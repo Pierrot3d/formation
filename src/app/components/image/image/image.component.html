@@ -1,0 +1,32 @@
+<div *ngIf="text" class="object-container my-40">
+  <div class="bloc-image-text" [style.height.%]="textHeight">
+    <div class="image-text">
+      <div class="text-button" [routerLink]="link ? '/' + link : ''">
+        <h1 *ngIf="text !== 'RSVP'" class="text-inner">{{ text }}</h1>
+      </div>
+      <div class="text-button-link" [routerLink]="link ? '/' + link : ''">
+        <a *ngIf="text === 'RSVP'" class="text-inner">{{ text }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="img-container grid justify-items-center">
+    <img
+      [ngClass]="isFullPageImage ? 'image-full' : ''"
+      class="with-text"
+      [style.height.vh]="isFullHeight ? '100' : ''"
+      [style.width]="width + 'px !important'"
+      [style.height]="height + 'px !important'"
+      src="../../../../assets/img/{{ src }}"
+    />
+  </div>
+</div>
+
+<div *ngIf="!text" class="img-container-without-text grid justify-items-center">
+  <img
+    [ngClass]="isFullPageImage ? 'image-full' : ''"
+    class="without-text"
+    [style.width]="width + 'px !important'"
+    [style.height]="height + 'px !important'"
+    src="../../../../assets/img/{{ src }}"
+  />
+</div>

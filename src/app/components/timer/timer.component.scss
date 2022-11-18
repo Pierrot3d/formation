@@ -1,0 +1,77 @@
+/* general styling */
+*
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body
+{
+  height: 100%;
+  margin: 0;
+}
+
+body
+{
+  align-items: center;
+  background-color: #ffd54f;
+  display: flex;
+}
+
+.container
+{
+  color: #333;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+}
+
+h1
+{
+  font-family: "Nunito";
+  color: black;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+}
+
+li
+{
+  display: inline-block;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+  font-family: "Nunito";
+  color: black;
+}
+
+li span
+{
+  display: block;
+  font-family: "Nunito";
+  color: black;
+}
+
+.emoji
+{
+  display: none;
+  padding: 1rem;
+}
+
+.emoji span
+{
+  padding: 0 0.5rem;
+}
+
+@media all and (max-width: 768px)
+{
+
+
+  li
+  {
+    padding: 0.75rem;
+  }
+
+}

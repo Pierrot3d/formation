@@ -1,0 +1,30 @@
+<section *ngFor="let item of list" [id]="item.id" (click)="myFunction(item)">
+  <!-- Section classique -->
+
+  <h1 #item.id>{{ item.title }}</h1>
+  <app-image
+    *ngIf="item.image"
+    [src]="item.image"
+    [text]="item.image_text"
+    [isFullPageImage]="item.full_page"
+    [isFullHeight]="item.isFullHeight"
+    [textHeight]="item.text_height"
+    [link]="item.link"
+  ></app-image>
+  <p class="under-image-text my-2.5">{{ item.text }}</p>
+
+  <!-- Section classique avec paragraphe  -->
+
+  <div *ngIf="item.paragraphe && !item.is_carroussel">
+    <ng-container *ngFor="let content of item.paragraphe">
+      <app-paragraphe [paragrapheContent]="content"></app-paragraphe>
+    </ng-container>
+  </div>
+
+  <!-- Section classique avec carroussel -->
+
+  <app-carroussel
+    *ngIf="item.is_carroussel"
+    [content]="item.paragraphe"
+  ></app-carroussel>
+</section>

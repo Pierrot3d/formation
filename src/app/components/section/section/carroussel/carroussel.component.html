@@ -1,0 +1,45 @@
+<div
+  class="grid md:grid-flow-col grid-cols-2 grid-rows-3 gap-4"
+  style="margin-top: 3rem"
+>
+  <ng-container *ngFor="let element of content; let i = index">
+    <div class="flex flex-col md:flex-row justify-center justify-items-center">
+      <app-image [src]="element.image" [text]="element.image_text"> </app-image>
+      <div class="flex flex-col justify-between h-3/4">
+        <p class="text-center my-2.5">
+          {{ element.title }}
+        </p>
+        <p class="text-center italic my-2.5">
+          {{ element.text }}
+        </p>
+        <p class="text-center italic my-2.5" style="color: red">
+          {{ element.avertissement }}
+        </p>
+        <a
+          *ngIf="element.phone"
+          class="text-center underline my-2.5"
+          [href]="'tel:+33' + element.phone"
+        >
+          {{ element.phone }}
+        </a>
+        <li *ngIf="element.mail">{{ element.mail }}</li>
+        <div class="text-center">
+          <a
+            class="
+              bg-transparent
+              hover:bg-black-500
+              py-2
+              px-4
+              border border-black
+              rounded
+              my-2.5
+            "
+            [href]="element.link"
+          >
+            {{ element.text_link }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

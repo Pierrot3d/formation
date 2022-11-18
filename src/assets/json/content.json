@@ -1,0 +1,294 @@
+[
+  {
+    "name": "Confirmer ma présence RSVP",
+    "id": "RSVP",
+    "title": "",
+    "image": "rsvp.jpg",
+    "full_page": true,
+    "image_text": "RSVP",
+    "isFullHeight": true,
+    "link": "rsvp"
+  },
+  {
+    "name": "Programme",
+    "id": "Programme",
+    "title": "",
+    "image": "PROGRAMME.jpg",
+    "full_page": true,
+    "image_text": "PROGRAMME",
+    "text_height": "70",
+    "paragraphe": [
+      {
+        "liste": [
+          {
+            "text": "Vous trouvez ci-dessous toutes informations relatives au déroulement de notre mariage. Nous sommes tellement impatients de vous y retrouver !",
+            "italic": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Le 25 Juin 2022",
+            "bold": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Cérémonie Religieuse - 16H30",
+            "bold": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Église de l’Ermitage de la Trinité, 20169 Bonifacio",
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text_link": "Direction l’Eglise",
+            "link": "https://www.google.com/maps/place/Ermitage+de+la+Trinit%C3%A9/@41.4053641,9.1237392,15z/data=!4m2!3m1!1s0x0:0xdf90ee550d7b78e6?sa=X&ved=2ahUKEwiI4fqesorzAhWoxIUKHbReAuUQ_BJ6BAhOEAU",
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Les talons aiguilles sont déconseillés !",
+            "italic": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "image": "up-arrow.png",
+            "isSize": true,
+            "width": "70",
+            "height": "70"
+          },
+          {
+            "text": "Réception - 18H30",
+            "bold": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Maora Beach Route de Santa Manza 20169 Bonifacio",
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text_link": "Direction Maora Beach",
+            "link": "https://www.google.com/maps/place/Maora+Plage/@41.4087555,9.2160649,15z/data=!4m2!3m1!1s0x0:0x1ccb78a420cf195e?sa=X&ved=2ahUKEwjx8KjjsYrzAhVIrxoKHQb8DFEQ_BJ6BAhlEAU",
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "image": "up-arrow.png",
+            "isSize": true,
+            "width": "70",
+            "height": "70"
+          },
+          {
+            "text": "Le 26 Juin 2022",
+            "bold": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Brunch - 12H",
+            "bold": true,
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Plage de Maora Route de Santa Manza 20169 Bonifacio",
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text_link": "Direction Maora Beach",
+            "link": "https://www.google.com/maps/place/Maora+Plage/@41.4087555,9.2160649,15z/data=!4m2!3m1!1s0x0:0x1ccb78a420cf195e?sa=X&ved=2ahUKEwjx8KjjsYrzAhVIrxoKHQb8DFEQ_BJ6BAhlEAU",
+            "isList": false,
+            "isCenter": true
+          },
+          {
+            "text": "Apportez votre plus beau maillot de bain !",
+            "italic": true,
+            "isList": false,
+            "isCenter": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Transport",
+    "id": "Transport",
+    "title": "",
+    "image": "TRANSPORT.jpg",
+    "image_text": "TRANSPORT",
+    "text_height": "70",
+    "full_page": true,
+    "paragraphe": [
+      {
+        "title": "Avion",
+        "icon": "flight",
+        "text": "Bonifacio est idéalement reliée par voie aérienne :",
+        "liste": [
+          {
+            "text": "vols quotidiens de Paris vers Figari avec AirFrance, EasyJet, AirCorsica et Voltorea",
+            "isList": true
+          },
+          {
+            "text": "vols quotidiens de Nantes vers Figari avec Voltorea",
+            "isList": true
+          }
+        ]
+      },
+      {
+        "title": "Location de voiture",
+        "icon": "time_to_leave",
+        "text": "Une location de voiture est indispensable pour vous déplacer en Corse. Nous vous invitons donc à contacter l'agence Sixt de l'aéroport de Figari afin d'avoir des tarifs préférentiels pour notre mariage avec le numero ci-dessous (indiquez que vous venez pour le mariage de Charlotte et Bastien) Aurélie : 06 15 97 66 84"
+      },
+      {
+        "title": "Le ferry",
+        "icon": "directions_boat",
+        "text": "Si vous souhaitez venir avec votre propre voiture, une voie maritime Corsica Ferries propose des trajets plusieurs fois par semaine depuis Toulon ou Nice vers Portovecchio.",
+        "text_link": "Traversée ferry Corse",
+        "link": "https://www.corsica-ferries.fr/traversees/corse-ferry/"
+      }
+    ]
+  },
+  {
+    "name": "Hébergement",
+    "id": "Hébergement",
+    "title": "",
+    "image": "HEBERGEMENT.jpeg",
+    "image_text": "HEBERGEMENT",
+    "text_height": "70",
+    "full_page": true,
+    "is_carroussel": true,
+    "text": "Nous vous avons sélectionné des logements à proximité du lieu du mariage (tous à moins de 10 min en voiture). Si vous souhaitez faire vos recherches, il faudra regarder les logements autour de Bonifacio / Golfe de Santa Manza pour être idéalement placé non loin de la fête et de l'Eglise : ",
+    "paragraphe": [
+      {
+        "title": "Casarina 3*",
+        "image": "casarina.jpg",
+        "text": "La résidence où nous avons loué notre villa, donc pour être avec nous à 3 min à pied de la fête c'est par ici ! Bénéficiez d'un code promo en indiquant sur leur site 'CASAMAR22'",
+        "text_link": "Lien",
+        "link": "https://residence-casarina.com/"
+      },
+
+      {
+        "title": "Hôtel Version Maquis la Citadelle 5*",
+        "image": "hotel-version-maquis-citadelle.jpeg",
+        "text": "L'hôtel exceptionnel parce qu'on le vaut bien",
+        "avertissement": "Réservations ouvertes à partir du 15 novembre",
+        "text_link": "Lien",
+        "link": "https://citadelle.versionmaquis.com/"
+      },
+
+      {
+        "title": "Les maisons du maquis",
+        "image": "maison du maquis.jpeg",
+        "text": "Pour l'emplacement et le rapport qualité/prix exceptionnel ",
+        "text_link": "Lien",
+        "link": "https://lesmaisonsdumaquis.com/"
+      },
+
+      {
+        "title": "Maora village 3*",
+        "image": "Maora.png",
+        "text": "La résidence jeune à 5 min à pied de la réception",
+        "text_link": "Lien",
+        "link": "http://maora-village.com/"
+      },
+
+      {
+        "title": "Les suites du maquis",
+        "image": "les-suites-du-maquis-hotel-bonifacio-corse-sud-france-jacuzzi-noir-800x800.jpeg",
+        "text": "Avoir son jacuzzi à 4 min en voiture de la fête !",
+        "text_link": "Lien",
+        "link": "https://www.lessuitesdumaquis.com/"
+      },
+      {
+        "title": "Hôtel Version Maquis Santa Manza 4*",
+        "image": "hotel-version-maquis-santa-manza.jpeg",
+        "text": "L'hôtel parfait pour un week-end en amoureux",
+        "avertissement": "Réservations ouvertes à partir du 15 novembre",
+        "text_link": "Lien",
+        "link": "https://santamanza.versionmaquis.com/"
+      }
+    ]
+  },
+
+  {
+    "name": "Activité",
+    "id": "Activité",
+    "title": "",
+    "image": "ACTIVITE.jpeg",
+    "image_text": "ACTIVITES",
+    "text_height": "70",
+    "full_page": true,
+    "paragraphe": [
+      {
+        "icon": "local_bar",
+        "text": "Entre mer et montagne, la Corse est connue pour sa riche culture, ses nombreuses activités, sa cuisine excellente et bien plus encore. Nous espérons vous aurez le temps d'explorer les environs ! Quelques suggestions :",
+        "liste": [
+          {
+            "text": "Louer un bateau et découvrir la Corse par la mer et ses nombreuses plages : Saint Cyprien, Palombaggia, iles Lavezzi, iles Sanguinaires, Santa Giulia, Rondinara et tant d'autres ! Nous vous conseillons de louer le bateau chez Pouss'Vague dans la baie de Sant'Amanza ",
+            "link": "http://www.poussvague.fr/",
+            "text_link": "lien",
+            "isList": true
+          },
+          {
+            "text": "Randonnée dans le Golfe de Porto, inscrit au patrimoine mondial de l’UNESCO, qui abrite un ancien volcan submergé par la mer.",
+            "isList": true
+          },
+          {
+            "text": "Visiter et flâner dans les ruelles de la citadelle de Bonifacio",
+            "isList": true
+          },
+          {
+            "text": "Canyoning en famille et amis sur la rivière de Solenzara.",
+            "isList": true
+          },
+          {
+            "text": "Explorer les piscines naturelles dans les montagnes de Cavu à Saint Lucie de Portovecchio",
+            "isList": true
+          },
+          {
+            "text": "Balade et baignade à cheval dans la baie de Santa Manza au centre équestre du Ranch San Diego ",
+            "isList": true
+          },
+          {
+            "text": "Faire du Kite sur le spot d'Eole Figari",
+            "isList": true
+          },
+          {
+            "text": "Evidemment, la Corse est l'un des spots de plongée les plus réputés au monde ! Nous vous conseillons la Réserve Naturelle des Bouches de Bonifacio et la Réserve Naturelle des îles Cerbicales.",
+            "isList": true
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "name": "Liste de mariage",
+    "id": "Liste de mariage",
+    "title": "",
+    "image": "LISTE DE MARIAGE.jpeg",
+    "image_text": "LISTE DE MARIAGE",
+    "text_height": "14",
+    "full_page": true,
+    "paragraphe": [
+      {
+        "title": "Votre présence est notre plus beau cadeau !",
+        "text": "Nous tenons à remercier notre famille et nos amis pour leur amour et leur soutien. Alors que nous entamons ce nouveau chapitre, nous rêvons de faire un safari ! Mille mercis pour votre contribution !",
+        "link": "https://charlotteetbastien.zankyou.com/fr/liste-de-mariage",
+        "text_link": "lien"
+      },
+
+      {
+        "title": "Liste de mariage",
+        "text": ""
+      }
+    ]
+  }
+]

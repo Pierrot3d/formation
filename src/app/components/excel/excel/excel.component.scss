@@ -1,0 +1,42 @@
+button:disabled
+{
+  background-color: grey;
+  color: black;
+  opacity: 35%;
+}
+
+.button-form
+{
+  width: 40%;
+  margin: 0 auto 0 auto;
+  margin-top: 2rem;
+}
+
+.checkbox-container
+{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto 0 auto;
+}
+
+.form-group
+{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+
+  input
+  {
+    width: 70%;
+    margin: 0 auto 0 auto;
+    border-radius: 9999px;
+  }
+}
+
+.form-group-checkbox
+{
+  justify-content: center;
+}

@@ -1,0 +1,96 @@
+<div class="paragraphe flex flex-col md:flex-row justify-around my-32">
+  <h2>{{ paragrapheContent.title }}</h2>
+  <i class="material-icons">{{ paragrapheContent.icon }}</i>
+  <app-image
+    *ngIf="paragrapheContent.image && paragrapheContent.image"
+    [src]="paragrapheContent.image"
+    [isFullPageImage]="paragrapheContent.full_page"
+  ></app-image>
+
+  <p>{{ paragrapheContent.text }}</p>
+
+  <ng-container *ngIf="paragrapheContent.liste">
+    <ng-container *ngFor="let element of paragrapheContent.liste">
+      <ng-container *ngIf="element.isList">
+        <li class="text-center">{{ element.text }}</li>
+        <ng-container *ngIf="element.link && element.text_link">
+          <div
+            class="text-center"
+            style="margin-top: 2rem; margin-bottom: 2rem"
+          >
+            <a
+              class="
+                bg-transparent
+                hover:bg-black-500
+                py-2
+                px-4
+                border border-black
+                rounded
+                my-2.5
+              "
+              [href]="element.link"
+            >
+              {{ element.text_link }}
+            </a>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!element.isList">
+        <p
+          *ngIf="element.text"
+          [style.font-weight]="element.bold ? 'bold' : ''"
+          [style.font-style]="element.italic ? 'italic' : ''"
+          [style.text-align]="element.isCenter ? 'center' : ''"
+          class="my-2.5"
+        >
+          {{ element.text }}
+        </p>
+        <app-image
+          *ngIf="element.image"
+          [src]="element.image"
+          [isFullPageImage]="element.full_page"
+          [height]="element.isSize ? element.height : ''"
+          [width]="element.isSize ? element.width : ''"
+          class="my-2.5"
+        ></app-image>
+        <ng-container *ngIf="element.link && element.text_link">
+          <div class="text-center">
+            <a
+              class="
+                bg-transparent
+                hover:bg-black-500
+                py-2
+                px-4
+                border border-black
+                rounded
+                my-2.5
+              "
+              [href]="element.link"
+            >
+              {{ element.text_link }}
+            </a>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="paragrapheContent.link && paragrapheContent.text_link">
+    <div class="text-center" style="margin-top: 3rem">
+      <a
+        style="width: auto"
+        class="
+          bg-transparent
+          hover:bg-black-500
+          py-2
+          px-4
+          border border-black
+          rounded
+          my-2.5
+        "
+        [href]="paragrapheContent.link"
+        >{{ paragrapheContent.text_link }}</a
+      >
+    </div>
+  </ng-container>
+</div>

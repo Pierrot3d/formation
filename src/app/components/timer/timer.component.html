@@ -1,0 +1,30 @@
+<div class="container">
+  <h2 id="headline">{{ title }}</h2>
+  <div id="countdown">
+    <ul>
+      <li>
+        <span id="days{{ id }}">{{ this.days }} </span>Jours
+      </li>
+      <li>
+        <span id="hours{{ id }}">{{ hours }}</span
+        >Heures
+      </li>
+      <li>
+        <span id="minutes{{ id }}">{{ minutes }}</span
+        >Minutes
+      </li>
+      <li>
+        <span id="seconds{{ id }}">{{ seconds }}</span
+        >Secondes
+      </li>
+    </ul>
+  </div>
+  <div style="margin-top: 3rem">
+    <app-image [src]="'logo.svg'"> </app-image>
+  </div>
+  <div id="content" class="emoji">
+    <span>🥳</span>
+    <span>🎉</span>
+    <span>🎂</span>
+  </div>
+</div>
