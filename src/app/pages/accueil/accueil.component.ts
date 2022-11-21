@@ -14,12 +14,13 @@ import { DatePipe } from '@angular/common';
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.scss'],
-  providers:
+  providers: [DatePipe]
 })
 export class AccueilComponent implements OnInit {
   @ViewChild(SectionComponent) accueil: SectionComponent;
   sticky: boolean;
 
+  laDate: Date = new Date();
   menuListTmp: MenuList[];
   menuList: MenuList[];
   @HostListener('window:scroll', ['$event'])
@@ -32,6 +33,7 @@ export class AccueilComponent implements OnInit {
   }
 
   constructor(private _contentService: ContentService) {
+
     this._contentService.getContent().subscribe((data) => {
       this.menuListTmp = data;
     });

@@ -16,6 +16,10 @@ import { TimerComponent } from './components/timer/timer.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
+
 
 @NgModule({
   declarations: [

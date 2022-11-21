@@ -6,10 +6,10 @@
   <app-menu [sticky]="sticky" [menuList]="menuListTmp"></app-menu>
   <div class="title">
     <div class="title1">
-      <h1 class="heading">Gestion de la formation des avocats du barreau de Tours</h1>
+      <h1 class="heading">Gestion de la formation des avocats</h1>
       <div style="height: 2vh"></div>
-      <h2 class="heading">25 juin 2022</h2>
-      <h2 class="heading">Bonifacio, Corse</h2>
+      <h2 class="heading">{{ laDate | date: 'mediumDate'}}</h2>
+      <h2 class="heading">Barreau de Tours</h2>
     </div>
     <div class="title2"></div>
   </div>
@@ -18,11 +18,7 @@
 <!-- About Section
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-<app-timer
-  [birthdayDate]="'Jun 25, 2022 16:30:00'"
-  [title]="'Le mariage aura lieu dans : '"
->
-</app-timer>
+
 <app-section [list]="menuListTmp"> </app-section>
 
 <!-- Team Section
@@ -40,17 +36,15 @@
       <p class="mx-12 italic text-center my-6">
         Si vous avez des questions n’hésitez pas à nous contacter !
       </p>
-      <p class="mx-16 italic text-center mt-6">Charlotte & Bastien</p>
+      <p class="mx-16 italic text-center mt-6">Barreau de Tours</p>
       <p class="mx-16 italic text-center mb-6">
-        3, rue Auguste Bailly Courbevoie
+        Palais de Justice, 2 place Jean Jaurès, 37000 Tours
       </p>
 
       <div
         class="flex italic mx-12 text-center my-6 justify-center items-center"
       >
-        <a href="tel:+336 84 99 26 61">06 84 99 26 61</a>
-        /
-        <a href="tel:+336 60 21 69 96">06 60 21 69 96</a>
+        <a href="tel:+332 47 05 61 64">02 47 05 61 64</a>
       </div>
 
       <p class="mx-16 italic text-center my-20">
