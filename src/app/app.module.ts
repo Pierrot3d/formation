@@ -18,6 +18,7 @@ import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { AddLawyerComponent } from './pages/add-lawyer/add-lawyer.component';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -29,7 +30,8 @@ registerLocaleData(localeFr, 'fr');
     TimerComponent,
     AccueilComponent,
     RsvpComponent,
-    DownloadComponent
+    DownloadComponent,
+    AddLawyerComponent
   ],
   imports: [
     BrowserModule,

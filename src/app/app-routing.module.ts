@@ -1,3 +1,4 @@
+import { AddLawyerComponent } from './pages/add-lawyer/add-lawyer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'download',
     component: DownloadComponent,
+  },
+  {
+    path: 'add-lawyer',
+    component: AddLawyerComponent,
   },
 
   {

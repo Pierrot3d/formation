@@ -1,13 +1,13 @@
 [
   {
-    "name": "Confirmer ma présence RSVP",
-    "id": "RSVP",
+    "name": "Ajouter un avocat",
+    "id": "addLawyer",
     "title": "",
-    "image": "rsvp.jpg",
+    "image": "addlawyer.jpg",
     "full_page": true,
-    "image_text": "RSVP",
+    "image_text": "Ajouter un avocat",
     "isFullHeight": true,
-    "link": "rsvp"
+    "link": "add-lawyer"
   },
   {
     "name": "Programme",
