@@ -19,7 +19,7 @@ export class ExcelService {
 
   saveAppareilsToServer(element: FormExcel) {
     this.httpClient
-      .post('https://bastiencharlotte-67daf-default-rtdb.firebaseio.com/bastienetchat.json', element)
+      .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json', element)
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');
@@ -33,7 +33,7 @@ export class ExcelService {
 
   getAppareilsFromServer(): [] {
     this.httpClient
-      .get<any[]>('https://bastiencharlotte-67daf-default-rtdb.firebaseio.com/bastienetchat.json')
+      .get<any[]>('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json')
       .subscribe(
         (response) => {
           let listTmp = response;

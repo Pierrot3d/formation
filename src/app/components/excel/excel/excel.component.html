@@ -1,4 +1,5 @@
 <div *ngIf="!isDownload">
+  <h1>Ajouter un avocat</h1>
   <form
     [formGroup]="excelForm"
     (ngSubmit)="formulaireValidation()"
@@ -29,10 +30,9 @@
       />
     </div>
 
-    <p style="margin-top: 2rem">Merci de nous confirmer votre présence :</p>
 
-    <div class="checkbox-container">
-      <div class="form-group-checkbox">
+<!--     <div class="checkbox-container">
+    <div class="form-group-checkbox">
         <input type="checkbox" formControlName="cocktail" class="mx-6" />
         <label>Au cocktail et au diner</label>
       </div>
@@ -49,7 +49,7 @@
         class="form-control"
         formControlName="restrictionAlimentaires"
       />
-    </div>
+    </div> -->
     <button
       type="submit"
       class="

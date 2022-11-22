@@ -46,9 +46,9 @@ export class ExcelComponent implements OnInit {
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       email: ['', Validators.required],
-      cocktail: [false],
-      brunch: [false],
-      restrictionAlimentaires: [''],
+      // cocktail: [false],
+      // brunch: [false],
+      // restrictionAlimentaires: [''],
     });
   }
 
