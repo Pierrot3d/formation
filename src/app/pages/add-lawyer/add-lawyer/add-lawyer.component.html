@@ -1,0 +1,129 @@
+<div *ngIf="!isDownload">
+  <h1 class="title">Ajouter un avocat</h1>
+  <form
+    [formGroup]="excelForm"
+    (ngSubmit)="formulaireValidation()"
+    class="flex flex-col justify-center"
+  >
+    <div class="form-group">
+      <label>Nom</label>
+      <input type="text" class="form-control" formControlName="nom" required />
+    </div>
+    <div class="form-group">
+      <label>Prénom</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="prenom"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        required
+      />
+    </div>
+
+
+<!--     <div class="checkbox-container">
+    <div class="form-group-checkbox">
+        <input type="checkbox" formControlName="cocktail" class="mx-6" />
+        <label>Au cocktail et au diner</label>
+      </div>
+      <div class="form-group-checkbox">
+        <input type="checkbox" formControlName="brunch" class="mx-6" />
+        <label>Au brunch</label>
+      </div>
+    </div>
+    <p style="margin-top: 2rem">Avez-vous des restriction alimentaires :</p>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="restrictionAlimentaires"
+      />
+    </div> -->
+    <div class="form-group">
+    <button
+      type="submit"
+      class="
+        button-form
+        bg-blue-500
+        hover:bg-blue-700
+        text-white
+        font-bold
+        py-2
+        px-4
+        rounded-full
+      "
+      [disabled]="excelForm.invalid"
+    >
+      Valider
+    </button>
+  </div>
+  <div class="form-group">
+    <p
+      *ngIf="this.excelService.isRecord"
+      style="margin-top: 2rem; color: green"
+    >
+      Merci ! Le formulaire a bien été envoyé
+    </p>
+  </div>
+  </form>
+</div>
+
+<div
+  *ngIf="isDownload"
+  style="text-align: center; display: flex; flex-direction: column"
+>
+  <button
+    (click)="generatePeople()"
+    class="
+      bg-gray-300
+      hover:bg-gray-400
+      text-gray-800
+      font-bold
+      py-2
+      px-4
+      rounded
+      inline-flex
+      items-center
+      mx-6
+    "
+    style="width: fit-content; margin: 6rem auto 3rem auto"
+  >
+    <span>Générer le fichier sur le serveur</span>
+  </button>
+
+  <button
+    (click)="generateExcel()"
+    class="
+      bg-gray-300
+      hover:bg-gray-400
+      text-gray-800
+      font-bold
+      py-2
+      px-4
+      rounded
+      inline-flex
+      items-center
+    "
+    style="width: fit-content; margin: 3rem auto 3rem auto"
+  >
+    <svg
+      class="fill-current w-4 h-4 mr-2"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+    >
+      <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+    </svg>
+    <span>Download</span>
+  </button>
+</div>

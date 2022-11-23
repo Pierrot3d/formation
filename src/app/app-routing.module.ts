@@ -1,4 +1,4 @@
-import { AddLawyerComponent } from './pages/add-lawyer/add-lawyer.component';
+import { AddLawyerComponent } from './pages/add-lawyer/add-lawyer/add-lawyer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

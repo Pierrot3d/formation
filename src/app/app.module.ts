@@ -1,3 +1,4 @@
+import { AddLawyerModule } from './pages/add-lawyer/addlawyer.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,7 +19,6 @@ import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import { AddLawyerComponent } from './pages/add-lawyer/add-lawyer.component';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -31,7 +31,6 @@ registerLocaleData(localeFr, 'fr');
     AccueilComponent,
     RsvpComponent,
     DownloadComponent,
-    AddLawyerComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +41,7 @@ registerLocaleData(localeFr, 'fr');
     ImageModule,
     RouterModule,
     ExcelModule,
+    AddLawyerModule,
     AppRoutingModule
   ],
   providers: [DatePipe],
