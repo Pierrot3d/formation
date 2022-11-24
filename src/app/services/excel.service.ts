@@ -36,10 +36,13 @@ export class ExcelService {
       .get<any[]>('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json')
       .subscribe(
         (response) => {
+          this.liste = [];
           let listTmp = response;
+          console.log("ceci est la listTmp", listTmp)
           for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
             this.liste.push(listTmp[elemnt])
           }
+          console.log("ceci est la vraie liste",this.liste)
           return this.liste
         },
         (error) => {
@@ -47,7 +50,6 @@ export class ExcelService {
 
         }
       );
-
     return []
   }
 

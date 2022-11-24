@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExcelService } from 'src/app/services/excel.service';
+
 
 @Component({
   templateUrl: './add-lawyer.component.html',
@@ -40,9 +41,16 @@ export class AddLawyerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.excelService.isRecord = false;
     this.excelForm = this.formBuilder.group({
-      nom: ['', Validators.required],
+      nom: ['',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]
+    ],
       prenom: ['', Validators.required],
       email: ['', Validators.required],
       // cocktail: [false],
@@ -58,6 +66,7 @@ export class AddLawyerComponent implements OnInit {
   }
   generatePeople() {
     this.excelService.getAppareilsFromServer();
+    console.log(this.excelService.getAppareilsFromServer())
   }
   generateExcel() {
     this.excelService.generateExcel();
