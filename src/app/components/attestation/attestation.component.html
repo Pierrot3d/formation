@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <title> Attestation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="attestation.component.css" />
+    <p size="A4">
+</head>
+<body>
+    <div class="container">
+    <h1>Ordre des avocats</h1>
+<hr align=center width=100%>
+<br>
+    <h2>Le Bâtonnier</h2>
+    <br><br><br><br><br><br><br><br><br><br>
+        <h3>ATTESTATION</h3>
+        <br>
+            <p>Je soussigné, {{ batonnier }}>, Bâtonnier de l'ordre des Avocats au Barreau de TOURS,<br><br>
+            Certifie que Maître {{ surname }} {{ name }}, inscrit au Barreau de TOURS, a rempli son obligation de formation continue spécifique {{ specificformation }} au titre de l'année 2022.</p>
+        <br><br>
+                <h4>Fait à TOURS,<br> Le DATE<br><br><var>{{ signature }}</var><br><br><br>PRENOM NOM</h4>
+                <br><br><br><br><br><br><br><br>
+<h5><img src="data:image/png;base64,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" class="meme_hauteur"><strong>Place Jean Jaurès</strong><br><strong>37000 TOURS</strong><br><strong>Tél</strong> : 02 47 05 61 64<br><strong>Fax</strong> : 02 47 60 17 25<br><strong>Mail</strong> : ordre@barreaudetours.fr<br><strong>Site</strong> : barreaudetours.fr</h5>
+</div>
+</body>
+<router-outlet name="print"></router-outlet>
+

@@ -1,0 +1,66 @@
+
+  
+    html, body {
+      background-color:grey;
+      
+    }   
+.container {
+    height: 29.7cm;
+    width: 21.0cm;
+    background-image: url(https://zupimages.net/up/22/45/vxnb.png);
+    background-color: white;
+    margin: auto;
+    padding-right: 1em;
+    padding-left: 1em;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+h1 {
+    color: rgb(159, 0, 0);
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 200%;
+    font-weight: normal;
+    text-align: center;
+}
+h2 {
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-style :italic;
+    font-size: 100%;
+    font-weight:bold;
+}
+h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 150%;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+}
+p {
+    padding-left : 17em;
+    font-family:'Times New Roman', Times, serif;
+    text-align: left;
+    text-align:justify;
+}
+h4 {
+    font-weight: normal;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 32em;
+}
+
+.meme_hauteur {
+                height: 100px;
+                width: auto;
+                float: left;
+            }   
+h5 {
+    font-size:small;
+    font-family :'Times New Roman', Times, serif;
+    font-style :italic;
+    color: gray;
+    font-weight: normal;
+    text-align: center;
+}

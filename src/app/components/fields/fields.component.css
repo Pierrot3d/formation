@@ -1,0 +1,9 @@
+label {
+    display: inline-block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+input ,
+label {
+    display: inline-block;
+    margin: .4rem 0;
+}
