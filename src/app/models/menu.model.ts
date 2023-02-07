@@ -35,6 +35,7 @@ export class Paragraphe {
   public title: string;
   public icon: string;
   public link: string;
+  public internalLink: string;
   public text_link: string;
   public liste: Liste[];
   public image: string;
@@ -51,6 +52,7 @@ export class Paragraphe {
       (this.icon = option.icon),
       (this.liste = option.liste),
       (this.link = option.link),
+      (this.internalLink = option.internalLink),
       (this.text_link = option.text_link),
       (this.image = option.image),
       (this.phone = option.phone),
@@ -65,6 +67,7 @@ export class Liste {
   public title: string;
   public icon: string;
   public link: string;
+  public internalLink: string;
   public text_link: string;
   public image: string;
   public image_text: string;
@@ -81,6 +84,7 @@ export class Liste {
       (this.title = option.title),
       (this.icon = option.icon),
       (this.link = option.link),
+      (this.internalLink = option.internalLink),
       (this.text_link = option.text_link),
       (this.image = option.image),
       (this.image_text = option.image_text),

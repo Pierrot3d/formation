@@ -2,7 +2,7 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 <header id="header" #home>
-  <img src="../../../assets/img/palais.jpg" alt="wave-and-couple" />
+  <img/>
   <app-menu [sticky]="sticky" [menuList]="menuListTmp"></app-menu>
   <div class="title">
     <div class="title1">
@@ -19,12 +19,15 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 
+
 <app-section [list]="menuListTmp"> </app-section>
 
 <!-- Team Section
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 <section #list id="team"></section>
+
+<app-table></app-table>
 
 <!-- Footer Section
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -48,9 +51,7 @@
       </div>
 
       <p class="mx-16 italic text-center my-20">
-        Made with
-        <i class="material-icons" style="color: #b80f0a">favorite</i> by Pierre
-        B
+        Made <i class="material-icons" style="color: #b80f0a">by</i> by Pierre B
       </p>
     </div>
   </div>

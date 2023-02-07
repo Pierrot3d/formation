@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paragraphe',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ParagrapheComponent implements OnInit {
   @Input() paragrapheContent;
-  constructor() {}
+  constructor(private route: Router) {}
 
   ngOnInit(): void {}
 }

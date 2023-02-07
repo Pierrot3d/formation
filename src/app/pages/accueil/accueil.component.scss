@@ -6,10 +6,16 @@ header
   img
   {
     width: 100%;
-    height: 100vh;
+    height: 105vh;
     position: absolute;
     object-fit: cover;
     z-index: 0;
+    background: linear-gradient(
+ rgba(0, 0, 0, 0.40),
+ rgba(0, 0, 0, 0.40)
+ ),url(../../../assets/img/palais.jpg);
+ background-size:cover;
+ background-repeat:no-repeat;
   }
 
   .title

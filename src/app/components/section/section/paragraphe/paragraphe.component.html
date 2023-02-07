@@ -34,6 +34,27 @@
             </a>
           </div>
         </ng-container>
+        <ng-container *ngIf="element.internalLink && element.internalLink">
+          <div
+            class="text-center"
+            style="margin-top: 2rem; margin-bottom: 2rem"
+          >
+            <a
+              class="
+                bg-transparent
+                hover:bg-black-500
+                py-2
+                px-4
+                border border-black
+                rounded
+                my-2.5
+              "
+              [routerLink]="element.internalLink ? '/' + element.internalLink : ''"
+            >
+              {{ element.text_link }}
+            </a>
+          </div>
+        </ng-container>
       </ng-container>
       <ng-container *ngIf="!element.isList">
         <p
@@ -71,6 +92,27 @@
             </a>
           </div>
         </ng-container>
+        <ng-container *ngIf="element.internalLink && element.internalLink">
+          <div
+            class="text-center"
+            style="margin-top: 2rem; margin-bottom: 2rem"
+          >
+            <a
+              class="
+                bg-transparent
+                hover:bg-black-500
+                py-2
+                px-4
+                border border-black
+                rounded
+                my-2.5
+              "
+              [routerLink]="element.internalLink ? '/' + element.internalLink : ''"
+            >
+              {{ element.text_link }}
+            </a>
+          </div>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ng-container>
@@ -91,6 +133,27 @@
         [href]="paragrapheContent.link"
         >{{ paragrapheContent.text_link }}</a
       >
+    </div>
+  </ng-container>
+  <ng-container *ngIf="paragrapheContent.internalLink && paragrapheContent.internalLink">
+    <div
+      class="text-center"
+      style="margin-top: 2rem; margin-bottom: 2rem"
+    >
+      <a
+        class="
+          bg-transparent
+          hover:bg-black-500
+          py-2
+          px-4
+          border border-black
+          rounded
+          my-2.5
+        "
+        [routerLink]="paragrapheContent.internalLink ? '/' + paragrapheContent.internalLink : ''"
+      >
+        {{ paragrapheContent.text_link }}
+      </a>
     </div>
   </ng-container>
 </div>
