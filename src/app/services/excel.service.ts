@@ -15,6 +15,7 @@ export class ExcelService {
   }
 
   liste = [];
+  listeWithId = [];
   isRecord: boolean;
 
   saveAppareilsToServer(element: FormExcel) {
@@ -22,6 +23,7 @@ export class ExcelService {
       .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json', element)
       .subscribe(
         () => {
+          console.log(element);
           console.log('Enregistrement terminé !');
           this.isRecord = true;
         },
@@ -31,19 +33,47 @@ export class ExcelService {
       );
   }
 
-  getAppareilsFromServer(): [] {
+  getLawyersFromServer(): [] {
     this.httpClient
       .get<any[]>('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json')
       .subscribe(
         (response) => {
           this.liste = [];
           let listTmp = response;
-          console.log("ceci est la listTmp", listTmp)
+          this.listeWithId = Object.keys(response).map(key => ({type: key, value: response[key]}));;
+          //console.log("ceci est la listTmp", listTmp)
           for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
             this.liste.push(listTmp[elemnt])
           }
           console.log("ceci est la vraie liste",this.liste)
           return this.liste
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+
+        }
+      );
+    return []
+  }
+
+  giveMeTheList()
+  {
+    return this.liste
+  }
+
+  giveMeTheListWithId()
+  {
+    return this.listeWithId
+  }
+
+  getLawyersFromServerWithId(): [] {
+    this.httpClient
+      .get<any[]>('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json')
+      .subscribe(
+        (response) => {
+          let listTmp = response;
+          console.log(listTmp)
+          return listTmp
         },
         (error) => {
           console.log('Erreur ! : ' + error);

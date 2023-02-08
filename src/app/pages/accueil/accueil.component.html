@@ -27,7 +27,9 @@
 
 <section #list id="team"></section>
 
-<app-table></app-table>
+<app-table
+[lawyersList]="this.excelService.giveMeTheListWithId()"
+></app-table>
 
 <!-- Footer Section
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

@@ -1,1 +1,24 @@
 <p>table works!</p>
+<button
+class="
+bg-gray-300
+hover:bg-gray-400
+text-gray-800
+font-bold
+py-2
+px-4
+rounded
+inline-flex
+items-center
+mx-6
+"
+style="width: fit-content; margin: 6rem auto 3rem auto"
+(click)="this.isMyTable()"
+>
+
+</button>
+<ul>
+  <li *ngFor="let item of this.lawyersList">
+    <p>{{ item.value.nom }}, {{item.value.prenom }}, {{item.value.email }}</p>
+  </li>
+</ul>

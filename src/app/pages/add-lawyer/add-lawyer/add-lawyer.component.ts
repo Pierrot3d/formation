@@ -12,29 +12,6 @@ export class AddLawyerComponent implements OnInit {
   @Input() isDownload: boolean = false;
   excelForm!: FormGroup;
 
-  json_data = [
-    {
-      name: 'Raja',
-      age: 20,
-    },
-    {
-      name: 'Mano',
-      age: 40,
-    },
-    {
-      name: 'Tom',
-      age: 40,
-    },
-    {
-      name: 'Devi',
-      age: 40,
-    },
-    {
-      name: 'Mango',
-      age: 40,
-    },
-  ];
-
   constructor(
     public excelService: ExcelService,
     private formBuilder: FormBuilder
@@ -62,11 +39,11 @@ export class AddLawyerComponent implements OnInit {
   formulaireValidation() {
     console.log('données du formulaire ..', this.excelForm.value);
     this.excelService.saveAppareilsToServer(this.excelForm.value);
-    this.excelService.getAppareilsFromServer();
+    this.excelService.getLawyersFromServer();
   }
   generatePeople() {
-    this.excelService.getAppareilsFromServer();
-    console.log(this.excelService.getAppareilsFromServer())
+    this.excelService.getLawyersFromServer();
+    console.log(this.excelService.getLawyersFromServer())
   }
   generateExcel() {
     this.excelService.generateExcel();

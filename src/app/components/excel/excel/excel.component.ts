@@ -55,10 +55,10 @@ export class ExcelComponent implements OnInit {
   formulaireValidation() {
     console.log('données du formulaire ..', this.excelForm.value);
     this.excelService.saveAppareilsToServer(this.excelForm.value);
-    this.excelService.getAppareilsFromServer();
+    this.excelService.getLawyersFromServer();
   }
   generatePeople() {
-    this.excelService.getAppareilsFromServer();
+    this.excelService.getLawyersFromServer();
   }
   generateExcel() {
     this.excelService.generateExcel();

@@ -8,7 +8,7 @@ import { SectionComponent } from 'src/app/components/section/section/section.com
 import { MenuList } from 'src/app/models/menu.model';
 import { ContentService } from 'src/app/services/content.service';
 import { DatePipe } from '@angular/common';
-
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-accueil',
@@ -32,8 +32,8 @@ export class AccueilComponent implements OnInit {
     }
   }
 
-  constructor(private _contentService: ContentService) {
-
+  constructor(private _contentService: ContentService, public excelService: ExcelService) {
+    this.excelService.getLawyersFromServer();
     this._contentService.getContent().subscribe((data) => {
       this.menuListTmp = data;
     });
