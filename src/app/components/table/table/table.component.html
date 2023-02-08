@@ -19,6 +19,6 @@ style="width: fit-content; margin: 6rem auto 3rem auto"
 </button>
 <ul>
   <li *ngFor="let item of this.lawyersList">
-    <p>{{ item.value.nom }}, {{item.value.prenom }}, {{item.value.email }}</p>
+    <p>{{item.type }}, {{item.value.prenom }}, {{item.value.email }}</p>
   </li>
 </ul>
