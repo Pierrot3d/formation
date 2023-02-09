@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Lawyers } from 'src/app/models/lawyers.model';
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
