@@ -18,7 +18,7 @@ export class ExcelService {
   listeWithId = [];
   isRecord: boolean;
 
-  saveAppareilsToServer(element: FormExcel) {
+  saveLawyersToServer(element: FormExcel) {
     this.httpClient
       .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json', element)
       .subscribe(
