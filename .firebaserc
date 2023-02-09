@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "barreaudetours-f3e06": {
+      "hosting": {
+        "formation": [
+          "barreaudetours-f3e06"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "barreaudetours-f3e06"
+  }
+}

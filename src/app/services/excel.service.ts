@@ -1,17 +1,30 @@
+import { Lawyers } from 'src/app/models/lawyers.model';
 import { Injectable } from '@angular/core';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import { FormExcel } from '../models/excel.model';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { getDatabase, ref, onValue} from "firebase/database";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExcelService {
+  lawyers$: Observable<Lawyers>;
 
   constructor(private httpClient: HttpClient,
     private datePipe: DatePipe) {
+      const db = getDatabase();
+      const starCountRef = ref(db, 'avocats/');
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        this.lawyers$ = data
+        console.log(this.lawyers$)
+        //updateStarCount(postElement, data);
+      })
   }
 
   liste = [];

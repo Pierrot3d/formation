@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Lawyers } from 'src/app/models/lawyers.model';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-table',

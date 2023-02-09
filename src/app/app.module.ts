@@ -19,6 +19,16 @@ import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import localeFr from '@angular/common/locales/fr';
 import { TableModule } from './components/table/table.module';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 
 registerLocaleData(localeFr, 'fr');
 
@@ -34,7 +44,14 @@ registerLocaleData(localeFr, 'fr');
     DownloadComponent,
   ],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
     BrowserModule,
+    AngularFireModule,
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule,
     MenuModuleModule,
     RouterModule,
     SectionModule,
@@ -46,7 +63,9 @@ registerLocaleData(localeFr, 'fr');
     TableModule,
     AppRoutingModule
   ],
-  providers: [DatePipe],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

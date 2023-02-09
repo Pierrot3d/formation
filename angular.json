@@ -114,6 +114,16 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "formation:build:production",
+            "firebaseProject": "barreaudetours-f3e06",
+            "firebaseHostingSite": "barreaudetours-f3e06"
+          }
         }
       }
     }
