@@ -9,7 +9,7 @@ import { Lawyers } from 'src/app/models/lawyers.model';
 export class TableComponent implements OnInit {
   @Input() lawyersList: Lawyers[];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'star'];
   dataSource
 
   constructor() {

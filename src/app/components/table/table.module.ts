@@ -1,7 +1,11 @@
 import { TableComponent } from './table/table.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -10,7 +14,10 @@ import { MatTableModule } from '@angular/material/table'
   declarations: [TableComponent],
   imports: [
     CommonModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     TableComponent

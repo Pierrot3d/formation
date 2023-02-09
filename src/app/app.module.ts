@@ -19,7 +19,6 @@ import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import localeFr from '@angular/common/locales/fr';
 import { TableModule } from './components/table/table.module';
-import { MatTableModule } from '@angular/material/table'
 
 registerLocaleData(localeFr, 'fr');
 
@@ -45,7 +44,6 @@ registerLocaleData(localeFr, 'fr');
     ExcelModule,
     AddLawyerModule,
     TableModule,
-    MatTableModule,
     AppRoutingModule
   ],
   providers: [DatePipe],
