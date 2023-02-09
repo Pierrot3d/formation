@@ -13,7 +13,7 @@ export class TableComponent implements OnInit {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'star'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'update', 'star'];
   dataSource
 
   constructor() {
