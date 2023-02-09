@@ -1,11 +1,8 @@
-<div class="demo-button-container">
-  <button mat-raised-button [routerLink]="'/add-lawyer'" class="demo-button">
-    Add data
-  </button>
-  <button
-      mat-raised-button
-      class="demo-button">
-    Remove data
+
+<div class="button-container">
+  <button mat-raised-button [routerLink]="'/add-lawyer'" class="button">
+    Ajouter un avocat
+    <mat-icon>person_add</mat-icon>
   </button>
 </div>
 
@@ -49,23 +46,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-
-<button
-class="
-bg-gray-300
-hover:bg-gray-400
-text-gray-800
-font-bold
-py-2
-px-4
-rounded
-inline-flex
-items-center
-mx-6
-"
-style="width: fit-content; margin: 6rem auto 3rem auto"
-(click)="this.isMyTable()"
->
-
-</button>
