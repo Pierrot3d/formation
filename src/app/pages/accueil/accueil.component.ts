@@ -33,7 +33,6 @@ export class AccueilComponent implements OnInit {
   }
 
   constructor(private _contentService: ContentService, public excelService: ExcelService) {
-    this.excelService.getLawyersFromServer();
     this._contentService.getContent().subscribe((data) => {
       this.menuListTmp = data;
     });
