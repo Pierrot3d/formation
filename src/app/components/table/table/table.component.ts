@@ -1,6 +1,6 @@
 import { ExcelService } from 'src/app/services/excel.service';
 import { Component, OnInit, Input, Inject, DebugElement } from '@angular/core';
-import { getDatabase, ref, onValue, remove} from "firebase/database";
+import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 
 @Component({
   selector: 'app-table',
@@ -31,7 +31,9 @@ export class TableComponent implements OnInit {
 
   updateUser(userKey){
     const db = getDatabase();
-    remove(ref(db, "avocats/" + userKey))
+    update(ref(db, "avocats/" + userKey), {
+      prenom: "Pierre",
+    })
   }
 
 
