@@ -1,8 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Lawyers } from 'src/app/models/lawyers.model';
-import { Observable } from 'rxjs';
-import { getDatabase, ref, onValue} from "firebase/database";
-
+import { ExcelService } from 'src/app/services/excel.service';
+import { Component, OnInit, Input, Inject, DebugElement } from '@angular/core';
+import { getDatabase, ref, onValue, remove} from "firebase/database";
 
 @Component({
   selector: 'app-table',
@@ -15,8 +13,9 @@ export class TableComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'update', 'star'];
   dataSource
+  db
 
-  constructor() {
+  constructor(public excelService: ExcelService) {
     const db = getDatabase();
     const starCountRef = ref(db, 'avocats/');
     onValue(starCountRef, (snapshot) => {
@@ -30,8 +29,22 @@ export class TableComponent implements OnInit {
 
   }
 
-  isMyTable()
+  updateUser(userKey){
+    const db = getDatabase();
+    remove(ref(db, "avocats/" + userKey))
+  }
+
+
+  removeUser(userKey){
+    const db = getDatabase();
+    remove(ref(db, "avocats/" + userKey))
+  }
+
+
+  isMyTable(element)
   {
+    console.log(element)
   }
 
 }
+

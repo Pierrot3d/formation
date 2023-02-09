@@ -24,6 +24,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   exports: [
     TableComponent
   ],
+  bootstrap: [TableComponent],
 })
 
 export class TableModule { }

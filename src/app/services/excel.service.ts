@@ -1,3 +1,4 @@
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Lawyers } from 'src/app/models/lawyers.model';
 import { Injectable } from '@angular/core';
 import { Workbook } from 'exceljs';
@@ -12,9 +13,20 @@ import { DatePipe } from '@angular/common';
 })
 export class ExcelService {
 
+  private dbPath = 'avocats';
+
+
   constructor(private httpClient: HttpClient,
+    private db: AngularFirestore,
     private datePipe: DatePipe) {
+
   }
+
+  getAllUsers() {
+        return new Promise<any>((resolve)=> {
+          this.db.collection(this.dbPath).valueChanges({ idField: 'id' }).subscribe(users => resolve(users));
+        })
+    }
 
   liste = [];
   listeWithId = [];
