@@ -6,23 +6,37 @@ import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { DialogAddLawyerComponent } from './dialogAddLawyer/dialogAddLawyer.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
+
 
 
 
 
 
 @NgModule({
-  declarations: [TableComponent],
+  declarations: [TableComponent, DialogAddLawyerComponent],
   imports: [
     CommonModule,
     MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    FormsModule,
     RouterModule
   ],
   exports: [
-    TableComponent
+    TableComponent,
+    DialogAddLawyerComponent
   ],
   bootstrap: [TableComponent],
 })

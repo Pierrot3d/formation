@@ -1,13 +1,20 @@
 import { ExcelService } from 'src/app/services/excel.service';
-import { Component, OnInit, Input, Inject, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";
+import {MatDialog } from '@angular/material/dialog';
+import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.component';
+
+export interface DialogData {
+  mail: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
@@ -15,7 +22,10 @@ export class TableComponent implements OnInit {
   dataSource
   db
 
-  constructor(public excelService: ExcelService) {
+  mail: string;
+  name: string;
+
+  constructor(public excelService: ExcelService, public dialog: MatDialog) {
     const db = getDatabase();
     const starCountRef = ref(db, 'avocats/');
     onValue(starCountRef, (snapshot) => {
@@ -23,10 +33,6 @@ export class TableComponent implements OnInit {
       this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
       console.log(this.lawyers$)
     })
-  }
-
-  ngOnInit(): void {
-
   }
 
   updateUser(userKey){
@@ -48,5 +54,17 @@ export class TableComponent implements OnInit {
     console.log(element)
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
+      data: {name: this.name, mail: this.mail},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.mail = result;
+    });
+  }
 }
+
+
 

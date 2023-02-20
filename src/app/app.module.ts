@@ -1,5 +1,5 @@
 import { AddLawyerModule } from './pages/add-lawyer/addlawyer.module';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -66,6 +66,7 @@ registerLocaleData(localeFr, 'fr');
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
