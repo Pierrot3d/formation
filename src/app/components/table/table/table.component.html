@@ -41,7 +41,7 @@
     <ng-container matColumnDef="update" stickyEnd>
       <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
       <td mat-cell *matCellDef="let element" >
-        <mat-icon mat-raised-button (click)="openDialog(element.value.nom, element.value.prenom, element.value.email)"> create </mat-icon>
+        <mat-icon mat-raised-button (click)="openDialog(element.type, element.value.nom, element.value.prenom, element.value.email)"> create </mat-icon>
       </td>
     </ng-container>
 

@@ -8,6 +8,7 @@ export interface DialogData {
   email: string;
   nom: string;
   prenom: string;
+  id: string;
 }
 
 @Component({
@@ -55,16 +56,16 @@ export class TableComponent {
     console.log(element)
   }
 
-  openDialog(nom, prenom, email): void {
+  openDialog(id, nom, prenom, email): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
       height: "40vh",
       width: "50vw",
-      data: {nom: nom, prenom: prenom, email: email},
+      data: {id: id, nom: nom, prenom: prenom, email: email},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.mail = result;
+      console.log(result);
     });
   }
 }
