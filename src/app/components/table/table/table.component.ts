@@ -5,9 +5,9 @@ import {MatDialog } from '@angular/material/dialog';
 import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.component';
 
 export interface DialogData {
-  mail: string;
-  name: string;
-  surname: string;
+  email: string;
+  nom: string;
+  prenom: string;
 }
 
 @Component({
@@ -55,9 +55,11 @@ export class TableComponent {
     console.log(element)
   }
 
-  openDialog(name, surname, mail): void {
+  openDialog(nom, prenom, email): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
-      data: {name: name, surname: surname, mail: mail},
+      height: "40vh",
+      width: "50vw",
+      data: {nom: nom, prenom: prenom, email: email},
     });
 
     dialogRef.afterClosed().subscribe(result => {
