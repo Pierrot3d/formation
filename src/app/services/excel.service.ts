@@ -1,3 +1,5 @@
+/* eslint-disable no-irregular-whitespace */
+/* eslint-disable prefer-const */
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Lawyers } from 'src/app/models/lawyers.model';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";

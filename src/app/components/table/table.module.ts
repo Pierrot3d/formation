@@ -1,3 +1,4 @@
+import { DialogUpdateLawyerComponent } from './dialogUpdateLawyer/dialogUpdateLawyer.component';
 import { TableComponent } from './table/table.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,7 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [TableComponent, DialogAddLawyerComponent],
+  declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -36,7 +37,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     TableComponent,
-    DialogAddLawyerComponent
+    DialogAddLawyerComponent,
+    DialogUpdateLawyerComponent
   ],
   bootstrap: [TableComponent],
   providers: [

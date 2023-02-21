@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 import {MatDialog } from '@angular/material/dialog';
 import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.component';
+import { DialogUpdateLawyerComponent } from '../dialogUpdateLawyer/dialogUpdateLawyer.component';
 
 export interface DialogData {
   email: string;
@@ -57,8 +58,21 @@ export class TableComponent {
     console.log(element)
   }
 
-  openDialog(id, nom, prenom, email): void {
+  openAddDialog(id, nom, prenom, email): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
+      height: "40vh",
+      width: "50vw",
+      data: {id: id, nom: nom, prenom: prenom, email: email},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+  openUpdateDialog(id, nom, prenom, email): void {
+    const dialogRef = this.dialog.open(DialogUpdateLawyerComponent, {
       height: "40vh",
       width: "50vw",
       data: {id: id, nom: nom, prenom: prenom, email: email},
