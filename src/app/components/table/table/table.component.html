@@ -41,7 +41,7 @@
     <ng-container matColumnDef="update" stickyEnd>
       <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
       <td mat-cell *matCellDef="let element" >
-        <mat-icon (click)="this.updateUser(element.type)"> create </mat-icon>
+        <mat-icon mat-raised-button (click)="openDialog()"> create </mat-icon>
       </td>
     </ng-container>
 
@@ -60,17 +60,8 @@
 </table>
 
 
-<ol>
-  <li>
-    <mat-form-field appearance="fill">
-      <mat-label>What's your name?</mat-label>
-      <input matInput [(ngModel)]="name">
-    </mat-form-field>
-  </li>
-  <li>
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
-  </li>
+
   <li *ngIf="mail">
     You chose: <i>{{mail}}</i>
   </li>
-</ol>
+
