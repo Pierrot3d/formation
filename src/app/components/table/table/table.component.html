@@ -1,7 +1,7 @@
 
 
 <div class="button-container">
-  <button mat-raised-button [routerLink]="'/add-lawyer'" class="button">
+  <button mat-raised-button (click)="openAddDialog()" class="button">
     Ajouter un avocat
     <mat-icon>person_add</mat-icon>
   </button>

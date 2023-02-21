@@ -37,7 +37,6 @@ export class AddLawyerComponent implements OnInit {
   }
 
   formulaireValidation() {
-    console.log('données du formulaire ..', this.excelForm.value);
     this.excelService.saveLawyersToServer(this.excelForm.value);
     this.excelService.getLawyersFromServer();
   }

@@ -20,10 +20,18 @@ export class DialogAddLawyerComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
-  updateUser()
+  addUser()
   {
-    this.excelService.updateUser(this.data.id, this.data.prenom, this.data.nom, this.data.email)
+    const value = {
+      prenom: this.data.prenom,
+      nom: this.data.nom,
+      email: this.data.email
+    }
+    this.excelService.saveLawyersToServer(value);
+    this.excelService.getLawyersFromServer();
   }
+
+
 
   onNoClick(): void {
     this.dialogRef.close();

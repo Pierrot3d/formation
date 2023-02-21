@@ -33,7 +33,7 @@ export class TableComponent {
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
-      console.log(this.lawyers$)
+      // console.log(this.lawyers$)
     })
   }
 
@@ -58,15 +58,15 @@ export class TableComponent {
     console.log(element)
   }
 
-  openAddDialog(id, nom, prenom, email): void {
+  openAddDialog(): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
       height: "40vh",
       width: "50vw",
-      data: {id: id, nom: nom, prenom: prenom, email: email},
+      data: {nom: "", prenom: "", email: ""},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       console.log(result);
     });
   }
@@ -79,7 +79,7 @@ export class TableComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       console.log(result);
     });
   }

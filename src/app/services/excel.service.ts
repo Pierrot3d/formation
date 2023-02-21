@@ -40,7 +40,7 @@ export class ExcelService {
       .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json', element)
       .subscribe(
         () => {
-          console.log(element);
+        //  console.log(element);
           console.log('Enregistrement terminé !');
           this.isRecord = true;
         },
