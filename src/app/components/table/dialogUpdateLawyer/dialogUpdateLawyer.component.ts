@@ -18,7 +18,7 @@ export class DialogUpdateLawyerComponent {
 
   updateUser()
   {
-    this.excelService.updateUser(this.data.id, this.data.prenom, this.data.nom, this.data.email)
+    this.excelService.updateUser(this.data.id, this.data.prenom, this.data.nom, this.data.email, this.data.group? this.data.group: "")
   }
 
   onNoClick(): void {

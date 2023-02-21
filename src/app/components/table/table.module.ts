@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatDialogModule,
     FormsModule,
+    MatSelectModule,
     RouterModule
   ],
   exports: [

@@ -25,7 +25,8 @@ export class DialogAddLawyerComponent {
     const value = {
       prenom: this.data.prenom,
       nom: this.data.nom,
-      email: this.data.email
+      email: this.data.email,
+      group: this.data.group? this.data.group: ""
     }
     this.excelService.saveLawyersToServer(value);
     this.excelService.getLawyersFromServer();

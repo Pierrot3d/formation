@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Modification du profil de {{data.prenom}} {{data.nom}}</h1>
+<h1 mat-dialog-title>Ajout d'un avocat</h1>
 <div mat-dialog-content>
   <p>
   <mat-form-field appearance="fill">
@@ -16,6 +16,18 @@
   <mat-form-field appearance="fill">
     <mat-label>e-mail</mat-label>
     <input matInput [(ngModel)]="data.email">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label>Groupe</mat-label>
+    <mat-select [(ngModel)]="data.group">
+      <mat-option value="Mineurs">Mineurs</mat-option>
+      <mat-option value="Pénal">Pénal</mat-option>
+      <mat-option value="JLD-HO">JLD-HO</mat-option>
+      <mat-option value="Déontologie">Déontologie</mat-option>
+      <mat-option value="Spécialisation">Spécialisation</mat-option>
+    </mat-select>
   </mat-form-field>
 </p>
 </div>

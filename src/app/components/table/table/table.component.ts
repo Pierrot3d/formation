@@ -9,6 +9,7 @@ export interface DialogData {
   email: string;
   nom: string;
   prenom: string;
+  group: string;
   id: string;
 }
 
@@ -21,7 +22,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'update', 'star'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'update', 'trash'];
   dataSource
   db
 
@@ -43,6 +44,7 @@ export class TableComponent {
       prenom: this.updateUserDataTmp.prenom,
       nom: this.updateUserDataTmp.nom,
       email: this.updateUserDataTmp.email,
+      group: this.updateUserDataTmp.group
     })
   }
 
@@ -60,9 +62,9 @@ export class TableComponent {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
-      height: "40vh",
+      height: "60vh",
       width: "50vw",
-      data: {nom: "", prenom: "", email: ""},
+      data: {nom: "", prenom: "", email: "", group: ""},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,11 +73,11 @@ export class TableComponent {
     });
   }
 
-  openUpdateDialog(id, nom, prenom, email): void {
+  openUpdateDialog(id, nom, prenom, email, group): void {
     const dialogRef = this.dialog.open(DialogUpdateLawyerComponent, {
-      height: "40vh",
+      height: "60vh",
       width: "50vw",
-      data: {id: id, nom: nom, prenom: prenom, email: email},
+      data: {id: id, nom: nom, prenom: prenom, email: email, group: group},
     });
 
     dialogRef.afterClosed().subscribe(result => {

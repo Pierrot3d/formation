@@ -73,12 +73,13 @@ export class ExcelService {
     return []
   }
 
-  updateUser(id, DataPrenom, DataNom, DataEmail){
+  updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){
     const db = getDatabase();
     update(ref(db, "avocats/" + id), {
       prenom: DataPrenom,
       nom: DataNom,
       email: DataEmail,
+      group: DataGroup
     })
   }
 
