@@ -7,6 +7,7 @@ import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.com
 export interface DialogData {
   mail: string;
   name: string;
+  surname: string;
 }
 
 @Component({
@@ -54,9 +55,9 @@ export class TableComponent {
     console.log(element)
   }
 
-  openDialog(): void {
+  openDialog(name, surname, mail): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
-      data: {name: this.name, mail: this.mail},
+      data: {name: name, surname: surname, mail: mail},
     });
 
     dialogRef.afterClosed().subscribe(result => {
