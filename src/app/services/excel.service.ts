@@ -1,5 +1,6 @@
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Lawyers } from 'src/app/models/lawyers.model';
+import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 import { Injectable } from '@angular/core';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
@@ -68,6 +69,15 @@ export class ExcelService {
         }
       );
     return []
+  }
+
+  updateUser(id, DataPrenom, DataNom, DataEmail){
+    const db = getDatabase();
+    update(ref(db, "avocats/" + id), {
+      prenom: DataPrenom,
+      nom: DataNom,
+      email: DataEmail,
+    })
   }
 
   giveMeTheList()

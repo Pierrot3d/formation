@@ -24,8 +24,7 @@ export class TableComponent {
   dataSource
   db
 
-  mail: string;
-  name: string;
+  updateUserDataTmp: DialogData;
 
   constructor(public excelService: ExcelService, public dialog: MatDialog) {
     const db = getDatabase();
@@ -37,10 +36,12 @@ export class TableComponent {
     })
   }
 
-  updateUser(userKey){
+  updateUser(){
     const db = getDatabase();
-    update(ref(db, "avocats/" + userKey), {
-      prenom: "Pierre",
+    update(ref(db, "avocats/" + this.updateUserDataTmp.id), {
+      prenom: this.updateUserDataTmp.prenom,
+      nom: this.updateUserDataTmp.nom,
+      email: this.updateUserDataTmp.email,
     })
   }
 
