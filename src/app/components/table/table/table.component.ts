@@ -9,7 +9,6 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Sort} from '@angular/material/sort';
 
 
-
 export interface DialogData {
   email: string;
   nom: string;

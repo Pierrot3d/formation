@@ -3,7 +3,8 @@ export class Lawyers {
   public value: {
     nom: string,
     prenom: string,
-    email: string
+    email: string,
+    group: string,
   };
 
 
