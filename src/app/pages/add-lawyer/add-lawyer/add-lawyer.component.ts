@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ExcelService } from 'src/app/services/excel.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 
 @Component({
   templateUrl: './add-lawyer.component.html',
@@ -13,13 +12,13 @@ export class AddLawyerComponent implements OnInit {
   excelForm!: FormGroup;
 
   constructor(
-    public excelService: ExcelService,
+    public bddCommunicationService: BddCommunicationService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
 
-    this.excelService.isRecord = false;
+    this.bddCommunicationService.isRecord = false;
     this.excelForm = this.formBuilder.group({
       nom: ['',
       [
@@ -37,14 +36,14 @@ export class AddLawyerComponent implements OnInit {
   }
 
   formulaireValidation() {
-    this.excelService.saveLawyersToServer(this.excelForm.value);
-    this.excelService.getLawyersFromServer();
+    this.bddCommunicationService.saveLawyersToServer(this.excelForm.value);
+    this.bddCommunicationService.getLawyersFromServer();
   }
   generatePeople() {
-    this.excelService.getLawyersFromServer();
-    console.log(this.excelService.getLawyersFromServer())
+    this.bddCommunicationService.getLawyersFromServer();
+    console.log(this.bddCommunicationService.getLawyersFromServer())
   }
-  generateExcel() {
-    this.excelService.generateExcel();
-  }
+  // generateExcel() {
+  //   this.excelService.generateExcel();
+  // }
 }

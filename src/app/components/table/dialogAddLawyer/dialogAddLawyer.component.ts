@@ -1,7 +1,7 @@
+import { BddCommunicationService } from './../../../services/bdd-communication.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../table/table.component';
-import { ExcelService } from 'src/app/services/excel.service';
 
 
 
@@ -16,7 +16,7 @@ export class DialogAddLawyerComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddLawyerComponent>,
-    private excelService: ExcelService,
+    private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
@@ -28,8 +28,8 @@ export class DialogAddLawyerComponent {
       email: this.data.email,
       group: this.data.group? this.data.group: ""
     }
-    this.excelService.saveLawyersToServer(value);
-    this.excelService.getLawyersFromServer();
+    this.bddCommunicationService.saveLawyersToServer(value);
+    this.bddCommunicationService.getLawyersFromServer();
   }
 
 

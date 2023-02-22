@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormExcel } from 'src/app/models/excel.model';
+import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class ExcelComponent implements OnInit {
 
   constructor(
     public excelService: ExcelService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public bddCommunicationService: BddCommunicationService
   ) { }
 
   ngOnInit(): void {
@@ -54,11 +56,11 @@ export class ExcelComponent implements OnInit {
 
   formulaireValidation() {
     console.log('données du formulaire ..', this.excelForm.value);
-    this.excelService.saveLawyersToServer(this.excelForm.value);
-    this.excelService.getLawyersFromServer();
+    this.bddCommunicationService.saveLawyersToServer(this.excelForm.value);
+    this.bddCommunicationService.getLawyersFromServer();
   }
   generatePeople() {
-    this.excelService.getLawyersFromServer();
+    this.bddCommunicationService.getLawyersFromServer();
   }
   generateExcel() {
     this.excelService.generateExcel();

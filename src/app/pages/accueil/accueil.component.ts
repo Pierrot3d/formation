@@ -1,14 +1,12 @@
 import {
   Component,
   HostListener,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { SectionComponent } from 'src/app/components/section/section/section.component';
 import { MenuList } from 'src/app/models/menu.model';
 import { ContentService } from 'src/app/services/content.service';
 import { DatePipe } from '@angular/common';
-import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-accueil',
@@ -16,7 +14,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./accueil.component.scss'],
   providers: [DatePipe]
 })
-export class AccueilComponent implements OnInit {
+export class AccueilComponent {
   @ViewChild(SectionComponent) accueil: SectionComponent;
   sticky: boolean;
 
@@ -32,11 +30,10 @@ export class AccueilComponent implements OnInit {
     }
   }
 
-  constructor(private _contentService: ContentService, public excelService: ExcelService) {
+  constructor(private _contentService: ContentService) {
     this._contentService.getContent().subscribe((data) => {
       this.menuListTmp = data;
     });
   }
 
-  ngOnInit() { }
 }

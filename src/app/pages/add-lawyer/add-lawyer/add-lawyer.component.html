@@ -70,7 +70,7 @@
   </div>
   <div class="form-group">
     <p
-      *ngIf="this.excelService.isRecord"
+      *ngIf="this.bddCommunicationService.isRecord"
       style="margin-top: 2rem; color: green"
     >
       Merci ! Le formulaire a bien été envoyé
@@ -102,7 +102,7 @@
     <span>Générer le fichier sur le serveur</span>
   </button>
 
-  <button
+  <!-- <button
     (click)="generateExcel()"
     class="
       bg-gray-300
@@ -125,5 +125,5 @@
       <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
     </svg>
     <span>Download</span>
-  </button>
+  </button> -->
 </div>

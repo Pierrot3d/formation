@@ -1,4 +1,4 @@
-import { ExcelService } from 'src/app/services/excel.service';
+import { BddCommunicationService } from "src/app/services/bdd-communication.service";
 import { Component } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 import {MatDialog } from '@angular/material/dialog';
@@ -34,7 +34,7 @@ export class TableComponent {
   sortedData;
 
 
-  constructor(public excelService: ExcelService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer) {
     const db = getDatabase();
     const starCountRef = ref(db, 'avocats/');
     onValue(starCountRef, (snapshot) => {
