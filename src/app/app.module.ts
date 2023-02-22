@@ -28,6 +28,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { TabletestComponent } from './tabletest/tabletest.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -42,6 +43,7 @@ registerLocaleData(localeFr, 'fr');
     AccueilComponent,
     RsvpComponent,
     DownloadComponent,
+    TabletestComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
