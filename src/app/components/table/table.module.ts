@@ -14,6 +14,7 @@ import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dia
 import {MatInputModule} from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatSortModule,
     FormsModule,
     MatSelectModule,
     RouterModule
