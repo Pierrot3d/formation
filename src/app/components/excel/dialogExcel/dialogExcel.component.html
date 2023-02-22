@@ -1,7 +1,13 @@
-<h1 mat-dialog-title>Ajout d'un avocat</h1>
-<div mat-dialog-content>
-<app-import-excel></app-import-excel>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button>
-</div>
+<mat-tab-group>
+  <mat-tab label="Importer">
+    <h1 mat-dialog-title>Importer un fichier XLSX</h1>
+    <div mat-dialog-content>
+      <app-import-excel></app-import-excel>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()"> Annuler </button>
+        <button mat-button cdkFocusInitial> Importer </button>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Exporter">Exporter un fichier XLSX</mat-tab>
+</mat-tab-group>
