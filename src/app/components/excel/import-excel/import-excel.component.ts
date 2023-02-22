@@ -34,6 +34,7 @@ export class ImportExcelComponent   {
         const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
         /* save data */
+        console.log(XLSX.utils.sheet_to_json(ws))
         data = XLSX.utils.sheet_to_json(ws);
       };
 

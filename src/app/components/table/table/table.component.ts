@@ -4,6 +4,7 @@ import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 import {MatDialog } from '@angular/material/dialog';
 import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.component';
 import { DialogUpdateLawyerComponent } from '../dialogUpdateLawyer/dialogUpdateLawyer.component';
+import { DialogExcelComponent } from "../../excel/dialogExcel/dialogExcel.component";
 import {MatTableDataSource} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Sort} from '@angular/material/sort';
@@ -73,6 +74,18 @@ export class TableComponent {
       height: "60vh",
       width: "50vw",
       data: {nom: "", prenom: "", email: "", group: ""},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+  openExcelDialog(): void {
+    const dialogRef = this.dialog.open(DialogExcelComponent, {
+      height: "60vh",
+      width: "50vw"
     });
 
     dialogRef.afterClosed().subscribe(result => {
