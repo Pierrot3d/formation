@@ -27,9 +27,14 @@
 
 <section #list id="team"></section>
 
-<app-table ></app-table>
-
-<app-import-excel></app-import-excel>
+<mat-tab-group style="margin-top: 10vh">
+  <mat-tab label="Importer">
+    <app-table ></app-table>
+  </mat-tab>
+  <mat-tab label="Exporter">
+    <app-formation></app-formation>
+  </mat-tab>
+</mat-tab-group>
 
 <!-- Footer Section
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

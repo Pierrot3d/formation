@@ -1,3 +1,4 @@
+import { FormationComponent } from './pages/formation/formation.component';
 import { AddLawyerComponent } from './pages/add-lawyer/add-lawyer/add-lawyer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'accueil',
     component: AccueilComponent,
+  },
+  {
+    path: 'formation',
+    component: FormationComponent,
   },
 
   {

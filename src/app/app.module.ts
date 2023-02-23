@@ -28,6 +28,17 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FormationComponent } from './pages/formation/formation.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -40,6 +51,7 @@ registerLocaleData(localeFr, 'fr');
     AddUsersComponent,
     TimerComponent,
     AccueilComponent,
+    FormationComponent,
     RsvpComponent,
     DownloadComponent,
   ],
@@ -61,6 +73,16 @@ registerLocaleData(localeFr, 'fr');
     ExcelModule,
     AddLawyerModule,
     TableModule,
+    MatTabsModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSortModule,
+    MatSelectModule,
     AppRoutingModule
   ],
   providers: [
