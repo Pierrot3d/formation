@@ -1,3 +1,4 @@
+import { DialogInformationLawyerComponent } from './dialogInformationLawyer/dialogInformationLawyer.component';
 import { DialogUpdateLawyerComponent } from './dialogUpdateLawyer/dialogUpdateLawyer.component';
 import { TableComponent } from './table/table.component';
 import { NgModule } from '@angular/core';
@@ -14,20 +15,19 @@ import { DialogAddLawyerComponent } from './dialogAddLawyer/dialogAddLawyer.comp
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
-
-
-
-
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent, SpinBoxComponent],
+  declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent, DialogInformationLawyerComponent ,SpinBoxComponent],
   imports: [
     CommonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatTableModule,
+    ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,

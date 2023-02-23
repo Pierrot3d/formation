@@ -63,6 +63,14 @@
           ></app-spin-box></td>
     </ng-container>
 
+    <!-- formation list Column -->
+    <ng-container matColumnDef="formationList" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element" >
+        <mat-icon mat-raised-button (click)="openInformationDialog(element.type, element.value.nom, element.value.prenom, element.value.email, element.value.group)"> list </mat-icon>
+      </td>
+    </ng-container>
+
     <!-- update Column -->
     <ng-container matColumnDef="update" stickyEnd>
       <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>

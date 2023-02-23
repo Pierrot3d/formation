@@ -1,3 +1,4 @@
+import { DialogInformationLawyerComponent } from './../dialogInformationLawyer/dialogInformationLawyer.component';
 import { BddCommunicationService } from "src/app/services/bdd-communication.service";
 import { Component } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";
@@ -28,7 +29,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayDo', 'update', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayDo', 'formationList', 'update', 'trash'];
   dataSource
   db
 
@@ -99,6 +100,19 @@ export class TableComponent {
     const dialogRef = this.dialog.open(DialogUpdateLawyerComponent, {
       height: "60vh",
       width: "50vw",
+      data: {id: id, nom: nom, prenom: prenom, email: email, group: group},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+  openInformationDialog(id, nom, prenom, email, group): void {
+    const dialogRef = this.dialog.open(DialogInformationLawyerComponent, {
+      height: "60vh",
+      width: "60vw",
       data: {id: id, nom: nom, prenom: prenom, email: email, group: group},
     });
 
