@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppPagesComponent } from './components/app-pages/app-pages.component';
 import { AddUsersComponent } from './components/app-pages/add-users/add-users.component';
 import { MenuModuleModule } from './components/menu-module/menu-module.module';
+import { SpinBoxComponent } from './components/spin-box/spin-box.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ExcelModule } from './components/excel/excel.module';
@@ -53,6 +54,7 @@ registerLocaleData(localeFr, 'fr');
     AccueilComponent,
     FormationComponent,
     RsvpComponent,
+    SpinBoxComponent,
     DownloadComponent,
   ],
   imports: [
