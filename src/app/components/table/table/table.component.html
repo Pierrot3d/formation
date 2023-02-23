@@ -47,8 +47,19 @@
       <td mat-cell *matCellDef="let element"> {{element.value.group}} </td>
     </ng-container>
 
+    <!-- Jours obligatoires de formations Column -->
+    <ng-container matColumnDef="formationDay" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="formationDay"> Jours obligatoires</th>
+        <td mat-cell *matCellDef="let element"> {{this.formationService.isGroupParticularity(element.value.group)}} </td>
+    </ng-container>
 
-    <!-- delete Column -->
+    <!-- Jours obligatoires de formations Column -->
+    <ng-container matColumnDef="formationDayDo" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="formationDayDo"> Jours effectués</th>
+        <td mat-cell *matCellDef="let element"> {{element.value.nbrDay}} </td>
+    </ng-container>
+
+    <!-- update Column -->
     <ng-container matColumnDef="update" stickyEnd>
       <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
       <td mat-cell *matCellDef="let element" >

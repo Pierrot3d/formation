@@ -8,6 +8,7 @@ import { DialogExcelComponent } from "../../excel/dialogExcel/dialogExcel.compon
 import {MatTableDataSource} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Sort} from '@angular/material/sort';
+import { FormationService } from "src/app/services/formation.service";
 
 
 export interface DialogData {
@@ -27,7 +28,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'update', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayDo', 'update', 'trash'];
   dataSource
   db
 
@@ -35,7 +36,7 @@ export class TableComponent {
   sortedData;
 
 
-  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService) {
     const db = getDatabase();
     const starCountRef = ref(db, 'avocats/');
     onValue(starCountRef, (snapshot) => {
