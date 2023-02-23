@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 
 @Component({
   selector: 'app-spin-box',
@@ -7,22 +8,44 @@ import { Component } from '@angular/core';
 })
 export class SpinBoxComponent   {
 
-  constructor() {}
+  constructor(private bddCommunicationService: BddCommunicationService) {}
+  @Input() value: number;
+  @Input() lawyerId;
 
-  value = 1;
 
 numberIncrement(element: number)
 {
-  const nbr = element + 1;
-  this.value = nbr
+  if(this.value)
+  {
+    const nbr = element + 1;
+    this.value = nbr
+    this.bddCommunicationService.updateNbrDay(this.lawyerId, this.value)
+  }
+  else
+  {
+    this.value = 0
+    const nbr = this.value + 1;
+    this.bddCommunicationService.updateNbrDay(this.lawyerId, nbr)
+  }
+
 }
 
 numberDecrement(element: number)
 {
   if(element > 0)
   {
-    const nbr = element - 1;
-    this.value = nbr
+    if(this.value)
+    {
+      const nbr = element - 1;
+      this.value = nbr
+      this.bddCommunicationService.updateNbrDay(this.lawyerId, this.value)
+    }
+    else
+    {
+      this.value = 0
+      const nbr = this.value - 1;
+      this.bddCommunicationService.updateNbrDay(this.lawyerId, nbr)
+    }
   }
   else
   {

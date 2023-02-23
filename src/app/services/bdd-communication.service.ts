@@ -75,6 +75,14 @@ updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){
   })
 }
 
+updateNbrDay(id, nbrDay)
+{
+  const db = getDatabase();
+  update(ref(db, "avocats/" + id), {
+    nbr: nbrDay
+  })
+}
+
 giveMeTheList()
 {
   return this.liste
