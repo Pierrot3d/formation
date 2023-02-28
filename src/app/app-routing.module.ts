@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
+import { TabletestComponent } from './tabletest/tabletest.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'rsvp',
     component: RsvpComponent,
   },
+
+  {
+    path: 'tabletest',
+    component: TabletestComponent,
+  }
 ];
 
 @NgModule({
