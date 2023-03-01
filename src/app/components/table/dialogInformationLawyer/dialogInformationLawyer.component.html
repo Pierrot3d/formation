@@ -1,5 +1,6 @@
 <h1 mat-dialog-title>Fiche de Me {{data.prenom}} {{data.nom}}</h1>
 
+
 <table mat-table [dataSource]="this.dataTmp" class="mat-elevation-z8">
 
 
@@ -22,12 +23,12 @@
     <td mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [formGroup]="this.range" [rangePicker]="picker">
+        <mat-date-range-input [formGroup]="this.range" [rangePicker]="picker" >
           <input matStartDate formControlName="start" placeholder="Start date">
           <input matEndDate formControlName="end" placeholder="End date">
         </mat-date-range-input>
-        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-hint>JJ/MM/AAAA – JJ/MM/AAAA</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
 
         <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
@@ -47,8 +48,8 @@
       <mat-form-field appearance="fill">
         <mat-label *ngIf="!range.value.start && !range.value.end"> Nombre de jour</mat-label>
         <ng-container *ngIf="range.value.start && range.value.end">
-          {{nbrDeJours(range.value.start, range.value.end)}}
-          </ng-container>
+          {{this.getBusinessDatesCount(this.range.value.start,this.range.value.end)}}
+        </ng-container>
         <input matInput>
       </mat-form-field>
     </td>
