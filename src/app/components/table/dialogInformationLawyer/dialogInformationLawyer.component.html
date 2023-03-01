@@ -33,17 +33,22 @@
         <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
         <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
       </mat-form-field>
-      <p>Selected range: {{range.value | json}}</p>
+      <!-- <p>Selected range: {{range.value | json}}</p> -->
     </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="nbrDay" >
     <th mat-header-cell *matHeaderCellDef> Nombre de jours </th>
-    <td mat-cell *matCellDef="let element"> nbr Jour </td>
+    <td mat-cell *matCellDef="let element">
+
+    </td>
     <td mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
-        <mat-label>Nombre de jour</mat-label>
+        <mat-label *ngIf="!range.value.start && !range.value.end"> Nombre de jour</mat-label>
+        <ng-container *ngIf="range.value.start && range.value.end">
+          {{nbrDeJours(range.value.start, range.value.end)}}
+          </ng-container>
         <input matInput>
       </mat-form-field>
     </td>

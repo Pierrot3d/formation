@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent, DialogInformationLawyerComponent ,SpinBoxComponent],
@@ -47,7 +47,9 @@ import { MatNativeDateModule } from '@angular/material/core';
   ],
   bootstrap: [TableComponent],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+
   ]
 })
 

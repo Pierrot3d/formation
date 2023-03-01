@@ -15,6 +15,7 @@ export class DialogInformationLawyerComponent  {
 
   displayedColumns: string[] = ['formation', 'date', 'nbrDay', 'total'];
   dataTmp: any;
+  nbrJour: number;
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -26,6 +27,18 @@ export class DialogInformationLawyerComponent  {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       console.log(data)
       this.dataTmp = [data];
+    }
+
+     nbrDeJours(d1?,d2?){
+      if(d1 && d2)
+      {
+        const WNbJours = d2.getTime() - d1.getTime();
+        return Math.ceil(WNbJours/(1000*60*60*24));
+      }
+      else
+      {
+        return 0
+      }
     }
 
 
