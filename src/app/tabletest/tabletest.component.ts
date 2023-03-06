@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PauseOutlined } from '@material-ui/icons';
+import { FormExcel } from 'src/app/models/excel.model';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-tabletest',
@@ -10,9 +12,14 @@ export class TabletestComponent {
 
 }
 
-type classeAttestation = Array<{Avocat: string, NbrDeJourDeFormation : number, specialite : string }>;
-
-const attestation: classeAttestation = [
+async function ajout_donnees(){
+  await Excel.run (async (context) => {
+    let feuille = context.workbook.worksheets.getActiveworksheets();
+    let tableaudonnees = feuille.tables.add('A1:D1', true);
+    tableaudonnees.name = 'tableaudonnees';
+    tableaudonnees.getHeaderrowrange().values = [['Avocat', 'NbrDeJourDeFormation', 'specialite']];
+  
+var data = [
   {
     Avocat : 'personne 1' ,
     NbrDeJourDeFormation : 6,
@@ -35,5 +42,10 @@ const attestation: classeAttestation = [
     specialite : 'false'
   }
 
-]
+];
+let nouvellesdonnees = data.map((item) =>[item.Avocat , item.NbrDeJourDeFormation , item.specialite]);
 
+tableaudonnees.rows.add(null, nouvellesdonnees);
+
+});
+}
