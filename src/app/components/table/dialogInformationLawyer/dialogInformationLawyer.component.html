@@ -11,7 +11,7 @@
     <td mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Formation</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="data.formationLabel">
       </mat-form-field>
     </td>
   </ng-container>
@@ -72,5 +72,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="addFormation(this.range.value.start,this.range.value.end)">Ok</button>
 </div>

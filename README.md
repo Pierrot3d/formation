@@ -1,3 +1,18 @@
+# Pour commencer
+
+1 - Tout d'abord, il faut récupérer le code 
+via https :
+
+https://github.com/Pierrot3d/formation.git
+
+avec gh :
+
+gh repo clone Pierrot3d/formation
+
+2 - Puis installer l'ensemble des librairies :
+
+npm install
+
 # content.json
 
 Le format utilisé est le suivant :

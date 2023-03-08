@@ -25,8 +25,22 @@ export class DialogInformationLawyerComponent  {
   constructor( public dialogRef: MatDialogRef<DialogInformationLawyerComponent>,
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      console.log(data)
       this.dataTmp = [data];
+    }
+
+    addFormation(start, end)
+    {
+      const startTMP = this.changeDateFormat(start)
+      const endTMP = this.changeDateFormat(end)
+
+      this.bddCommunicationService.updateFormation(this.data.id,this.data.formationLabel, startTMP, endTMP ,this.numOfDates, this.data.formation?.id)
+    }
+
+    changeDateFormat(date)
+    {
+      const offset = date.getTimezoneOffset()
+      date = new Date(date.getTime() - (offset*60*1000))
+      return date.toISOString().split('T')[0]
     }
 
      nbrDeJours(d1?,d2?){

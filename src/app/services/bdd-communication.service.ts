@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Lawyers } from 'src/app/models/lawyers.model';
-import { getDatabase, ref, update} from "firebase/database";
+import { getDatabase, ref, update, push, set} from "firebase/database";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormExcel } from '../models/excel.model';
@@ -73,6 +73,23 @@ updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){
     email: DataEmail,
     group: DataGroup
   })
+}
+
+
+
+updateFormation(id, formationLabel, startDay, endDay, numOfDay, formationId? : number){
+  // Create a new post reference with an auto-generated id
+const db = getDatabase();
+const lawyerListRef = ref(db, 'formation/' + id);
+const formation = push(lawyerListRef);
+console.log(startDay, endDay)
+set(formation, {
+  formationLabel: formationLabel,
+  start: startDay,
+  end: endDay,
+  numOfDay: numOfDay
+});
+
 }
 
 updateNbrDay(id, nbrDay)

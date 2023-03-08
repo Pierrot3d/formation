@@ -18,6 +18,8 @@ export interface DialogData {
   prenom: string;
   group: string;
   id: string;
+  formation: any;
+  formationLabel: string;
 }
 
 @Component({
@@ -109,11 +111,11 @@ export class TableComponent {
     });
   }
 
-  openInformationDialog(id, nom, prenom, email, group): void {
+  openInformationDialog(id, nom, prenom, email, group, formation, formationLabel): void {
     const dialogRef = this.dialog.open(DialogInformationLawyerComponent, {
       height: "60vh",
       width: "60vw",
-      data: {id: id, nom: nom, prenom: prenom, email: email, group: group},
+      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationLabel: formationLabel},
     });
 
     dialogRef.afterClosed().subscribe(result => {
