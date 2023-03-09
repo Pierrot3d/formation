@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Lawyers } from 'src/app/models/lawyers.model';
-import { getDatabase, ref, update, push, set} from "firebase/database";
+import { getDatabase, ref, update, push, set, get, child} from "firebase/database";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormExcel } from '../models/excel.model';
@@ -25,6 +25,10 @@ getAllUsers() {
 
 liste = [];
 listeWithId = [];
+
+formationList = [];
+formationListWithId = [];
+
 isRecord: boolean;
 
 saveLawyersToServer(element: FormExcel) {
@@ -63,6 +67,20 @@ getLawyersFromServer(): [] {
       }
     );
   return []
+}
+
+getFormationFromServer(id){
+  const db = getDatabase();
+  const dbRef = ref(db, 'formation/');
+   get(child(dbRef, id)).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
 }
 
 updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){

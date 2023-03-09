@@ -26,6 +26,7 @@ export class DialogInformationLawyerComponent  {
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       this.dataTmp = [data];
+      console.log(this.bddCommunicationService.getFormationFromServer(this.data.id))
     }
 
     addFormation(start, end)
