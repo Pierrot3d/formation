@@ -69,18 +69,30 @@ getLawyersFromServer(): [] {
   return []
 }
 
-getFormationFromServer(id){
+getFormationFromServer(id): [] {
   const db = getDatabase();
   const dbRef = ref(db, 'formation/');
    get(child(dbRef, id)).then((snapshot) => {
     if (snapshot.exists()) {
+
       console.log(snapshot.val());
+      this.formationList = [];
+        let listTmp = snapshot.val();
+        this.formationListWithId = Object.keys(snapshot.val()).map(key => ({type: key, value: snapshot.val()[key]}));
+        //console.log("ceci est la listTmp", listTmp)
+        for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
+          this.formationList.push(listTmp[elemnt])
+        }
+        //console.log("ceci est la vraie liste",this.liste)
+        return this.formationList
     } else {
       console.log("No data available");
+      return []
     }
   }).catch((error) => {
     console.error(error);
   });
+  return []
 }
 
 updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){

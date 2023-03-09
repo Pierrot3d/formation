@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>Fiche de Me {{data.prenom}} {{data.nom}}</h1>
 
 
-<table mat-table [dataSource]="this.dataTmp" class="mat-elevation-z8">
+<table mat-table [dataSource]="this.formationList$" class="mat-elevation-z8">
 
 
   <!-- Name Column -->
   <ng-container matColumnDef="formation">
     <th mat-header-cell *matHeaderCellDef> Formation </th>
-    <td mat-cell *matCellDef="let element"> formation </td>
+    <td mat-cell *matCellDef="let element"> {{element.value.formationLabel}} </td>
     <td mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Formation</mat-label>
@@ -19,7 +19,7 @@
   <!-- Weight Column -->
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef > Date </th>
-    <td mat-cell *matCellDef="let element"> date </td>
+    <td mat-cell *matCellDef="let element"> {{element.value.start}} - {{element.value.end}} </td>
     <td mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Enter a date range</mat-label>
@@ -41,9 +41,7 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="nbrDay" >
     <th mat-header-cell *matHeaderCellDef> Nombre de jours </th>
-    <td mat-cell *matCellDef="let element">
-
-    </td>
+    <td mat-cell *matCellDef="let element">  {{element.value.numOfDay}} </td>
     <td mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label *ngIf="!range.value.start && !range.value.end"> Nombre de jour</mat-label>
@@ -60,7 +58,7 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element"></td>
     <td mat-footer-cell *matFooterCellDef>
-    <mat-icon>add</mat-icon>
+    <mat-icon (click)="addFormation(this.range.value.start,this.range.value.end)">add</mat-icon>
     </td>
   </ng-container>
 
@@ -72,5 +70,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="addFormation(this.range.value.start,this.range.value.end)">Ok</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial >Ok</button>
 </div>

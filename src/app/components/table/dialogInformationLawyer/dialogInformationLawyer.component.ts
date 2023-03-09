@@ -4,6 +4,9 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../table/table.component';
 import {FormGroup, FormControl} from '@angular/forms';
+import {MatTableDataSource} from '@angular/material/table';
+import { getDatabase, ref, onValue, remove, update} from "firebase/database";
+
 
 @Component({
   selector: 'app-dialogInformationLawyer',
@@ -16,6 +19,9 @@ export class DialogInformationLawyerComponent  {
   displayedColumns: string[] = ['formation', 'date', 'nbrDay', 'total'];
   dataTmp: any;
   nbrJour: number;
+  formationList$;
+  sortedData;
+  dataSource;
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -26,7 +32,17 @@ export class DialogInformationLawyerComponent  {
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       this.dataTmp = [data];
-      console.log(this.bddCommunicationService.getFormationFromServer(this.data.id))
+
+      const db = getDatabase();
+    const starCountRef = ref(db, 'formation/' + this.data.id);
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      this.formationList$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
+      // console.log(this.lawyers$)
+      this.dataSource = new MatTableDataSource(this.formationList$);
+      this.sortedData = this.formationList$.slice()
+      console.log(this.formationList$)
+    })
     }
 
     addFormation(start, end)
