@@ -30,6 +30,9 @@ export class TabletestComponent {
       specialite : 'false'
     }
     ]
+    Avocat: string;
+    NbrDeJourDeFormation : number;
+    specialite: string;
 }
 
 export class Tableau {
