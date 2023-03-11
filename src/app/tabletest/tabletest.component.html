@@ -3,6 +3,7 @@
 <head>
 <meta charset = "UTF-8">
 <base href="tabletest.component.html">
+<link href="tabletest.component.scss">
 </head>
 <body>
     <div>
@@ -10,7 +11,7 @@
         
             <tr *ngFor="let item of tableau">
                 <td>{{item.Avocat}}</td>
-                <td [ngStyle]="{ backgroundColor: item.NbrDeJourDeFormation > 4 ? 'red' : 'transparent' }">{{item.NbrDeJourDeFormation}}></td>
+                <td [ngStyle]="{ backgroundColor: item.NbrDeJourDeFormation > 4 ? 'green' : 'red' }">{{item.NbrDeJourDeFormation}}</td>
                 <td>{{item.specialite}}</td>
             </tr>
     
