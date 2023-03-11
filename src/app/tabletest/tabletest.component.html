@@ -8,12 +8,46 @@
 <body>
     <div>
         <p>test</p>
-        
-            <tr *ngFor="let item of tableau">
+           
+            <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 6 ? 'green' : 'red' }">
+                <ng-container *ngIf="item.specialite == 'Pénal'">
                 <td>{{item.Avocat}}</td>
-                <td [ngStyle]="{ backgroundColor: item.NbrDeJourDeFormation > 4 ? 'green' : 'red' }">{{item.NbrDeJourDeFormation}}</td>
+                <td>{{item.NbrDeJourDeFormation}}</td>
                 <td>{{item.specialite}}</td>
+                </ng-container>
             </tr>
-    
+
+
+            <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 2 ? 'green' : 'red' }">
+                <ng-container *ngIf="item.specialite == 'JLD-HO'">
+                <td>{{item.Avocat}}</td>
+                <td>{{item.NbrDeJourDeFormation}}</td>
+                <td>{{item.specialite}}</td>
+                </ng-container>
+            </tr>
+
+            <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 6 ? 'green' : 'red' }">
+                <ng-container *ngIf="item.specialite == 'Mineurs'">
+                <td>{{item.Avocat}}</td>
+                <td>{{item.NbrDeJourDeFormation}}</td>
+                <td>{{item.specialite}}</td>
+                </ng-container>
+            </tr>
+
+            <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 9 ? 'green' : 'red' }">
+                <ng-container *ngIf="item.specialite == 'jeunes avocats'">
+                <td>{{item.Avocat}}</td>
+                <td>{{item.NbrDeJourDeFormation}}</td>
+                <td>{{item.specialite}}</td>
+                </ng-container>
+            </tr>
+            <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 9 ? 'green' : 'red' }">
+                <ng-container *ngIf="item.specialite == 'avocats spécialisés'">
+                <td>{{item.Avocat}}</td>
+                <td>{{item.NbrDeJourDeFormation}}</td>
+                <td>{{item.specialite}}</td>
+                </ng-container>
+            </tr>
+ 
     </div>
 </body>
