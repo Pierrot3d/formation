@@ -1,11 +1,18 @@
+<router-outlet></router-outlet>
 <!DOCTYPE html>
 <head>
 <meta charset = "UTF-8">
+<base href="tabletest.component.html">
 </head>
 <body>
     <div>
-        <script type="text/javascript">
-            document.write(classAttestation)
-        </script>
+        <p>test</p>
+        
+            <tr *ngFor="let item of tableau">
+                <td>{{item.Avocat}}</td>
+                <td>{{item.NbrDeJourDeFormation}}</td>
+                <td>{{item.specialite}}</td>
+            </tr>
+    
     </div>
 </body>
