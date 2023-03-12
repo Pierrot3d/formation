@@ -6,9 +6,8 @@
 <link href="tabletest.component.scss">
 </head>
 <body>
-    <div>
-        <p>test</p>
-           
+<div class="container">
+<table class="center">
             <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 6 ? 'green' : 'red' }">
                 <ng-container *ngIf="item.specialite == 'Pénal'">
                 <td>{{item.Avocat}}</td>
@@ -16,7 +15,6 @@
                 <td>{{item.specialite}}</td>
                 </ng-container>
             </tr>
-
 
             <tr *ngFor="let item of tableau" [ngStyle]="{ 'background-color': item.NbrDeJourDeFormation > 2 ? 'green' : 'red' }">
                 <ng-container *ngIf="item.specialite == 'JLD-HO'">
@@ -48,6 +46,7 @@
                 <td>{{item.specialite}}</td>
                 </ng-container>
             </tr>
+ </table>
+</div>
  
-    </div>
 </body>

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./tabletest.component.scss']
 })
 export class TabletestComponent {
-   tableau : Tableau[]= [
+   tableau : any[]= [
 
     {
       Avocat : 'personne 1' ,
@@ -62,12 +62,6 @@ export class TabletestComponent {
 
     ]
 
-}
-
-export class Tableau {
-  Avocat: string;
-  NbrDeJourDeFormation : number;
-  specialite: string;
 }
 
 
