@@ -37,11 +37,17 @@ export class DialogInformationLawyerComponent  {
     const starCountRef = ref(db, 'formation/' + this.data.id);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      this.formationList$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
-      // console.log(this.lawyers$)
-      this.dataSource = new MatTableDataSource(this.formationList$);
-      this.sortedData = this.formationList$.slice()
-      console.log(this.formationList$)
+      if(data)
+      {
+        this.formationList$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
+        // console.log(this.lawyers$)
+        this.dataSource = new MatTableDataSource(this.formationList$);
+        this.sortedData = this.formationList$.slice()
+      }
+      else
+      {
+        this.formationList$ = []
+      }
     })
     }
 
@@ -85,6 +91,19 @@ getBusinessDatesCount(startDate, endDate) {
     }
     this.numOfDates = count;
     return count;
+}
+
+sendNewJour()
+{
+  let nbrDayTmp: number
+  nbrDayTmp = 0;
+
+  for(let i = 0; i < this.formationList$.length; i++)
+  {
+    nbrDayTmp = nbrDayTmp + this.formationList$[i].value.numOfDay
+  }
+
+  this.bddCommunicationService.updateNbrDay(this.data.id, nbrDayTmp)
 }
 
     onNoClick(): void {
