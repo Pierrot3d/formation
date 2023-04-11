@@ -1,7 +1,6 @@
 <input type="file" (change)="onChange($event)" #inputFile> <button (click)="removeData()">Remove Data</button>
 <div *ngIf="isExcelFile === false">
-  This is not an Excel file
-</div>
+Ceci n'est pas un fichier excel </div>
     <span *ngIf="spinnerEnabled" class="k-i-loading k-icon"></span>
 
 
@@ -17,4 +16,5 @@
           </td>
         </tr>
       </table>
+
     </ng-container>

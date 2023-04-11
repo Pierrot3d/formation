@@ -88,8 +88,8 @@ export class TableComponent {
 
   openExcelDialog(): void {
     const dialogRef = this.dialog.open(DialogExcelComponent, {
-      height: "60vh",
-      width: "50vw"
+      height: "80vh",
+      width: "60vw"
     });
 
     dialogRef.afterClosed().subscribe(result => {

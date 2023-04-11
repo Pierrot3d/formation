@@ -31,6 +31,15 @@ mat-icon
   outline: none;
   display: block;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+    font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+    font-size: var(--mdc-typography-body2-font-size, 14px);
+    line-height: var(--mdc-typography-body2-line-height, 20px);
+    font-weight: var(--mdc-typography-body2-font-weight, 400);
+    letter-spacing: var(--mdc-typography-body2-letter-spacing, 0.0178571429em);
+    -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
+    text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
+    text-transform: var(--mdc-typography-body2-text-transform, none);
 }
 
 .input-number-group .input-number,
