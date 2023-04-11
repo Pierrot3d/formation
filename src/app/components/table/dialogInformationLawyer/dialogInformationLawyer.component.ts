@@ -106,6 +106,20 @@ sendNewJour()
   this.bddCommunicationService.updateNbrDay(this.data.id, nbrDayTmp)
 }
 
+sendNewHours()
+{
+  let nbrHoursTmp: number
+  nbrHoursTmp = 0;
+
+  for(let i = 0; i < this.formationList$.length; i++)
+  {
+    console.log(nbrHoursTmp, "+", this.formationList$[i].value.numOfHours)
+    nbrHoursTmp = nbrHoursTmp + +this.formationList$[i].value.numOfHours
+  }
+  console.log(nbrHoursTmp)
+  this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp)
+}
+
     onNoClick(): void {
       this.dialogRef.close();
     }

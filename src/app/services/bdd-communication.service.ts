@@ -107,7 +107,7 @@ updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){
 
 
 
-updateFormation(id, formationLabel, startDay, endDay, numOfDay, numOfHours, formationId? : number){
+updateFormation(id, formationLabel, startDay, endDay, numOfDay, numOfHours: number, formationId? : number){
   // Create a new post reference with an auto-generated id
 const db = getDatabase();
 const lawyerListRef = ref(db, 'formation/' + id);
@@ -128,6 +128,14 @@ updateNbrDay(id, nbrDay)
   const db = getDatabase();
   update(ref(db, "avocats/" + id), {
     nbr: nbrDay
+  })
+}
+
+updateNbrHours(id, nbrHours)
+{
+  const db = getDatabase();
+  update(ref(db, "avocats/" + id), {
+    nbr: nbrHours
   })
 }
 
