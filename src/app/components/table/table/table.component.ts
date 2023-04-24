@@ -1,6 +1,6 @@
 import { DialogInformationLawyerComponent } from './../dialogInformationLawyer/dialogInformationLawyer.component';
 import { BddCommunicationService } from "src/app/services/bdd-communication.service";
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 import {MatDialog } from '@angular/material/dialog';
 import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.component';
@@ -19,6 +19,7 @@ export interface DialogData {
   group: string;
   id: string;
   formation: any;
+  formationType: any;
   formationLabel: string;
   numOfHours: number;
 }
@@ -29,10 +30,12 @@ export interface DialogData {
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
+
+
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayDo', 'formationList', 'update', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayDo', 'formationHoursReport', 'formationList', 'update', 'trash'];
   dataSource
   db
 
@@ -112,17 +115,32 @@ export class TableComponent {
     });
   }
 
-  openInformationDialog(id, nom, prenom, email, group, formation, formationLabel): void {
+  openInformationDialog(id, nom, prenom, email, group, formation, formationType, formationLabel): void {
     const dialogRef = this.dialog.open(DialogInformationLawyerComponent, {
       height: "80vh",
       width: "80vw",
-      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationLabel: formationLabel},
+      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationType:formationType, formationLabel: formationLabel},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       console.log(result);
     });
+  }
+
+
+  isMandatoryFormation(element)
+  {
+
+    if(this.formationService.isGroupParticularity(element.value.group) <= element.value.nbr)
+    {
+      console.log(true)
+      return true
+    }
+    else
+    {
+      return false
+    }
   }
 
 

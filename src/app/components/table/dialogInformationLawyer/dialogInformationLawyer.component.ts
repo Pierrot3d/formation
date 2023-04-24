@@ -16,7 +16,7 @@ import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 export class DialogInformationLawyerComponent  {
 
 
-  displayedColumns: string[] = ['formation', 'date', 'nbrDay', 'nbrHours', 'total'];
+  displayedColumns: string[] = ['formation', 'type', 'date', 'nbrDay', 'nbrHours', 'total'];
   dataTmp: any;
   nbrJour: number;
   formationList$;
@@ -56,7 +56,7 @@ export class DialogInformationLawyerComponent  {
       const startTMP = this.changeDateFormat(start)
       const endTMP = this.changeDateFormat(end)
 
-      this.bddCommunicationService.updateFormation(this.data.id,this.data.formationLabel, startTMP, endTMP ,this.numOfDates, this.data.numOfHours, this.data.formation?.id)
+      this.bddCommunicationService.updateFormation(this.data.id,this.data.formationLabel, this.data.formationType, startTMP, endTMP ,this.numOfDates, this.data.numOfHours, this.data.formation?.id)
     }
 
     changeDateFormat(date)

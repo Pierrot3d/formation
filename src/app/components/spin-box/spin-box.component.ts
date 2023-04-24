@@ -11,6 +11,7 @@ export class SpinBoxComponent   {
   constructor(private bddCommunicationService: BddCommunicationService) {}
   @Input() value: number;
   @Input() lawyerId;
+  @Input() isReportedHours;
 
 
 numberIncrement(element: number)
@@ -53,5 +54,46 @@ numberDecrement(element: number)
   }
 }
 
+
+
+numberIncrementReport(element: number)
+{
+  if(this.value)
+  {
+    const nbr = element + 1;
+    this.value = nbr
+    this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, this.value)
+  }
+  else
+  {
+    this.value = 0
+    const nbr = this.value + 1;
+    this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, nbr)
+  }
+
+}
+
+numberDecrementReport(element: number)
+{
+  if(element > 0)
+  {
+    if(this.value)
+    {
+      const nbr = element - 1;
+      this.value = nbr
+      this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, this.value)
+    }
+    else
+    {
+      this.value = 0
+      const nbr = this.value - 1;
+      this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, nbr)
+    }
+  }
+  else
+  {
+    return
+  }
+}
 
 }

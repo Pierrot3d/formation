@@ -16,6 +16,18 @@
     </td>
   </ng-container>
 
+    <!-- Name Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.value.formationType}} </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <mat-form-field appearance="fill">
+          <mat-label>Type</mat-label>
+          <input matInput [(ngModel)]="data.formationType">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
   <!-- Weight Column -->
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef > Date </th>
@@ -63,6 +75,7 @@
       </mat-form-field>
     </td>
   </ng-container>
+
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="total" >
