@@ -18,10 +18,13 @@ export interface DialogData {
   prenom: string;
   group: string;
   id: string;
+  mandatoryHours: number;
+  mandatoryGroupHours: number;
   formation: any;
   formationType: any;
   formationLabel: string;
   numOfHours: number;
+  numOfGroupHours: number;
 }
 
 @Component({
@@ -35,7 +38,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayDo', 'formationHoursReport', 'formationList', 'update', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationHoursReport', 'formationList', 'update', 'trash'];
   dataSource
   db
 

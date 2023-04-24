@@ -52,8 +52,14 @@
     <!-- Jours obligatoires de formations Column -->
     <ng-container matColumnDef="formationDay" >
         <th mat-header-cell *matHeaderCellDef mat-sort-header="formationDay"> Heures obligatoires</th>
-        <td mat-cell *matCellDef="let element"> {{this.formationService.isGroupParticularity(element.value.group)}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.value.mandatoryHours}} </td>
     </ng-container>
+
+        <!-- Jours obligatoires de formations groupe -->
+        <ng-container matColumnDef="formationDayGroup" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="formationDayGroup"> HO groupe</th>
+          <td mat-cell *matCellDef="let element"> {{element.value.mandatoryHoursGroup}} </td>
+      </ng-container>
 
     <!-- Jours effectués de formations Column -->
     <ng-container matColumnDef="formationDayDo" >

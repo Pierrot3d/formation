@@ -20,6 +20,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
+
 @NgModule({
   declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent, DialogInformationLawyerComponent ,SpinBoxComponent],
   imports: [

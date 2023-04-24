@@ -1,0 +1,16 @@
+mat-footer-row
+{
+  height: 11vh !important;
+}
+
+mat-hint
+{
+  font-size: 8px;
+}
+
+#addButton
+{
+  background-color: #8B1731;
+  color: white;
+  font-size: 1.4em;
+}
