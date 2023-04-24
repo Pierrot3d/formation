@@ -21,10 +21,18 @@
       <th mat-header-cell *matHeaderCellDef> Type </th>
       <td mat-cell *matCellDef="let element"> {{element.value.formationType}} </td>
       <td mat-footer-cell *matFooterCellDef>
-        <mat-form-field appearance="fill">
-          <mat-label>Type</mat-label>
-          <input matInput [(ngModel)]="data.formationType">
-        </mat-form-field>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Groupe</mat-label>
+            <mat-select matInput [(ngModel)]="data.formationType">
+              <mat-option value="Mineurs">Mineurs</mat-option>
+              <mat-option value="Pénal">Pénal</mat-option>
+              <mat-option value="JLD-HO">JLD-HO</mat-option>
+              <mat-option value="Déontologie">Déontologie</mat-option>
+              <mat-option value="Spécialisation">Spécialisation</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
       </td>
     </ng-container>
 
