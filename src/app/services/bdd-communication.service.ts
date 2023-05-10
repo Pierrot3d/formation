@@ -95,13 +95,14 @@ getFormationFromServer(id): [] {
   return []
 }
 
-updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?){
+updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?, MandatoryHours?){
   const db = getDatabase();
   update(ref(db, "avocats/" + id), {
     prenom: DataPrenom,
     nom: DataNom,
     email: DataEmail,
-    group: DataGroup
+    group: DataGroup,
+    mandatoryHoursGroup: MandatoryHours
   })
 }
 

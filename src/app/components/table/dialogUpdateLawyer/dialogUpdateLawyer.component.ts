@@ -6,19 +6,59 @@ import { BddCommunicationService } from 'src/app/services/bdd-communication.serv
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-dialogUpdateLawyer',
   templateUrl: './dialogUpdateLawyer.component.html',
-  styleUrls: ['./dialogUpdateLawyer.component.css']
+  styleUrls: ['./dialogUpdateLawyer.component.css'],
 })
 export class DialogUpdateLawyerComponent {
-
-  constructor(public dialogRef: MatDialogRef<DialogUpdateLawyerComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<DialogUpdateLawyerComponent>,
     private bddCommunicationService: BddCommunicationService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
-  updateUser()
-  {
-    this.bddCommunicationService.updateUser(this.data.id, this.data.prenom, this.data.nom, this.data.email, this.data.group? this.data.group: "")
+  updateUser() {
+    this.bddCommunicationService.updateUser(
+      this.data.id,
+      this.data.prenom,
+      this.data.nom,
+      this.data.email,
+      this.data.group ? this.data.group : '',
+      this.data.group? this.isGroupParticularity(this.data.group): 0
+
+    );
   }
+
+  isGroupParticularity(element: string)
+  {
+
+    switch(element)
+    {
+      case "Mineurs":
+        {
+          return 7;
+        }
+      case "Pénal":
+        {
+          return 7;
+        }
+      case "JLD-HO":
+        {
+          return 3;
+        }
+      case "Déontologie":
+        {
+          return 10;
+        }
+      case "Spécialisation":
+        {
+          return 10;
+        }
+      default:
+        {
+          return 0
+        }
+    }
+  }
+
 
   onNoClick(): void {
     this.dialogRef.close();
