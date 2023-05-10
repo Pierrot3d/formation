@@ -137,7 +137,6 @@ export class TableComponent {
 
     if(this.formationService.isGroupParticularity(element.value.group) <= element.value.nbr)
     {
-      console.log(true)
       return true
     }
     else

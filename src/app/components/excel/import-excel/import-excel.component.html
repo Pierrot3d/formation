@@ -1,4 +1,8 @@
-<input type="file" (change)="onChange($event)" #inputFile> <button (click)="removeData()">Remove Data</button>
+<input type="file" (change)="onChange($event)" #inputFile>
+<div style="margin-top: 1vw;" *ngIf="isExcelFile === true">
+<button (click)="importData()" mat-raised-button color="primary" style="margin-right: 1vw">Importer</button>
+<button (click)="removeData()" mat-stroked-button color="primary">Effacer</button>
+</div>
 <div *ngIf="isExcelFile === false">
 Ceci n'est pas un fichier excel </div>
     <span *ngIf="spinnerEnabled" class="k-i-loading k-icon"></span>
