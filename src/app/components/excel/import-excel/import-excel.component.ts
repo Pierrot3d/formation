@@ -64,19 +64,26 @@ export class ImportExcelComponent   {
     {
       const str = elmt.nom
       const words = str.split(' ');
-      this.addUser(words[1], words[0])
-      console.log(words[1], words[0] )
+      if(words.length === 2)
+      {
+        this.addUser(words[1], words[0], elmt?.email)
+      }
+      else
+      {
+        this.addUser(words[2], words[0] + ' ' + words[1], elmt?.email)
+      }
+
     }
     console.log(this.dataImported)
   }
 
 
-  addUser(prenom, nom)
+  addUser(prenom, nom, email?)
   {
     const value = {
       prenom: prenom,
       nom: nom,
-      email: "non renseigné",
+      email: email? email: 'non renseigné',
       mandatoryHours: 20,
     }
     this.bddCommunicationService.saveLawyersToServer(value);

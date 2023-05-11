@@ -1,6 +1,6 @@
 import { DialogInformationLawyerComponent } from './../dialogInformationLawyer/dialogInformationLawyer.component';
 import { BddCommunicationService } from "src/app/services/bdd-communication.service";
-import { Component, Input } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 import {MatDialog } from '@angular/material/dialog';
 import { DialogAddLawyerComponent } from '../dialogAddLawyer/dialogAddLawyer.component';
@@ -9,6 +9,9 @@ import { DialogExcelComponent } from "../../excel/dialogExcel/dialogExcel.compon
 import {MatTableDataSource} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+
 import { FormationService } from "src/app/services/formation.service";
 
 
@@ -45,6 +48,9 @@ export class TableComponent {
   updateUserDataTmp: DialogData;
   sortedData;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
 
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService) {
     const db = getDatabase();
@@ -56,7 +62,44 @@ export class TableComponent {
       this.dataSource = new MatTableDataSource(this.lawyers$);
       this.sortedData = this.lawyers$.slice()
     })
+
   }
+
+  sortData(sort: Sort) {
+    const data = this.lawyers$.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+
+      switch (sort.active) {
+        case 'nom':
+          return this.compare(a.value.nom, b.value.nom, isAsc);
+        case 'prenom':
+          return this.compare(a.value.prenom, b.value.prenom, isAsc);
+        case 'email':
+          return this.compare(a.value.email, b.value.email, isAsc);
+        case 'group':
+          return this.compare(a.value.group, b.value.group, isAsc);
+        case 'formationDayDo':
+          return this.compare(a.value.formationDayDo, b.value.formationDayDo, isAsc);
+        case 'formationHoursReport':
+          return this.compare(a.value.formationHoursReport, b.value.formationHoursReport, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+
+
+compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a > b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
+
 
   updateUser(){
     const db = getDatabase();
@@ -153,8 +196,10 @@ export class TableComponent {
     // Furthermore, you can customize the message to add additional
     // details about the values being sorted.
     if (sortState.direction) {
+
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
+
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
