@@ -20,27 +20,27 @@ isGroupParticularity(element: string)
   {
     case "Mineurs":
       {
-        this.nbrHeuresObligatoires = this.nbrHeuresObligatoires + 7
+        this.nbrHeuresObligatoires
         return this.nbrHeuresObligatoires;
       }
     case "Pénal":
       {
-        this.nbrHeuresObligatoires = this.nbrHeuresObligatoires + 7
+        this.nbrHeuresObligatoires
         return this.nbrHeuresObligatoires;
       }
     case "JLD-HO":
       {
-        this.nbrHeuresObligatoires = this.nbrHeuresObligatoires + 3
+        this.nbrHeuresObligatoires
         return this.nbrHeuresObligatoires;
       }
     case "Déontologie":
       {
-        this.nbrHeuresObligatoires = this.nbrHeuresObligatoires + 10
+        this.nbrHeuresObligatoires
         return this.nbrHeuresObligatoires;
       }
     case "Spécialisation":
       {
-        this.nbrHeuresObligatoires = this.nbrHeuresObligatoires + 10
+        this.nbrHeuresObligatoires
         return this.nbrHeuresObligatoires;
       }
     default:

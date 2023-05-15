@@ -61,6 +61,7 @@ export class TableComponent {
       // console.log(this.lawyers$)
       this.dataSource = new MatTableDataSource(this.lawyers$);
       this.sortedData = this.lawyers$.slice()
+
     })
 
   }

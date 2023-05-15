@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { ExportExcelComponent } from './export-excel/export-excel.component';
 
 
 
@@ -26,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
   declarations: [
     ExcelComponent,
     ImportExcelComponent,
+    ExportExcelComponent,
     DialogExcelComponent
   ],
   imports: [
