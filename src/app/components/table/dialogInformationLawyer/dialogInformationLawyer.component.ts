@@ -56,7 +56,7 @@ export class DialogInformationLawyerComponent  {
       const startTMP = this.changeDateFormat(start)
       const endTMP = this.changeDateFormat(end)
 
-      this.bddCommunicationService.updateFormation(this.data.id,this.data.formationLabel, this.data.formationType, startTMP, endTMP ,0, this.data.numOfHours, this.data.numOfGroupHours, this.data.formation?.id)
+      this.bddCommunicationService.updateFormation(this.data.id,this.data.formationLabel, this.data.formationType, startTMP, endTMP ,0, this.data.numOfHours? this.data.numOfHours:0, this.data.numOfGroupHours? this.data.numOfGroupHours:0, this.data.formation?.id)
 
     }
 
