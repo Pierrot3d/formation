@@ -228,7 +228,7 @@ generateExcel() {
           }
         } */
         data.push([
-          listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].formationDayGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
+          listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
         ])
       }
 
