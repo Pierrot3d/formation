@@ -47,6 +47,7 @@ export class TableComponent {
 
   updateUserDataTmp: DialogData;
   sortedData;
+  dataSortedByUser: Sort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -61,6 +62,10 @@ export class TableComponent {
       // console.log(this.lawyers$)
       this.dataSource = new MatTableDataSource(this.lawyers$);
       this.sortedData = this.lawyers$.slice()
+      if(this.dataSortedByUser)
+      {
+        this.sortData(this.dataSortedByUser)
+      }
 
     })
 
@@ -72,7 +77,7 @@ export class TableComponent {
       this.sortedData = data;
       return;
     }
-
+    this.dataSortedByUser = sort;
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
 
