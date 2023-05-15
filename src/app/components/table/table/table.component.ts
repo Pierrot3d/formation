@@ -108,7 +108,8 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       prenom: this.updateUserDataTmp.prenom,
       nom: this.updateUserDataTmp.nom,
       email: this.updateUserDataTmp.email,
-      group: this.updateUserDataTmp.group
+      group: this.updateUserDataTmp.group,
+      mandatoryHoursGroup: this.updateUserDataTmp.mandatoryGroupHours
     })
   }
 

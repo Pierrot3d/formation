@@ -21,9 +21,8 @@ export class DialogUpdateLawyerComponent {
       this.data.prenom,
       this.data.nom,
       this.data.email,
-      this.data.group ? this.data.group : '',
+      this.data.group? this.data.group: '',
       this.data.group? this.isGroupParticularity(this.data.group): 0
-
     );
   }
 
