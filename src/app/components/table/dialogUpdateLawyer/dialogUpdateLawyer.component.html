@@ -1,3 +1,6 @@
+<div mat-dialog-actions style="justify-content: right;">
+  <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
+  </div>
 <h1 mat-dialog-title>Modification du profil de {{data.prenom}} {{data.nom}}</h1>
 <div mat-dialog-content>
   <p>
@@ -32,6 +35,5 @@
 </p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Annuler</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="updateUser()">Valider</button>
 </div>

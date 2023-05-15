@@ -1,1 +1,14 @@
 <button (click)="generateExcel()" mat-raised-button color="primary" style="margin-right: 1vw">exporter</button>
+
+<p>
+<mat-form-field appearance="fill">
+  <mat-label>Groupe</mat-label>
+  <mat-select [(value)]="selectedGroup">
+    <mat-option value="Mineurs">Mineurs</mat-option>
+    <mat-option value="Pénal">Pénal</mat-option>
+    <mat-option value="JLD-HO">JLD-HO</mat-option>
+    <mat-option value="Déontologie">Déontologie</mat-option>
+    <mat-option value="Spécialisation">Spécialisation</mat-option>
+  </mat-select>
+</mat-form-field>
+</p>

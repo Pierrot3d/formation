@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
+import { DialogData } from '../../table/table/table.component';
 
 @Component({
   selector: 'app-export-excel',
@@ -8,12 +10,15 @@ import { BddCommunicationService } from 'src/app/services/bdd-communication.serv
 })
 export class ExportExcelComponent  {
 
-  constructor(private bddCommunicationService: BddCommunicationService)
+  constructor(
+    private bddCommunicationService: BddCommunicationService)
   { }
 
+    selectedGroup = "";
 
   generateExcel() {
-    this.bddCommunicationService.generateExcel();
+    console.log(this.selectedGroup)
+    this.bddCommunicationService.generateExcel(this.selectedGroup);
   }
 
 }

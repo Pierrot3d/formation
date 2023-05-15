@@ -127,8 +127,8 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(DialogAddLawyerComponent, {
-      height: "60vh",
-      width: "50vw",
+      height: "70vh",
+      width: "40vw",
       data: {nom: "", prenom: "", email: "", group: ""},
     });
 
@@ -141,7 +141,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
   openExcelDialog(): void {
     const dialogRef = this.dialog.open(DialogExcelComponent, {
       height: "80vh",
-      width: "60vw"
+      width: "60vw",
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -152,8 +152,8 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   openUpdateDialog(id, nom, prenom, email, group): void {
     const dialogRef = this.dialog.open(DialogUpdateLawyerComponent, {
-      height: "60vh",
-      width: "50vw",
+      height: "70vh",
+      width: "40vw",
       data: {id: id, nom: nom, prenom: prenom, email: email, group: group},
     });
 

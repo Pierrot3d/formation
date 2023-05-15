@@ -181,7 +181,7 @@ getLawyersFromServerWithId(): [] {
 }
 
 
-generateExcel() {
+generateExcel(group?) {
 
   //Excel Title, Header, Data
   const title = 'Liste des Avocats';
@@ -227,9 +227,28 @@ generateExcel() {
             listTmp[elemnt].brunch = 'ne participe pas'
           }
         } */
-        data.push([
-          listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
-        ])
+        console.log(group)
+        if(group)
+        {
+          console.log(group === listTmp[elemnt].group, group, listTmp[elemnt].group)
+          if(group === listTmp[elemnt].group)
+           {
+            console.log("im in")
+          data.push([
+            listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
+          ])
+         }
+         else
+         {
+          continue
+         }
+        }
+        else{
+          data.push([
+            listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
+          ])
+        }
+
       }
 
 

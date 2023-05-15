@@ -1,11 +1,11 @@
+<div mat-dialog-actions style="justify-content: right;">
+<mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
+</div>
 <mat-tab-group>
   <mat-tab label="Importer">
     <h1 mat-dialog-title>Importer un fichier XLSX</h1>
     <div mat-dialog-content>
       <app-import-excel></app-import-excel>
-      <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()"> Annuler </button>
-      </div>
     </div>
   </mat-tab>
   <mat-tab label="Exporter">
@@ -13,9 +13,6 @@
     <h1 mat-dialog-title>Exporter un fichier XLSX</h1>
     <div mat-dialog-content>
       <app-export-excel></app-export-excel>
-      <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()"> Annuler </button>
-      </div>
     </div>
   </mat-tab>
 
