@@ -125,6 +125,11 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     const db = getDatabase();
     remove(ref(db, "avocats/" + userKey));
     remove(ref(db, "formation/" + userKey))
+
+    if(this.dataSortedByUser)
+    {
+      this.sortData(this.dataSortedByUser)
+    }
   }
 
 
