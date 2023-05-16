@@ -121,6 +121,7 @@ const formation = push(lawyerListRef);
 console.log(startDay, endDay)
 set(formation, {
   formationLabel: formationLabel,
+  formationType: formationType,
   start: startDay,
   end: endDay,
   numOfDay: numOfDay,

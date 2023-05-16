@@ -27,7 +27,7 @@
         <p>
           <mat-form-field appearance="fill">
             <mat-label>Groupe</mat-label>
-            <mat-select matInput [(ngModel)]="data.formationType">
+            <mat-select matInput [(ngModel)]="data.formationType" multiple>
               <mat-option value="Mineurs">Mineurs</mat-option>
               <mat-option value="Pénal">Pénal</mat-option>
               <mat-option value="JLD-HO">JLD-HO</mat-option>
@@ -99,7 +99,7 @@
   </ng-container>
 
   <ng-container matColumnDef="trash" >
-    <mat-header-cell *matHeaderCellDef> supprimer</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Supprimer</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-icon class="trash"(click)="this.removeFormation(this.data.id, element.type)"> delete </mat-icon>
     </mat-cell>
