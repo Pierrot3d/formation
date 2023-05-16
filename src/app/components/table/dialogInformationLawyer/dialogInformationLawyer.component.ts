@@ -16,7 +16,7 @@ import { getDatabase, ref, onValue, remove, update} from "firebase/database";
 export class DialogInformationLawyerComponent  {
 
 
-  displayedColumns: string[] = ['formation', 'type', 'date', 'nbrHours', 'nbrHoursGroup', 'total'];
+  displayedColumns: string[] = ['formation', 'type', 'date', 'nbrHours', 'nbrHoursGroup', 'trash', 'total'];
   dataTmp: any;
   nbrJour: number;
   formationList$;
@@ -49,6 +49,12 @@ export class DialogInformationLawyerComponent  {
         this.formationList$ = []
       }
     })
+    }
+
+    removeFormation(id, elemnt)
+    {
+      console.log(id, elemnt)
+      this.bddCommunicationService.removeFormation(id, elemnt)
     }
 
     addFormation(start, end)

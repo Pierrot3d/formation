@@ -9,6 +9,7 @@ import { FormExcel } from '../models/excel.model';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { DatePipe } from '@angular/common';
+import { remove } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
@@ -152,6 +153,21 @@ updateNbrHoursReport(id, nbrHours)
     nbrReport: nbrHours
   })
 }
+
+
+
+removeUser(userKey){
+  const db = getDatabase();
+  remove(ref(db, "avocats/" + userKey));
+  remove(ref(db, "formation/" + userKey))
+}
+
+removeFormation(id, formationKey){
+  const db = getDatabase();
+    remove(ref(db, "formation/" + id + "/"  + formationKey))
+
+}
+
 
 giveMeTheList()
 {

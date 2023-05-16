@@ -98,6 +98,15 @@
     </mat-footer-cell>
   </ng-container>
 
+  <ng-container matColumnDef="trash" >
+    <mat-header-cell *matHeaderCellDef> supprimer</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-icon class="trash"(click)="this.removeFormation(this.data.id, element.type)"> delete </mat-icon>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+    </mat-footer-cell>
+  </ng-container>
+
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="total" >
