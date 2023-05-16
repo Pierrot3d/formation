@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-attestation',
@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./attestation.component.css']
 })
 export class AttestationComponent implements OnInit {
-  batonnier!: string;
-  name!: string;
-  surname!: string;
-  specificformation!: string;
-  signature!: string;
+  @Input() batonnier!: string;
+  @Input() name!: string;
+  @Input() surname!: string;
+  @Input() specificformation!: string;
+  @Input() signature!: string;
 
   ngOnInit(){
     this.batonnier = 'PHILIPPE BARON'
@@ -20,7 +20,7 @@ export class AttestationComponent implements OnInit {
     this.signature = 'SIGNATURE'
   }
 
-}  
+}
 
 
 

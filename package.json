@@ -27,6 +27,7 @@
     "file-saver": "^2.0.5",
     "material-icons": "^1.12.2",
     "material-table": "^2.0.3",
+    "pdfmake": "^0.2.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",

@@ -82,6 +82,15 @@
             ></app-spin-box></td>
       </ng-container>
 
+              <!-- Jours reportables de formations Column -->
+              <ng-container matColumnDef="formationHoursReportable" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="formationHoursReportable"> Heures reportables</th>
+                <td mat-cell *matCellDef="let element">
+                  <div *ngIf="element.value.nbr > 20">
+                    {{element.value.nbr - element.value.mandatoryHours}}
+                  </div>
+            </ng-container>
+
     <!-- formation list Column -->
     <ng-container matColumnDef="formationList" stickyEnd>
       <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
@@ -97,6 +106,17 @@
         <mat-icon mat-raised-button (click)="openUpdateDialog(element.type, element.value.nom, element.value.prenom, element.value.email, element.value.group)"> create </mat-icon>
       </td>
     </ng-container>
+
+  <!-- delete Column -->
+  <ng-container matColumnDef="attestation" stickyEnd>
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button [disabled]="!this.isMandatoryFormation(element)" color="primary"
+      (click)="generatePdf(element.value.nom, element.value.prenom)">
+      <mat-icon >description</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
   <!-- delete Column -->
     <ng-container matColumnDef="trash" stickyEnd>

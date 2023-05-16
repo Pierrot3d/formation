@@ -11,7 +11,9 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Sort} from '@angular/material/sort';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { FormationService } from "src/app/services/formation.service";
 
 
@@ -41,7 +43,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationHoursReport', 'formationList', 'update', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'attestation', 'trash'];
   dataSource
   db
 
@@ -209,6 +211,46 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  generatePdf(name, surname)
+  {
+    const document = this.getDocument(name, surname);
+    pdfMake.createPdf(document).open();
+  }
+
+  getDocument(name, surname)
+  {
+
+    const docDefinition =
+
+    { content:[
+      {
+        columns: [
+          [
+            {
+              text: 'Attestation',
+              style: 'name'
+            },
+            {
+              text: name + ' ' + surname,
+            }
+          ]
+        ]
+      },
+      {
+        text: 'Attestation de formation',
+        bold: true,
+        fontSize: 20,
+        alignment: 'center',
+        margin: [0, 0, 0, 20]
+      }
+
+    ]
+  }
+
+    return docDefinition
+
   }
 }
 
