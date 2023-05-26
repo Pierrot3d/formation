@@ -1,3 +1,29 @@
-<p>
-  dialogInformationParticipant works!
-</p>
+<div class="button-container">
+  <button mat-raised-button class="button">
+    Ajouter une formation
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<p>{{this.data.duration}}</p>
+
+<table mat-table [dataSource]="this.dataTable" class="mat-elevation-z8">
+
+
+  <!-- Group Column -->
+  <ng-container matColumnDef="participant">
+    <th mat-header-cell *matHeaderCellDef > Nombre de participant </th>
+    <td mat-cell *matCellDef="let element" style="cursor: pointer;"> {{element}} </td>
+  </ng-container>
+
+    <!-- trash Column -->
+    <ng-container matColumnDef="trash">
+      <th mat-header-cell *matHeaderCellDef > Supprimer </th>
+      <td mat-cell *matCellDef="let element">  <mat-icon class="trash"> delete </mat-icon> </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+</table>

@@ -16,10 +16,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DialogInformationParticipantComponent } from './dialogInformationParticipant/dialogInformationParticipant.component';
 
 
 @NgModule({
-  declarations: [FormationComponent, DialogAddOrdreFormationComponent],
+  declarations: [FormationComponent, DialogAddOrdreFormationComponent, DialogInformationParticipantComponent],
   imports: [
     CommonModule,
     MatDatepickerModule,
@@ -40,7 +41,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
   ],
   exports: [
     FormationComponent,
-    DialogAddOrdreFormationComponent
+    DialogAddOrdreFormationComponent,
+    DialogInformationParticipantComponent
   ],
   bootstrap: [FormationComponent],
   providers: [
