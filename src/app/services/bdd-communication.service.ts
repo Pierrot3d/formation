@@ -10,6 +10,7 @@ import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { DatePipe } from '@angular/common';
 import { remove } from '@angular/fire/database';
+import { DialogAddOrdreFormationComponent } from '../pages/formation/dialogAddOrdreFormation/dialogAddOrdreFormation.component';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,21 @@ isRecord: boolean;
 saveLawyersToServer(element: FormExcel) {
   this.httpClient
     .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json', element)
+    .subscribe(
+      () => {
+      //  console.log(element);
+        console.log('Enregistrement terminé !');
+        this.isRecord = true;
+      },
+      (error) => {
+        console.log('Erreur ! : ' + error);
+      }
+    );
+}
+
+saveOrdreFormationToServer(element) {
+  this.httpClient
+    .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/formationOrdre.json', element)
     .subscribe(
       () => {
       //  console.log(element);

@@ -108,9 +108,9 @@
   </ng-container>
 
   <ng-container matColumnDef="update" >
-    <mat-header-cell *matHeaderCellDef> Supprimer</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Modifier</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon class="trash"(click)="this.removeFormation(this.data.id, element.type)"> create </mat-icon>
+      <mat-icon class="trash"(click)="this.modifyModeFn()"> create </mat-icon>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
     </mat-footer-cell>

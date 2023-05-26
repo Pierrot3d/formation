@@ -38,7 +38,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { FormationComponent } from './pages/formation/formation.component';
+import { ordreFormationModule } from './pages/formation/ordreFormation.module';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -51,7 +51,6 @@ registerLocaleData(localeFr, 'fr');
     AddUsersComponent,
     TimerComponent,
     AccueilComponent,
-    FormationComponent,
     RsvpComponent,
     DownloadComponent,
   ],
@@ -83,7 +82,8 @@ registerLocaleData(localeFr, 'fr');
     MatDialogModule,
     MatSortModule,
     MatSelectModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ordreFormationModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

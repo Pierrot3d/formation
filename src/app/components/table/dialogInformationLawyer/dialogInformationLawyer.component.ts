@@ -28,6 +28,7 @@ export class DialogInformationLawyerComponent {
   formationList$;
   sortedData;
   dataSource;
+  modifyMode: boolean;
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -39,6 +40,7 @@ export class DialogInformationLawyerComponent {
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
+    this.modifyMode = false;
     this.dataTmp = [data];
 
     const db = getDatabase();
@@ -57,6 +59,12 @@ export class DialogInformationLawyerComponent {
         this.formationList$ = [];
       }
     });
+  }
+
+  modifyModeFn()
+  {
+    this.modifyMode = !this.modifyMode;
+    console.log(this.modifyMode)
   }
 
   removeFormation(id, elemnt) {
