@@ -24,10 +24,12 @@ export class DialogAddOrdreFormationComponent  {
       formationName: this.data.formationName,
       duration: this.data.duration,
       participant: this.data.participant,
+      nbrParticipant: this.data.participant.length
     }
     this.bddCommunicationService.saveOrdreFormationToServer(value);
-    this.bddCommunicationService.getLawyersFromServer();
   }
+
+
 
 
   onNoClick(): void {

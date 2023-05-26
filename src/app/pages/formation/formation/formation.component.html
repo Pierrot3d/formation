@@ -12,21 +12,27 @@
   <ng-container matColumnDef="formationName">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="formationName" sortActionDescription="Sort by formationName">
       Formation </th>
-    <td mat-cell *matCellDef="let element"> {{element.value.nom}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.value.formationName}} </td>
   </ng-container>
 
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="duration">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="duration"> Durée </th>
-    <td mat-cell *matCellDef="let element"> {{element.value.email}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.value.duration}} </td>
   </ng-container>
 
   <!-- Group Column -->
   <ng-container matColumnDef="participant">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="participant"> Nombre de participant </th>
-    <td mat-cell *matCellDef="let element"> {{element.value.group}} </td>
+    <td mat-cell *matCellDef="let element" (click)="openInformationParticipantDialog()" style="cursor: pointer;"> {{element.value.nbrParticipant}} </td>
   </ng-container>
+
+    <!-- trash Column -->
+    <ng-container matColumnDef="trash">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="trash"> Supprimer </th>
+      <td mat-cell *matCellDef="let element">  <mat-icon class="trash"(click)="this.removeOrdreFormation(element.type)"> delete </mat-icon> </td>
+    </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

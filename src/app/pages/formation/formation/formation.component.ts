@@ -9,11 +9,13 @@ import { BddCommunicationService } from 'src/app/services/bdd-communication.serv
 import { FormationService } from 'src/app/services/formation.service';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { DialogAddOrdreFormationComponent } from '../dialogAddOrdreFormation/dialogAddOrdreFormation.component';
+import { DialogInformationParticipantComponent } from '../dialogInformationParticipant/dialogInformationParticipant.component';
 
 export interface DialogOrdreFormationData {
   formationName: string;
   duration: string;
   participant: string;
+  nbrParticipant: number;
 }
 
 @Component({
@@ -28,7 +30,7 @@ export class FormationComponent {
 
   lawyers$
 
-  displayedColumns: string[] = ['formationName', 'duration', 'participant' ];
+  displayedColumns: string[] = ['formationName', 'duration', 'participant', 'trash' ];
   dataSource
   db
 
@@ -88,6 +90,11 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a > b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
+removeOrdreFormation(element)
+{
+  this.bddCommunicationService.removeOrdreFormation(element)
+}
+
 openAddOrdreFormationDialog(): void {
   const dialogRef = this.dialog.open(DialogAddOrdreFormationComponent, {
     height: "80vh",
@@ -95,11 +102,30 @@ openAddOrdreFormationDialog(): void {
     data: {id: '', formationName: '', duration: '', participant: ''},
   });
 
+
+
   dialogRef.afterClosed().subscribe(result => {
     // console.log('The dialog was closed');
     console.log(result);
   });
 }
+
+openInformationParticipantDialog(): void {
+  const dialogRef = this.dialog.open(DialogInformationParticipantComponent, {
+    height: "80vh",
+    width: "80vw",
+    data: {id: '', formationName: '', duration: '', participant: ''},
+  });
+
+
+
+  dialogRef.afterClosed().subscribe(result => {
+    // console.log('The dialog was closed');
+    console.log(result);
+  });
+}
+
+
 
 
 }

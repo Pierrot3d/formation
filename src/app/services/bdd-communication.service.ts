@@ -185,6 +185,11 @@ removeFormation(id, formationKey){
 
 }
 
+removeOrdreFormation(userKey){
+  const db = getDatabase();
+  remove(ref(db, "formationOrdre/" + userKey));
+}
+
 
 giveMeTheList()
 {
