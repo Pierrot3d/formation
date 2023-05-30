@@ -18,14 +18,36 @@
 </p>
 <p>
   <mat-form-field appearance="fill">
-    <mat-label>participant</mat-label>
-    <mat-select [(ngModel)]="data.participant" multiple>
+    <mat-label>groupe</mat-label>
+    <mat-select [(ngModel)]="data.groupe" multiple>
       <mat-option value="Mineurs">Mineurs</mat-option>
       <mat-option value="Pénal">Pénal</mat-option>
       <mat-option value="JLD-HO">JLD-HO</mat-option>
       <mat-option value="Déontologie">Déontologie</mat-option>
       <mat-option value="Spécialisation">Spécialisation</mat-option>
     </mat-select>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="fill">
+    <mat-label>Ajouter des participants</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Ajout de participant">
+      <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
+        {{participant.value.nom}}
+        <button matChipRemove [attr.aria-label]="'remove ' + participant">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    </mat-chip-grid>
+    <input placeholder="Ajouter un participant ..." #lawyerInput [formControl]="lawyerCtrl"
+      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"/>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let participant of filteredLawyers | async" [value]="participant">
+        {{participant.value.nom}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 </p>
 </div>

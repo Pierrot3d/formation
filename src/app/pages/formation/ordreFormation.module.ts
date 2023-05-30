@@ -1,7 +1,7 @@
 import { DialogAddOrdreFormationComponent } from './dialogAddOrdreFormation/dialogAddOrdreFormation.component';
 import { FormationComponent } from './formation/formation.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
@@ -17,6 +17,10 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DialogInformationParticipantComponent } from './dialogInformationParticipant/dialogInformationParticipant.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+
+
 
 
 @NgModule({
@@ -37,7 +41,14 @@ import { DialogInformationParticipantComponent } from './dialogInformationPartic
     MatSortModule,
     FormsModule,
     MatSelectModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe
   ],
   exports: [
     FormationComponent,

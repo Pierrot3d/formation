@@ -14,7 +14,8 @@ import { DialogInformationParticipantComponent } from '../dialogInformationParti
 export interface DialogOrdreFormationData {
   formationName: string;
   duration: string;
-  participant: string;
+  participant: [];
+  groupe: string;
   nbrParticipant: number;
 }
 
@@ -29,6 +30,7 @@ export interface DialogOrdreFormationData {
 export class FormationComponent {
 
   lawyers$
+  lawyersList$
 
   displayedColumns: string[] = ['formationName', 'duration', 'participant', 'trash' ];
   dataSource
@@ -54,7 +56,8 @@ export class FormationComponent {
         this.sortData(this.dataSortedByUser)
       }
 
-    })}
+    })
+  }
 
     sortData(sort: Sort) {
       const data = this.lawyers$.slice();

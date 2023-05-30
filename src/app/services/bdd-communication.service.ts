@@ -79,7 +79,7 @@ getLawyersFromServer(): [] {
         for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
           this.liste.push(listTmp[elemnt])
         }
-        console.log("ceci est la vraie liste",this.liste)
+        // console.log("ceci est la vraie liste",this.liste)
         return this.liste
       },
       (error) => {

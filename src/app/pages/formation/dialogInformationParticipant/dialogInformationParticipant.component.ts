@@ -27,6 +27,7 @@ export class DialogInformationParticipantComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
   constructor( public dialogRef: MatDialogRef<DialogInformationParticipantComponent>,
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogOrdreFormationData){
@@ -36,6 +37,12 @@ export class DialogInformationParticipantComponent {
       {
         this.dataTable.push(elmnt)
       }
+
+      console.log(this.bddCommunicationService.liste)
+    }
+
+    onNoClick(): void {
+      this.dialogRef.close();
     }
 
   }
