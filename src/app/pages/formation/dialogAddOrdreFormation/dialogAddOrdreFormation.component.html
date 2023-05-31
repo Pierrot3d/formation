@@ -32,12 +32,12 @@
   <mat-form-field class="fill">
     <mat-label>Ajouter des participants</mat-label>
     <mat-chip-grid #chipGrid aria-label="Ajout de participant">
-      <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
+     <!--  <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
         {{participant.value.nom}}
         <button matChipRemove [attr.aria-label]="'remove ' + participant">
           <mat-icon>cancel</mat-icon>
         </button>
-      </mat-chip-row>
+      </mat-chip-row> -->
     </mat-chip-grid>
     <input placeholder="Ajouter un participant ..." #lawyerInput [formControl]="lawyerCtrl"
       [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
@@ -49,6 +49,14 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+</p>
+<p>
+    <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
+      {{participant.value.nom}}
+      <button matChipRemove [attr.aria-label]="'remove ' + participant">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
 </p>
 </div>
 <div mat-dialog-actions>
