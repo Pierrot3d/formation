@@ -62,6 +62,30 @@ export class DialogAddOrdreFormationComponent  {
       nbrParticipant: this.lawyer.length
     }
     this.bddCommunicationService.saveOrdreFormationToServer(value);
+    this.addFormation()
+
+  }
+
+  heuresDeGroupe;
+  addFormation() {
+    const startTMP = 0;
+    const endTMP = 0;
+
+    for(const participant of this.lawyer)
+    {
+      this.bddCommunicationService.updateFormation(
+        participant.type,
+        this.data.formationName,
+        this.data.groupe? this.data.groupe : "",
+        startTMP,
+        endTMP,
+        0,
+        this.data.duration ? this.data.duration : 0,
+        this.heuresDeGroupe ? this.heuresDeGroupe : 0,
+      );
+    }
+
+
   }
 
   add(event: MatChipInputEvent): void {

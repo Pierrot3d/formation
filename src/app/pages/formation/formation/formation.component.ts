@@ -13,7 +13,7 @@ import { DialogInformationParticipantComponent } from '../dialogInformationParti
 
 export interface DialogOrdreFormationData {
   formationName: string;
-  duration: string;
+  duration: number;
   participant: [];
   groupe: string;
   nbrParticipant: number;
@@ -109,7 +109,7 @@ openAddOrdreFormationDialog(): void {
 
   dialogRef.afterClosed().subscribe(result => {
     // console.log('The dialog was closed');
-    console.log(result);
+    //console.log(result);
   });
 }
 
@@ -124,7 +124,7 @@ openInformationParticipantDialog(element): void {
 
   dialogRef.afterClosed().subscribe(result => {
     // console.log('The dialog was closed');
-    console.log(result);
+    // console.log(result);
   });
 }
 
