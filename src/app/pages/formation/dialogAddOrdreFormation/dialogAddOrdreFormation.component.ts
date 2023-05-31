@@ -7,7 +7,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
 import { Observable, catchError, map, startWith } from 'rxjs';
-import { getDatabase, onValue, ref } from '@angular/fire/database';
+import { getDatabase, onValue, push, ref } from '@angular/fire/database';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -53,27 +53,32 @@ export class DialogAddOrdreFormationComponent  {
 
   addUser()
   {
-    console.log(this.lawyer)
+    this.addFormation()
+
     const value = {
       formationName: this.data.formationName,
       duration: this.data.duration,
       participant: this.lawyer,
       groupe: this.data.groupe,
-      nbrParticipant: this.lawyer.length
+      nbrParticipant: this.lawyer.length,
+      individualFormationId: this.formationId
     }
     this.bddCommunicationService.saveOrdreFormationToServer(value);
-    this.addFormation()
+
+
+
 
   }
 
   heuresDeGroupe;
+  formationId = [];
   addFormation() {
     const startTMP = 0;
     const endTMP = 0;
 
     for(const participant of this.lawyer)
     {
-      this.bddCommunicationService.updateFormation(
+     this.formationId.push(this.bddCommunicationService.updateFormation(
         participant.type,
         this.data.formationName,
         this.data.groupe? this.data.groupe : "",
@@ -82,7 +87,7 @@ export class DialogAddOrdreFormationComponent  {
         0,
         this.data.duration ? this.data.duration : 0,
         this.heuresDeGroupe ? this.heuresDeGroupe : 0,
-      );
+      ));
     }
 
 

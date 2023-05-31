@@ -47,6 +47,10 @@ export class FormationComponent {
     const starCountRef = ref(db, 'formationOrdre/');
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
+      if(data)
+      {
+
+
       this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
       // console.log(this.lawyers$)
       this.dataSource = new MatTableDataSource(this.lawyers$);
@@ -55,6 +59,7 @@ export class FormationComponent {
       {
         this.sortData(this.dataSortedByUser)
       }
+    }
 
     })
   }
@@ -95,7 +100,12 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
 removeOrdreFormation(element)
 {
-  this.bddCommunicationService.removeOrdreFormation(element)
+  for(const participant of element.value.participant)
+  {
+    for(const formationId of element.value.individualFormationId)
+    this.bddCommunicationService.removeFormation(participant.type, formationId)
+  }
+  this.bddCommunicationService.removeOrdreFormation(element.type)
 }
 
 openAddOrdreFormationDialog(): void {

@@ -31,7 +31,7 @@
     <!-- trash Column -->
     <ng-container matColumnDef="trash">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="trash"> Supprimer </th>
-      <td mat-cell *matCellDef="let element">  <mat-icon class="trash"(click)="this.removeOrdreFormation(element.type)"> delete </mat-icon> </td>
+      <td mat-cell *matCellDef="let element">  <mat-icon class="trash"(click)="this.removeOrdreFormation(element)"> delete </mat-icon> </td>
     </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

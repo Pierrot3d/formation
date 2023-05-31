@@ -134,7 +134,7 @@ updateFormation(id, formationLabel, formationType, startDay, endDay, numOfDay, n
 const db = getDatabase();
 const lawyerListRef = ref(db, 'formation/' + id);
 const formation = push(lawyerListRef);
-console.log(startDay, endDay)
+console.log(formation.key)
 set(formation, {
   formationLabel: formationLabel,
   formationType: formationType,
@@ -144,6 +144,8 @@ set(formation, {
   numOfHours: numOfHours,
   numOfGroupHours: numOfGroupHours
 });
+
+return formation.key
 
 }
 
