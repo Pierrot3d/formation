@@ -25,6 +25,7 @@ export class DialogAddOrdreFormationComponent  {
   filteredLawyers: Observable<any>;
   lawyer = [];
 
+
   @ViewChild('lawyerInput') lawyerInput: ElementRef<HTMLInputElement>;
   dataSource: any;
 
@@ -44,8 +45,7 @@ export class DialogAddOrdreFormationComponent  {
 
       this.filteredLawyers = this.lawyerCtrl.valueChanges.pipe(
         startWith(null),
-        map((lawyer: string | null) => (lawyer ? this._filter(lawyer) : this.$lawyerList
-        .slice())),
+        map((lawyer: string | null) => (lawyer ? this._filter(lawyer) : this.$lawyerList.slice())),
       );
       console.log(this.filteredLawyers)
   });
@@ -119,7 +119,6 @@ export class DialogAddOrdreFormationComponent  {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(event)
     this.lawyer.push(event.option.value);
     this.lawyerInput.nativeElement.value = '';
     this.lawyerCtrl.setValue(null);
@@ -127,8 +126,8 @@ export class DialogAddOrdreFormationComponent  {
 
   private _filter(value: string): string[] {
     const filterValue = value;
-
-    return this.$lawyerList;
+    return this.$lawyerList.filter(fruit => fruit.value.nom.includes(filterValue)
+      );
   }
 
 
