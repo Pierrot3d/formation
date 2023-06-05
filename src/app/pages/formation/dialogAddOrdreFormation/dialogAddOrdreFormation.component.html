@@ -45,14 +45,14 @@
       (matChipInputTokenEnd)="add($event)"/>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
       <mat-option *ngFor="let participant of filteredLawyers | async" [value]="participant">
-        {{participant.value.nom}}
+        {{participant.value.nom}} {{participant.value.prenom}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 </p>
 <p>
     <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
-      {{participant.value.nom}}
+      {{participant.value.nom}} {{participant.value.prenom}}
       <button matChipRemove [attr.aria-label]="'remove ' + participant">
         <mat-icon>cancel</mat-icon>
       </button>
