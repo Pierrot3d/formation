@@ -10,6 +10,21 @@
     <input matInput [(ngModel)]="data.formationName">
   </mat-form-field>
 </p>
+<p matColumnDef="date">
+    <mat-form-field appearance="fill">
+      <mat-label>Entrez les dates</mat-label>
+      <mat-date-range-input [formGroup]="this.range" [rangePicker]="picker" >
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>JJ/MM/AAAA – JJ/MM/AAAA</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">La date de départ est invalide</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">La date de fin est invalide</mat-error>
+    </mat-form-field>
+</p>
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Durée</mat-label>

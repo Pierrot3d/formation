@@ -5,7 +5,7 @@ import { BddCommunicationService } from 'src/app/services/bdd-communication.serv
 import { DialogOrdreFormationData } from '../formation/formation.component';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, catchError, map, startWith } from 'rxjs';
 import { getDatabase, onValue, push, ref } from '@angular/fire/database';
 import { MatTableDataSource } from '@angular/material/table';
@@ -28,6 +28,12 @@ export class DialogAddOrdreFormationComponent  {
 
   @ViewChild('lawyerInput') lawyerInput: ElementRef<HTMLInputElement>;
   dataSource: any;
+
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
 
   constructor(
@@ -53,28 +59,29 @@ export class DialogAddOrdreFormationComponent  {
 
   addUser()
   {
-    this.addFormation()
+    const startTMP = this.changeDateFormat(this.range.value.start);
+    const endTMP = this.changeDateFormat(this.range.value.end);
+
+    this.addFormation(this.range.value.start, this.range.value.end)
 
     const value = {
       formationName: this.data.formationName,
       duration: this.data.duration,
       participant: this.lawyer,
       groupe: this.data.groupe,
+      startTMP,
+      endTMP,
       nbrParticipant: this.lawyer.length,
       individualFormationId: this.formationId
     }
     this.bddCommunicationService.saveOrdreFormationToServer(value);
-
-
-
-
   }
 
   heuresDeGroupe;
   formationId = [];
-  addFormation() {
-    const startTMP = 0;
-    const endTMP = 0;
+  addFormation(start, end) {
+    const startTMP = this.changeDateFormat(start);
+    const endTMP = this.changeDateFormat(end);
 
     for(const participant of this.lawyer)
     {
@@ -90,7 +97,12 @@ export class DialogAddOrdreFormationComponent  {
       ));
     }
 
+  }
 
+  changeDateFormat(date) {
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() - offset * 60 * 1000);
+    return date.toISOString().split('T')[0];
   }
 
   add(event: MatChipInputEvent): void {

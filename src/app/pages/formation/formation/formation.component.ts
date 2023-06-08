@@ -17,6 +17,8 @@ export interface DialogOrdreFormationData {
   participant: [];
   groupe: string;
   nbrParticipant: number;
+  endTMP;
+  startTMP;
 }
 
 @Component({
@@ -127,7 +129,7 @@ openInformationParticipantDialog(element): void {
   const dialogRef = this.dialog.open(DialogInformationParticipantComponent, {
     height: "80vh",
     width: "80vw",
-    data: {id: element.type, formationName: element.value.formationName, duration: element.value.duration, participant: element.value.participant},
+    data: {id: element.type, formationName: element.value.formationName, duration: element.value.duration, participant: element.value.participant, startTMP: element.value.startTMP, endTMP: element.value.endTMP},
   });
 
 
