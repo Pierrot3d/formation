@@ -19,6 +19,7 @@ export interface DialogOrdreFormationData {
   nbrParticipant: number;
   endTMP;
   startTMP;
+  individualFormationId: [];
 }
 
 @Component({
@@ -34,7 +35,7 @@ export class FormationComponent {
   lawyers$
   lawyersList$
 
-  displayedColumns: string[] = ['formationName', 'duration', 'participant', 'trash' ];
+  displayedColumns: string[] = ['formationName', 'duration', 'participant', 'update', 'trash' ];
   dataSource
   db
 
@@ -129,7 +130,7 @@ openInformationParticipantDialog(element): void {
   const dialogRef = this.dialog.open(DialogInformationParticipantComponent, {
     height: "80vh",
     width: "80vw",
-    data: {id: element.type, formationName: element.value.formationName, duration: element.value.duration, participant: element.value.participant, startTMP: element.value.startTMP, endTMP: element.value.endTMP},
+    data: {id: element.type, formationName: element.value.formationName, duration: element.value.duration, participant: element.value.participant, startTMP: element.value.startTMP, endTMP: element.value.endTMP, individualFormationId: element.value.individualFormationId},
   });
 
 
