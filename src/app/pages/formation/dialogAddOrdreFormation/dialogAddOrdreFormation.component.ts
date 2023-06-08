@@ -102,7 +102,10 @@ export class DialogAddOrdreFormationComponent  {
   changeDateFormat(date) {
     const offset = date.getTimezoneOffset();
     date = new Date(date.getTime() - offset * 60 * 1000);
-    return date.toISOString().split('T')[0];
+    const jour = date.toISOString().split('T')[0].split('-')[2]
+    const mois = date.toISOString().split('T')[0].split('-')[1]
+    const annee = date.toISOString().split('T')[0].split('-')[0]
+    return jour + '/' + mois + '/'+ annee;
   }
 
   add(event: MatChipInputEvent): void {
