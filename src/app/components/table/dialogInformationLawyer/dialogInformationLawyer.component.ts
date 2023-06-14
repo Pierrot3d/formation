@@ -133,7 +133,8 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
-    let nbrHoursTmp: number;
+    this.bddCommunicationService.sendNewHours(this.formationList$, this.data.id)
+/*     let nbrHoursTmp: number;
     nbrHoursTmp = 0;
 
     for (let i = 0; i < this.formationList$.length; i++) {
@@ -141,7 +142,7 @@ export class DialogInformationLawyerComponent {
       nbrHoursTmp = nbrHoursTmp + +this.formationList$[i].value.numOfHours;
     }
     console.log(nbrHoursTmp);
-    this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp);
+    this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp); */
   }
 
   onNoClick(): void {

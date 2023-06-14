@@ -220,6 +220,18 @@ getLawyersFromServerWithId(): [] {
   return []
 }
 
+sendNewHours(formationList, id) {
+  let nbrHoursTmp: number;
+  nbrHoursTmp = 0;
+
+  for (let i = 0; i < formationList.length; i++) {
+    console.log(nbrHoursTmp, '+', formationList[i].value.numOfHours);
+    nbrHoursTmp = nbrHoursTmp + + formationList[i].value.numOfHours;
+  }
+  console.log(nbrHoursTmp);
+  this.updateNbrHours(id, nbrHoursTmp);
+}
+
 
 generateExcel(group?) {
 
