@@ -53,7 +53,7 @@ export class DialogAddOrdreFormationComponent  {
         startWith(null),
         map((lawyer: string | null) => (lawyer ? this._filter(lawyer) : this.$lawyerList.slice())),
       );
-      console.log(this.filteredLawyers)
+      // console.log(this.filteredLawyers)
   });
 }
 
@@ -95,6 +95,31 @@ export class DialogAddOrdreFormationComponent  {
         this.data.duration ? this.data.duration : 0,
         this.heuresDeGroupe ? this.heuresDeGroupe : 0,
       ));
+
+      let formationList$: {type, value}[] = [];
+
+
+      const db = getDatabase();
+      const starCountRef = ref(db, 'formation/' + participant.type);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          formationList$ = Object.keys(data).map((key) => ({
+            type: key,
+            value: data[key],
+          }));
+          // console.log(this.lawyers$)
+          // console.log(formationList$)
+
+          // console.log(formationList$)
+          this.bddCommunicationService.sendNewHours(participant.type, formationList$)
+        } else {
+          formationList$ = [];
+
+          return console.log('pas de formation avec cet utilisateur')
+        }
+      });
+
     }
 
   }
@@ -109,10 +134,10 @@ export class DialogAddOrdreFormationComponent  {
   }
 
   add(event: MatChipInputEvent): void {
-    console.log(event)
+    // console.log(event)
     const value = (event.value || '').trim();
 
-    console.log(value)
+    // console.log(value)
 
     // Add our fruit
     if (value) {

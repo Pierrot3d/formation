@@ -133,7 +133,7 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
-    this.bddCommunicationService.sendNewHours(this.formationList$, this.data.id)
+    this.bddCommunicationService.sendNewHours(this.data.id, this.formationList$)
 /*     let nbrHoursTmp: number;
     nbrHoursTmp = 0;
 

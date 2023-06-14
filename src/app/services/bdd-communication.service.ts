@@ -9,8 +9,9 @@ import { FormExcel } from '../models/excel.model';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { DatePipe } from '@angular/common';
-import { remove } from '@angular/fire/database';
+import { onValue, remove } from '@angular/fire/database';
 import { DialogAddOrdreFormationComponent } from '../pages/formation/dialogAddOrdreFormation/dialogAddOrdreFormation.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
   providedIn: 'root'
@@ -96,7 +97,7 @@ getFormationFromServer(id): [] {
    get(child(dbRef, id)).then((snapshot) => {
     if (snapshot.exists()) {
 
-      console.log(snapshot.val());
+      //console.log(snapshot.val());
       this.formationList = [];
         let listTmp = snapshot.val();
         this.formationListWithId = Object.keys(snapshot.val()).map(key => ({type: key, value: snapshot.val()[key]}));
@@ -104,7 +105,7 @@ getFormationFromServer(id): [] {
         for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
           this.formationList.push(listTmp[elemnt])
         }
-        //console.log("ceci est la vraie liste",this.liste)
+        console.log("ceci est la vraie liste",this.liste)
         return this.formationList
     } else {
       console.log("No data available");
@@ -114,6 +115,34 @@ getFormationFromServer(id): [] {
     console.error(error);
   });
   return []
+}
+
+
+getFormationFromServer2(id): any
+{
+  let formationList$: {type, value}[] = [];
+
+
+  const db = getDatabase();
+  const starCountRef = ref(db, 'formation/' + id);
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      formationList$ = Object.keys(data).map((key) => ({
+        type: key,
+        value: data[key],
+      }));
+      // console.log(this.lawyers$)
+      console.log(formationList$)
+
+      return formationList$
+
+    } else {
+      formationList$ = [];
+
+      return formationList$
+    }
+  });
 }
 
 updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?, mandatoryHoursGroup?){
@@ -134,7 +163,7 @@ updateFormation(id, formationLabel, formationType, startDay, endDay, numOfDay, n
 const db = getDatabase();
 const lawyerListRef = ref(db, 'formation/' + id);
 const formation = push(lawyerListRef);
-console.log(formation.key)
+//console.log(formation.key)
 set(formation, {
   formationLabel: formationLabel,
   formationType: formationType,
@@ -220,16 +249,46 @@ getLawyersFromServerWithId(): [] {
   return []
 }
 
-sendNewHours(formationList, id) {
+sendNewHours(id, formationList?) {
+
+  let nbrHours = 0
+  if(formationList)
+  {
+    nbrHours = this.getFormationHours(formationList)
+    this.updateNbrHours(id, nbrHours);
+  }
+  else
+  {
+  /*   this.getFormationFromServer2(id)
+
+    console.log('les formations de ', id , formationListTmp)
+    setTimeout (() => {
+
+      let nbrHoursTmp: number;
+      nbrHoursTmp = 0;
+
+      for (let i = 0; i < formationListTmp.length; i++) {
+        console.log('le calcul : ', nbrHoursTmp, '+', formationListTmp[i]['numOfHours']);
+        nbrHoursTmp = nbrHoursTmp + + formationListTmp[i]['numOfHours'];
+      }
+
+      console.log('les heures :', nbrHoursTmp)
+      this.updateNbrHours(id, nbrHoursTmp);
+    }, 3000); */
+
+  }
+}
+
+getFormationHours(formationList)
+{
   let nbrHoursTmp: number;
   nbrHoursTmp = 0;
 
   for (let i = 0; i < formationList.length; i++) {
-    console.log(nbrHoursTmp, '+', formationList[i].value.numOfHours);
     nbrHoursTmp = nbrHoursTmp + + formationList[i].value.numOfHours;
   }
-  console.log(nbrHoursTmp);
-  this.updateNbrHours(id, nbrHoursTmp);
+
+  return nbrHoursTmp
 }
 
 
@@ -279,7 +338,7 @@ generateExcel(group?) {
             listTmp[elemnt].brunch = 'ne participe pas'
           }
         } */
-        console.log(group)
+        //console.log(group)
         if(group)
         {
           console.log(group === listTmp[elemnt].group, group, listTmp[elemnt].group)

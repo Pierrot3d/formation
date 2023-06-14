@@ -135,7 +135,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   isMyTable(element)
   {
-    console.log(element)
+    // console.log(element)
   }
 
   openAddDialog(): void {
@@ -147,7 +147,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      console.log(result);
+      //console.log(result);
     });
   }
 
@@ -159,7 +159,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      console.log(result);
+      //console.log(result);
     });
   }
 
@@ -172,7 +172,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      console.log(result);
+      //console.log(result);
     });
   }
 
@@ -185,7 +185,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      console.log(result);
+      // console.log(result);
     });
   }
 
