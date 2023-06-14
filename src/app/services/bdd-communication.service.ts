@@ -346,7 +346,7 @@ generateExcel(group?) {
            {
             console.log("im in")
           data.push([
-            listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
+            listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].nbrReport, listTmp[elemnt].formationList
           ])
          }
          else
@@ -356,7 +356,7 @@ generateExcel(group?) {
         }
         else{
           data.push([
-            listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].formationHoursReport, listTmp[elemnt].formationList
+            listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].nbrReport, listTmp[elemnt].formationList
           ])
         }
 
