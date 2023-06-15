@@ -4,7 +4,10 @@ export class Lawyers {
     nom: string,
     prenom: string,
     email: string,
-    group: string,
+    group: [], // groupe d'appartenance des avocats
+    mandatoryHours: number, // nombre d'heure obligatoire
+    mandatoryHoursGroup: number, //nombre d'heure obligatoire de groupe
+    nbr: number, //nombre d'heure globale
   };
 
 
