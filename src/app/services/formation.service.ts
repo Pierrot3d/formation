@@ -43,6 +43,11 @@ isGroupParticularity(element: string)
         this.nbrHeuresObligatoires
         return this.nbrHeuresObligatoires;
       }
+    case "Droit des étrangers":
+      {
+        this.nbrHeuresObligatoires
+        return this.nbrHeuresObligatoires
+      }
     default:
       {
         return this.nbrHeuresObligatoires;

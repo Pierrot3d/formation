@@ -51,6 +51,10 @@ export class DialogUpdateLawyerComponent {
         {
           return 10;
         }
+      case "Droit des étrangers":
+        {
+          return 10;
+        }
       default:
         {
           return 0
