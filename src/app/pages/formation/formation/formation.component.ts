@@ -10,6 +10,9 @@ import { FormationService } from 'src/app/services/formation.service';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { DialogAddOrdreFormationComponent } from '../dialogAddOrdreFormation/dialogAddOrdreFormation.component';
 import { DialogInformationParticipantComponent } from '../dialogInformationParticipant/dialogInformationParticipant.component';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export interface DialogOrdreFormationData {
   formationName: string;
@@ -35,7 +38,7 @@ export class FormationComponent {
   lawyers$
   lawyersList$
 
-  displayedColumns: string[] = ['formationName', 'duration', 'participant', 'update', 'trash' ];
+  displayedColumns: string[] = ['formationName', 'duration', 'participant', 'update', 'attestation', 'trash' ];
   dataSource
   db
 
@@ -141,6 +144,73 @@ openInformationParticipantDialog(element): void {
   });
 }
 
+generatePdf(participant)
+{
+  const lawyersNameTableTmp = [];
+  for(const part of participant)
+  {
+    const lawyerTableTmp = {
+      Nom: part.value.nom + ' ' + part.value.prenom,
+      Signature: ' '
+    }
+
+    lawyersNameTableTmp.push(lawyerTableTmp)
+  }
+
+  console.log(lawyersNameTableTmp)
+
+
+  const document = this.getDocument(lawyersNameTableTmp, ['Nom', 'Signature']);
+  pdfMake.createPdf(document).open();
+}
+
+
+buildTableBody(data, columns) {
+  const body = [];
+
+  body.push(columns);
+
+  data.forEach(function(row) {
+      const dataRow = [];
+
+      columns.forEach(function(column) {
+          dataRow.push(row[column].toString());
+      })
+
+      body.push(dataRow);
+  });
+
+  return body;
+}
+
+getDocument(participant, column)
+{
+  console.log(participant)
+
+  const docDefinition =
+
+  { content:[
+    {
+			style: 'tableExample',
+			table: {
+        widths: ['auto', '*'],
+        heights: 40,
+				body: this.buildTableBody(participant, column)
+			},
+			layout: {
+				fillColor: function (rowIndex, node, columnIndex) {
+					return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+				}
+			}
+		},
+  ]
+
+
+}
+
+  return docDefinition
+
+}
 
 
 

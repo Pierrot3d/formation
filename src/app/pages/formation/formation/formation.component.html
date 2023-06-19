@@ -28,6 +28,16 @@
     <td mat-cell *matCellDef="let element"> {{element.value.nbrParticipant}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="attestation" >
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary"
+      (click)="generatePdf(element.value.participant)">
+      <mat-icon >description</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
       <!-- update Column -->
       <ng-container matColumnDef="update" stickyEnd>
         <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
