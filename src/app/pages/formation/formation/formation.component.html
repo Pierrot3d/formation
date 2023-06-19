@@ -32,7 +32,7 @@
     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button color="primary"
-      (click)="generatePdf(element.value.participant)">
+      (click)="generatePdf(element.value.participant, element.value.startTMP, element.value.formationName)">
       <mat-icon >description</mat-icon>
       </button>
     </td>
