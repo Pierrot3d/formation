@@ -1,24 +1,7 @@
-<div #header class="menu-off" *ngIf="sticky">
-  <img
-    *ngIf="!isMenu"
-    src="../../../../assets/img/logo/logo.webp"
-    class="logo"
-    alt=""
-  />
-  <!-- <div *ngIf="!isMenu" class="burger-menu" (click)="onClickMenu()">
-    <i class="material-icons logo-menu">menu</i>
-  </div> -->
-
-  <div *ngIf="isMenu" class="menu">
-    <nav>
-      <ul>
-        <div class="logo-menu">
-          <i (click)="onClickMenu()" class="material-icons logo-icon">close</i>
-        </div>
-        <li class="menu-li" *ngFor="let item of menuList">
-          <a class="smoothscroll" (click)="scroll(item.id)">{{ item.name }}</a>
-        </li>
-      </ul>
-    </nav>
+<div #header class="menu-off">
+  <img  src="../../../../assets/img/logo/logo.webp" class="logo" alt="" />
+  <div class="burger-menu">
+    <mat-icon class="material-icons logo-menu" (click)="openGeneralDialog()">settings</mat-icon>
   </div>
 </div>
+

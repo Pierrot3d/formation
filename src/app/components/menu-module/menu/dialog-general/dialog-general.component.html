@@ -1,0 +1,21 @@
+<div mat-dialog-actions style="justify-content: right;">
+  <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
+  </div>
+<h1 mat-dialog-title>Informations Générales</h1>
+<div mat-dialog-content>
+  <p>
+  <mat-form-field appearance="fill">
+    <mat-label>Prénom</mat-label>
+    <input matInput [(ngModel)]="data.prenom">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label>Nom</mat-label>
+    <input matInput [(ngModel)]="data.nom">
+  </mat-form-field>
+</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="addBatonnier(data)">Ok</button>
+</div>

@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 import { onValue, remove } from '@angular/fire/database';
 import { DialogAddOrdreFormationComponent } from '../pages/formation/dialogAddOrdreFormation/dialogAddOrdreFormation.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGeneral } from '../models/general.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,23 @@ formationList = [];
 formationListWithId = [];
 
 isRecord: boolean;
+
+saveGeneralToServer(element: FormGeneral) {
+  this.httpClient
+    .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/general.json', element)
+    .subscribe(
+      () => {
+      //  console.log(element);
+        console.log('Enregistrement terminé !');
+        this.isRecord = true;
+      },
+      (error) => {
+        console.log('Erreur ! : ' + error);
+      }
+    );
+}
+
+
 
 saveLawyersToServer(element: FormExcel) {
   this.httpClient

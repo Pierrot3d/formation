@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuList } from 'src/app/models/menu.model';
+import { MatDialog } from '@angular/material/dialog';
+import { FormGeneral } from 'src/app/models/general.model';
+import { DialogGeneralComponent } from './dialog-general/dialog-general.component';
 
 
 @Component({
@@ -7,26 +9,24 @@ import { MenuList } from 'src/app/models/menu.model';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
-  @Input() sticky: boolean = false;
-  @Input() menuList: MenuList[] = [];
+export class MenuComponent {
 
-  isMenu: boolean = false;
+  constructor( public dialog: MatDialog,)
+  {
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onClickMenu() {
-    this.isMenu = !this.isMenu;
   }
 
-  container = 'div';
-  scrollTo = '#row_8';
+  openGeneralDialog(): void {
+    const dialogRef = this.dialog.open(DialogGeneralComponent, {
+      height: "70vh",
+      width: "40vw",
+      data: {nom: "", prenom: ""},
+    });
 
-
-
-  scroll(el: any) {
-    document.getElementById(el)!.scrollIntoView();
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      //console.log(result);
+    });
   }
+
 }
