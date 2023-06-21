@@ -15,6 +15,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { FormationService } from "src/app/services/formation.service";
+import { ContentService } from 'src/app/services/content.service';
 
 
 export interface DialogData {
@@ -55,7 +56,7 @@ export class TableComponent {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService) {
+  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService, private contentService: ContentService) {
     const db = getDatabase();
     const starCountRef = ref(db, 'avocats/');
     onValue(starCountRef, (snapshot) => {
@@ -225,39 +226,79 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     pdfMake.createPdf(document).open();
   }
 
+
   getDocument(name, surname)
-  {
+{
 
-    const docDefinition =
+  const logo = this.contentService.logoBase64
 
-    { content:[
-      {
-        columns: [
-          [
-            {
-              text: 'Attestation',
-              style: 'name'
-            },
-            {
-              text: name + ' ' + surname,
-            }
-          ]
+  const docDefinition =
+
+  { content:
+    [
+    {
+      image: logo,
+      width: 60
+    },
+    {
+      text: 'ORDRE DES AVOCATS DE TOURS',
+      margin: [ 0, 20, 0, 10 ],
+      style: 'header'
+    },
+    {
+      text: 'Je soussigné' + ' ' + this.bddCommunicationService.batonnier + ', le Bâtonnier de l’Ordre des Avocats du Barreau de TOURS, atteste de la présence de Maître' + surname + name + 'à la Formation décrite ci-après :',
+      margin: [ 0, 20, 0, 10 ],
+    },
+
+
+    {
+      columns: [
+        [
+          {
+            text: 'Attestation',
+            style: 'name'
+          },
+          {
+            text: name + ' ' + surname,
+          }
         ]
-      },
-      {
-        text: 'Attestation de formation',
-        bold: true,
-        fontSize: 20,
-        alignment: 'center',
-        margin: [0, 0, 0, 20]
-      }
+      ]
+    },
+    {
+      text: 'Attestation de formation',
+      bold: true,
+      fontSize: 20,
+      alignment: 'center',
+      margin: [0, 0, 0, 20]
+    }
 
-    ]
+  ],
+styles:
+{
+  header:
+  {
+    fontSize: 18,
+    alignment: 'center',
+    bold: true
+  },
+  t1:
+  {
+    fontSize: 14,
+    alignment: 'center',
+    bold: true
+  },
+  formation:
+  {
+    fontSize: 14,
+    alignment: 'center',
   }
+}
 
-    return docDefinition
+}
 
-  }
+  return docDefinition
+
+}
 }
 
 

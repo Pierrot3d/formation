@@ -31,6 +31,8 @@ getAllUsers() {
       })
   }
 
+ batonnier: string;
+
 liste = [];
 listeWithId = [];
 

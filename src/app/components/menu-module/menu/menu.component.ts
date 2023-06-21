@@ -1,3 +1,4 @@
+import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGeneral } from 'src/app/models/general.model';
@@ -16,7 +17,7 @@ export class MenuComponent {
   dataSource
   sortedData
 
-  constructor( public dialog: MatDialog,)
+  constructor( public dialog: MatDialog, private bddCommunicationService: BddCommunicationService)
   {
     const db = getDatabase();
     const starCountRef = ref(db, 'general/');
@@ -26,6 +27,7 @@ export class MenuComponent {
       this.dataSource = new MatTableDataSource(this.generalData$);
       this.sortedData = this.generalData$.slice()
       console.log(this.sortedData)
+      this.bddCommunicationService.batonnier = this.sortedData[0].value.prenom + ' ' + this.sortedData[0].value.nom;
     })
   }
 
