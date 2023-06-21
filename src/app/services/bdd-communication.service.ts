@@ -109,6 +109,29 @@ getLawyersFromServer(): [] {
   return []
 }
 
+getGeneralFromServer(): [] {
+  this.httpClient
+    .get<any[]>('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/general.json')
+    .subscribe(
+      (response) => {
+        this.liste = [];
+        let listTmp = response;
+        this.listeWithId = Object.keys(response).map(key => ({type: key, value: response[key]}));
+        //console.log("ceci est la listTmp", listTmp)
+        for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
+          this.liste.push(listTmp[elemnt])
+        }
+        // console.log("ceci est la vraie liste",this.liste)
+        return this.liste
+      },
+      (error) => {
+        console.log('Erreur ! : ' + error);
+
+      }
+    );
+  return []
+}
+
 getFormationFromServer(id): [] {
   const db = getDatabase();
   const dbRef = ref(db, 'formation/');
@@ -171,6 +194,14 @@ updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?, mandatoryHoursGroup?)
     email: DataEmail,
     group: DataGroup,
     mandatoryHoursGroup: mandatoryHoursGroup
+  })
+}
+
+updateGeneral(id, DataPrenom, DataNom){
+  const db = getDatabase();
+  update(ref(db, "general/" + id), {
+    prenom: DataPrenom,
+    nom: DataNom,
   })
 }
 

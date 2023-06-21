@@ -10,16 +10,17 @@ import { BddCommunicationService } from 'src/app/services/bdd-communication.serv
 })
 export class DialogGeneralComponent {
 
-
   constructor(
     public dialogRef: MatDialogRef<DialogGeneralComponent>,
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: FormGeneral,
-  ) {}
+  ) {
 
-  addBatonnier(data)
+  }
+
+  updateBatonnier()
   {
-    console.log(data.prenom, data.nom)
+    this.bddCommunicationService.updateGeneral(this.data.id, this.data.prenom, this.data.nom);
   }
 
 
