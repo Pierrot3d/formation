@@ -1,8 +1,13 @@
 <div mat-dialog-actions style="justify-content: right;">
   <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
   </div>
-<h1 mat-dialog-title>Fiche de Me {{data.prenom}} {{data.nom}}</h1>
+<h1 mat-dialog-title>Fiche de Me {{data.formationLabel}} {{data.nom}}</h1>
 
+
+    <button mat-icon-button color="primary"
+    (click)="generatePdf(this.formationList$)">
+    <mat-icon >description</mat-icon>
+    </button>
 
 <mat-table mat-table [dataSource]="this.formationList$" class="mat-elevation-z8">
 

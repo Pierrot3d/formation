@@ -6,6 +6,10 @@ import { DialogData } from '../table/table.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
+import { ContentService } from 'src/app/services/content.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-dialogInformationLawyer',
@@ -38,6 +42,7 @@ export class DialogInformationLawyerComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogInformationLawyerComponent>,
     private bddCommunicationService: BddCommunicationService,
+    private contentService: ContentService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
     this.modifyMode = false;
@@ -144,6 +149,131 @@ export class DialogInformationLawyerComponent {
     console.log(nbrHoursTmp);
     this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp); */
   }
+
+ generatePdf(formationsList)
+{
+let lawyersNameTableTmp = [];
+  for(const part of formationsList)
+  {
+    const lawyerTableTmp = {
+      Date: part.value.start,
+      Libellé: part.value.formationLabel,
+      Heures: part.value.numOfHours,
+    }
+
+    lawyersNameTableTmp.push(lawyerTableTmp)
+  }
+
+  console.log(lawyersNameTableTmp)
+  lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) => (a.Nom > b.Nom ? 1 : -1))
+
+  const document = this.getDocument(lawyersNameTableTmp, ['Date', 'Libellé', 'Heures']);
+  pdfMake.createPdf(document).open();
+}
+
+
+buildTableBody(data, columns) {
+  const body = [];
+
+  body.push(columns);
+  data.forEach(function(row) {
+      const dataRow = [];
+
+      columns.forEach(function(column) {
+          dataRow.push(row[column].toString());
+      })
+
+      body.push(dataRow);
+  });
+  console.log(body)
+
+  return body;
+}
+
+getDocument(formationName, column)
+{
+
+  const logo = this.contentService.logoBase64
+
+  const docDefinition =
+
+  { content:
+    [
+    {
+      image: logo,
+      width: 60
+    },
+    {
+      text: 'ORDRE DES AVOCATS DE TOURS',
+      margin: [ 0, 20, 0, 10 ],
+      style: 'header'
+    },
+    {
+      text: name,
+      margin: [ 0, 10, 0, 10 ],
+      style: 'formation'
+    },
+    {
+			table: {
+        widths: ['*', 'auto'],
+        heights: 40,
+				body: [
+          ['OBLIGATION', 'Heures'],
+          ['Obligation horaire', '20'],
+          ['Obligation suite à ajustement: Motif: ', ' ']
+        ]
+			},
+      layout: {
+				fillColor: function (rowIndex, node, columnIndex) {
+					return (rowIndex === 0) ? '#CCCCCC' : null;
+				}
+			}
+		},
+    {
+      text: 'Avocat : ' + this.data.nom + ' ' + this.data.prenom,
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
+    },
+    {
+			table: {
+        //widths: ['auto', '*'],
+        heights: 40,
+				body: this.buildTableBody(formationName, column)
+			},
+			layout: {
+				fillColor: function (rowIndex, node, columnIndex) {
+					return (rowIndex === 0) ? '#CCCCCC' : null;
+				}
+			}
+		},
+
+  ],
+styles:
+{
+  header:
+  {
+    fontSize: 18,
+    alignment: 'center',
+    bold: true
+  },
+  t1:
+  {
+    fontSize: 14,
+    alignment: 'center',
+    bold: true
+  },
+  formation:
+  {
+    fontSize: 14,
+    alignment: 'center',
+  }
+}
+
+}
+
+  return docDefinition
+
+}
 
   onNoClick(): void {
     this.dialogRef.close();
