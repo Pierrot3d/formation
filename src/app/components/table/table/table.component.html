@@ -71,6 +71,16 @@
           ></app-spin-box></td>
     </ng-container>
 
+        <!-- Jours effectués de formations Column -->
+        <ng-container matColumnDef="formationDayGroupDo" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="formationDayGroupDo"> Heures groupe effectuées</th>
+          <td mat-cell *matCellDef="let element">
+            <app-spin-box
+            [value]="element.value.nbrGroup"
+            [lawyerId]="element.type"
+            ></app-spin-box></td>
+      </ng-container>
+
         <!-- Jours reportés de formations Column -->
         <ng-container matColumnDef="formationHoursReport" >
           <th mat-header-cell *matHeaderCellDef mat-sort-header="formationHoursReport"> Heures reportées</th>

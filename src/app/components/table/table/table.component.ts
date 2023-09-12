@@ -44,7 +44,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'attestation', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationDayGroupDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'attestation', 'trash'];
   dataSource
   db
 

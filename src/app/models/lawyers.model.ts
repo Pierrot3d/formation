@@ -8,6 +8,7 @@ export class Lawyers {
     mandatoryHours: number, // nombre d'heure obligatoire
     mandatoryHoursGroup: number, //nombre d'heure obligatoire de groupe
     nbr: number, //nombre d'heure globale
+    nbrGroup: number, //nombre d'heure de groupe
   };
 
 
