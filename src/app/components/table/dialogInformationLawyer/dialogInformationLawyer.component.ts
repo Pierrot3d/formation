@@ -138,7 +138,9 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
+    console.log(this.formationList$)
     this.bddCommunicationService.sendNewHours(this.data.id, this.formationList$)
+    this.bddCommunicationService.sendNewGroupHours(this.data.id, this.formationList$)
 /*     let nbrHoursTmp: number;
     nbrHoursTmp = 0;
 
@@ -149,6 +151,8 @@ export class DialogInformationLawyerComponent {
     console.log(nbrHoursTmp);
     this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp); */
   }
+
+
 
  generatePdf(formationsList)
 {

@@ -253,7 +253,13 @@ updateNbrHoursReport(id, nbrHours)
   })
 }
 
-
+updateNbrGroupHours(id, nbrGroupHours)
+{
+  const db = getDatabase();
+  update(ref(db, "avocats/" + id), {
+    nbrGroup: nbrGroupHours
+  })
+}
 
 removeUser(userKey){
   const db = getDatabase();
@@ -330,6 +336,36 @@ sendNewHours(id, formationList?) {
   }
 }
 
+sendNewGroupHours(id, formationList?) {
+
+  let nbrGroupHours = 0
+  if(formationList)
+  {
+    nbrGroupHours = this.getFormationGroupHours(formationList)
+    this.updateNbrGroupHours(id, nbrGroupHours);
+  }
+  else
+  {
+  /*   this.getFormationFromServer2(id)
+
+    console.log('les formations de ', id , formationListTmp)
+    setTimeout (() => {
+
+      let nbrHoursTmp: number;
+      nbrHoursTmp = 0;
+
+      for (let i = 0; i < formationListTmp.length; i++) {
+        console.log('le calcul : ', nbrHoursTmp, '+', formationListTmp[i]['numOfHours']);
+        nbrHoursTmp = nbrHoursTmp + + formationListTmp[i]['numOfHours'];
+      }
+
+      console.log('les heures :', nbrHoursTmp)
+      this.updateNbrHours(id, nbrHoursTmp);
+    }, 3000); */
+
+  }
+}
+
 getFormationHours(formationList)
 {
   let nbrHoursTmp: number;
@@ -342,6 +378,17 @@ getFormationHours(formationList)
   return nbrHoursTmp
 }
 
+getFormationGroupHours(formationList)
+{
+  let nbrGroupHoursTmp: number;
+  nbrGroupHoursTmp = 0;
+
+  for (let i = 0; i < formationList.length; i++) {
+    nbrGroupHoursTmp = nbrGroupHoursTmp + + formationList[i].value.numOfGroupHours;
+  }
+
+  return nbrGroupHoursTmp
+}
 
 generateExcel(group?) {
 
