@@ -21,47 +21,73 @@ export class DialogUpdateLawyerComponent {
       this.data.prenom,
       this.data.nom,
       this.data.email,
-      this.data.group? this.data.group: '',
-      this.data.group? this.isGroupParticularity(this.data.group): 0
+      this.data.group ? this.data.group : '',
+      this.data.group ? this.isGroupParticularity(this.data.group) : 0
     );
   }
 
-  isGroupParticularity(element: string)
-  {
+  isGroupParticularity(element) {
+    let mandatoryHoursGroupTmp = 0;
 
-    switch(element)
-    {
-      case "Mineurs":
-        {
+    if (Array.isArray(element)) {
+      for (let i = 0; i < element.length; i++) {
+        switch (element[i]) {
+          case 'Mineurs': {
+            mandatoryHoursGroupTmp = mandatoryHoursGroupTmp + 7;
+            break;
+          }
+          case 'Pénal': {
+            mandatoryHoursGroupTmp = mandatoryHoursGroupTmp + 7;
+            break;
+          }
+          case 'JLD-HO': {
+            mandatoryHoursGroupTmp = mandatoryHoursGroupTmp + 3;
+            break;
+          }
+          case 'Déontologie': {
+            mandatoryHoursGroupTmp = mandatoryHoursGroupTmp + 10;
+            break;
+          }
+          case 'Spécialisation': {
+            mandatoryHoursGroupTmp = mandatoryHoursGroupTmp + 10;
+            break;
+          }
+          case 'Droit des étrangers': {
+            mandatoryHoursGroupTmp = mandatoryHoursGroupTmp + 10;
+            break;
+          }
+          default: {
+            return 0;
+          }
+        }
+      }
+      return mandatoryHoursGroupTmp;
+    } else {
+      switch (element) {
+        case 'Mineurs': {
           return 7;
         }
-      case "Pénal":
-        {
+        case 'Pénal': {
           return 7;
         }
-      case "JLD-HO":
-        {
+        case 'JLD-HO': {
           return 3;
         }
-      case "Déontologie":
-        {
+        case 'Déontologie': {
           return 10;
         }
-      case "Spécialisation":
-        {
+        case 'Spécialisation': {
           return 10;
         }
-      case "Droit des étrangers":
-        {
+        case 'Droit des étrangers': {
           return 10;
         }
-      default:
-        {
-          return 0
+        default: {
+          return 0;
         }
+      }
     }
   }
-
 
   onNoClick(): void {
     this.dialogRef.close();
