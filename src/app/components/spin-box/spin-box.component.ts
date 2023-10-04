@@ -12,6 +12,7 @@ export class SpinBoxComponent   {
   @Input() value: number;
   @Input() lawyerId;
   @Input() isReportedHours;
+  @Input() backgroundColor;
 
 
 numberIncrement(element: number)
