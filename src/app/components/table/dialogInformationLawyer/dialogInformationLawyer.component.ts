@@ -39,6 +39,11 @@ export class DialogInformationLawyerComponent {
     end: new FormControl<Date | null>(null),
   });
 
+  updateRange = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+
   constructor(
     public dialogRef: MatDialogRef<DialogInformationLawyerComponent>,
     private bddCommunicationService: BddCommunicationService,
@@ -66,10 +71,26 @@ export class DialogInformationLawyerComponent {
     });
   }
 
-  modifyModeFn()
+  modifyModeFn(element)
   {
-    this.modifyMode = !this.modifyMode;
-    console.log(this.modifyMode)
+    element.value.modifyMode = true
+  }
+
+  modified(element)
+  {
+
+    element.value.modifyMode = false
+    this.bddCommunicationService.updateFormationBdd(
+      this.data.id,
+      element.value.formationLabel,
+      element.value.formationType? element.value.formationType : "",
+      element.value.start,
+      element.value.end,
+        0,
+        element.value.numOfHours ? element.value.numOfHours : 0,
+        element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
+        element.type
+    )
   }
 
   removeFormation(id, elemnt) {
@@ -81,7 +102,7 @@ export class DialogInformationLawyerComponent {
     const startTMP = this.changeDateFormat(start);
     const endTMP = this.changeDateFormat(end);
 
-    this.bddCommunicationService.updateFormation(
+    this.bddCommunicationService.addFormationBdd(
       this.data.id,
       this.data.formationLabel,
       this.data.formationType? this.data.formationType : "",

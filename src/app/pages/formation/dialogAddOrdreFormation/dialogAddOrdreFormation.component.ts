@@ -85,7 +85,7 @@ export class DialogAddOrdreFormationComponent  {
 
     for(const participant of this.lawyer)
     {
-     this.formationId.push(this.bddCommunicationService.updateFormation(
+     this.formationId.push(this.bddCommunicationService.addFormationBdd(
         participant.type,
         this.data.formationName,
         this.data.groupe? this.data.groupe : "",

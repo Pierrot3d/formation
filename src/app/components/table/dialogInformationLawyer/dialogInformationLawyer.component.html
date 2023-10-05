@@ -1,13 +1,12 @@
 <div mat-dialog-actions style="justify-content: right;">
   <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
-  </div>
+</div>
 <h1 mat-dialog-title>Fiche de Me {{data.formationLabel}} {{data.nom}}</h1>
 
 
-    <button mat-icon-button color="primary"
-    (click)="generatePdf(this.formationList$)">
-    <mat-icon >description</mat-icon>
-    </button>
+<button mat-icon-button color="primary" (click)="generatePdf(this.formationList$)">
+  <mat-icon>description</mat-icon>
+</button>
 
 <mat-table mat-table [dataSource]="this.formationList$" class="mat-elevation-z8">
 
@@ -15,7 +14,19 @@
   <!-- Name Column -->
   <ng-container matColumnDef="formation">
     <mat-header-cell *matHeaderCellDef> Formation </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.value.formationLabel}} </mat-cell>
+    <mat-cell *matCellDef="let element">
+      <div *ngIf="!element.value.modifyMode">
+        {{element.value.formationLabel}}
+      </div>
+      <div *ngIf="element.value.modifyMode">
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{element.value.formationLabel}}
+          </mat-label>
+          <input matInput [(ngModel)]="element.value.formationLabel">
+        </mat-form-field>
+      </div>
+    </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Formation</mat-label>
@@ -24,51 +35,71 @@
     </mat-footer-cell>
   </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="type">
-      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.value.formationType}} </mat-cell>
-      <mat-footer-cell *matFooterCellDef>
-        <p>
-          <mat-form-field appearance="fill">
-            <mat-label>Groupe</mat-label>
-            <mat-select matInput [(ngModel)]="data.formationType" multiple>
-              <mat-option value="Mineurs">Mineurs</mat-option>
-              <mat-option value="Pénal">Pénal</mat-option>
-              <mat-option value="JLD-HO">JLD-HO</mat-option>
-              <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
-              <mat-option value="Déontologie">Déontologie</mat-option>
-              <mat-option value="Spécialisation">Spécialisation</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-      </mat-footer-cell>
-    </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div *ngIf="!element.value.modifyMode">{{element.value.formationType}} </div>
+      <div *ngIf="element.value.modifyMode">
+        <mat-form-field appearance="fill">
+          <mat-label>Groupe</mat-label>
+          <mat-select matInput [(ngModel)]="element.value.formationType" multiple>
+            <mat-option value="Mineurs">Mineurs</mat-option>
+            <mat-option value="Pénal">Pénal</mat-option>
+            <mat-option value="JLD-HO">JLD-HO</mat-option>
+            <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
+            <mat-option value="Déontologie">Déontologie</mat-option>
+            <mat-option value="Spécialisation">Spécialisation</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Groupe</mat-label>
+          <mat-select matInput [(ngModel)]="data.formationType" multiple>
+            <mat-option value="Mineurs">Mineurs</mat-option>
+            <mat-option value="Pénal">Pénal</mat-option>
+            <mat-option value="JLD-HO">JLD-HO</mat-option>
+            <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
+            <mat-option value="Déontologie">Déontologie</mat-option>
+            <mat-option value="Spécialisation">Spécialisation</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+    </mat-footer-cell>
+  </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="date">
-    <mat-header-cell *matHeaderCellDef > Date </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.value.start}} - {{element.value.end}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+    <div>
+      {{element.value.start}} - {{element.value.end}}
+    </div>
+  </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Entrez les dates</mat-label>
-        <mat-date-range-input [formGroup]="this.range" [rangePicker]="picker" >
+        <mat-date-range-input [formGroup]="this.range" [rangePicker]="picker">
           <input matStartDate formControlName="start" placeholder="Start date">
           <input matEndDate formControlName="end" placeholder="End date">
         </mat-date-range-input>
         <mat-hint>JJ/MM/AAAA – JJ/MM/AAAA</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
 
-        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">La date de départ est invalide</mat-error>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">La date de départ est
+          invalide</mat-error>
         <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">La date de fin est invalide</mat-error>
       </mat-form-field>
       <!-- <p>Selected range: {{range.value | json}}</p> -->
     </mat-footer-cell>
   </ng-container>
 
-<!--   <!-- Symbol Column -->
-  <ng-container matColumnDef="nbrDay" >
+  <!--   <!-- Symbol Column -->
+  <ng-container matColumnDef="nbrDay">
     <mat-header-cell *matHeaderCellDef> Nombre de jours </mat-header-cell>
     <mat-cell *matCellDef="let element">  {{element.value.numOfDay}} </mat-cell>
     <mat-footer-cell *matFooterCellDef>
@@ -82,9 +113,19 @@
     </mat-footer-cell>
   </ng-container> -->
 
-  <ng-container matColumnDef="nbrHours" >
+  <ng-container matColumnDef="nbrHours">
     <mat-header-cell *matHeaderCellDef> Nombre d'heures </mat-header-cell>
-    <mat-cell *matCellDef="let element">  {{element.value.numOfHours}} </mat-cell>
+    <mat-cell *matCellDef="let element">  
+    <div *ngIf="!element.value.modifyMode">
+      {{element.value.numOfHours}}
+    </div>
+    <div *ngIf="element.value.modifyMode">
+      <mat-form-field appearance="fill">
+        <mat-label>{{element.value.numOfHours}}</mat-label>
+        <input matInput [(ngModel)]="element.value.numOfHours">
+      </mat-form-field>
+    </div>
+  </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures</mat-label>
@@ -93,10 +134,19 @@
     </mat-footer-cell>
   </ng-container>
 
-  <ng-container matColumnDef="nbrHoursGroup" >
+  <ng-container matColumnDef="nbrHoursGroup">
     <mat-header-cell *matHeaderCellDef> Nombre d'heures groupe</mat-header-cell>
-    <mat-cell *matCellDef="let element">  {{element.value.numOfGroupHours}} </mat-cell>
-    <mat-footer-cell *matFooterCellDef>
+    <mat-cell *matCellDef="let element">  
+      <div *ngIf="!element.value.modifyMode">
+        {{element.value.numOfGroupHours}}
+      </div>
+      <div *ngIf="element.value.modifyMode">
+        <mat-form-field appearance="fill">
+          <mat-label>{{element.value.numOfGroupHours}}</mat-label>
+          <input matInput [(ngModel)]="element.value.numOfGroupHours">
+        </mat-form-field>
+      </div>
+    </mat-cell>    <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures groupe</mat-label>
         <input matInput [(ngModel)]="data.numOfGroupHours">
@@ -104,19 +154,20 @@
     </mat-footer-cell>
   </ng-container>
 
-  <ng-container matColumnDef="trash" >
+  <ng-container matColumnDef="trash">
     <mat-header-cell *matHeaderCellDef> Supprimer</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon class="trash"(click)="this.removeFormation(this.data.id, element.type)"> delete </mat-icon>
+      <mat-icon *ngIf="!element.value.modifyMode" class="trash" (click)="this.removeFormation(this.data.id, element.type)"> delete </mat-icon>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
     </mat-footer-cell>
   </ng-container>
 
-  <ng-container matColumnDef="update" >
+  <ng-container matColumnDef="update">
     <mat-header-cell *matHeaderCellDef> Modifier</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon class="trash"(click)="this.modifyModeFn()"> create </mat-icon>
+      <mat-icon *ngIf="!element.value.modifyMode" class="trash" (click)="this.modifyModeFn(element)"> create </mat-icon>
+      <mat-icon *ngIf="element.value.modifyMode" class="trash" (click)="this.modified(element)"> check </mat-icon>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
     </mat-footer-cell>
@@ -124,11 +175,12 @@
 
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="total" >
+  <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element"></mat-cell>
     <mat-footer-cell *matFooterCellDef center align="center">
-      <button  mat-raised-button color="primary" (click)="addFormation(this.range.value.start,this.range.value.end)">Ajouter     <mat-icon >add</mat-icon>
+      <button mat-raised-button color="primary"
+        (click)="addFormation(this.range.value.start,this.range.value.end)">Ajouter <mat-icon>add</mat-icon>
       </button>
     </mat-footer-cell>
   </ng-container>
@@ -140,5 +192,6 @@
 </mat-table>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary"  [mat-dialog-close]="data" cdkFocusInitial (click)="sendNewHours()">Valider</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial
+    (click)="sendNewHours()">Valider</button>
 </div>

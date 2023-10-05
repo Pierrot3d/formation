@@ -1,3 +1,4 @@
+import { Formation } from './../models/formation.model';
 /* eslint-disable no-irregular-whitespace */
 /* eslint-disable prefer-const */
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -209,7 +210,7 @@ updateGeneral(id, DataPrenom, DataNom){
 
 
 
-updateFormation(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId? : number){
+addFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId? : number){
   // Create a new post reference with an auto-generated id
 const db = getDatabase();
 const lawyerListRef = ref(db, 'formation/' + id);
@@ -228,6 +229,28 @@ set(formation, {
 return formation.key
 
 }
+
+updateFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId : number){
+  // Create a new post reference with an auto-generated id
+const db = getDatabase();
+
+const formation = ref(db, "formation/" + id + "/"  + formationId)
+console.log(formation)
+update(formation, {
+  formationLabel: formationLabel,
+  formationType: formationType,
+  start: startDay,
+  end: endDay,
+  numOfDay: numOfDay,
+  numOfHours: numOfHours,
+  numOfGroupHours: numOfGroupHours
+});
+
+return
+
+}
+
+
 
 updateNbrDay(id, nbrDay)
 {
