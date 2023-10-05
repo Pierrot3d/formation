@@ -19,9 +19,10 @@ import { MatTableDataSource } from '@angular/material/table';
 export class DialogAddOrdreFormationComponent  {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   testList;
-  $lawyerList
+  $lawyerList;
 
   lawyerCtrl = new FormControl('');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filteredLawyers: Observable<any>;
   lawyer = [];
 
@@ -134,7 +135,7 @@ export class DialogAddOrdreFormationComponent  {
   }
 
   add(event: MatChipInputEvent): void {
-    // console.log(event)
+     console.log(event)
     const value = (event.value || '').trim();
 
     // console.log(value)
@@ -166,8 +167,9 @@ export class DialogAddOrdreFormationComponent  {
 
   private _filter(value: string): string[] {
     const filterValue = value;
-    return this.$lawyerList.filter(fruit => fruit.value.nom.includes(filterValue)
-      );
+    const arr = this.$lawyerList || []
+
+    return arr ? arr.filter(lawyer => lawyer.value.nom?.includes(filterValue? filterValue : '')) : [];
   }
 
 
