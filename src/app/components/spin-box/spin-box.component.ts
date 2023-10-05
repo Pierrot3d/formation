@@ -14,19 +14,32 @@ export class SpinBoxComponent   {
   @Input() isReportedHours;
   @Input() backgroundColor;
 
+  onChangeEvent(event: any){
+
+    this.bddCommunicationService.updateNbrDay(this.lawyerId, event.target.value)
+    console.log(event.target.value);
+
+  }
+
+  onChangeEventReport(event: any){
+
+    this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, event.target.value)
+    console.log(event.target.value);
+
+  }
 
 numberIncrement(element: number)
 {
   if(this.value)
   {
-    const nbr = element + 1;
+    const nbr = element + 0.5;
     this.value = nbr
     this.bddCommunicationService.updateNbrDay(this.lawyerId, this.value)
   }
   else
   {
     this.value = 0
-    const nbr = this.value + 1;
+    const nbr = this.value + 0.5;
     this.bddCommunicationService.updateNbrDay(this.lawyerId, nbr)
   }
 
@@ -38,14 +51,14 @@ numberDecrement(element: number)
   {
     if(this.value)
     {
-      const nbr = element - 1;
+      const nbr = element - 0.5;
       this.value = nbr
       this.bddCommunicationService.updateNbrDay(this.lawyerId, this.value)
     }
     else
     {
       this.value = 0
-      const nbr = this.value - 1;
+      const nbr = this.value - 0.5;
       this.bddCommunicationService.updateNbrDay(this.lawyerId, nbr)
     }
   }
@@ -61,14 +74,14 @@ numberIncrementReport(element: number)
 {
   if(this.value)
   {
-    const nbr = element + 1;
+    const nbr = element + 0.5;
     this.value = nbr
     this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, this.value)
   }
   else
   {
     this.value = 0
-    const nbr = this.value + 1;
+    const nbr = this.value + 0.5;
     this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, nbr)
   }
 
@@ -80,14 +93,14 @@ numberDecrementReport(element: number)
   {
     if(this.value)
     {
-      const nbr = element - 1;
+      const nbr = element - 0.5;
       this.value = nbr
       this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, this.value)
     }
     else
     {
       this.value = 0
-      const nbr = this.value - 1;
+      const nbr = this.value - 0.5;
       this.bddCommunicationService.updateNbrHoursReport(this.lawyerId, nbr)
     }
   }

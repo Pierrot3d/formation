@@ -2,7 +2,7 @@
   <div class="input-group-button" (click)="numberDecrement(this.value)">
     <mat-icon>remove_circle</mat-icon>
   </div>
-  <input class="input-number" type="number" [ngStyle]="this.backgroundColor?{'background-color': 'green'} : {}" value="{{this.value}}" min="0" max="1000">
+  <input class="input-number" type="number" (change)="onChangeEvent($event)" [ngStyle]="this.backgroundColor?{'background-color': 'green'} : {}" value="{{this.value}}" min="0" max="1000">
   <div class="input-group-button" (click)="numberIncrement(this.value)">
     <mat-icon>add_circle</mat-icon>
   </div>
@@ -12,7 +12,7 @@
   <div class="input-group-button" (click)="numberDecrementReport(this.value)">
     <mat-icon>remove_circle</mat-icon>
   </div>
-  <input class="input-number" type="number" [ngStyle]="this.backgroundColor? {'background-color': 'green'} : {}"  value="{{this.value}}" min="0" max="1000">
+  <input class="input-number" type="number" (change)="onChangeEventReport($event)" [ngStyle]="this.backgroundColor? {'background-color': 'green'} : {}"  value="{{this.value}}" min="0" max="1000">
   <div class="input-group-button" (click)="numberIncrementReport(this.value)">
     <mat-icon>add_circle</mat-icon>
   </div>
