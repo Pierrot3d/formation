@@ -208,6 +208,66 @@ updateGeneral(id, DataPrenom, DataNom){
   })
 }
 
+addOrdreFormation(range, data, lawyer, formationId, startTMP, endTMP,heuresDeGroupe?)
+{
+  this.addOrdreFormationToParticipant(data, lawyer, formationId, startTMP, endTMP, heuresDeGroupe)
+
+  const value = {
+    formationName: data.formationName,
+    duration: data.duration,
+    participant: lawyer,
+    groupe: data.groupe,
+    startTMP,
+    endTMP,
+    nbrParticipant: lawyer.length,
+    individualFormationId: formationId
+  }
+  this.saveOrdreFormationToServer(value);
+}
+
+addOrdreFormationToParticipant(data, lawyer, formationId, startTMP, endTMP, heuresDeGroupe?) {
+
+
+  for(const participant of lawyer)
+  {
+   formationId.push(this.addFormationBdd(
+      participant.type,
+      data.formationName,
+      data.groupe? data.groupe : "",
+      startTMP,
+      endTMP,
+      0,
+      data.duration ? data.duration : 0,
+      heuresDeGroupe ? heuresDeGroupe : 0,
+    ));
+
+    let formationList$: {type, value}[] = [];
+
+
+    const db = getDatabase();
+    const starCountRef = ref(db, 'formation/' + participant.type);
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        formationList$ = Object.keys(data).map((key) => ({
+          type: key,
+          value: data[key],
+        }));
+        // console.log(this.lawyers$)
+        // console.log(formationList$)
+
+        // console.log(formationList$)
+        this.sendNewHours(participant.type, formationList$)
+      } else {
+        formationList$ = [];
+
+        return console.log('pas de formation avec cet utilisateur')
+      }
+    });
+
+  }
+
+}
 
 
 addFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId? : number){

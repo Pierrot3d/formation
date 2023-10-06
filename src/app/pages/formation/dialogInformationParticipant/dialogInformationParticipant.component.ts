@@ -143,8 +143,8 @@ export class DialogInformationParticipantComponent {
 
     private _filter(value: string): string[] {
       const filterValue = value;
-      return this.$lawyerList.filter(fruit => fruit.value.nom.includes(filterValue)
-        );
+      const arr = this.$lawyerList || []
+      return arr ? arr.filter(lawyer => lawyer.value.nom?.includes(filterValue? filterValue : '')) : [];
     }
 
     onNoClick(): void {

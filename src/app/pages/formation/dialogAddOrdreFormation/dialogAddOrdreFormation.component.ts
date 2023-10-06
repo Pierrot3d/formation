@@ -58,12 +58,14 @@ export class DialogAddOrdreFormationComponent  {
   });
 }
 
-  addUser()
+  addGlobalFormation()
   {
     const startTMP = this.changeDateFormat(this.range.value.start);
     const endTMP = this.changeDateFormat(this.range.value.end);
 
-    this.addFormation(this.range.value.start, this.range.value.end)
+    this.bddCommunicationService.addOrdreFormation(this.range, this.data, this.lawyer, this.formationId, startTMP, endTMP, this.heuresDeGroupe)
+
+    /* this.addFormation(this.range.value.start, this.range.value.end)
 
     const value = {
       formationName: this.data.formationName,
@@ -75,12 +77,13 @@ export class DialogAddOrdreFormationComponent  {
       nbrParticipant: this.lawyer.length,
       individualFormationId: this.formationId
     }
-    this.bddCommunicationService.saveOrdreFormationToServer(value);
+    this.bddCommunicationService.saveOrdreFormationToServer(value); */
   }
 
   heuresDeGroupe;
   formationId = [];
-  addFormation(start, end) {
+
+ /* addFormation(start, end) {
     const startTMP = this.changeDateFormat(start);
     const endTMP = this.changeDateFormat(end);
 
@@ -123,7 +126,7 @@ export class DialogAddOrdreFormationComponent  {
 
     }
 
-  }
+  } */
 
   changeDateFormat(date) {
     const offset = date.getTimezoneOffset();
