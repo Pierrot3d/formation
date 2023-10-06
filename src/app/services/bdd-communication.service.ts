@@ -269,6 +269,30 @@ addOrdreFormationToParticipant(data, lawyer, formationId, startTMP, endTMP, heur
 
 }
 
+updateOrdreFormationParticipant(idFormationOrdre, data, lawyer, oldFormationId, formationId, startTMP, endTMP )
+{
+  const db = getDatabase();
+
+  this.addOrdreFormationToParticipant(data, lawyer, formationId, startTMP, endTMP)
+
+
+const formation = ref(db, "formationOrdre/" + idFormationOrdre)
+console.log(formation)
+update(formation, {
+  formationName: data.formationName,
+    duration: data.duration,
+    participant: lawyer,
+    groupe: data.groupe,
+    startTMP,
+    endTMP,
+    nbrParticipant: lawyer.length,
+    individualFormationId: formationId
+});
+
+
+return
+}
+
 
 addFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId? : number){
   // Create a new post reference with an auto-generated id

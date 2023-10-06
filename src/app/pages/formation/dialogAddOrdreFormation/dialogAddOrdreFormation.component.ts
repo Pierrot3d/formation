@@ -63,6 +63,7 @@ export class DialogAddOrdreFormationComponent  {
     const startTMP = this.changeDateFormat(this.range.value.start);
     const endTMP = this.changeDateFormat(this.range.value.end);
 
+    console.log(this.formationId)
     this.bddCommunicationService.addOrdreFormation(this.range, this.data, this.lawyer, this.formationId, startTMP, endTMP, this.heuresDeGroupe)
 
     /* this.addFormation(this.range.value.start, this.range.value.end)
