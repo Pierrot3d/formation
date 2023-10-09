@@ -122,14 +122,14 @@
     <div *ngIf="element.value.modifyMode">
       <mat-form-field appearance="fill">
         <mat-label>{{element.value.numOfHours}}</mat-label>
-        <input matInput [(ngModel)]="element.value.numOfHours">
+        <input matInput type="number" [(ngModel)]="element.value.numOfHours">
       </mat-form-field>
     </div>
   </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures</mat-label>
-        <input matInput [(ngModel)]="data.numOfHours">
+        <input matInput type="number" [(ngModel)]="data.numOfHours">
       </mat-form-field>
     </mat-footer-cell>
   </ng-container>
@@ -143,13 +143,13 @@
       <div *ngIf="element.value.modifyMode">
         <mat-form-field appearance="fill">
           <mat-label>{{element.value.numOfGroupHours}}</mat-label>
-          <input matInput [(ngModel)]="element.value.numOfGroupHours">
+          <input matInput type="number" [(ngModel)]="element.value.numOfGroupHours">
         </mat-form-field>
       </div>
     </mat-cell>    <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures groupe</mat-label>
-        <input matInput [(ngModel)]="data.numOfGroupHours">
+        <input matInput type="number" [(ngModel)]="data.numOfGroupHours">
       </mat-form-field>
     </mat-footer-cell>
   </ng-container>
