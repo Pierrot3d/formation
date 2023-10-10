@@ -148,7 +148,7 @@ openInformationParticipantDialog(element): void {
   });
 }
 
-generatePdf(participant, date, formationName)
+generatePdf(participant, date, formationName, lieu)
 {
   let lawyersNameTableTmp = [];
   for(const part of participant)
@@ -164,7 +164,7 @@ generatePdf(participant, date, formationName)
   console.log(lawyersNameTableTmp)
   lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) => (a.Nom > b.Nom ? 1 : -1))
 
-  const document = this.getDocument(lawyersNameTableTmp, ['Nom', 'Signature'], date, formationName);
+  const document = this.getDocument(lawyersNameTableTmp, ['Nom', 'Signature'], date, formationName, lieu);
   pdfMake.createPdf(document).open();
 }
 
@@ -187,7 +187,7 @@ buildTableBody(data, columns) {
   return body;
 }
 
-getDocument(participant, column, date, formationName)
+getDocument(participant, column, date, formationName, lieu)
 {
 
   const logo = this.contentService.logoBase64
@@ -211,7 +211,7 @@ getDocument(participant, column, date, formationName)
       style: 'formation'
     },
     {
-      text: 'TOURS - FACULTE DE DROIT- SALLE',
+      text: lieu,
       margin: [ 0, 10, 0, 10 ],
       style: 't1'
     },

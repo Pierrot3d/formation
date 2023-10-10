@@ -48,7 +48,6 @@ saveGeneralToServer(element: FormGeneral) {
     .subscribe(
       () => {
       //  console.log(element);
-        console.log('Enregistrement terminé !');
         this.isRecord = true;
       },
       (error) => {
@@ -64,8 +63,6 @@ saveLawyersToServer(element: FormExcel) {
     .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json', element)
     .subscribe(
       () => {
-      //  console.log(element);
-        console.log('Enregistrement terminé !');
         this.isRecord = true;
       },
       (error) => {
@@ -79,8 +76,6 @@ saveOrdreFormationToServer(element) {
     .post('https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/formationOrdre.json', element)
     .subscribe(
       () => {
-      //  console.log(element);
-        console.log('Enregistrement terminé !');
         this.isRecord = true;
       },
       (error) => {
@@ -149,7 +144,6 @@ getFormationFromServer(id): [] {
         for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
           this.formationList.push(listTmp[elemnt])
         }
-        console.log("ceci est la vraie liste",this.liste)
         return this.formationList
     } else {
       console.log("No data available");
@@ -177,7 +171,6 @@ getFormationFromServer2(id): any
         value: data[key],
       }));
       // console.log(this.lawyers$)
-      console.log(formationList$)
 
       return formationList$
 
@@ -262,7 +255,7 @@ addOrdreFormationToParticipant(data, lawyer, formationId, startTMP, endTMP, heur
       } else {
         formationList$ = [];
 
-        return console.log('pas de formation avec cet utilisateur')
+        return
       }
     });
 
@@ -283,7 +276,7 @@ update(formation, {
     duration: data.duration,
     lieu: data.lieu,
     participant: lawyer,
-    groupe: data.groupe,
+    groupe: data.groupe? data.groupe: "",
     startTMP,
     endTMP,
     nbrParticipant: lawyer.length,
@@ -299,8 +292,8 @@ updateOrdreFormationInformations(idFormationOrdre, data, participant, startTMP, 
   const db = getDatabase();
 
   const formation = ref(db, "formationOrdre/" + idFormationOrdre)
-console.log(formation)
-update(formation, {
+
+  update(formation, {
     formationName: data.formationName,
     duration: data.duration,
     groupe: data.groupe,
@@ -336,7 +329,7 @@ updateFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay
 const db = getDatabase();
 
 const formation = ref(db, "formation/" + id + "/"  + formationId)
-console.log(formation)
+
 update(formation, {
   formationLabel: formationLabel,
   formationType: formationType,
@@ -363,7 +356,6 @@ updateNbrDay(id, nbrDay)
 
 updateNbrHours(id, nbrHours)
 {
-  console.log(nbrHours)
   const db = getDatabase();
   update(ref(db, "avocats/" + id), {
     nbr: nbrHours
@@ -420,7 +412,6 @@ getLawyersFromServerWithId(): [] {
     .subscribe(
       (response) => {
         let listTmp = response;
-        console.log(listTmp)
         return listTmp
       },
       (error) => {
@@ -535,7 +526,6 @@ generateExcel(group?) {
       }
 
       listTmp = this.liste;
-      console.log(listTmp)
 
       for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
         // console.log(listTmp[elemnt])
@@ -564,10 +554,8 @@ generateExcel(group?) {
         //console.log(group)
         if(group)
         {
-          console.log(group === listTmp[elemnt].group, group, listTmp[elemnt].group)
           if(group === listTmp[elemnt].group)
            {
-            console.log("im in")
           data.push([
             listTmp[elemnt].nom, listTmp[elemnt].prenom, listTmp[elemnt].email, listTmp[elemnt].group, listTmp[elemnt].mandatoryHours, listTmp[elemnt].mandatoryHoursGroup, listTmp[elemnt].nbr, listTmp[elemnt].nbrReport, listTmp[elemnt].formationList
           ])
@@ -625,7 +613,6 @@ generateExcel(group?) {
         let row = worksheet.addRow(key);
         let qty = row.getCell(7);
         let color = 'FF99FF99';
-        console.log(qty.model.value)
         if (qty.model.value < row.getCell(5).model.value || qty.model.value === undefined) {
           color = 'FF9999'
         }
