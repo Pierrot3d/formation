@@ -19,6 +19,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export interface DialogOrdreFormationData {
   formationName: string;
   duration: number;
+  lieu: string;
   participant: [];
   groupe: string;
   id: string;
@@ -41,7 +42,7 @@ export class FormationComponent {
   lawyers$
   lawyersList$
 
-  displayedColumns: string[] = ['formationName', 'duration', 'participant', 'update', 'attestation', 'trash' ];
+  displayedColumns: string[] = ['formationName', 'duration', 'lieu', 'participant', 'update', 'attestation', 'trash' ];
   dataSource
   db
 
@@ -121,7 +122,7 @@ openAddOrdreFormationDialog(): void {
   const dialogRef = this.dialog.open(DialogAddOrdreFormationComponent, {
     height: "80vh",
     width: "80vw",
-    data: {id: '', formationName: '', duration: '', participant: ''},
+    data: {id: '', formationName: '', lieu: '', duration: '', participant: ''},
   });
 
 
@@ -136,7 +137,7 @@ openInformationParticipantDialog(element): void {
   const dialogRef = this.dialog.open(DialogInformationParticipantComponent, {
     height: "80vh",
     width: "80vw",
-    data: {id: element.type, formationName: element.value.formationName, duration: element.value.duration, participant: element.value.participant, startTMP: element.value.startTMP, endTMP: element.value.endTMP, individualFormationId: element.value.individualFormationId, groupe: element.value.groupe},
+    data: {id: element.type, formationName: element.value.formationName, lieu: element.value.lieu, duration: element.value.duration, participant: element.value.participant, startTMP: element.value.startTMP, endTMP: element.value.endTMP, individualFormationId: element.value.individualFormationId, groupe: element.value.groupe},
   });
 
 

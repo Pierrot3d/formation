@@ -22,6 +22,12 @@
     <td mat-cell *matCellDef="let element"> {{element.value.duration}} </td>
   </ng-container>
 
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="lieu">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="lieu"> Lieu </th>
+      <td mat-cell *matCellDef="let element"> {{element.value.lieu}} </td>
+    </ng-container>
+
   <!-- Group Column -->
   <ng-container matColumnDef="participant">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="participant"> Nombre de participant </th>

@@ -214,6 +214,7 @@ addOrdreFormation(range, data, lawyer, formationId, startTMP, endTMP,heuresDeGro
 
   const value = {
     formationName: data.formationName,
+    lieu: data.lieu,
     duration: data.duration,
     participant: lawyer,
     groupe: data.groupe,
@@ -280,6 +281,7 @@ const formation = ref(db, "formationOrdre/" + idFormationOrdre)
 update(formation, {
     formationName: data.formationName,
     duration: data.duration,
+    lieu: data.lieu,
     participant: lawyer,
     groupe: data.groupe,
     startTMP,
@@ -361,6 +363,7 @@ updateNbrDay(id, nbrDay)
 
 updateNbrHours(id, nbrHours)
 {
+  console.log(nbrHours)
   const db = getDatabase();
   update(ref(db, "avocats/" + id), {
     nbr: nbrHours
