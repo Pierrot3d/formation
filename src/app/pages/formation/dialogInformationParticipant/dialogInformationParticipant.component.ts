@@ -140,6 +140,13 @@ export class DialogInformationParticipantComponent {
     );
   }
 
+  modifyMode = false;
+
+  modifyModeAction()
+  {
+    this.modifyMode = !this.modifyMode
+  }
+
   private _filter(value: string): string[] {
     const filterValue = value;
     const arr = this.$lawyerList || [];

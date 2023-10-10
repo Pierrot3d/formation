@@ -1,0 +1,5 @@
+.participantName
+{
+  display: flex;
+  flex-direction: column;
+}

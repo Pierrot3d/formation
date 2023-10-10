@@ -1,25 +1,67 @@
 <div mat-dialog-actions style="justify-content: right;">
   <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
-  </div>
+</div>
 
-<p>Date : {{this.data.startTMP}} - {{this.data.endTMP}}</p>
+<p><mat-icon (click)="modifyModeAction()"> create </mat-icon></p>
 
-<p>Durée de la formation : {{this.data.duration}} heures</p>
+<p *ngIf="!modifyMode">Date : {{this.data.startTMP}} - {{this.data.endTMP}}</p>
 
-<table mat-table [dataSource]="this.dataTable" class="mat-elevation-z8">
+<p *ngIf="!modifyMode">Durée de la formation : {{this.data.duration}} heures</p>
+
+<div *ngIf="modifyMode" mat-dialog-content>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Nom de la formation</mat-label>
+      <input matInput [(ngModel)]="data.formationName">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Durée</mat-label>
+      <input matInput [(ngModel)]="data.duration">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Date de début (respecter le format)</mat-label>
+      <input matInput [(ngModel)]="data.startTMP">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Date de fin (respecter le format)</mat-label>
+      <input matInput [(ngModel)]="data.endTMP">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>groupe</mat-label>
+      <mat-select [(ngModel)]="data.groupe" multiple>
+        <mat-option value="Mineurs">Mineurs</mat-option>
+        <mat-option value="Pénal">Pénal</mat-option>
+        <mat-option value="JLD-HO">JLD-HO</mat-option>
+        <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
+        <mat-option value="Déontologie">Déontologie</mat-option>
+        <mat-option value="Spécialisation">Spécialisation</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+</div>
+
+<table *ngIf="!modifyMode" mat-table [dataSource]="this.dataTable" class="mat-elevation-z8">
 
 
   <!-- Group Column -->
   <ng-container matColumnDef="participant">
-    <th mat-header-cell *matHeaderCellDef > Participant </th>
+    <th mat-header-cell *matHeaderCellDef> Participant </th>
     <td mat-cell *matCellDef="let element" style="cursor: pointer;"> {{element.value.nom}} {{element.value.prenom}}</td>
   </ng-container>
 
-    <!-- trash Column -->
-    <ng-container matColumnDef="trash">
-      <th mat-header-cell *matHeaderCellDef > Supprimer </th>
-      <td mat-cell *matCellDef="let element">  <mat-icon class="trash"> delete </mat-icon> </td>
-    </ng-container>
+  <!-- trash Column -->
+  <ng-container matColumnDef="trash">
+    <th mat-header-cell *matHeaderCellDef> Supprimer </th>
+    <td mat-cell *matCellDef="let element"> <mat-icon class="trash"> delete </mat-icon> </td>
+  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -27,29 +69,28 @@
 
 </table>
 
-<p>
-<mat-form-field class="fill">
-  <mat-label>Ajouter des participants</mat-label>
-  <mat-chip-grid #chipGrid aria-label="Ajout de participant">
-   <!--  <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
+<p *ngIf="modifyMode">
+  <mat-form-field class="fill">
+    <mat-label>Ajouter des participants</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Ajout de participant">
+      <!--  <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
       {{participant.value.nom}}
       <button matChipRemove [attr.aria-label]="'remove ' + participant">
         <mat-icon>cancel</mat-icon>
       </button>
     </mat-chip-row> -->
-  </mat-chip-grid>
-  <input placeholder="Ajouter un participant ..." #lawyerInput [formControl]="lawyerCtrl"
-    [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-    (matChipInputTokenEnd)="add($event)"/>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let participant of filteredLawyers | async" [value]="participant">
-      {{participant.value.nom}} {{participant.value.prenom}}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+    </mat-chip-grid>
+    <input placeholder="Ajouter un participant ..." #lawyerInput [formControl]="lawyerCtrl" [matChipInputFor]="chipGrid"
+      [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)" />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let participant of filteredLawyers | async" [value]="participant">
+        {{participant.value.nom}} {{participant.value.prenom}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
 </p>
-<p>
+<p *ngIf="modifyMode" class="participantName">
   <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
     {{participant.value.nom}} {{participant.value.prenom}}
     <button matChipRemove [attr.aria-label]="'remove ' + participant">
@@ -58,6 +99,6 @@
   </mat-chip-row>
 </p>
 
-<div mat-dialog-actions>
+<div *ngIf="modifyMode" mat-dialog-actions>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="updateGlobalFormation()">Mettre à jour la formation</button>
 </div>

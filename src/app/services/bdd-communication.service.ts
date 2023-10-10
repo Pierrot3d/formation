@@ -277,9 +277,8 @@ updateOrdreFormationParticipant(idFormationOrdre, data, lawyer, oldFormationId, 
 
 
 const formation = ref(db, "formationOrdre/" + idFormationOrdre)
-console.log(formation)
 update(formation, {
-  formationName: data.formationName,
+    formationName: data.formationName,
     duration: data.duration,
     participant: lawyer,
     groupe: data.groupe,
@@ -291,6 +290,22 @@ update(formation, {
 
 
 return
+}
+
+updateOrdreFormationInformations(idFormationOrdre, data, participant, startTMP, endTMP)
+{
+  const db = getDatabase();
+
+  const formation = ref(db, "formationOrdre/" + idFormationOrdre)
+console.log(formation)
+update(formation, {
+    formationName: data.formationName,
+    duration: data.duration,
+    groupe: data.groupe,
+    startTMP,
+    endTMP,
+  });
+
 }
 
 
