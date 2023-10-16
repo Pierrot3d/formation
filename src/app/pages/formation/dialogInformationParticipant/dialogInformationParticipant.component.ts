@@ -129,6 +129,22 @@ export class DialogInformationParticipantComponent {
   updateGlobalFormation() {
     this.removeOrdreFormation(this.lawyer);
 
+    let datasTmp = ""
+    // eslint-disable-next-line prefer-const
+    for(let datas of this.data.participant)
+    {
+      console.log(datas)
+      if(datas.type == datasTmp)
+      {
+        console.log("Il y a deux pareil")
+      }
+      else
+      {
+        datasTmp = datas.type;
+        return
+      }
+    }
+
     this.bddCommunicationService.updateOrdreFormationParticipant(
       this.data.id,
       this.data,

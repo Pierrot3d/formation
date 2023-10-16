@@ -20,7 +20,7 @@ export interface DialogOrdreFormationData {
   formationName: string;
   duration: number;
   lieu: string;
-  participant: [];
+  participant: any[];
   groupe: string;
   id: string;
   nbrParticipant: number;
