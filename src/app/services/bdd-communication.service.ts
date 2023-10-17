@@ -304,7 +304,7 @@ updateOrdreFormationInformations(idFormationOrdre, data, participant, startTMP, 
 }
 
 
-addFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId? : number){
+addFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, isHeFormator?: boolean, formationId? : number){
   // Create a new post reference with an auto-generated id
 const db = getDatabase();
 const lawyerListRef = ref(db, 'formation/' + id);
@@ -317,14 +317,15 @@ set(formation, {
   end: endDay,
   numOfDay: numOfDay,
   numOfHours: numOfHours,
-  numOfGroupHours: numOfGroupHours
+  numOfGroupHours: numOfGroupHours,
+  isHeFormator: isHeFormator
 });
 
 return formation.key
 
 }
 
-updateFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId : number){
+updateFormationBdd(id, formationLabel, formationType, startDay, endDay, numOfDay, numOfHours: number, numOfGroupHours:number, formationId : number, isHeFormator?: boolean){
   // Create a new post reference with an auto-generated id
 const db = getDatabase();
 
@@ -337,7 +338,8 @@ update(formation, {
   end: endDay,
   numOfDay: numOfDay,
   numOfHours: numOfHours,
-  numOfGroupHours: numOfGroupHours
+  numOfGroupHours: numOfGroupHours,
+  isHeFormator: isHeFormator
 });
 
 return
@@ -486,9 +488,20 @@ getFormationHours(formationList)
 {
   let nbrHoursTmp: number;
   nbrHoursTmp = 0;
+  let formatorTable = [];
 
   for (let i = 0; i < formationList.length; i++) {
-    nbrHoursTmp = nbrHoursTmp + + formationList[i].value.numOfHours;
+    if(formationList[i].value.isHeFormator)
+    {
+      let nbrFormatorHours = formationList[i].value.numOfHours * 4
+
+      nbrHoursTmp = nbrHoursTmp + + nbrFormatorHours;
+
+    }
+    else
+    {
+      nbrHoursTmp = nbrHoursTmp + + formationList[i].value.numOfHours;
+    }
   }
 
   return nbrHoursTmp

@@ -23,6 +23,7 @@ export class DialogInformationLawyerComponent {
     'date',
     'nbrHours',
     'nbrHoursGroup',
+    'isHeFormator',
     'trash',
     'update',
     'total',
@@ -89,7 +90,8 @@ export class DialogInformationLawyerComponent {
         0,
         element.value.numOfHours ? element.value.numOfHours : 0,
         element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
-        element.type
+        element.type,
+        element.value.isHeFormator
     )
   }
 
@@ -111,7 +113,8 @@ export class DialogInformationLawyerComponent {
       0,
       this.data.numOfHours ? this.data.numOfHours : 0,
       this.data.numOfGroupHours ? this.data.numOfGroupHours : 0,
-      this.data.formation?.id
+      this.data.isHeFormator,
+      this.data.formation?.id,
     );
   }
 

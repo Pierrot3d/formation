@@ -146,13 +146,32 @@
           <input matInput type="number" [(ngModel)]="element.value.numOfGroupHours">
         </mat-form-field>
       </div>
-    </mat-cell>    <mat-footer-cell *matFooterCellDef>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures groupe</mat-label>
         <input matInput type="number" [(ngModel)]="data.numOfGroupHours">
       </mat-form-field>
     </mat-footer-cell>
   </ng-container>
+
+  <ng-container matColumnDef="isHeFormator">
+    <mat-header-cell *matHeaderCellDef> Formation dispensée ?</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div *ngIf="!element.value.modifyMode">
+        <mat-icon *ngIf="element.value.isHeFormator" class="trash" style="color: green;"> check_circle </mat-icon>
+      </div>
+      <div *ngIf="element.value.modifyMode">
+      <mat-checkbox [(ngModel)]="element.value.isHeFormator"></mat-checkbox>
+    </div>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      <mat-cell>
+        <mat-checkbox [(ngModel)]="data.isHeFormator"></mat-checkbox>
+      </mat-cell>
+    </mat-footer-cell>
+  </ng-container>
+
 
   <ng-container matColumnDef="trash">
     <mat-header-cell *matHeaderCellDef> Supprimer</mat-header-cell>

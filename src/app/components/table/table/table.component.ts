@@ -31,6 +31,7 @@ export interface DialogData {
   formationLabel: string;
   numOfHours: number;
   numOfGroupHours: number;
+  isHeFormator: boolean;
 }
 
 @Component({
