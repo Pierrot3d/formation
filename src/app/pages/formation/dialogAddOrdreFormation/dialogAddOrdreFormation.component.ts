@@ -27,6 +27,8 @@ export class DialogAddOrdreFormationComponent {
   lawyer = [];
 
   @ViewChild('lawyerInput') lawyerInput: ElementRef<HTMLInputElement>;
+  @ViewChild('chipList') chipList;
+
   dataSource: any;
 
   range = new FormGroup({
@@ -85,19 +87,26 @@ export class DialogAddOrdreFormationComponent {
     return jour + '/' + mois + '/' + annee;
   }
 
-  add(event: MatChipInputEvent): void {
+  /*   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-
+    console.log("c'est add")
     // Add our fruit
     if (value) {
+      console.log(value)
       this.lawyer.push(value);
-    }
-
-    // Clear the input value
+      console.log(this.lawyer)
+          // Clear the input value
     event.chipInput!.clear();
 
     this.lawyerCtrl.setValue(null);
-  }
+    }
+    else
+    {
+      this.chipList.errorState = true;
+    }
+
+
+  } */
 
   remove(fruit: string): void {
     const index = this.lawyer.indexOf(fruit);
@@ -108,10 +117,18 @@ export class DialogAddOrdreFormationComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.lawyer.push(event.option.value);
-    this.lawyerInput.nativeElement.value = '';
-    this.lawyerCtrl.setValue(null);
-  }
+
+      this.lawyer.push(event.option.value);
+      this.lawyerInput.nativeElement.value = '';
+      this.lawyerCtrl.setValue(null);
+      for(let i = 0; i < this.$lawyerList.length;  i++)
+      {
+        if(this.$lawyerList[i].type === event.option.value.type)
+        {
+          this.$lawyerList.splice(i, 1);
+        }
+      }
+    }
 
   private _filter(value: string): string[] {
     const filterValue = value;

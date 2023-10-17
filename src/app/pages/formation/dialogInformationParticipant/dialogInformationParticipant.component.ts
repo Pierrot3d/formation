@@ -71,6 +71,7 @@ export class DialogInformationParticipantComponent {
       this.dataTable.push(elmnt);
     }
 
+
     this.lawyer = this.dataTable;
   }
 
@@ -123,7 +124,17 @@ export class DialogInformationParticipantComponent {
 
     this.lawyerInput.nativeElement.value = '';
     this.lawyerCtrl.setValue(null);
+
+    for(let i = 0; i < this.$lawyerList.length;  i++)
+    {
+      if(this.$lawyerList[i].type === event.option.value.type)
+      {
+        this.$lawyerList.splice(i, 1);
+      }
+    }
   }
+
+
 
   formationId = [];
   updateGlobalFormation() {

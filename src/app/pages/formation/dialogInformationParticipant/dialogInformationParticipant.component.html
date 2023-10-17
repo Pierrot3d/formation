@@ -86,9 +86,11 @@
       </button>
     </mat-chip-row> -->
     </mat-chip-grid>
+        <!-- ajouter : (matChipInputTokenEnd)="add($event)" dans le input ci-dessous pour remettre en fonction add
+  -->
     <input placeholder="Ajouter un participant ..." #lawyerInput [formControl]="lawyerCtrl" [matChipInputFor]="chipGrid"
       [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="add($event)" />
+      />
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
       <mat-option *ngFor="let participant of filteredLawyers | async" [value]="participant">
         {{participant.value.nom}} {{participant.value.prenom}}
