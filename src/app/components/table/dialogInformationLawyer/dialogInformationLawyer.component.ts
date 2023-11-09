@@ -220,7 +220,7 @@ buildTableBody(data, columns) {
 
 getDocument(formationName, column)
 {
-
+  console.log(this.data)
   const logo = this.contentService.logoBase64
 
   const docDefinition =
@@ -257,7 +257,7 @@ getDocument(formationName, column)
         heights: 40,
 				body: [
           ['OBLIGATION', 'Heures'],
-          ['Obligation horaire', '20'],
+          ['Obligation horaire', this.data.mandatoryHours],
           ['Ajustement d’obligation horaire : ', ' '],
           [{text: 'Motif : ', colSpan: 2}],
           ['Obligation suite à ajustement : ', ' ']
@@ -306,10 +306,10 @@ getDocument(formationName, column)
         widths: ['*', 'auto'],
         heights: 40,
 				body: [
-          ['Report issu de l’exercice précédent :', ''],
+          ['Report issu de l’exercice précédent :', this.data.nbrReport],
           ['Report issu de l’exercice suivant :', ''],
           ['Déficit d\'heures :', ' '],
-          ['Total général :', ' '],
+          ['Total général :', this.data.nbr],
           ['Obligation :', '']
         ]
 			}
