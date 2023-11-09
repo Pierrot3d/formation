@@ -14,7 +14,7 @@ import { FormationService } from 'src/app/services/formation.service';
 import { DialogOrdreFormationData } from '../formation/formation.component';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl,Validators,  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, map, startWith, catchError } from 'rxjs';
 
 @Component({
@@ -26,7 +26,9 @@ import { Observable, map, startWith, catchError } from 'rxjs';
 export class DialogInformationParticipantComponent {
   OrdreFormation$;
 
-  displayedColumns: string[] = ['participant', 'trash'];
+  //displayedColumns: string[] = ['participant', 'trash'];
+  displayedColumns: string[] = ['participant'];
+
   dataSource;
   db;
 
@@ -38,7 +40,7 @@ export class DialogInformationParticipantComponent {
 
   $lawyerList;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  lawyerCtrl = new FormControl('');
+  lawyerCtrl = new FormControl('', [Validators.required]);
   filteredLawyers: Observable<any>;
   lawyer = [];
 
@@ -142,7 +144,7 @@ export class DialogInformationParticipantComponent {
 
     let datasTmp = ""
     // eslint-disable-next-line prefer-const
-    for(let datas of this.data.participant)
+     for(let datas of this.data.participant)
     {
       console.log(datas)
       if(datas.type == datasTmp)
@@ -183,6 +185,7 @@ export class DialogInformationParticipantComponent {
         )
       : [];
   }
+
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -7,7 +7,7 @@
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Nom de la formation</mat-label>
-    <input matInput [(ngModel)]="data.formationName">
+    <input matInput required [(ngModel)]="data.formationName">
   </mat-form-field>
 </p>
 <p matColumnDef="date">
@@ -28,13 +28,13 @@
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Lieu</mat-label>
-    <input matInput [(ngModel)]="data.lieu">
+    <input matInput required [(ngModel)]="data.lieu">
   </mat-form-field>
 </p>
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Durée</mat-label>
-    <input type="number" matInput [(ngModel)]="data.duration">
+    <input type="number" matInput required [(ngModel)]="data.duration">
   </mat-form-field>
 </p>
 <p>
@@ -84,7 +84,16 @@
       </button>
     </mat-chip-row>
 </p>
+<p style="margin-top: 1.4em;">
+  <ng-container *ngIf="!this.data.lieu || !this.data.formationName || !this.data.duration" mat-dialog-actions>
+    <button mat-raised-button disabled>Ajouter la formation</button>
+  </ng-container>
+  <ng-container *ngIf="this.data.lieu && this.data.formationName && this.data.duration" mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="addGlobalFormation()" [mat-dialog-close]="data"
+      cdkFocusInitial>Mettre à jour la formation</button>
+  </ng-container>
+</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="addGlobalFormation()">Ok</button>
-</div>
+
+
+

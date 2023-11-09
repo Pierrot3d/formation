@@ -91,7 +91,7 @@ export class DialogInformationLawyerComponent {
         element.value.numOfHours ? element.value.numOfHours : 0,
         element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
         element.type,
-        element.value.isHeFormator
+        element.value.isHeFormator ? element.value.isHeFormator : false
     )
   }
 
@@ -113,7 +113,7 @@ export class DialogInformationLawyerComponent {
       0,
       this.data.numOfHours ? this.data.numOfHours : 0,
       this.data.numOfGroupHours ? this.data.numOfGroupHours : 0,
-      this.data.isHeFormator,
+      this.data.isHeFormator ? this.data.isHeFormator : false,
       this.data.formation?.id,
     );
   }

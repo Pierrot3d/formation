@@ -269,7 +269,7 @@ updateOrdreFormationParticipant(idFormationOrdre, data, lawyer, oldFormationId, 
 
   this.addOrdreFormationToParticipant(data, lawyer, formationId, startTMP, endTMP)
 
-
+console.log("jenvoie à bdd :", lawyer)
 const formation = ref(db, "formationOrdre/" + idFormationOrdre)
 update(formation, {
     formationName: data.formationName,
@@ -318,7 +318,7 @@ set(formation, {
   numOfDay: numOfDay,
   numOfHours: numOfHours,
   numOfGroupHours: numOfGroupHours,
-  isHeFormator: isHeFormator
+  isHeFormator: isHeFormator? isHeFormator : false
 });
 
 return formation.key
