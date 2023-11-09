@@ -237,9 +237,19 @@ getDocument(formationName, column)
       style: 'header'
     },
     {
+      text: 'Relevé d’information continu « année »',
+      margin: [ 0, 20, 0, 10 ],
+      style: 't1'
+    },
+    {
       text: name,
       margin: [ 0, 10, 0, 10 ],
       style: 'formation'
+    },
+    {
+      text: 'Avocat : ' + this.data.nom + ' ' + this.data.prenom,
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
     },
     {
 			table: {
@@ -248,7 +258,9 @@ getDocument(formationName, column)
 				body: [
           ['OBLIGATION', 'Heures'],
           ['Obligation horaire', '20'],
-          ['Obligation suite à ajustement: Motif: ', ' ']
+          ['Ajustement d’obligation horaire : ', ' '],
+          [{text: 'Motif : ', colSpan: 2}],
+          ['Obligation suite à ajustement : ', ' ']
         ]
 			},
       layout: {
@@ -258,7 +270,7 @@ getDocument(formationName, column)
 			}
 		},
     {
-      text: 'Avocat : ' + this.data.nom + ' ' + this.data.prenom,
+      text: 'Formations reçues',
       margin: [ 0, 10, 0, 10 ],
       style: 't1'
     },
@@ -272,6 +284,34 @@ getDocument(formationName, column)
 				fillColor: function (rowIndex, node, columnIndex) {
 					return (rowIndex === 0) ? '#CCCCCC' : null;
 				}
+			}
+		},
+    {
+      text: 'Formations dispensées',
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
+    },
+    {
+      text: 'Publications',
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
+    },
+    {
+      text: 'Récapitulatif',
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
+    },
+    {
+			table: {
+        widths: ['*', 'auto'],
+        heights: 40,
+				body: [
+          ['Report issu de l’exercice précédent :', ''],
+          ['Report issu de l’exercice suivant :', ''],
+          ['Déficit d\'heures :', ' '],
+          ['Total général :', ' '],
+          ['Obligation :', '']
+        ]
 			}
 		},
 
