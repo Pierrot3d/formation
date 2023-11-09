@@ -103,6 +103,7 @@ export class DialogInformationParticipantComponent {
   }
 
   removeOrdreFormation(element) {
+    console.log(this.deletedLawyers)
     for (const participant of element) {
       for (const formationId of this.data.individualFormationId)
         this.bddCommunicationService.removeFormation(
@@ -110,6 +111,14 @@ export class DialogInformationParticipantComponent {
           formationId
         );
     }
+    for (const participant of this.deletedLawyers) {
+      for (const formationId of this.data.individualFormationId)
+        this.bddCommunicationService.removeFormation(
+          participant.type,
+          formationId
+        );
+    }
+
     this.bddCommunicationService.removeOrdreFormation(element.type);
   }
 
@@ -142,9 +151,9 @@ export class DialogInformationParticipantComponent {
   updateGlobalFormation() {
     this.removeOrdreFormation(this.lawyer);
 
-    let datasTmp = ""
+    //let datasTmp = ""
     // eslint-disable-next-line prefer-const
-     for(let datas of this.data.participant)
+/*      for(let datas of this.data.participant)
     {
       console.log(datas)
       if(datas.type == datasTmp)
@@ -156,7 +165,7 @@ export class DialogInformationParticipantComponent {
         datasTmp = datas.type;
         return
       }
-    }
+    } */
 
     this.bddCommunicationService.updateOrdreFormationParticipant(
       this.data.id,
