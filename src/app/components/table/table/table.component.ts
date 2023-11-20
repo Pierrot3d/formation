@@ -34,6 +34,8 @@ export interface DialogData {
   numOfHours: number;
   numOfGroupHours: number;
   isHeFormator: boolean;
+  nbrAdjustHour: number;
+  motifAdjustHour: string;
 }
 
 @Component({
@@ -180,11 +182,12 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     });
   }
 
-  openInformationDialog(id, nom, prenom, email, group, formation, formationType, formationLabel, mandatoryHours, nbr, nbrReport): void {
+  openInformationDialog(id, nom, prenom, email, group, formation, formationType, formationLabel, mandatoryHours, nbr, nbrReport, nbrAdjustHour,
+    motifAdjustHour): void {
     const dialogRef = this.dialog.open(DialogInformationLawyerComponent, {
       height: "80vh",
       width: "80vw",
-      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationType:formationType, formationLabel: formationLabel, mandatoryHours: mandatoryHours, nbr: nbr, nbrReport: nbrReport},
+      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationType:formationType, formationLabel: formationLabel, mandatoryHours: mandatoryHours, nbr: nbr, nbrReport: nbrReport, nbrAdjustHour: nbrAdjustHour, motifAdjustHour: motifAdjustHour},
     });
 
     dialogRef.afterClosed().subscribe(result => {

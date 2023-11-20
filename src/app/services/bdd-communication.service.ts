@@ -346,6 +346,14 @@ return
 
 }
 
+updateAdjustementHour(id, nbrAdjustHour, motifAdjustHour){
+  const db = getDatabase();
+  update(ref(db, "avocats/" + id), {
+    nbrAdjustHour: nbrAdjustHour,
+    motifAdjustHour: motifAdjustHour,
+  })
+}
+
 
 
 updateNbrDay(id, nbrDay)

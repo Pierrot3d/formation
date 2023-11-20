@@ -1,36 +1,78 @@
-<div mat-dialog-actions style="justify-content: right;">
-  <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
+<div style="text-align: center">
+  <div mat-dialog-actions style="justify-content: right">
+    <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
+  </div>
+  <h1 mat-dialog-title>Fiche de Me {{ data.formationLabel }} {{ data.nom }}</h1>
+
+  <div>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="generatePdf(this.formationList$)"
+    >
+      <mat-icon>description</mat-icon>
+    </button>
+  </div>
+  <div style="margin-bottom: 1vh">
+    <button
+      *ngIf="!this.ajustHourMode"
+      mat-raised-button
+      color="primary"
+      (click)="ajustFn()"
+    >
+      Ajustement horaire
+    </button>
+    <ng-container *ngIf="this.ajustHourMode">
+      <div>
+        <mat-form-field style="margin-bottom: 1vh">
+          <mat-label>nombre d'heure</mat-label>
+          <input matInput type="number" value="{{this.data.nbrAdjustHour}}" [(ngModel)]="adjustHourTable.nbrAdjustHour"/>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="margin-bottom: 1vh">
+          <mat-label>Motif</mat-label>
+          <textarea matInput [(ngModel)]="adjustHourTable.motifAdjustHour"></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <button
+        style="margin-bottom: 1vh"
+        mat-raised-button
+        color="primary"
+        (click)="saveAjustFn(adjustHourTable.nbrAdjustHour, adjustHourTable.motifAdjustHour)"
+      >
+        Enregistrer l'ajustement
+      </button>
+      </div>
+    </ng-container>
+  </div>
 </div>
-<h1 mat-dialog-title>Fiche de Me {{data.formationLabel}} {{data.nom}}</h1>
-
-
-<button mat-icon-button color="primary" (click)="generatePdf(this.formationList$)">
-  <mat-icon>description</mat-icon>
-</button>
-
-<mat-table mat-table [dataSource]="this.formationList$" class="mat-elevation-z8">
-
-
+<mat-table
+  mat-table
+  [dataSource]="this.formationList$"
+  class="mat-elevation-z8"
+>
   <!-- Name Column -->
   <ng-container matColumnDef="formation">
     <mat-header-cell *matHeaderCellDef> Formation </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <div *ngIf="!element.value.modifyMode">
-        {{element.value.formationLabel}}
+        {{ element.value.formationLabel }}
       </div>
       <div *ngIf="element.value.modifyMode">
         <mat-form-field appearance="fill">
           <mat-label>
-            {{element.value.formationLabel}}
+            {{ element.value.formationLabel }}
           </mat-label>
-          <input matInput [(ngModel)]="element.value.formationLabel">
+          <input matInput [(ngModel)]="element.value.formationLabel" />
         </mat-form-field>
       </div>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Formation</mat-label>
-        <input matInput [(ngModel)]="data.formationLabel">
+        <input matInput [(ngModel)]="data.formationLabel" />
       </mat-form-field>
     </mat-footer-cell>
   </ng-container>
@@ -39,15 +81,23 @@
   <ng-container matColumnDef="type">
     <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <div *ngIf="!element.value.modifyMode">{{element.value.formationType}} </div>
+      <div *ngIf="!element.value.modifyMode">
+        {{ element.value.formationType }}
+      </div>
       <div *ngIf="element.value.modifyMode">
         <mat-form-field appearance="fill">
           <mat-label>Groupe</mat-label>
-          <mat-select matInput [(ngModel)]="element.value.formationType" multiple>
+          <mat-select
+            matInput
+            [(ngModel)]="element.value.formationType"
+            multiple
+          >
             <mat-option value="Mineurs">Mineurs</mat-option>
             <mat-option value="Pénal">Pénal</mat-option>
             <mat-option value="JLD-HO">JLD-HO</mat-option>
-            <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
+            <mat-option value="Droit des étrangers"
+              >Droit des étrangers</mat-option
+            >
             <mat-option value="Déontologie">Déontologie</mat-option>
             <mat-option value="Spécialisation">Spécialisation</mat-option>
           </mat-select>
@@ -62,7 +112,9 @@
             <mat-option value="Mineurs">Mineurs</mat-option>
             <mat-option value="Pénal">Pénal</mat-option>
             <mat-option value="JLD-HO">JLD-HO</mat-option>
-            <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
+            <mat-option value="Droit des étrangers"
+              >Droit des étrangers</mat-option
+            >
             <mat-option value="Déontologie">Déontologie</mat-option>
             <mat-option value="Spécialisation">Spécialisation</mat-option>
           </mat-select>
@@ -75,24 +127,32 @@
   <ng-container matColumnDef="date">
     <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
     <mat-cell *matCellDef="let element">
-    <div>
-      {{element.value.start}} - {{element.value.end}}
-    </div>
-  </mat-cell>
+      <div>{{ element.value.start }} - {{ element.value.end }}</div>
+    </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Entrez les dates</mat-label>
         <mat-date-range-input [formGroup]="this.range" [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Start date">
-          <input matEndDate formControlName="end" placeholder="End date">
+          <input
+            matStartDate
+            formControlName="start"
+            placeholder="Start date"
+          />
+          <input matEndDate formControlName="end" placeholder="End date" />
         </mat-date-range-input>
         <mat-hint>JJ/MM/AAAA – JJ/MM/AAAA</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
 
-        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">La date de départ est
-          invalide</mat-error>
-        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">La date de fin est invalide</mat-error>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+          >La date de départ est invalide</mat-error
+        >
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+          >La date de fin est invalide</mat-error
+        >
       </mat-form-field>
       <!-- <p>Selected range: {{range.value | json}}</p> -->
     </mat-footer-cell>
@@ -101,56 +161,76 @@
   <!--   <!-- Symbol Column -->
   <ng-container matColumnDef="nbrDay">
     <mat-header-cell *matHeaderCellDef> Nombre de jours </mat-header-cell>
-    <mat-cell *matCellDef="let element">  {{element.value.numOfDay}} </mat-cell>
+    <mat-cell *matCellDef="let element">
+       {{ element.value.numOfDay }}
+    </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
-        <mat-label *ngIf="!range.value.start && !range.value.end"> Nombre de jour</mat-label>
+        <mat-label *ngIf="!range.value.start && !range.value.end">
+          Nombre de jour</mat-label
+        >
         <ng-container *ngIf="range.value.start && range.value.end">
-          {{this.getBusinessDatesCount(this.range.value.start,this.range.value.end)}}
+          {{
+            this.getBusinessDatesCount(
+              this.range.value.start,
+              this.range.value.end
+            )
+          }}
         </ng-container>
-        <input matInput>
+        <input matInput />
       </mat-form-field>
     </mat-footer-cell>
-  </ng-container> -->
+  </ng-container>
+  -->
 
   <ng-container matColumnDef="nbrHours">
     <mat-header-cell *matHeaderCellDef> Nombre d'heures </mat-header-cell>
-    <mat-cell *matCellDef="let element">  
-    <div *ngIf="!element.value.modifyMode">
-      {{element.value.numOfHours}}
-    </div>
-    <div *ngIf="element.value.modifyMode">
-      <mat-form-field appearance="fill">
-        <mat-label>{{element.value.numOfHours}}</mat-label>
-        <input matInput type="number" [(ngModel)]="element.value.numOfHours">
-      </mat-form-field>
-    </div>
-  </mat-cell>
+    <mat-cell *matCellDef="let element">
+       
+      <div *ngIf="!element.value.modifyMode">
+        {{ element.value.numOfHours }}
+      </div>
+      <div *ngIf="element.value.modifyMode">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ element.value.numOfHours }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="element.value.numOfHours"
+          />
+        </mat-form-field>
+      </div>
+    </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures</mat-label>
-        <input matInput type="number" [(ngModel)]="data.numOfHours">
+        <input matInput type="number" [(ngModel)]="data.numOfHours" />
       </mat-form-field>
     </mat-footer-cell>
   </ng-container>
 
   <ng-container matColumnDef="nbrHoursGroup">
     <mat-header-cell *matHeaderCellDef> Nombre d'heures groupe</mat-header-cell>
-    <mat-cell *matCellDef="let element">  
+    <mat-cell *matCellDef="let element">
+       
       <div *ngIf="!element.value.modifyMode">
-        {{element.value.numOfGroupHours}}
+        {{ element.value.numOfGroupHours }}
       </div>
       <div *ngIf="element.value.modifyMode">
         <mat-form-field appearance="fill">
-          <mat-label>{{element.value.numOfGroupHours}}</mat-label>
-          <input matInput type="number" [(ngModel)]="element.value.numOfGroupHours">
+          <mat-label>{{ element.value.numOfGroupHours }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="element.value.numOfGroupHours"
+          />
         </mat-form-field>
       </div>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-form-field appearance="fill">
         <mat-label>Nombre d'heures groupe</mat-label>
-        <input matInput type="number" [(ngModel)]="data.numOfGroupHours">
+        <input matInput type="number" [(ngModel)]="data.numOfGroupHours" />
       </mat-form-field>
     </mat-footer-cell>
   </ng-container>
@@ -159,11 +239,17 @@
     <mat-header-cell *matHeaderCellDef> Formation dispensée ?</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <div *ngIf="!element.value.modifyMode">
-        <mat-icon *ngIf="element.value.isHeFormator" class="trash" style="color: green;"> check_circle </mat-icon>
+        <mat-icon
+          *ngIf="element.value.isHeFormator"
+          class="trash"
+          style="color: green"
+        >
+          check_circle
+        </mat-icon>
       </div>
       <div *ngIf="element.value.modifyMode">
-      <mat-checkbox [(ngModel)]="element.value.isHeFormator"></mat-checkbox>
-    </div>
+        <mat-checkbox [(ngModel)]="element.value.isHeFormator"></mat-checkbox>
+      </div>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <mat-cell>
@@ -172,45 +258,71 @@
     </mat-footer-cell>
   </ng-container>
 
-
   <ng-container matColumnDef="trash">
     <mat-header-cell *matHeaderCellDef> Supprimer</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon *ngIf="!element.value.modifyMode" class="trash" (click)="this.removeFormation(this.data.id, element.type)"> delete </mat-icon>
+      <mat-icon
+        *ngIf="!element.value.modifyMode"
+        class="trash"
+        (click)="this.removeFormation(this.data.id, element.type)"
+      >
+        delete
+      </mat-icon>
     </mat-cell>
-    <mat-footer-cell *matFooterCellDef>
-    </mat-footer-cell>
+    <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
   </ng-container>
 
   <ng-container matColumnDef="update">
     <mat-header-cell *matHeaderCellDef> Modifier</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon *ngIf="!element.value.modifyMode" class="trash" (click)="this.modifyModeFn(element)"> create </mat-icon>
-      <mat-icon *ngIf="element.value.modifyMode" class="trash" (click)="this.modified(element)"> check </mat-icon>
+      <mat-icon
+        *ngIf="!element.value.modifyMode"
+        class="trash"
+        (click)="this.modifyModeFn(element)"
+      >
+        create
+      </mat-icon>
+      <mat-icon
+        *ngIf="element.value.modifyMode"
+        class="trash"
+        (click)="this.modified(element)"
+      >
+        check
+      </mat-icon>
     </mat-cell>
-    <mat-footer-cell *matFooterCellDef>
-    </mat-footer-cell>
+    <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
   </ng-container>
-
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element"></mat-cell>
     <mat-footer-cell *matFooterCellDef center align="center">
-      <button mat-raised-button color="primary"
-        (click)="addFormation(this.range.value.start,this.range.value.end)">Ajouter <mat-icon>add</mat-icon>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addFormation(this.range.value.start, this.range.value.end)"
+      >
+        Ajouter <mat-icon>add</mat-icon>
       </button>
     </mat-footer-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
-
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-footer-row
+    *matFooterRowDef="displayedColumns; sticky: true"
+  ></mat-footer-row>
 </mat-table>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial
-    (click)="sendNewHours()">Valider</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    (click)="sendNewHours()"
+  >
+    Valider
+  </button>
 </div>

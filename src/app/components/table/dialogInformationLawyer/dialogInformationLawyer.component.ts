@@ -34,6 +34,12 @@ export class DialogInformationLawyerComponent {
   sortedData;
   dataSource;
   modifyMode: boolean;
+  ajustHourMode = false;
+  adjustHourTable = {
+    nbrAdjustHour : "",
+    motifAdjustHour: ""
+  }
+
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -176,7 +182,19 @@ export class DialogInformationLawyerComponent {
     this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp); */
   }
 
+  ajustFn()
+  {
+    this.ajustHourMode = !this.ajustHourMode
+    console.log("Ajustement")
+  }
 
+  saveAjustFn(nbrAdjustHour, motifAdjustHour)
+  {
+    this.ajustHourMode = !this.ajustHourMode
+
+    this.bddCommunicationService.updateAdjustementHour(this.data.id, nbrAdjustHour, motifAdjustHour )
+    console.log("Ajustement")
+  }
 
  generatePdf(formationsList)
 {
