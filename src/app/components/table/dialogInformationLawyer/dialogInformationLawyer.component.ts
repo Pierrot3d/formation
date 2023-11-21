@@ -255,7 +255,7 @@ getDocument(formationName, column)
       style: 'header'
     },
     {
-      text: 'Relevé d’information continu ' + (new Date()).getFullYear(),
+      text: 'Relevé de formation continue ' + (new Date()).getFullYear(),
       margin: [ 0, 20, 0, 10 ],
       style: 't1'
     },
@@ -277,7 +277,7 @@ getDocument(formationName, column)
           ['OBLIGATION', 'Heures'],
           ['Obligation horaire', this.data.mandatoryHours],
           ['Ajustement d’obligation horaire : ', this.data.nbrAdjustHour? this.data.nbrAdjustHour: ''],
-          [{text: 'Motif : ' + ' ' + this.data.motifAdjustHour? 'Motif : ' + this.data.motifAdjustHour : '', colSpan: 2}],
+          [{text: this.data.motifAdjustHour? 'Motif : ' + this.data.motifAdjustHour : 'Motif : ', colSpan: 2}],
           ['Obligation suite à ajustement : ', this.data.nbrAdjustHour? this.data.mandatoryHours - this.data.nbrAdjustHour: '']
         ]
 			},
@@ -310,10 +310,38 @@ getDocument(formationName, column)
       style: 't1'
     },
     {
+			table: {
+        widths: ['*', '*', '*'],
+        heights: 40,
+				body: [
+          [' ', ' ', ' '],
+        ]
+			},
+      layout: {
+				fillColor: function (rowIndex, node, columnIndex) {
+					return (rowIndex === 0) ? '#CCCCCC' : null;
+				}
+			}
+		},
+    {
       text: 'Publications',
       margin: [ 0, 10, 0, 10 ],
       style: 't1'
     },
+    {
+			table: {
+        widths: ['*', '*', '*'],
+        heights: 40,
+				body: [
+          [' ', ' ', ' '],
+        ]
+			},
+      layout: {
+				fillColor: function (rowIndex, node, columnIndex) {
+					return (rowIndex === 0) ? '#CCCCCC' : null;
+				}
+			}
+		},
     {
       text: 'Récapitulatif',
       margin: [ 0, 10, 0, 10 ],
@@ -325,10 +353,9 @@ getDocument(formationName, column)
         heights: 40,
 				body: [
           ['Report issu de l’exercice précédent :', this.data.nbrReport? this.data.nbrReport : ''],
-          ['Report issu de l’exercice suivant :', ''],
+          ['Report sur l’exercice suivant :', ''],
           ['Déficit d\'heures :', ' '],
-          ['Total général :', this.data.nbr],
-          ['Obligation :', '']
+          ['Total général :', this.data.nbr]
         ]
 			}
 		},
