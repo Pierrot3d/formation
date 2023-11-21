@@ -76,6 +76,8 @@ export class DialogInformationLawyerComponent {
         this.formationList$ = [];
       }
     });
+
+
   }
 
   modifyModeFn(element)
@@ -185,7 +187,6 @@ export class DialogInformationLawyerComponent {
   ajustFn()
   {
     this.ajustHourMode = !this.ajustHourMode
-    console.log("Ajustement")
   }
 
   saveAjustFn(nbrAdjustHour, motifAdjustHour)
@@ -193,7 +194,6 @@ export class DialogInformationLawyerComponent {
     this.ajustHourMode = !this.ajustHourMode
 
     this.bddCommunicationService.updateAdjustementHour(this.data.id, nbrAdjustHour, motifAdjustHour )
-    console.log("Ajustement")
   }
 
  generatePdf(formationsList)
@@ -255,7 +255,7 @@ getDocument(formationName, column)
       style: 'header'
     },
     {
-      text: 'Relevé d’information continu « année »',
+      text: 'Relevé d’information continu ' + (new Date()).getFullYear(),
       margin: [ 0, 20, 0, 10 ],
       style: 't1'
     },
@@ -276,9 +276,9 @@ getDocument(formationName, column)
 				body: [
           ['OBLIGATION', 'Heures'],
           ['Obligation horaire', this.data.mandatoryHours],
-          ['Ajustement d’obligation horaire : ', ' '],
-          [{text: 'Motif : ', colSpan: 2}],
-          ['Obligation suite à ajustement : ', ' ']
+          ['Ajustement d’obligation horaire : ', this.data.nbrAdjustHour? this.data.nbrAdjustHour: ''],
+          [{text: 'Motif : ' + ' ' + this.data.motifAdjustHour? 'Motif : ' + this.data.motifAdjustHour : '', colSpan: 2}],
+          ['Obligation suite à ajustement : ', this.data.nbrAdjustHour? this.data.mandatoryHours - this.data.nbrAdjustHour: '']
         ]
 			},
       layout: {
