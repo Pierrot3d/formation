@@ -324,7 +324,7 @@ getDocument(formationName, column)
         widths: ['*', 'auto'],
         heights: 40,
 				body: [
-          ['Report issu de l’exercice précédent :', this.data.nbrReport],
+          ['Report issu de l’exercice précédent :', this.data.nbrReport? this.data.nbrReport : ''],
           ['Report issu de l’exercice suivant :', ''],
           ['Déficit d\'heures :', ' '],
           ['Total général :', this.data.nbr],
