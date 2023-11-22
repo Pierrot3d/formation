@@ -76,14 +76,18 @@ export class DialogInformationLawyerComponent {
       }
     });
 
-    if (this.data.reportableHours == this.data.nbr - this.data.mandatoryHours) {
-      //console.log('')
-    } else {
-      this.bddCommunicationService.updateReportableHours(
-        this.data.id,
-        this.data.nbr - this.data.mandatoryHours
-      );
+    if(this.data.reportableHours)
+    {
+      if (!(this.data.reportableHours == this.data.nbr - this.data.mandatoryHours)) {
+        this.bddCommunicationService.updateReportableHours(
+          this.data.id,
+          this.data.nbr - this.data.mandatoryHours
+        );
+      } else {
+       // console.log('')
+      }
     }
+
   }
 
   modifyModeFn(element) {
@@ -107,7 +111,7 @@ export class DialogInformationLawyerComponent {
   }
 
   removeFormation(id, elemnt) {
-    console.log(id, elemnt);
+    //console.log(id, elemnt);
     this.bddCommunicationService.removeFormation(id, elemnt);
   }
 
@@ -173,7 +177,7 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
-    console.log(this.formationList$);
+    //console.log(this.formationList$);
     this.bddCommunicationService.sendNewHours(
       this.data.id,
       this.formationList$
@@ -219,7 +223,7 @@ export class DialogInformationLawyerComponent {
       lawyersNameTableTmp.push(lawyerTableTmp);
     }
 
-    console.log(lawyersNameTableTmp);
+    //console.log(lawyersNameTableTmp);
     lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) =>
       a.Nom > b.Nom ? 1 : -1
     );
@@ -245,14 +249,18 @@ export class DialogInformationLawyerComponent {
 
       body.push(dataRow);
     });
-    console.log(body);
+    //console.log(body);
 
     return body;
   }
 
   getDocument(formationName, column) {
-    console.log(this.data);
     const logo = this.contentService.logoBase64;
+    let mandatoryhoursAdjust: number;
+    if(this.data.nbrAdjustHour)
+    {
+      mandatoryhoursAdjust = this.data.mandatoryHours - this.data.nbrAdjustHour
+    }
 
     const docDefinition = {
       content: [
@@ -379,13 +387,15 @@ export class DialogInformationLawyerComponent {
                 this.data.nbrReport ? this.data.nbrReport : '',
               ],
               ['Report sur l’exercice suivant :', this.data.reportableHours > 0 ? this.data.reportableHours : ''],
-              ["Déficit d'heures :", this.data.reportableHours < 0 ? this.data.reportableHours : ''],
+              ["Déficit d'heures :", mandatoryhoursAdjust? (this.data.nbr - mandatoryhoursAdjust < 0 ? this.data.nbr - mandatoryhoursAdjust : '') : (this.data.reportableHours < 0 ? this.data.reportableHours : '')],
               ['Total général :', this.data.nbr],
               [
                 'Obligation : ',
-                this.data.nbr >= this.data.mandatoryHours
+                mandatoryhoursAdjust? (this.data.nbr >= mandatoryhoursAdjust
+                ? 'Satisfaite'
+                : 'Non satisfaite') : (this.data.nbr >= this.data.mandatoryHours
                   ? 'Satisfaite'
-                  : 'Non satisfaite',
+                  : 'Non satisfaite'),
               ],
             ],
           },
