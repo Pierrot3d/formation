@@ -36,10 +36,9 @@ export class DialogInformationLawyerComponent {
   modifyMode: boolean;
   ajustHourMode = false;
   adjustHourTable = {
-    nbrAdjustHour : "",
-    motifAdjustHour: ""
-  }
-
+    nbrAdjustHour: '',
+    motifAdjustHour: '',
+  };
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -77,30 +76,34 @@ export class DialogInformationLawyerComponent {
       }
     });
 
-
+    if (this.data.reportableHours == this.data.nbr - this.data.mandatoryHours) {
+      //console.log('')
+    } else {
+      this.bddCommunicationService.updateReportableHours(
+        this.data.id,
+        this.data.nbr - this.data.mandatoryHours
+      );
+    }
   }
 
-  modifyModeFn(element)
-  {
-    element.value.modifyMode = true
+  modifyModeFn(element) {
+    element.value.modifyMode = true;
   }
 
-  modified(element)
-  {
-
-    element.value.modifyMode = false
+  modified(element) {
+    element.value.modifyMode = false;
     this.bddCommunicationService.updateFormationBdd(
       this.data.id,
       element.value.formationLabel,
-      element.value.formationType? element.value.formationType : "",
+      element.value.formationType ? element.value.formationType : '',
       element.value.start,
       element.value.end,
-        0,
-        element.value.numOfHours ? element.value.numOfHours : 0,
-        element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
-        element.type,
-        element.value.isHeFormator ? element.value.isHeFormator : false
-    )
+      0,
+      element.value.numOfHours ? element.value.numOfHours : 0,
+      element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
+      element.type,
+      element.value.isHeFormator ? element.value.isHeFormator : false
+    );
   }
 
   removeFormation(id, elemnt) {
@@ -115,24 +118,24 @@ export class DialogInformationLawyerComponent {
     this.bddCommunicationService.addFormationBdd(
       this.data.id,
       this.data.formationLabel,
-      this.data.formationType? this.data.formationType : "",
+      this.data.formationType ? this.data.formationType : '',
       startTMP,
       endTMP,
       0,
       this.data.numOfHours ? this.data.numOfHours : 0,
       this.data.numOfGroupHours ? this.data.numOfGroupHours : 0,
       this.data.isHeFormator ? this.data.isHeFormator : false,
-      this.data.formation?.id,
+      this.data.formation?.id
     );
   }
 
   changeDateFormat(date) {
     const offset = date.getTimezoneOffset();
     date = new Date(date.getTime() - offset * 60 * 1000);
-    const jour = date.toISOString().split('T')[0].split('-')[2]
-    const mois = date.toISOString().split('T')[0].split('-')[1]
-    const annee = date.toISOString().split('T')[0].split('-')[0]
-    return jour + '/' + mois + '/'+ annee;
+    const jour = date.toISOString().split('T')[0].split('-')[2];
+    const mois = date.toISOString().split('T')[0].split('-')[1];
+    const annee = date.toISOString().split('T')[0].split('-')[0];
+    return jour + '/' + mois + '/' + annee;
   }
 
   nbrDeJours(d1?, d2?) {
@@ -170,10 +173,16 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
-    console.log(this.formationList$)
-    this.bddCommunicationService.sendNewHours(this.data.id, this.formationList$)
-    this.bddCommunicationService.sendNewGroupHours(this.data.id, this.formationList$)
-/*     let nbrHoursTmp: number;
+    console.log(this.formationList$);
+    this.bddCommunicationService.sendNewHours(
+      this.data.id,
+      this.formationList$
+    );
+    this.bddCommunicationService.sendNewGroupHours(
+      this.data.id,
+      this.formationList$
+    );
+    /*     let nbrHoursTmp: number;
     nbrHoursTmp = 0;
 
     for (let i = 0; i < this.formationList$.length; i++) {
@@ -184,209 +193,224 @@ export class DialogInformationLawyerComponent {
     this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp); */
   }
 
-  ajustFn()
-  {
-    this.ajustHourMode = !this.ajustHourMode
+  ajustFn() {
+    this.ajustHourMode = !this.ajustHourMode;
   }
 
-  saveAjustFn(nbrAdjustHour, motifAdjustHour)
-  {
-    this.ajustHourMode = !this.ajustHourMode
+  saveAjustFn(nbrAdjustHour, motifAdjustHour) {
+    this.ajustHourMode = !this.ajustHourMode;
 
-    this.bddCommunicationService.updateAdjustementHour(this.data.id, nbrAdjustHour, motifAdjustHour )
+    this.bddCommunicationService.updateAdjustementHour(
+      this.data.id,
+      nbrAdjustHour,
+      motifAdjustHour
+    );
   }
 
- generatePdf(formationsList)
-{
-let lawyersNameTableTmp = [];
-  for(const part of formationsList)
-  {
-    const lawyerTableTmp = {
-      Date: part.value.start,
-      Libellé: part.value.formationLabel,
-      Heures: part.value.numOfHours,
+  generatePdf(formationsList) {
+    let lawyersNameTableTmp = [];
+    for (const part of formationsList) {
+      const lawyerTableTmp = {
+        Date: part.value.start,
+        Libellé: part.value.formationLabel,
+        Heures: part.value.numOfHours,
+      };
+
+      lawyersNameTableTmp.push(lawyerTableTmp);
     }
 
-    lawyersNameTableTmp.push(lawyerTableTmp)
+    console.log(lawyersNameTableTmp);
+    lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) =>
+      a.Nom > b.Nom ? 1 : -1
+    );
+
+    const document = this.getDocument(lawyersNameTableTmp, [
+      'Date',
+      'Libellé',
+      'Heures',
+    ]);
+    pdfMake.createPdf(document).open();
   }
 
-  console.log(lawyersNameTableTmp)
-  lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) => (a.Nom > b.Nom ? 1 : -1))
+  buildTableBody(data, columns) {
+    const body = [];
 
-  const document = this.getDocument(lawyersNameTableTmp, ['Date', 'Libellé', 'Heures']);
-  pdfMake.createPdf(document).open();
-}
-
-
-buildTableBody(data, columns) {
-  const body = [];
-
-  body.push(columns);
-  data.forEach(function(row) {
+    body.push(columns);
+    data.forEach(function (row) {
       const dataRow = [];
 
-      columns.forEach(function(column) {
-          dataRow.push(row[column].toString());
-      })
+      columns.forEach(function (column) {
+        dataRow.push(row[column].toString());
+      });
 
       body.push(dataRow);
-  });
-  console.log(body)
+    });
+    console.log(body);
 
-  return body;
-}
-
-getDocument(formationName, column)
-{
-  console.log(this.data)
-  const logo = this.contentService.logoBase64
-
-  const docDefinition =
-
-  { content:
-    [
-    {
-      image: logo,
-      width: 60
-    },
-    {
-      text: 'ORDRE DES AVOCATS DE TOURS',
-      margin: [ 0, 20, 0, 10 ],
-      style: 'header'
-    },
-    {
-      text: 'Relevé de formation continue ' + (new Date()).getFullYear(),
-      margin: [ 0, 20, 0, 10 ],
-      style: 't1'
-    },
-    {
-      text: name,
-      margin: [ 0, 10, 0, 10 ],
-      style: 'formation'
-    },
-    {
-      text: 'Avocat : ' + this.data.nom + ' ' + this.data.prenom,
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
-			table: {
-        widths: ['*', 'auto'],
-        heights: 40,
-				body: [
-          ['OBLIGATION', 'Heures'],
-          ['Obligation horaire', this.data.mandatoryHours],
-          ['Ajustement d’obligation horaire : ', this.data.nbrAdjustHour? this.data.nbrAdjustHour: ''],
-          [{text: this.data.motifAdjustHour? 'Motif : ' + this.data.motifAdjustHour : 'Motif : ', colSpan: 2}],
-          ['Obligation suite à ajustement : ', this.data.nbrAdjustHour? this.data.mandatoryHours - this.data.nbrAdjustHour: '']
-        ]
-			},
-      layout: {
-				fillColor: function (rowIndex, node, columnIndex) {
-					return (rowIndex === 0) ? '#CCCCCC' : null;
-				}
-			}
-		},
-    {
-      text: 'Formations reçues',
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
-			table: {
-        //widths: ['auto', '*'],
-        heights: 40,
-				body: this.buildTableBody(formationName, column)
-			},
-			layout: {
-				fillColor: function (rowIndex, node, columnIndex) {
-					return (rowIndex === 0) ? '#CCCCCC' : null;
-				}
-			}
-		},
-    {
-      text: 'Formations dispensées',
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
-			table: {
-        widths: ['*', '*', '*'],
-        heights: 40,
-				body: [
-          [' ', ' ', ' '],
-        ]
-			},
-      layout: {
-				fillColor: function (rowIndex, node, columnIndex) {
-					return (rowIndex === 0) ? '#CCCCCC' : null;
-				}
-			}
-		},
-    {
-      text: 'Publications',
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
-			table: {
-        widths: ['*', '*', '*'],
-        heights: 40,
-				body: [
-          [' ', ' ', ' '],
-        ]
-			},
-      layout: {
-				fillColor: function (rowIndex, node, columnIndex) {
-					return (rowIndex === 0) ? '#CCCCCC' : null;
-				}
-			}
-		},
-    {
-      text: 'Récapitulatif',
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
-			table: {
-        widths: ['*', 'auto'],
-        heights: 40,
-				body: [
-          ['Report issu de l’exercice précédent :', this.data.nbrReport? this.data.nbrReport : ''],
-          ['Report sur l’exercice suivant :', ''],
-          ['Déficit d\'heures :', ' '],
-          ['Total général :', this.data.nbr]
-        ]
-			}
-		},
-
-  ],
-styles:
-{
-  header:
-  {
-    fontSize: 18,
-    alignment: 'center',
-    bold: true
-  },
-  t1:
-  {
-    fontSize: 14,
-    alignment: 'center',
-    bold: true
-  },
-  formation:
-  {
-    fontSize: 14,
-    alignment: 'center',
+    return body;
   }
-}
 
-}
+  getDocument(formationName, column) {
+    console.log(this.data);
+    const logo = this.contentService.logoBase64;
 
-  return docDefinition
+    const docDefinition = {
+      content: [
+        {
+          image: logo,
+          width: 60,
+        },
+        {
+          text: 'ORDRE DES AVOCATS DE TOURS',
+          margin: [0, 20, 0, 10],
+          style: 'header',
+        },
+        {
+          text: 'Relevé de formation continue ' + new Date().getFullYear(),
+          margin: [0, 20, 0, 10],
+          style: 't1',
+        },
+        {
+          text: name,
+          margin: [0, 10, 0, 10],
+          style: 'formation',
+        },
+        {
+          text: 'Avocat : ' + this.data.nom + ' ' + this.data.prenom,
+          margin: [0, 10, 0, 10],
+          style: 't1',
+        },
+        {
+          table: {
+            widths: ['*', 'auto'],
+            heights: 40,
+            body: [
+              ['OBLIGATION', 'Heures'],
+              ['Obligation horaire', this.data.mandatoryHours],
+              [
+                'Ajustement d’obligation horaire : ',
+                this.data.nbrAdjustHour ? this.data.nbrAdjustHour : '',
+              ],
+              [
+                {
+                  text: this.data.motifAdjustHour
+                    ? 'Motif : ' + this.data.motifAdjustHour
+                    : 'Motif : ',
+                  colSpan: 2,
+                },
+              ],
+              [
+                'Obligation suite à ajustement : ',
+                this.data.nbrAdjustHour
+                  ? this.data.mandatoryHours - this.data.nbrAdjustHour
+                  : '',
+              ],
+            ],
+          },
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return rowIndex === 0 ? '#CCCCCC' : null;
+            },
+          },
+        },
+        {
+          text: 'Formations reçues',
+          margin: [0, 10, 0, 10],
+          style: 't1',
+        },
+        {
+          table: {
+            //widths: ['auto', '*'],
+            heights: 40,
+            body: this.buildTableBody(formationName, column),
+          },
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return rowIndex === 0 ? '#CCCCCC' : null;
+            },
+          },
+        },
+        {
+          text: 'Formations dispensées',
+          margin: [0, 10, 0, 10],
+          style: 't1',
+        },
+        {
+          table: {
+            widths: ['*', '*', '*'],
+            heights: 40,
+            body: [[' ', ' ', ' ']],
+          },
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return rowIndex === 0 ? '#CCCCCC' : null;
+            },
+          },
+        },
+        {
+          text: 'Publications',
+          margin: [0, 10, 0, 10],
+          style: 't1',
+        },
+        {
+          table: {
+            widths: ['*', '*', '*'],
+            heights: 40,
+            body: [[' ', ' ', ' ']],
+          },
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return rowIndex === 0 ? '#CCCCCC' : null;
+            },
+          },
+        },
+        {
+          text: 'Récapitulatif',
+          margin: [0, 10, 0, 10],
+          style: 't1',
+        },
+        {
+          table: {
+            widths: ['*', 'auto'],
+            heights: 40,
+            body: [
+              [
+                'Report issu de l’exercice précédent :',
+                this.data.nbrReport ? this.data.nbrReport : '',
+              ],
+              ['Report sur l’exercice suivant :', this.data.reportableHours > 0 ? this.data.reportableHours : ''],
+              ["Déficit d'heures :", this.data.reportableHours < 0 ? this.data.reportableHours : ''],
+              ['Total général :', this.data.nbr],
+              [
+                'Obligation : ',
+                this.data.nbr >= this.data.mandatoryHours
+                  ? 'Satisfaite'
+                  : 'Non satisfaite',
+              ],
+            ],
+          },
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          alignment: 'center',
+          bold: true,
+        },
+        t1: {
+          fontSize: 14,
+          alignment: 'center',
+          bold: true,
+        },
+        formation: {
+          fontSize: 14,
+          alignment: 'center',
+        },
+      },
+    };
 
-}
+    return docDefinition;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

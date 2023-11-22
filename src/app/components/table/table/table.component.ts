@@ -36,6 +36,7 @@ export interface DialogData {
   isHeFormator: boolean;
   nbrAdjustHour: number;
   motifAdjustHour: string;
+  reportableHours: number;
 }
 
 @Component({
@@ -74,7 +75,6 @@ export class TableComponent {
       {
         this.sortData(this.dataSortedByUser)
       }
-
     })
 
   }
@@ -183,11 +183,11 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
   }
 
   openInformationDialog(id, nom, prenom, email, group, formation, formationType, formationLabel, mandatoryHours, nbr, nbrReport, nbrAdjustHour,
-    motifAdjustHour): void {
+    motifAdjustHour, reportableHours): void {
     const dialogRef = this.dialog.open(DialogInformationLawyerComponent, {
       height: "80vh",
       width: "80vw",
-      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationType:formationType, formationLabel: formationLabel, mandatoryHours: mandatoryHours, nbr: nbr, nbrReport: nbrReport, nbrAdjustHour: nbrAdjustHour, motifAdjustHour: motifAdjustHour},
+      data: {id: id, nom: nom, prenom: prenom, email: email, group: group, formation: formation, formationType:formationType, formationLabel: formationLabel, mandatoryHours: mandatoryHours, nbr: nbr, nbrReport: nbrReport, nbrAdjustHour: nbrAdjustHour, motifAdjustHour: motifAdjustHour, reportableHours: reportableHours},
     });
 
     dialogRef.afterClosed().subscribe(result => {
