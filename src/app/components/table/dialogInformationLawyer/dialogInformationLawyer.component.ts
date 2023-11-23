@@ -78,15 +78,21 @@ export class DialogInformationLawyerComponent {
 
     if(this.data.reportableHours)
     {
+      console.log(this.data)
       if (!(this.data.reportableHours == this.data.nbr - this.data.mandatoryHours)) {
         this.bddCommunicationService.updateReportableHours(
           this.data.id,
           this.data.nbr - this.data.mandatoryHours
         );
-      } else {
-       // console.log('')
       }
     }
+    else {
+      this.bddCommunicationService.updateReportableHours(
+        this.data.id,
+        this.data.nbr - this.data.mandatoryHours
+      );
+      this.data.reportableHours = this.data.nbr - this.data.mandatoryHours
+  }
 
   }
 
