@@ -406,7 +406,7 @@ export class DialogInformationLawyerComponent {
                 'Report issu de l’exercice précédent :',
                 this.data.nbrReport ? this.data.nbrReport : '',
               ],
-              ['Report sur l’exercice suivant :', this.data.reportableHours > 0 ? this.data.reportableHours : ''],
+              ['Report sur l’exercice suivant :', mandatoryhoursAdjust? ((this.data.nbr - mandatoryhoursAdjust) > 0? (this.data.nbr - mandatoryhoursAdjust) : '' ) : (this.data.reportableHours > 0 ? this.data.reportableHours : '')],
               ["Déficit d'heures :", mandatoryhoursAdjust? (this.data.nbr - mandatoryhoursAdjust < 0 ? this.data.nbr - mandatoryhoursAdjust : '') : (this.data.reportableHours < 0 ? this.data.reportableHours : '')],
               ['Total général :', this.data.nbr],
               [
