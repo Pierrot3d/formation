@@ -68,7 +68,6 @@ export class DialogInformationLawyerComponent {
           type: key,
           value: data[key],
         }));
-        // console.log(this.lawyers$)
         this.dataSource = new MatTableDataSource(this.formationList$);
         this.sortedData = this.formationList$.slice();
       } else {
@@ -78,7 +77,6 @@ export class DialogInformationLawyerComponent {
 
     if(this.data.reportableHours)
     {
-      console.log(this.data)
       if (!(this.data.reportableHours == this.data.nbr - this.data.mandatoryHours)) {
         this.bddCommunicationService.updateReportableHours(
           this.data.id,
@@ -117,7 +115,6 @@ export class DialogInformationLawyerComponent {
   }
 
   removeFormation(id, elemnt) {
-    //console.log(id, elemnt);
     this.bddCommunicationService.removeFormation(id, elemnt);
   }
 
@@ -183,7 +180,6 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
-    //console.log(this.formationList$);
     this.bddCommunicationService.sendNewHours(
       this.data.id,
       this.formationList$
@@ -192,15 +188,6 @@ export class DialogInformationLawyerComponent {
       this.data.id,
       this.formationList$
     );
-    /*     let nbrHoursTmp: number;
-    nbrHoursTmp = 0;
-
-    for (let i = 0; i < this.formationList$.length; i++) {
-      console.log(nbrHoursTmp, '+', this.formationList$[i].value.numOfHours);
-      nbrHoursTmp = nbrHoursTmp + +this.formationList$[i].value.numOfHours;
-    }
-    console.log(nbrHoursTmp);
-    this.bddCommunicationService.updateNbrHours(this.data.id, nbrHoursTmp); */
   }
 
   ajustFn() {
@@ -219,22 +206,27 @@ export class DialogInformationLawyerComponent {
 
   generatePdf(formationsList) {
     let lawyersNameTableTmp = [];
+
     for (const part of formationsList) {
       const lawyerTableTmp = {
         Date: part.value.start,
         Libellé: part.value.formationLabel,
         Heures: part.value.numOfHours,
+        isHeFormator: part.value.isHeFormator? part.value.isHeFormator : false
       };
 
       lawyersNameTableTmp.push(lawyerTableTmp);
     }
 
-    //console.log(lawyersNameTableTmp);
     lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) =>
       a.Nom > b.Nom ? 1 : -1
     );
 
     const document = this.getDocument(lawyersNameTableTmp, [
+      'Date',
+      'Libellé',
+      'Heures',
+    ], [
       'Date',
       'Libellé',
       'Heures',
@@ -247,20 +239,42 @@ export class DialogInformationLawyerComponent {
 
     body.push(columns);
     data.forEach(function (row) {
-      const dataRow = [];
+      if(!row.isHeFormator)
+      {
+        const dataRow = [];
 
-      columns.forEach(function (column) {
-        dataRow.push(row[column].toString());
-      });
+        columns.forEach(function (column) {
+          dataRow.push(row[column].toString());
+        });
 
-      body.push(dataRow);
+        body.push(dataRow);
+      }
     });
-    //console.log(body);
 
     return body;
   }
 
-  getDocument(formationName, column) {
+  buildGaveFormationTableBody(data, columns) {
+    const body = [];
+
+    body.push(columns);
+    data.forEach(function (row) {
+      if(row.isHeFormator)
+      {
+        const dataRow = [];
+
+        columns.forEach(function (column) {
+          dataRow.push(row[column].toString());
+        });
+
+        body.push(dataRow);
+      }
+    });
+
+    return body;
+  }
+
+  getDocument(formationName, column, columnDispense) {
     const logo = this.contentService.logoBase64;
     let mandatoryhoursAdjust: number;
     if(this.data.nbrAdjustHour)
@@ -334,7 +348,7 @@ export class DialogInformationLawyerComponent {
         },
         {
           table: {
-            //widths: ['auto', '*'],
+            widths: ['auto', '*', 'auto'],
             heights: 40,
             body: this.buildTableBody(formationName, column),
           },
@@ -351,9 +365,9 @@ export class DialogInformationLawyerComponent {
         },
         {
           table: {
-            widths: ['*', '*', '*'],
+            widths: ['auto', '*', 'auto'],
             heights: 40,
-            body: [[' ', ' ', ' ']],
+            body: this.buildGaveFormationTableBody(formationName, columnDispense),
           },
           layout: {
             fillColor: function (rowIndex, node, columnIndex) {
