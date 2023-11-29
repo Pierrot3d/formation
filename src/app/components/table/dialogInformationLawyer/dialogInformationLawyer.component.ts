@@ -230,6 +230,7 @@ export class DialogInformationLawyerComponent {
       'Date',
       'Libellé',
       'Heures',
+      'Comptabilisées'
     ]);
     pdfMake.createPdf(document).open();
   }
@@ -262,7 +263,8 @@ export class DialogInformationLawyerComponent {
       if(row.isHeFormator)
       {
         const dataRow = [];
-
+        row.Comptabilisées = row.Heures*4
+        console.log(row)
         columns.forEach(function (column) {
           dataRow.push(row[column].toString());
         });
@@ -365,7 +367,7 @@ export class DialogInformationLawyerComponent {
         },
         {
           table: {
-            widths: ['auto', '*', 'auto'],
+            widths: ['auto', '*', 'auto', 'auto'],
             heights: 40,
             body: this.buildGaveFormationTableBody(formationName, columnDispense),
           },
