@@ -196,7 +196,7 @@ updateUser(id, DataPrenom, DataNom, DataEmail, DataGroup?, mandatoryHoursGroup?)
 updateReportableHours(id, reportableHours: number){
   const db = getDatabase();
   update(ref(db, "avocats/" + id), {
-    reportableHours: reportableHours,
+    reportableHours: reportableHours ? reportableHours : 0,
   })
 }
 
