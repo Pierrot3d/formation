@@ -49,6 +49,7 @@ export class TableComponent {
 
   //@Input() lawyersList: Lawyers[];
   lawyers$
+  formation$
 
   displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationDayGroupDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'attestation', 'trash'];
   dataSource
@@ -76,6 +77,17 @@ export class TableComponent {
         this.sortData(this.dataSortedByUser)
       }
     })
+
+    const dbFormation = getDatabase();
+    const starCountRefFormation = ref(dbFormation, 'formation/');
+    onValue(starCountRefFormation, (snapshot) => {
+      const data = snapshot.val();
+      this.formation$ = Object.keys(data).map((key) => ({
+        type: key,
+        value: data[key],
+      }));
+      console.log(this.formation$)
+    });
 
   }
 
@@ -208,6 +220,11 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     {
       return false
     }
+  }
+
+  generateSatisfyList()
+  {
+    this.bddCommunicationService.getSatisfyList(this.formation$, this.lawyers$)
   }
 
 
