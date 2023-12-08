@@ -267,7 +267,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
   }
 
 
-  getDocument(name, surname)
+getDocument(name, surname)
 {
 
   const logo = this.contentService.logoBase64
