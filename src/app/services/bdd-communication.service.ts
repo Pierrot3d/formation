@@ -558,14 +558,8 @@ export class BddCommunicationService {
     }
   }
 
-  getSatisfyList(allLawyerFormationData, allLawyerInformation) {
+  getSatisfyList(allLawyerInformation, satisfyList, unsatifyList) {
 
-
-        /* if (lawyerFormationData.value[key].isHeFormator) {
-          lawyerFormationData.value[key].numOfHours = lawyerFormationData.value[key].numOfHours * 4;
-          lawyerFormationData.value[key].numOfGroupHours =
-          lawyerFormationData.value[key].numOfGroupHours * 4;
-        } */
     for (let lawyerInformation of allLawyerInformation) {
       if (lawyerInformation.value.nbrAdjustHour) {
         lawyerInformation.value.mandatoryhoursAdjust =
@@ -573,23 +567,22 @@ export class BddCommunicationService {
         lawyerInformation.value.nbrAdjustHour;
         if(lawyerInformation.value.nbr >= lawyerInformation.value.mandatoryhoursAdjust)
       {
-        console.log('ADJUST', lawyerInformation.value.nom, lawyerInformation.value.mandatoryHours, lawyerInformation.value.nbr)
+        satisfyList.push(lawyerInformation)
       }
       else{
-        console.log('ADJUST',false)
+        unsatifyList.push(lawyerInformation)
       }
       }
       else
       {
         if(lawyerInformation.value.nbr >= lawyerInformation.value.mandatoryHours)
         {
-          console.log(lawyerInformation.value.nom, lawyerInformation.value.mandatoryHours, lawyerInformation.value.nbr)
+          satisfyList.push(lawyerInformation)
         }
         else{
-          console.log(false)
+          unsatifyList.push(lawyerInformation)
         }
       }
-
       }
   }
 

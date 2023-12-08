@@ -58,6 +58,8 @@ export class TableComponent {
   updateUserDataTmp: DialogData;
   sortedData;
   dataSortedByUser: Sort;
+  SatisfyListMode = false;
+  sortedDataTmp
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -224,7 +226,22 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   generateSatisfyList()
   {
-    this.bddCommunicationService.getSatisfyList(this.formation$, this.lawyers$)
+    this.SatisfyListMode = !this.SatisfyListMode
+
+    if(this.SatisfyListMode)
+    {
+      const satisfyList = []
+      const unsatisfyList = []
+      this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
+      console.log(satisfyList)
+      this.sortedDataTmp = this.sortedData
+      this.sortedData = new MatTableDataSource(satisfyList);
+    }
+    else
+    {
+      this.sortedData = this.sortedDataTmp;
+    }
+
   }
 
 
