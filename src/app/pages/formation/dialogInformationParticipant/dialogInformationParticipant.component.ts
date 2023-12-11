@@ -212,6 +212,7 @@ export class DialogInformationParticipantComponent {
 
   getDocument(name, surname, formationName, date, duree, lieu) {
     const logo = this.contentService.logoBase64;
+    const signature = this.contentService.signature;
 
     const docDefinition = {
       content: [
@@ -273,6 +274,10 @@ export class DialogInformationParticipantComponent {
               {
                 text: this.bddCommunicationService.batonnier,
               },
+              {
+                image: signature,
+                width: 80,
+              },
             ],
           ],
         },
@@ -312,6 +317,8 @@ export class DialogInformationParticipantComponent {
   getGlobalDocument(datas, date, formationName, duree, lieu) {
     const tables = [];
     const logo = this.contentService.logoBase64;
+    const signature = this.contentService.signature
+
 
     for (const data of datas) {
       tables.push(
@@ -372,6 +379,10 @@ export class DialogInformationParticipantComponent {
               },
               {
                 text: this.bddCommunicationService.batonnier,
+              },
+              {
+                image: signature,
+                width: 80,
                 pageBreak: 'after'
               },
             ],

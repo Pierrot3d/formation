@@ -51,7 +51,7 @@ export class TableComponent {
   lawyers$
   formation$
 
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationDayGroupDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'attestation', 'trash'];
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationDayGroupDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'trash'];
   dataSource
   db
 
@@ -71,7 +71,6 @@ export class TableComponent {
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
-      // console.log(this.lawyers$)
       this.dataSource = new MatTableDataSource(this.lawyers$);
       this.sortedData = this.lawyers$.slice()
       this.sortedData.sort(this.SortSatisfyArray)
@@ -89,7 +88,6 @@ export class TableComponent {
         type: key,
         value: data[key],
       }));
-      console.log(this.formation$)
     });
 
   }
@@ -233,11 +231,9 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       const satisfyList = []
       const unsatisfyList = []
       this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
-      console.log(satisfyList)
       satisfyList.sort(this.SortSatisfyArray)
       this.sortedDataTmp = this.sortedData
       this.sortedData = new MatTableDataSource(satisfyList);
-      console.log(this.sortedData)
     }
     else
     {

@@ -161,7 +161,6 @@ generatePdf(participant, date, formationName, lieu)
     lawyersNameTableTmp.push(lawyerTableTmp)
   }
 
-  console.log(lawyersNameTableTmp)
   lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) => (a.Nom > b.Nom ? 1 : -1))
 
   const document = this.getDocument(lawyersNameTableTmp, ['Nom', 'Signature'], date, formationName, lieu);

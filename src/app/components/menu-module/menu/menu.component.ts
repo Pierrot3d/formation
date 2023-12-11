@@ -26,7 +26,6 @@ export class MenuComponent {
       this.generalData$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
       this.dataSource = new MatTableDataSource(this.generalData$);
       this.sortedData = this.generalData$.slice()
-      console.log(this.sortedData)
       this.bddCommunicationService.batonnier = this.sortedData[0].value.prenom + ' ' + this.sortedData[0].value.nom;
     })
   }

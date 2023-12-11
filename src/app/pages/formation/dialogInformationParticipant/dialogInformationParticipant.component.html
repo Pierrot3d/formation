@@ -2,16 +2,9 @@
   <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
 </div>
 
-<p>
-  <button
-    mat-icon-button
-    color="primary"
-    (click)="generateGlobalPdf(this.dataTable, this.data.formationName, this.data.startTMP, this.data.duration, this.data.lieu)"
-  >
-    <mat-icon>description</mat-icon>
-  </button>
+<p style="margin-top: 2vh; margin-bottom: 2vh;">
+
 </p>
-<p><mat-icon (click)="modifyModeAction()"> create </mat-icon></p>
 
 <p *ngIf="!modifyMode">
   Date : {{ this.data.startTMP }} - {{ this.data.endTMP }}
@@ -19,6 +12,36 @@
 
 <p *ngIf="!modifyMode">
   Durée de la formation : {{ this.data.duration }} heures
+</p>
+
+<p style="margin-top: 2vh; margin-bottom: 2vh;">
+  <button
+    mat-raised-button
+    class="button"
+    color="primary"
+    (click)="
+      generateGlobalPdf(
+        this.dataTable,
+        this.data.formationName,
+        this.data.startTMP,
+        this.data.duration,
+        this.data.lieu
+      )
+    "
+  >
+  Générer toutes les attestations
+    <mat-icon>description</mat-icon>
+  </button>
+  <button
+  mat-raised-button
+  class="button"
+  (click)="
+    modifyModeAction()
+  "
+>
+Modifier la formation
+  <mat-icon>create</mat-icon>
+</button>
 </p>
 
 <div *ngIf="modifyMode" mat-dialog-content>
@@ -87,7 +110,16 @@
       <button
         mat-icon-button
         color="primary"
-        (click)="generatePdf(element.value.nom, element.value.prenom, this.data.formationName, this.data.startTMP, this.data.duration, this.data.lieu)"
+        (click)="
+          generatePdf(
+            element.value.nom,
+            element.value.prenom,
+            this.data.formationName,
+            this.data.startTMP,
+            this.data.duration,
+            this.data.lieu
+          )
+        "
       >
         <mat-icon>description</mat-icon>
       </button>
