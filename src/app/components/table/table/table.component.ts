@@ -128,7 +128,6 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 }
 
 
-
   updateUser(){
     const db = getDatabase();
     update(ref(db, "avocats/" + this.updateUserDataTmp.id), {
@@ -234,14 +233,26 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       const unsatisfyList = []
       this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
       console.log(satisfyList)
+      satisfyList.sort(this.SortSatisfyArray)
       this.sortedDataTmp = this.sortedData
       this.sortedData = new MatTableDataSource(satisfyList);
+      console.log(this.sortedData)
     }
     else
     {
       this.sortedData = this.sortedDataTmp;
     }
 
+  }
+
+  SortSatisfyArray(x, y) {
+    if (x.value.nom  < y.value.nom) {
+      return -1;
+    }
+    if (x.value.nom > y.value.nom) {
+      return 1;
+    }
+    return 0;
   }
 
 
