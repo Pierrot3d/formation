@@ -232,8 +232,10 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       const unsatisfyList = []
       this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
       satisfyList.sort(this.SortSatisfyArray)
+      this.generateSatisfyPdf(satisfyList)
       this.sortedDataTmp = this.sortedData
       this.sortedData = new MatTableDataSource(satisfyList);
+
     }
     else
     {
@@ -268,85 +270,83 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     }
   }
 
-  generatePdf(name, surname)
-  {
-    const document = this.getDocument(name, surname);
+
+  generateSatisfyPdf(datas) {
+    const document = this.getGlobalDocument(
+      datas
+    );
     pdfMake.createPdf(document).open();
   }
 
+  getGlobalDocument(datas) {
+    const tables = [];
+    const logo = this.contentService.logoBase64;
 
-getDocument(name, surname)
-{
-
-  const logo = this.contentService.logoBase64
-
-  const docDefinition =
-
-  { content:
-    [
-    {
+    tables.push({
       image: logo,
-      width: 60
+      width: 60,
     },
     {
-      text: 'ORDRE DES AVOCATS DE TOURS',
-      margin: [ 0, 20, 0, 10 ],
-      style: 'header'
-    },
-    {
-      text: 'Je soussigné' + ' ' + this.bddCommunicationService.batonnier + ', le Bâtonnier de l’Ordre des Avocats du Barreau de TOURS, atteste de la présence de Maître' + surname + name + 'à la Formation décrite ci-après :',
-      margin: [ 0, 20, 0, 10 ],
-    },
-
-
-    {
-      columns: [
-        [
-          {
-            text: 'Attestation',
-            style: 'name'
-          },
-          {
-            text: name + ' ' + surname,
-          }
-        ]
-      ]
-    },
-    {
-      text: 'Attestation de formation',
+      text: 'Avocats ayant satisfaits à leurs obligations de formation',
       bold: true,
       fontSize: 20,
       alignment: 'center',
-      margin: [0, 0, 0, 20]
+      margin: [0, 0, 0, 20],
+    },
+    {
+      text: 'Formations satisfaite',
+      margin: [0, 10, 0, 10],
+      style: 't1',
+    },)
+
+
+      tables.push(
+        {
+          table: {
+            widths: ['*', '*'],
+            heights: 40,
+            body: [
+              ['Nom', 'Prénom'],
+            ],
+          },
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return rowIndex === 0 ? '#CCCCCC' : null;
+            },
+          },
+        },
+      );
+
+      for (const data of datas) {
+        tables[3].table.body.push(
+          [data.value.nom, data.value.prenom],
+        )
+      }
+
+      const docDefinition = {
+        content: [ tables ],
+        styles: {
+          header: {
+            fontSize: 18,
+            alignment: 'center',
+            bold: true,
+          },
+          t1: {
+            fontSize: 14,
+            alignment: 'center',
+            bold: true,
+          },
+          formation: {
+            fontSize: 14,
+            alignment: 'center',
+          },
+        },
+      };
+
+      return docDefinition;
     }
 
-  ],
-styles:
-{
-  header:
-  {
-    fontSize: 18,
-    alignment: 'center',
-    bold: true
-  },
-  t1:
-  {
-    fontSize: 14,
-    alignment: 'center',
-    bold: true
-  },
-  formation:
-  {
-    fontSize: 14,
-    alignment: 'center',
-  }
-}
 
-}
-
-  return docDefinition
-
-}
 }
 
 

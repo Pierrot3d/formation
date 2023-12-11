@@ -389,7 +389,7 @@ export class DialogInformationParticipantComponent {
           ],
         },
       );}
-
+        console.log(tables)
       const docDefinition = {
         content: [ tables ],
         styles: {
