@@ -74,6 +74,7 @@ export class TableComponent {
       // console.log(this.lawyers$)
       this.dataSource = new MatTableDataSource(this.lawyers$);
       this.sortedData = this.lawyers$.slice()
+      this.sortedData.sort(this.SortSatisfyArray)
       if(this.dataSortedByUser)
       {
         this.sortData(this.dataSortedByUser)
