@@ -13,10 +13,24 @@ export class SpinBoxComponent   {
   @Input() lawyerId;
   @Input() isReportedHours;
   @Input() backgroundColor;
+  @Input() isGroupHours;
 
   onChangeEvent(event: any){
 
+    console.log(event)
+    console.log(event.target.value)
+
     this.bddCommunicationService.updateNbrDay(this.lawyerId, event.target.value)
+    console.log(event.target.value);
+
+  }
+
+  onChangeEventGroup(event: any){
+
+    console.log(event)
+    console.log(event.target.value)
+
+    this.bddCommunicationService.updateNbrGroupHours(this.lawyerId, event.target.value)
     console.log(event.target.value);
 
   }

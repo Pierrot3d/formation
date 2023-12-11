@@ -39,6 +39,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ordreFormationModule } from './pages/formation/ordreFormation.module';
+import { SpinBoxModule } from './components/spin-box/spin-box.module';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -83,7 +84,8 @@ registerLocaleData(localeFr, 'fr');
     MatSortModule,
     MatSelectModule,
     AppRoutingModule,
-    ordreFormationModule
+    ordreFormationModule,
+    SpinBoxModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

@@ -71,7 +71,8 @@
           <app-spin-box
           [value]="element.value.nbr"
           [lawyerId]="element.type"
-          [backgroundColor]="false"
+          [isReportedHours]="false"
+          [isGroupHours]="false"
           ></app-spin-box></td>
     </ng-container>
 
@@ -82,7 +83,8 @@
             <app-spin-box
             [value]="element.value.nbrGroup"
             [lawyerId]="element.type"
-            [backgroundColor]="element.value.nbrGroup === element.value.mandatoryHours"
+            [isReportedHours]="false"
+            [isGroupHours]="true"
             ></app-spin-box></td>
       </ng-container>
 
@@ -95,6 +97,7 @@
             [lawyerId]="element.type"
             [backgroundColor]="false"
             [isReportedHours]="true"
+            [isGroupHours]="false"
             ></app-spin-box></td>
       </ng-container>
 

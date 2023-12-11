@@ -2,7 +2,6 @@ import { DialogInformationLawyerComponent } from './dialogInformationLawyer/dial
 import { DialogUpdateLawyerComponent } from './dialogUpdateLawyer/dialogUpdateLawyer.component';
 import { TableComponent } from './table/table.component';
 import { NgModule } from '@angular/core';
-import { SpinBoxComponent } from '../spin-box/spin-box.component';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
@@ -20,11 +19,12 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SpinBoxModule } from '../spin-box/spin-box.module';
 
 
 
 @NgModule({
-  declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent, DialogInformationLawyerComponent ,SpinBoxComponent],
+  declarations: [TableComponent, DialogAddLawyerComponent, DialogUpdateLawyerComponent, DialogInformationLawyerComponent],
   imports: [
     CommonModule,
     MatCheckboxModule,
@@ -42,7 +42,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatSortModule,
     FormsModule,
     MatSelectModule,
-    RouterModule
+    RouterModule,
+    SpinBoxModule
   ],
   exports: [
     TableComponent,
