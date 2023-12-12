@@ -16,6 +16,17 @@
   </mat-form-field>
 </p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="updateBatonnier()">Ok</button>
+
+<div mat-dialog-actions style="width: 100%; justify-content: center;">
+  <button
+    mat-raised-button
+    color="primary"
+    class="button"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    (click)="updateBatonnier()"
+  >
+    Enregistrer
+  </button>
 </div>
+

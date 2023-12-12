@@ -1,14 +1,21 @@
 <div mat-dialog-actions style="justify-content: right">
   <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
 </div>
+<div class="information-container">
+  <div class="information-container-center">
+  <h2 *ngIf="!modifyMode">
+    {{ this.data.formationName }}
+  </h2>
 
-<p *ngIf="!modifyMode">
-  Date : {{ this.data.startTMP }} - {{ this.data.endTMP }}
-</p>
+  <p *ngIf="!modifyMode">
+    <b>Date : </b> {{ this.data.startTMP }} - {{ this.data.endTMP }}
+  </p>
 
-<p *ngIf="!modifyMode">
-  Durée de la formation : {{ this.data.duration }} heures
-</p>
+  <p *ngIf="!modifyMode">
+    <b>Durée de la formation : </b> {{ this.data.duration }} heures
+  </p>
+</div>
+</div>
 
 <p *ngIf="!modifyMode">
   <button
@@ -25,19 +32,13 @@
       )
     "
   >
-  Générer toutes les attestations
+    Générer toutes les attestations
     <mat-icon>description</mat-icon>
   </button>
-  <button
-  mat-raised-button
-  class="button"
-  (click)="
-    modifyModeAction()
-  "
->
-Modifier la formation
-  <mat-icon>create</mat-icon>
-</button>
+  <button mat-raised-button class="button" (click)="modifyModeAction()">
+    Modifier la formation
+    <mat-icon>create</mat-icon>
+  </button>
 </p>
 
 <div *ngIf="modifyMode" mat-dialog-content>
@@ -168,7 +169,9 @@ Modifier la formation
 </p>
 <p>
   <ng-container *ngIf="modifyMode && !this.data.lieu" mat-dialog-actions>
-    <button mat-raised-button disabled class="button">Mettre à jour la formation</button>
+    <button mat-raised-button disabled class="button">
+      Mettre à jour la formation
+    </button>
   </ng-container>
   <ng-container *ngIf="modifyMode && this.data.lieu" mat-dialog-actions>
     <button
