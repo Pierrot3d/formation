@@ -275,7 +275,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     const document = this.getGlobalDocument(
       datas
     );
-    pdfMake.createPdf(document).open();
+    pdfMake.createPdf(document).download();
   }
 
   getGlobalDocument(datas) {
