@@ -1,40 +1,52 @@
-<div mat-dialog-actions style="justify-content: right;">
+<div mat-dialog-actions style="justify-content: right">
   <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
-  </div>
-<h1 mat-dialog-title>Modification du profil de {{data.prenom}} {{data.nom}}</h1>
+</div>
+<h1 mat-dialog-title>
+  Modification du profil de {{ data.prenom }} {{ data.nom }}
+</h1>
 <div mat-dialog-content>
   <p>
-  <mat-form-field appearance="fill">
-    <mat-label>Prénom</mat-label>
-    <input matInput [(ngModel)]="data.prenom">
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="fill">
-    <mat-label>Nom</mat-label>
-    <input matInput [(ngModel)]="data.nom">
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="fill">
-    <mat-label>e-mail</mat-label>
-    <input matInput [(ngModel)]="data.email">
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="fill">
-    <mat-label>Groupe</mat-label>
-    <mat-select [(ngModel)]="data.group" multiple>
-      <mat-option value="Mineurs">Mineurs</mat-option>
-      <mat-option value="Pénal">Pénal</mat-option>
-      <mat-option value="JLD-HO">JLD-HO</mat-option>
-      <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
-      <mat-option value="Déontologie">Déontologie</mat-option>
-      <mat-option value="Spécialisation">Spécialisation</mat-option>
-    </mat-select>
-  </mat-form-field>
-</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Prénom</mat-label>
+      <input matInput [(ngModel)]="data.prenom" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="data.nom" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>e-mail</mat-label>
+      <input matInput [(ngModel)]="data.email" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Groupe</mat-label>
+      <mat-select [(ngModel)]="data.group" multiple>
+        <mat-option value="Mineurs">Mineurs</mat-option>
+        <mat-option value="Pénal">Pénal</mat-option>
+        <mat-option value="JLD-HO">JLD-HO</mat-option>
+        <mat-option value="Droit des étrangers">Droit des étrangers</mat-option>
+        <mat-option value="Déontologie">Déontologie</mat-option>
+        <mat-option value="Spécialisation">Spécialisation</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <div mat-dialog-actions style="width: 100%; justify-content: center;">
+  <button
+    mat-raised-button
+    color="primary"
+    class="button"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    (click)="updateUser()"
+  >
+    Valider
+  </button>
 </div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="updateUser()">Valider</button>
 </div>
+

@@ -4,53 +4,99 @@
   </div>
   <h1 mat-dialog-title>Fiche de Me {{ data.formationLabel }} {{ data.nom }}</h1>
 
-  <div>
+  <div       *ngIf="!this.ajustHourMode"
+  >
     <button
-      mat-icon-button
+      mat-raised-button
+      class="button"
       color="primary"
       (click)="generatePdf(this.formationList$)"
     >
+      Générer le relevé de formation continue
       <mat-icon>description</mat-icon>
     </button>
-  </div>
-  <div style="margin-bottom: 1vh">
     <button
-      *ngIf="!this.ajustHourMode"
       mat-raised-button
-      color="primary"
+      class="button"
       (click)="ajustFn()"
     >
       Ajustement horaire
+      <mat-icon>access_time</mat-icon>
     </button>
+  </div>
+
+  <div style="margin-bottom: 1vh">
     <ng-container *ngIf="this.ajustHourMode">
       <div>
-        <mat-form-field *ngIf="!this.data.nbrAdjustHour" style="margin-bottom: 1vh">
+        <mat-form-field
+          *ngIf="!this.data.nbrAdjustHour"
+          style="margin-bottom: 1vh"
+        >
           <mat-label>nombre d'heure</mat-label>
-          <input matInput type="number" [(ngModel)]="adjustHourTable.nbrAdjustHour"/>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="adjustHourTable.nbrAdjustHour"
+          />
         </mat-form-field>
-        <mat-form-field *ngIf="this.data.nbrAdjustHour" style="margin-bottom: 1vh">
-          <mat-label style="color: black !important;">{{this.data.nbrAdjustHour}}</mat-label>
-          <input matInput type="number" [(ngModel)]="adjustHourTable.nbrAdjustHour"  />
+        <mat-form-field
+          *ngIf="this.data.nbrAdjustHour"
+          style="margin-bottom: 1vh"
+        >
+          <mat-label style="color: black !important">{{
+            this.data.nbrAdjustHour
+          }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="adjustHourTable.nbrAdjustHour"
+          />
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field *ngIf="!this.data.motifAdjustHour" style="margin-bottom: 1vh">
+        <mat-form-field
+          *ngIf="!this.data.motifAdjustHour"
+          style="margin-bottom: 1vh"
+        >
           <mat-label>Motif</mat-label>
-          <textarea matInput [(ngModel)]="adjustHourTable.motifAdjustHour"></textarea>
+          <textarea
+            matInput
+            [(ngModel)]="adjustHourTable.motifAdjustHour"
+          ></textarea>
         </mat-form-field>
-        <mat-form-field *ngIf="this.data.motifAdjustHour" style="margin-bottom: 1vh">
-          <mat-label style="color: black !important;">{{this.data.motifAdjustHour}}</mat-label>
-          <textarea matInput [(ngModel)]="adjustHourTable.motifAdjustHour"></textarea>
+        <mat-form-field
+          *ngIf="this.data.motifAdjustHour"
+          style="margin-bottom: 1vh"
+        >
+          <mat-label style="color: black !important">{{
+            this.data.motifAdjustHour
+          }}</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="adjustHourTable.motifAdjustHour"
+          ></textarea>
         </mat-form-field>
       </div>
       <div>
         <button
-        style="margin-bottom: 1vh"
+          mat-raised-button
+          color="primary"
+          class="button"
+          (click)="
+            saveAjustFn(
+              adjustHourTable.nbrAdjustHour,
+              adjustHourTable.motifAdjustHour
+            )
+          "
+        >
+          Enregistrer l'ajustement
+        </button>
+        <button
         mat-raised-button
-        color="primary"
-        (click)="saveAjustFn(adjustHourTable.nbrAdjustHour, adjustHourTable.motifAdjustHour)"
+        class="button"
+        (click)="ajustFn()"
       >
-        Enregistrer l'ajustement
+        Annuler
       </button>
       </div>
     </ng-container>
