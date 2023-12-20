@@ -12,6 +12,9 @@
   <button mat-raised-button [style.background-color]="SatisfyListMode ? 'green' : ''"  (click)="generateSatisfyList()" class="button">
     <mat-icon>playlist_add_check</mat-icon>
   </button>
+  <button mat-raised-button (click)="refreshHours()" class="button">
+    <mat-icon>refresh</mat-icon>
+  </button>
 </div>
 
 
@@ -30,7 +33,7 @@
   <ng-container matColumnDef="nom">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="nom" sortActionDescription="Sort by nom"> Nom </th>
     <td mat-cell *matCellDef="let element">
-      <mat-icon *ngIf="this.isMandatoryFormation(element)" >check_circle</mat-icon>
+     <!-- <mat-icon *ngIf="this.isMandatoryFormation(element)" >check_circle</mat-icon> -->
       {{element.value.nom}} </td>
   </ng-container>
 

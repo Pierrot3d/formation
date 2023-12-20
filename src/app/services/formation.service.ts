@@ -12,6 +12,54 @@ constructor() {
   this.nbrHeuresObligatoires = 20;
 }
 
+isFormationObligationSatisfy(element)
+{
+  if(element.value.group)
+  {
+    switch(element.value.group)
+    {
+      case "Mineurs":
+      {
+       console.log(element)
+        return
+      }
+    case "Pénal":
+      {
+        console.log(element)
+        return
+      }
+    case "JLD-HO":
+      {
+        console.log(element)
+        return
+      }
+    case "Déontologie":
+      {
+        console.log(element)
+        return
+      }
+    case "Spécialisation":
+      {
+        console.log(element)
+        return
+      }
+    case "Droit des étrangers":
+      {
+        console.log(element)
+        return
+      }
+    default:
+      {
+        return
+      }
+    }
+  }
+  else
+  {
+    return
+  }
+}
+
 isGroupParticularity(element: string)
 {
   this.nbrHeuresObligatoires = 20

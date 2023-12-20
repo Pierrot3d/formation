@@ -92,6 +92,33 @@ export class TableComponent {
 
   }
 
+  refreshHours(){
+    for(const lawyer of this.lawyers$)
+    {
+      for(const formation of this.formation$)
+      {
+        if(formation.type === lawyer.type)
+        {
+          let formationList = []
+          formationList = Object.keys(formation.value).map((key) => ({
+            type: key,
+            value: formation.value[key],
+          }));
+
+          this.bddCommunicationService.sendNewHours(
+            lawyer.type,
+            formationList
+          );
+          this.bddCommunicationService.sendNewGroupHours(
+            lawyer.type,
+            formationList
+          );
+        }
+      }
+    }
+  }
+
+
   sortData(sort: Sort) {
     const data = this.lawyers$.slice();
     if (!sort.active || sort.direction === '') {
