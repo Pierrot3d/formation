@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import { DownloadComponent } from './pages/download/download.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
+import { SigninComponent } from './pages/signin/signin.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,11 @@ const routes: Routes = [
     redirectTo: '/accueil',
     pathMatch: 'full',
   },
+  {
+    path: 'signin',
+    component: SigninComponent,
 
+  },
   {
     path: 'accueil',
     component: AccueilComponent,

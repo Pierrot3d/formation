@@ -296,7 +296,7 @@ export class DialogInformationLawyerComponent {
           style: 'header',
         },
         {
-          text: 'Relevé de formation continue ' + new Date().getFullYear(),
+          text: 'Relevé de formation continue ' + '2023',
           margin: [0, 20, 0, 10],
           style: 't1',
         },
