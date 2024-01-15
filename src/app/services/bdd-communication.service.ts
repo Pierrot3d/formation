@@ -234,6 +234,13 @@ export class BddCommunicationService {
     });
   }
 
+  updateDisplayYear(displayYear) {
+    const db = getDatabase();
+    update(ref(db, 'general/'), {
+      displayYear: displayYear,
+    });
+  }
+
   addOrdreFormation(
     range,
     data,

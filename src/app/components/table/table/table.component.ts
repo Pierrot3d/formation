@@ -93,6 +93,11 @@ export class TableComponent {
     console.log(this.selectedDate)
   }
 
+  updateDisplayYear()
+  {
+    this.bddCommunicationService.updateDisplayYear(this.selectedDate);
+  }
+
   refreshHours(){
     for(const lawyer of this.lawyers$)
     {
