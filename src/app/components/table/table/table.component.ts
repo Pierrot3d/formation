@@ -60,6 +60,7 @@ export class TableComponent {
   dataSortedByUser: Sort;
   SatisfyListMode = false;
   sortedDataTmp
+  selectedDate = ((new Date()).getFullYear()).toString();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -89,7 +90,7 @@ export class TableComponent {
         value: data[key],
       }));
     });
-
+    console.log(this.selectedDate)
   }
 
   refreshHours(){

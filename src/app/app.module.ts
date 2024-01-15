@@ -40,6 +40,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ordreFormationModule } from './pages/formation/ordreFormation.module';
 import { SpinBoxModule } from './components/spin-box/spin-box.module';
+import { SigninModule } from './pages/signin/signin.module';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -85,6 +86,7 @@ registerLocaleData(localeFr, 'fr');
     MatSelectModule,
     AppRoutingModule,
     ordreFormationModule,
+    SigninModule,
     SpinBoxModule
   ],
   providers: [
