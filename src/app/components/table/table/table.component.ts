@@ -90,7 +90,6 @@ export class TableComponent {
         value: data[key],
       }));
     });
-    console.log(this.selectedDate)
   }
 
   updateDisplayYear()
