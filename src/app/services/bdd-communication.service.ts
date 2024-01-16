@@ -37,6 +37,7 @@ export class BddCommunicationService {
   }
 
   batonnier: string;
+  selectedDate: string;
 
   liste = [];
   listeWithId = [];
@@ -238,6 +239,14 @@ export class BddCommunicationService {
     const db = getDatabase();
     update(ref(db, 'general/'), {
       displayYear: displayYear,
+    });
+  }
+
+  newYearCreation() {
+    const db = getDatabase();
+    update(ref(db, '2024/'), {
+      formation: 'test',
+      FormationOrdre: 'test'
     });
   }
 

@@ -50,6 +50,7 @@ export class TableComponent {
   //@Input() lawyersList: Lawyers[];
   lawyers$
   formation$
+  generalData$
 
   displayedColumns: string[] = ['nom', 'prenom', 'email', 'group', 'formationDay', 'formationDayGroup', 'formationDayDo', 'formationDayGroupDo', 'formationHoursReport', 'formationHoursReportable', 'formationList', 'update', 'trash'];
   dataSource
@@ -57,6 +58,7 @@ export class TableComponent {
 
   updateUserDataTmp: DialogData;
   sortedData;
+  sortedGeneralData;
   dataSortedByUser: Sort;
   SatisfyListMode = false;
   sortedDataTmp
@@ -67,6 +69,8 @@ export class TableComponent {
 
 
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService, private contentService: ContentService) {
+    this.bddCommunicationService.newYearCreation()
+
     const db = getDatabase();
     const starCountRef = ref(db, 'avocats/');
     onValue(starCountRef, (snapshot) => {
@@ -81,15 +85,36 @@ export class TableComponent {
       }
     })
 
-    const dbFormation = getDatabase();
-    const starCountRefFormation = ref(dbFormation, 'formation/');
-    onValue(starCountRefFormation, (snapshot) => {
+
+    const dbGeneral = getDatabase();
+    const starCountRefGeneral = ref(dbGeneral, 'general/');
+    onValue(starCountRefGeneral, (snapshot) => {
       const data = snapshot.val();
-      this.formation$ = Object.keys(data).map((key) => ({
-        type: key,
-        value: data[key],
-      }));
-    });
+      this.generalData$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
+      this.dataSource = new MatTableDataSource(this.generalData$);
+      this.sortedGeneralData = this.generalData$.slice()
+      this.bddCommunicationService.batonnier = this.sortedGeneralData[0].value.prenom + ' ' + this.sortedGeneralData[0].value.nom;
+      if(data)
+      {
+        this.bddCommunicationService.selectedDate = this.sortedGeneralData[1].value
+        this.selectedDate = this.bddCommunicationService.selectedDate
+
+        const dbFormation = getDatabase();
+        const starCountRefFormation = ref(dbFormation, this.bddCommunicationService.selectedDate +'/formation/');
+        onValue(starCountRefFormation, (snapshot) => {
+        const data = snapshot.val();
+        if(data)
+        {
+          this.formation$ = Object.keys(data).map((key) => ({
+            type: key,
+            value: data[key],
+          }));
+        }
+      });
+      }
+    })
+
+
   }
 
   updateDisplayYear()
