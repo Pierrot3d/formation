@@ -41,23 +41,33 @@ export class DialogAddOrdreFormationComponent {
     private bddCommunicationService: BddCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: DialogOrdreFormationData
   ) {
-    const db = getDatabase();
-    const starCountRef = ref(db, 'avocats/');
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      this.$lawyerList = Object.keys(data).map((key) => ({
-        type: key,
-        value: data[key],
-      }));
-      this.dataSource = new MatTableDataSource(this.$lawyerList);
 
-      this.filteredLawyers = this.lawyerCtrl.valueChanges.pipe(
-        startWith(null),
-        map((lawyer: string | null) =>
-          lawyer ? this._filter(lawyer) : this.$lawyerList.slice()
-        )
-      );
-    });
+
+    const dbGeneral = getDatabase();
+    const starCountRefGeneral = ref(dbGeneral, 'general/');
+    onValue(starCountRefGeneral, (snapshot) => {
+      const data = snapshot.val();
+      if(data)
+      {
+        const db = getDatabase();
+        const starCountRef = ref(db, 'avocats/');
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          this.$lawyerList = Object.keys(data).map((key) => ({
+            type: key,
+            value: data[key],
+          }));
+          this.dataSource = new MatTableDataSource(this.$lawyerList);
+
+          this.filteredLawyers = this.lawyerCtrl.valueChanges.pipe(
+            startWith(null),
+            map((lawyer: string | null) =>
+              lawyer ? this._filter(lawyer) : this.$lawyerList.slice()
+            )
+          );
+        });
+      }
+    })
   }
 
   addGlobalFormation() {

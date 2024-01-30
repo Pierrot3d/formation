@@ -83,7 +83,7 @@ export class BddCommunicationService {
   saveOrdreFormationToServer(element) {
     this.httpClient
       .post(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/formationOrdre.json',
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/formationOrdre.json',
         element
       )
       .subscribe(
@@ -313,7 +313,7 @@ export class BddCommunicationService {
       let formationList$: { type; value }[] = [];
 
       const db = getDatabase();
-      const starCountRef = ref(db, 'formation/' + participant.type);
+      const starCountRef = ref(db, this.selectedDate + '/formation/' + participant.type);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
@@ -355,7 +355,7 @@ export class BddCommunicationService {
     );
 
     console.log('jenvoie à bdd :', lawyer);
-    const formation = ref(db, 'formationOrdre/' + idFormationOrdre);
+    const formation = ref(db, this.selectedDate + '/formationOrdre/' + idFormationOrdre);
     update(formation, {
       formationName: data.formationName,
       duration: data.duration,
@@ -380,7 +380,7 @@ export class BddCommunicationService {
   ) {
     const db = getDatabase();
 
-    const formation = ref(db, 'formationOrdre/' + idFormationOrdre);
+    const formation = ref(db, this.selectedDate + '/formationOrdre/' + idFormationOrdre);
 
     update(formation, {
       formationName: data.formationName,
@@ -405,7 +405,7 @@ export class BddCommunicationService {
   ) {
     // Create a new post reference with an auto-generated id
     const db = getDatabase();
-    const lawyerListRef = ref(db, 'formation/' + id);
+    const lawyerListRef = ref(db, + this.selectedDate + '/formation/' + id);
     const formation = push(lawyerListRef);
     //console.log(formation.key)
     set(formation, {
@@ -497,12 +497,12 @@ export class BddCommunicationService {
 
   removeFormation(id, formationKey) {
     const db = getDatabase();
-    remove(ref(db, 'formation/' + id + '/' + formationKey));
+    remove(ref(db, this.selectedDate + '/formation/' + id + '/' + formationKey));
   }
 
   removeOrdreFormation(userKey) {
     const db = getDatabase();
-    remove(ref(db, 'formationOrdre/' + userKey));
+    remove(ref(db, this.selectedDate + '/formationOrdre/' + userKey));
   }
 
   giveMeTheList() {
