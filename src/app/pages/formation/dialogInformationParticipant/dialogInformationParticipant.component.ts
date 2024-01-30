@@ -56,29 +56,41 @@ export class DialogInformationParticipantComponent {
     private contentService: ContentService,
     @Inject(MAT_DIALOG_DATA) public data: DialogOrdreFormationData
   ) {
-    const db = getDatabase();
-    const starCountRef = ref(db, 'avocats/');
-    onValue(starCountRef, (snapshot) => {
+
+    const dbGeneral = getDatabase();
+    const starCountRefGeneral = ref(dbGeneral, 'general/');
+    onValue(starCountRefGeneral, (snapshot) => {
       const data = snapshot.val();
-      this.$lawyerList = Object.keys(data).map((key) => ({
-        type: key,
-        value: data[key],
-      }));
-      this.dataSource = new MatTableDataSource(this.$lawyerList);
+      if(data)
+      {
+        const db = getDatabase();
+        const starCountRef = ref(db, this.bddCommunicationService.selectedDate +  '/avocats/');
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          this.$lawyerList = Object.keys(data).map((key) => ({
+            type: key,
+            value: data[key],
+          }));
+          this.dataSource = new MatTableDataSource(this.$lawyerList);
 
-      this.filteredLawyers = this.lawyerCtrl.valueChanges.pipe(
-        startWith(null),
-        map((lawyer: string | null) =>
-          lawyer ? this._filter(lawyer) : this.$lawyerList.slice()
-        )
-      );
-    });
+          this.filteredLawyers = this.lawyerCtrl.valueChanges.pipe(
+            startWith(null),
+            map((lawyer: string | null) =>
+              lawyer ? this._filter(lawyer) : this.$lawyerList.slice()
+            )
+          );
+        });
 
-    for (const elmnt of this.data.participant) {
-      this.dataTable.push(elmnt);
-    }
+        for (const elmnt of this.data.participant) {
+          this.dataTable.push(elmnt);
+        }
 
-    this.lawyer = this.dataTable;
+        this.lawyer = this.dataTable;
+      }
+    })
+
+
+
   }
 
   add(event: MatChipInputEvent): void {
