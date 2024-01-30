@@ -56,11 +56,18 @@ export class DialogInformationLawyerComponent {
     private contentService: ContentService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
-    this.modifyMode = false;
+
+    const dbGeneral = getDatabase();
+    const starCountRefGeneral = ref(dbGeneral, 'general/');
+    onValue(starCountRefGeneral, (snapshot) => {
+      const data = snapshot.val();
+      if(data)
+      {
+        this.modifyMode = false;
     this.dataTmp = [data];
 
     const db = getDatabase();
-    const starCountRef = ref(db, 'formation/' + this.data.id);
+    const starCountRef = ref(db, this.bddCommunicationService.selectedDate + '/formation/' + this.data.id);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -91,6 +98,12 @@ export class DialogInformationLawyerComponent {
       );
       this.data.reportableHours = this.data.nbr - this.data.mandatoryHours
   }
+
+      }
+    })
+
+
+
 
   }
 
@@ -296,7 +309,7 @@ export class DialogInformationLawyerComponent {
           style: 'header',
         },
         {
-          text: 'Relevé de formation continue ' + '2023',
+          text: 'Relevé de formation continue ' + this.bddCommunicationService.selectedDate,
           margin: [0, 20, 0, 10],
           style: 't1',
         },

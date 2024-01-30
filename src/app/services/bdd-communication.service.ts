@@ -222,7 +222,7 @@ export class BddCommunicationService {
 
   updateReportableHours(id, reportableHours: number) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       reportableHours: reportableHours ? reportableHours : 0,
     });
   }
@@ -437,7 +437,7 @@ export class BddCommunicationService {
     // Create a new post reference with an auto-generated id
     const db = getDatabase();
 
-    const formation = ref(db, 'formation/' + id + '/' + formationId);
+    const formation = ref(db, this.selectedDate + '/formation/' + id + '/' + formationId);
 
     update(formation, {
       formationLabel: formationLabel,
@@ -455,7 +455,7 @@ export class BddCommunicationService {
 
   updateAdjustementHour(id, nbrAdjustHour, motifAdjustHour) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       nbrAdjustHour: nbrAdjustHour,
       motifAdjustHour: motifAdjustHour,
     });
@@ -463,7 +463,7 @@ export class BddCommunicationService {
 
   updateNbrDay(id, nbrDay) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       nbr: nbrDay,
     });
   }
