@@ -235,18 +235,24 @@ export class BddCommunicationService {
     });
   }
 
+  updateNewYearLawyerTmp(data)
+  {
+    const db = getDatabase();
+    for(const lawyer of data)
+    {
+      update(ref(db, '2024/avocats/' + lawyer.type), {
+        nbrGroup: 0,
+      });
+    }
+  /*   update(ref(db, '2023/'), {
+      avocats: data
+    }); */
+  }
+
   updateDisplayYear(displayYear) {
     const db = getDatabase();
     update(ref(db, 'general/'), {
       displayYear: displayYear,
-    });
-  }
-
-  newYearCreation() {
-    const db = getDatabase();
-    update(ref(db, '2024/'), {
-      formation: 'test',
-      FormationOrdre: 'test'
     });
   }
 

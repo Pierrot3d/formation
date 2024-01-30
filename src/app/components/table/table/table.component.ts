@@ -61,6 +61,7 @@ export class TableComponent {
   sortedGeneralData;
   dataSortedByUser: Sort;
   SatisfyListMode = false;
+  UnsatisfyListMode = false;
   sortedDataTmp
   selectedDate = ((new Date()).getFullYear()).toString();
 
@@ -69,21 +70,8 @@ export class TableComponent {
 
 
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService, private contentService: ContentService) {
-    this.bddCommunicationService.newYearCreation()
 
-    const db = getDatabase();
-    const starCountRef = ref(db, 'avocats/');
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
-      this.dataSource = new MatTableDataSource(this.lawyers$);
-      this.sortedData = this.lawyers$.slice()
-      this.sortedData.sort(this.SortSatisfyArray)
-      if(this.dataSortedByUser)
-      {
-        this.sortData(this.dataSortedByUser)
-      }
-    })
+
 
 
     const dbGeneral = getDatabase();
@@ -98,6 +86,22 @@ export class TableComponent {
       {
         this.bddCommunicationService.selectedDate = this.sortedGeneralData[1].value
         this.selectedDate = this.bddCommunicationService.selectedDate
+
+        const db = getDatabase();
+        const starCountRef = ref(db, this.bddCommunicationService.selectedDate +'/avocats/');
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
+          this.dataSource = new MatTableDataSource(this.lawyers$);
+
+          this.sortedData = this.lawyers$.slice()
+          this.sortedData.sort(this.SortSatisfyArray)
+          if(this.dataSortedByUser)
+          {
+            this.sortData(this.dataSortedByUser)
+          }
+        })
+
 
         const dbFormation = getDatabase();
         const starCountRefFormation = ref(dbFormation, this.bddCommunicationService.selectedDate +'/formation/');
@@ -301,6 +305,29 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   }
 
+  generateUnsatisfyList()
+  {
+    this.UnsatisfyListMode = !this.UnsatisfyListMode
+
+    if(this.UnsatisfyListMode)
+    {
+      const satisfyList = []
+      const unsatisfyList = []
+      this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
+      unsatisfyList.sort(this.SortSatisfyArray)
+
+      this.generateUnsatisfyPdf(unsatisfyList)
+      this.sortedDataTmp = this.sortedData
+      this.sortedData = new MatTableDataSource(unsatisfyList);
+
+    }
+    else
+    {
+      this.sortedData = this.sortedDataTmp;
+    }
+
+  }
+
   SortSatisfyArray(x, y) {
     if (x.value.nom  < y.value.nom) {
       return -1;
@@ -403,6 +430,81 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       return docDefinition;
     }
 
+
+    generateUnsatisfyPdf(datas) {
+      const document = this.getGlobalUnsatisfyDocument(
+        datas
+      );
+      pdfMake.createPdf(document).download();
+    }
+
+    getGlobalUnsatisfyDocument(datas) {
+      const tables = [];
+      const logo = this.contentService.logoBase64;
+
+      tables.push({
+        image: logo,
+        width: 60,
+      },
+      {
+        text: 'Avocats n\'ayant pas satisfaits à leurs obligations de formation',
+        bold: true,
+        fontSize: 20,
+        alignment: 'center',
+        margin: [0, 0, 0, 20],
+      },
+      {
+        text: 'Formations non satisfaite',
+        margin: [0, 10, 0, 10],
+        style: 't1',
+      },)
+
+
+        tables.push(
+          {
+            table: {
+              widths: ['*', '*'],
+              heights: 40,
+              body: [
+                ['Nom', 'Prénom'],
+              ],
+            },
+            layout: {
+              fillColor: function (rowIndex, node, columnIndex) {
+                return rowIndex === 0 ? '#CCCCCC' : null;
+              },
+            },
+          },
+        );
+
+        for (const data of datas) {
+          tables[3].table.body.push(
+            [data.value.nom, data.value.prenom],
+          )
+        }
+
+        const docDefinition = {
+          content: [ tables ],
+          styles: {
+            header: {
+              fontSize: 18,
+              alignment: 'center',
+              bold: true,
+            },
+            t1: {
+              fontSize: 14,
+              alignment: 'center',
+              bold: true,
+            },
+            formation: {
+              fontSize: 14,
+              alignment: 'center',
+            },
+          },
+        };
+
+        return docDefinition;
+      }
 
 }
 

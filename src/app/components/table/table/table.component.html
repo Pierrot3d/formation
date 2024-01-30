@@ -12,6 +12,9 @@
   <button mat-raised-button [style.background-color]="SatisfyListMode ? 'green' : ''"  (click)="generateSatisfyList()" class="button">
     <mat-icon>playlist_add_check</mat-icon>
   </button>
+  <button mat-raised-button [style.background-color]="UnsatisfyListMode ? 'red' : ''"  (click)="generateUnsatisfyList()" class="button">
+    <mat-icon>highlight_off</mat-icon>
+  </button>
   <button mat-raised-button (click)="refreshHours()" class="button">
     <mat-icon>refresh</mat-icon>
   </button>
