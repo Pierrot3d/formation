@@ -150,58 +150,6 @@ export class BddCommunicationService {
     return [];
   }
 
-  getFormationFromServer(id): [] {
-    const db = getDatabase();
-    const dbRef = ref(db, 'formation/');
-    get(child(dbRef, id))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          //console.log(snapshot.val());
-          this.formationList = [];
-          let listTmp = snapshot.val();
-          this.formationListWithId = Object.keys(snapshot.val()).map((key) => ({
-            type: key,
-            value: snapshot.val()[key],
-          }));
-          //console.log("ceci est la listTmp", listTmp)
-          for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
-            this.formationList.push(listTmp[elemnt]);
-          }
-          return this.formationList;
-        } else {
-          console.log('No data available');
-          return [];
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    return [];
-  }
-
-  getFormationFromServer2(id): any {
-    let formationList$: { type; value }[] = [];
-
-    const db = getDatabase();
-    const starCountRef = ref(db, 'formation/' + id);
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        formationList$ = Object.keys(data).map((key) => ({
-          type: key,
-          value: data[key],
-        }));
-        // console.log(this.lawyers$)
-
-        return formationList$;
-      } else {
-        formationList$ = [];
-
-        return formationList$;
-      }
-    });
-  }
-
   updateUser(
     id,
     DataPrenom,
@@ -477,7 +425,7 @@ export class BddCommunicationService {
 
   updateNbrHoursReport(id, nbrHours) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       nbrReport: nbrHours,
     });
   }
@@ -491,8 +439,8 @@ export class BddCommunicationService {
 
   removeUser(userKey) {
     const db = getDatabase();
-    remove(ref(db, 'avocats/' + userKey));
-    remove(ref(db, 'formation/' + userKey));
+    remove(ref(db, this.selectedDate + '/avocats/' + userKey));
+    remove(ref(db, this.selectedDate +'/formation/' + userKey));
   }
 
   removeFormation(id, formationKey) {
@@ -536,22 +484,7 @@ export class BddCommunicationService {
       nbrHours = this.getFormationHours(formationList);
       this.updateNbrHours(id, nbrHours);
     } else {
-      /*   this.getFormationFromServer2(id)
-
-    console.log('les formations de ', id , formationListTmp)
-    setTimeout (() => {
-
-      let nbrHoursTmp: number;
-      nbrHoursTmp = 0;
-
-      for (let i = 0; i < formationListTmp.length; i++) {
-        console.log('le calcul : ', nbrHoursTmp, '+', formationListTmp[i]['numOfHours']);
-        nbrHoursTmp = nbrHoursTmp + + formationListTmp[i]['numOfHours'];
-      }
-
-      console.log('les heures :', nbrHoursTmp)
-      this.updateNbrHours(id, nbrHoursTmp);
-    }, 3000); */
+      //nothing
     }
   }
 
@@ -561,22 +494,7 @@ export class BddCommunicationService {
       nbrGroupHours = this.getFormationGroupHours(formationList);
       this.updateNbrGroupHours(id, nbrGroupHours);
     } else {
-      /*   this.getFormationFromServer2(id)
-
-    console.log('les formations de ', id , formationListTmp)
-    setTimeout (() => {
-
-      let nbrHoursTmp: number;
-      nbrHoursTmp = 0;
-
-      for (let i = 0; i < formationListTmp.length; i++) {
-        console.log('le calcul : ', nbrHoursTmp, '+', formationListTmp[i]['numOfHours']);
-        nbrHoursTmp = nbrHoursTmp + + formationListTmp[i]['numOfHours'];
-      }
-
-      console.log('les heures :', nbrHoursTmp)
-      this.updateNbrHours(id, nbrHoursTmp);
-    }, 3000); */
+    //nothing
     }
   }
 

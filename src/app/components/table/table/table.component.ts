@@ -202,8 +202,8 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   removeUser(userKey){
     const db = getDatabase();
-    remove(ref(db, "avocats/" + userKey));
-    remove(ref(db, "formation/" + userKey))
+    remove(ref(db, this.bddCommunicationService.selectedDate + "/avocats/" + userKey));
+    remove(ref(db, this.bddCommunicationService.selectedDate + "/formation/" + userKey))
 
     if(this.dataSortedByUser)
     {

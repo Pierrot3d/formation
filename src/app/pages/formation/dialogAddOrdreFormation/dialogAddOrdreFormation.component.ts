@@ -50,7 +50,7 @@ export class DialogAddOrdreFormationComponent {
       if(data)
       {
         const db = getDatabase();
-        const starCountRef = ref(db, 'avocats/');
+        const starCountRef = ref(db, this.bddCommunicationService.selectedDate + '/avocats/');
         onValue(starCountRef, (snapshot) => {
           const data = snapshot.val();
           this.$lawyerList = Object.keys(data).map((key) => ({
