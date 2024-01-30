@@ -67,7 +67,7 @@ export class BddCommunicationService {
   saveLawyersToServer(element: FormExcel) {
     this.httpClient
       .post(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json',
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/avocats.json',
         element
       )
       .subscribe(
@@ -99,7 +99,7 @@ export class BddCommunicationService {
   getLawyersFromServer(): [] {
     this.httpClient
       .get<any[]>(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json'
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/avocats.json'
       )
       .subscribe(
         (response) => {
@@ -211,7 +211,7 @@ export class BddCommunicationService {
     mandatoryHoursGroup?
   ) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       prenom: DataPrenom,
       nom: DataNom,
       email: DataEmail,
