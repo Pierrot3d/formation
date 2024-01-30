@@ -470,7 +470,7 @@ export class BddCommunicationService {
 
   updateNbrHours(id, nbrHours) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       nbr: nbrHours,
     });
   }
@@ -484,7 +484,7 @@ export class BddCommunicationService {
 
   updateNbrGroupHours(id, nbrGroupHours) {
     const db = getDatabase();
-    update(ref(db, 'avocats/' + id), {
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
       nbrGroup: nbrGroupHours,
     });
   }
