@@ -53,25 +53,41 @@ export class FormationComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService, private contentService: ContentService) {
-    const db = getDatabase();
-    const starCountRef = ref(db, 'formationOrdre/');
-    onValue(starCountRef, (snapshot) => {
+
+
+    const dbGeneral = getDatabase();
+    const starCountRefGeneral = ref(dbGeneral, 'general/');
+    onValue(starCountRefGeneral, (snapshot) => {
       const data = snapshot.val();
       if(data)
       {
+        const db = getDatabase();
+        const starCountRef = ref(db, this.bddCommunicationService.selectedDate + '/formationOrdre/');
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          if(data)
+          {
+          this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
+         //console.log(this.lawyers$)
+          this.dataSource = new MatTableDataSource(this.lawyers$);
+          this.sortedData = this.lawyers$.slice()
+          if(this.dataSortedByUser)
+          {
+            this.sortData(this.dataSortedByUser)
+          }
+        }
+        else
+        {
+          this.lawyers$ = {}
+          this.sortedData = []
+        }
 
-
-      this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
-      // console.log(this.lawyers$)
-      this.dataSource = new MatTableDataSource(this.lawyers$);
-      this.sortedData = this.lawyers$.slice()
-      if(this.dataSortedByUser)
-      {
-        this.sortData(this.dataSortedByUser)
+        })
       }
-    }
-
     })
+
+
+
   }
 
     sortData(sort: Sort) {
