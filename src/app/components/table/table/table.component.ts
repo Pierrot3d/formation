@@ -62,6 +62,7 @@ export class TableComponent {
   dataSortedByUser: Sort;
   SatisfyListMode = false;
   UnsatisfyListMode = false;
+  UnsatisfyNumber: number;
   sortedDataTmp
   selectedDate = ((new Date()).getFullYear()).toString();
 
@@ -70,7 +71,6 @@ export class TableComponent {
 
 
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService, private contentService: ContentService) {
-
 
 
 
@@ -257,6 +257,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
   openInformationDialog(id, nom, prenom, email, group, formation, formationType, formationLabel, mandatoryHours, nbr, nbrReport, nbrAdjustHour,
     motifAdjustHour, reportableHours): void {
+      console.log(id)
     const dialogRef = this.dialog.open(DialogInformationLawyerComponent, {
       height: "80vh",
       width: "80vw",
@@ -315,6 +316,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       const unsatisfyList = []
       this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
       unsatisfyList.sort(this.SortSatisfyArray)
+      this.UnsatisfyNumber = unsatisfyList.length
 
       this.generateUnsatisfyPdf(unsatisfyList)
       this.sortedDataTmp = this.sortedData
@@ -447,7 +449,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
         width: 60,
       },
       {
-        text: 'Avocats n\'ayant pas satisfaits à leurs obligations de formation',
+        text: 'Avocats n\'ayant pas satisfaits à leurs obligations de formation : ' + this.UnsatisfyNumber,
         bold: true,
         fontSize: 20,
         alignment: 'center',

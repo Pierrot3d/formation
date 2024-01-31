@@ -42,6 +42,9 @@ export class BddCommunicationService {
   liste = [];
   listeWithId = [];
 
+  listTMP = [];
+  listWithIdTMP= [];
+
   formationList = [];
   formationListWithId = [];
 
@@ -183,19 +186,63 @@ export class BddCommunicationService {
     });
   }
 
+
+ /*  getLawyersFromServerTMP() {
+
+    const dbFormation = getDatabase();
+    const starCountRefFormation = ref(dbFormation, 'formation/');
+    onValue(starCountRefFormation, (snapshot) => {
+    const formationData = snapshot.val();
+    if(formationData)
+    {
+      this.formation$ = Object.keys(formationData).map((key) => ({
+        type: key,
+        value: formationData[key],
+      }));
+    }
+    console.log(this.formation$)
+    this.updateNewYearLawyerTmp(this.formation$)
+  });
+  }
+
+  formation$
+
   updateNewYearLawyerTmp(data)
   {
     const db = getDatabase();
-    for(const lawyer of data)
+
+
+
+   for(let formation of data)
     {
-      update(ref(db, '2024/avocats/' + lawyer.type), {
-        nbrGroup: 0,
-      });
+      if(formation.value)
+      {
+        let formationList = []
+        formationList = Object.keys(formation.value).map((key) => ({
+          type: key,
+          value: formation.value[key],
+        }));
+
+        for(let formationListUniq of formationList)
+        {
+
+          const formationsend = ref(db, '2023' + '/formation/' + formation.type + '/' + formationListUniq.type);
+          update(formationsend, {
+            end: formationListUniq.value.end ,
+            formationLabel: formationListUniq.value.formationLabel,
+            formationType: formationListUniq.value.formationType ? formationListUniq.value.formationType: '',
+            numOfDay: formationListUniq.value.numOfDay ? formationListUniq.value.numOfDay :0,
+            numOfHours: formationListUniq.value.numOfHours ? formationListUniq.value.numOfHours : 0,
+            numOfGroupHours: formationListUniq.value.numOfGroupHours ? formationListUniq.value.numOfGroupHours:0,
+            start: formationListUniq.value.start,
+            isHeFormator: formationListUniq.value.isHeFormator ?  formationListUniq.value.isHeFormator : false
+          });
+        }
+
+
+      }
     }
-  /*   update(ref(db, '2023/'), {
-      avocats: data
-    }); */
-  }
+  } */
 
   updateDisplayYear(displayYear) {
     const db = getDatabase();

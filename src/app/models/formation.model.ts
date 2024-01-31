@@ -6,8 +6,11 @@ export class Formation {
       value: {
         end: string,
         formationLabel: string,
+        formationType: any,
         numOfDay: number,
         numOfHours: string,
+        isHeFormator: boolean,
+        numOfGroupHours: any,
         start: string,
       }
     }
