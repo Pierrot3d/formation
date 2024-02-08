@@ -67,6 +67,7 @@ export class TableComponent {
   UnsatisfyNumber: number;
   sortedDataTmp
   selectedDate = ((new Date()).getFullYear()).toString();
+  numberOfLawyer: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -95,6 +96,7 @@ export class TableComponent {
           const data = snapshot.val();
           this.lawyers$ = Object.keys(data).map(key => ({type: key, value: data[key]}))
           this.dataSource = new MatTableDataSource(this.lawyers$);
+          this.numberOfLawyer = this.lawyers$.length
 
           this.sortedData = this.lawyers$.slice()
           this.sortedData.sort(this.SortSatisfyArray)

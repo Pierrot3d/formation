@@ -26,6 +26,9 @@
     </mat-select>
   </mat-form-field>
 </div>
+<div class="button-container" >
+  <p style="font-size: 12px; text-align: left;">Nombre total d'avocats : {{this.numberOfLawyer}}</p>
+</div>
 
 
 <table mat-table [dataSource]="this.sortedData" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)" >
