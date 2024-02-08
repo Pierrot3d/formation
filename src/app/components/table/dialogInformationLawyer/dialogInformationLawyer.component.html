@@ -2,7 +2,7 @@
   <div mat-dialog-actions style="justify-content: right">
     <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
   </div>
-  <h1 mat-dialog-title>Fiche de Me {{ data.formationLabel }} {{ data.nom }}</h1>
+  <h1 mat-dialog-title>Fiche de Me {{ data.prenom }} {{ data.nom }}</h1>
 
   <div       *ngIf="!this.ajustHourMode"
   >
@@ -307,6 +307,29 @@
     <mat-footer-cell *matFooterCellDef>
       <mat-cell>
         <mat-checkbox [(ngModel)]="data.isHeFormator"></mat-checkbox>
+      </mat-cell>
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isitAPublication">
+    <mat-header-cell *matHeaderCellDef> Publication ?</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div *ngIf="!element.value.modifyMode">
+        <mat-icon
+          *ngIf="element.value.isitAPublication"
+          class="trash"
+          style="color: green"
+        >
+          check_circle
+        </mat-icon>
+      </div>
+      <div *ngIf="element.value.modifyMode">
+        <mat-checkbox [(ngModel)]="element.value.isitAPublication"></mat-checkbox>
+      </div>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      <mat-cell>
+        <mat-checkbox [(ngModel)]="data.isitAPublication"></mat-checkbox>
       </mat-cell>
     </mat-footer-cell>
   </ng-container>

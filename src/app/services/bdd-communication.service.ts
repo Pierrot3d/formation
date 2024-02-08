@@ -396,7 +396,8 @@ export class BddCommunicationService {
     numOfHours: number,
     numOfGroupHours: number,
     isHeFormator?: boolean,
-    formationId?: number
+    isitAPublication?: boolean,
+    formationId?: number,
   ) {
     // Create a new post reference with an auto-generated id
     const db = getDatabase();
@@ -412,6 +413,7 @@ export class BddCommunicationService {
       numOfHours: numOfHours,
       numOfGroupHours: numOfGroupHours,
       isHeFormator: isHeFormator ? isHeFormator : false,
+      isitAPublication: isitAPublication? isitAPublication: false
     });
 
     return formation.key;
@@ -427,7 +429,8 @@ export class BddCommunicationService {
     numOfHours: number,
     numOfGroupHours: number,
     formationId: number,
-    isHeFormator?: boolean
+    isHeFormator?: boolean,
+    isitAPublication?: boolean
   ) {
     // Create a new post reference with an auto-generated id
     const db = getDatabase();
@@ -443,6 +446,7 @@ export class BddCommunicationService {
       numOfHours: numOfHours,
       numOfGroupHours: numOfGroupHours,
       isHeFormator: isHeFormator,
+      isitAPublication: isitAPublication
     });
 
     return;

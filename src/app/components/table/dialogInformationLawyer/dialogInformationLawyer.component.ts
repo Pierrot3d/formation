@@ -24,6 +24,7 @@ export class DialogInformationLawyerComponent {
     'nbrHours',
     'nbrHoursGroup',
     'isHeFormator',
+    'isitAPublication',
     'trash',
     'update',
     'total',
@@ -123,7 +124,8 @@ export class DialogInformationLawyerComponent {
       element.value.numOfHours ? element.value.numOfHours : 0,
       element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
       element.type,
-      element.value.isHeFormator ? element.value.isHeFormator : false
+      element.value.isHeFormator ? element.value.isHeFormator : false,
+      element.value.isitAPublication ? element.value.isitAPublication : false
     );
   }
 
@@ -145,17 +147,25 @@ export class DialogInformationLawyerComponent {
       this.data.numOfHours ? this.data.numOfHours : 0,
       this.data.numOfGroupHours ? this.data.numOfGroupHours : 0,
       this.data.isHeFormator ? this.data.isHeFormator : false,
+      this.data.isitAPublication? this.data.isitAPublication : false,
       this.data.formation?.id
     );
   }
 
   changeDateFormat(date) {
-    const offset = date.getTimezoneOffset();
-    date = new Date(date.getTime() - offset * 60 * 1000);
-    const jour = date.toISOString().split('T')[0].split('-')[2];
-    const mois = date.toISOString().split('T')[0].split('-')[1];
-    const annee = date.toISOString().split('T')[0].split('-')[0];
-    return jour + '/' + mois + '/' + annee;
+    if(date)
+    {
+      const offset = date.getTimezoneOffset();
+      date = new Date(date.getTime() - offset * 60 * 1000);
+      const jour = date.toISOString().split('T')[0].split('-')[2];
+      const mois = date.toISOString().split('T')[0].split('-')[1];
+      const annee = date.toISOString().split('T')[0].split('-')[0];
+      return jour + '/' + mois + '/' + annee;
+    }
+    else
+    {
+      return 0
+    }
   }
 
   nbrDeJours(d1?, d2?) {
@@ -225,7 +235,8 @@ export class DialogInformationLawyerComponent {
         Date: part.value.start,
         Libellé: part.value.formationLabel,
         Heures: part.value.numOfHours,
-        isHeFormator: part.value.isHeFormator? part.value.isHeFormator : false
+        isHeFormator: part.value.isHeFormator? part.value.isHeFormator : false,
+        isitAPublication: part.value.isitAPublication? part.value.isitAPublication: false
       };
 
       lawyersNameTableTmp.push(lawyerTableTmp);
@@ -244,6 +255,11 @@ export class DialogInformationLawyerComponent {
       'Libellé',
       'Heures',
       'Comptabilisées'
+    ], [
+      'Date',
+      'Libellé',
+      'Heures',
+      'Comptabilisées'
     ]);
     pdfMake.createPdf(document).open();
   }
@@ -253,7 +269,7 @@ export class DialogInformationLawyerComponent {
 
     body.push(columns);
     data.forEach(function (row) {
-      if(!row.isHeFormator)
+      if(!row.isHeFormator || !row.isitAPublication)
       {
         const dataRow = [];
 
@@ -289,7 +305,26 @@ export class DialogInformationLawyerComponent {
     return body;
   }
 
-  getDocument(formationName, column, columnDispense) {
+  buildPublicationTableBody(data, columns) {
+    const body = [];
+
+    body.push(columns);
+    data.forEach(function (row) {
+      if(row.isitAPublication)
+      {
+        const dataRow = [];
+        row.Comptabilisées = row.Heures
+        columns.forEach(function (column) {
+          dataRow.push(row[column].toString());
+        });
+
+        body.push(dataRow);
+      }
+    });
+
+    return body;
+  }
+  getDocument(formationName, column, columnDispense, columnPublication) {
     const logo = this.contentService.logoBase64;
     let mandatoryhoursAdjust: number;
     if(this.data.nbrAdjustHour)
@@ -397,9 +432,9 @@ export class DialogInformationLawyerComponent {
         },
         {
           table: {
-            widths: ['*', '*', '*'],
+            widths: ['auto', '*', 'auto', 'auto'],
             heights: 40,
-            body: [[' ', ' ', ' ']],
+            body: this.buildPublicationTableBody(formationName, columnPublication),
           },
           layout: {
             fillColor: function (rowIndex, node, columnIndex) {

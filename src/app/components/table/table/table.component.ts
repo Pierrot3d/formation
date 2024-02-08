@@ -34,6 +34,7 @@ export interface DialogData {
   numOfHours: number;
   numOfGroupHours: number;
   isHeFormator: boolean;
+  isitAPublication: boolean;
   nbrAdjustHour: number;
   motifAdjustHour: string;
   reportableHours: number;
@@ -61,6 +62,7 @@ export class TableComponent {
   sortedGeneralData;
   dataSortedByUser: Sort;
   SatisfyListMode = false;
+  SatisfyNumber: number;
   UnsatisfyListMode = false;
   UnsatisfyNumber: number;
   sortedDataTmp
@@ -294,6 +296,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       const unsatisfyList = []
       this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
       satisfyList.sort(this.SortSatisfyArray)
+      this.SatisfyNumber = satisfyList.length
       this.generateSatisfyPdf(satisfyList)
       this.sortedDataTmp = this.sortedData
       this.sortedData = new MatTableDataSource(satisfyList);
@@ -373,7 +376,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       width: 60,
     },
     {
-      text: 'Avocats ayant satisfaits à leurs obligations de formation',
+      text: 'Avocats ayant satisfaits à leurs obligations de formation : ' +  this.SatisfyNumber,
       bold: true,
       fontSize: 20,
       alignment: 'center',

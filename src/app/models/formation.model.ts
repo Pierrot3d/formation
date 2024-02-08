@@ -10,6 +10,7 @@ export class Formation {
         numOfDay: number,
         numOfHours: string,
         isHeFormator: boolean,
+        isitAPublication: boolean,
         numOfGroupHours: any,
         start: string,
       }
