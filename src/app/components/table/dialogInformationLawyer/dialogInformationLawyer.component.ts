@@ -269,15 +269,19 @@ export class DialogInformationLawyerComponent {
 
     body.push(columns);
     data.forEach(function (row) {
-      if(!row.isHeFormator || !row.isitAPublication)
+      if(!row.isHeFormator)
       {
-        const dataRow = [];
+        if(!row.isitAPublication)
+        {
+          const dataRow = [];
 
-        columns.forEach(function (column) {
-          dataRow.push(row[column].toString());
-        });
+          columns.forEach(function (column) {
+            dataRow.push(row[column].toString());
+          });
 
-        body.push(dataRow);
+          body.push(dataRow);
+        }
+
       }
     });
 

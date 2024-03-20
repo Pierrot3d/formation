@@ -41,6 +41,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ordreFormationModule } from './pages/formation/ordreFormation.module';
 import { SpinBoxModule } from './components/spin-box/spin-box.module';
 import { SigninModule } from './pages/signin/signin.module';
+import { TrombinoscopeModule } from './components/trombinoscope/trombinoscope.module';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -87,7 +88,8 @@ registerLocaleData(localeFr, 'fr');
     AppRoutingModule,
     ordreFormationModule,
     SigninModule,
-    SpinBoxModule
+    SpinBoxModule,
+    TrombinoscopeModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
