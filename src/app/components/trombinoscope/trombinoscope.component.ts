@@ -125,7 +125,7 @@ export class TrombinoscopeComponent {
 
   openUpdateDialog(id, imageUrl, nom, prenom, serment, casePalais, adresse, telephone, email): void {
     const dialogRef = this.dialog.open(DialogUpdateTrombinoscopeComponent, {
-      height: "70vh",
+      height: "100vh",
       width: "40vw",
       data: {id: id, imageUrl: imageUrl, nom: nom, prenom: prenom, serment: serment, case: casePalais, adresse: adresse, telephone: telephone, email : email},
     });

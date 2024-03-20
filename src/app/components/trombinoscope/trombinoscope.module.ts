@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSortModule,
     MatDialogModule,
     FormsModule,
+    MatButtonModule,
     MatInputModule,
     MatFormFieldModule
   ],

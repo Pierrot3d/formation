@@ -4,14 +4,38 @@
 <h1 mat-dialog-title>
   Modification du profil de {{ data.prenom }} {{ data.nom }}
 </h1>
+
+<!-- <input type="file" class="file-input"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+
+   {{fileName || "No file uploaded yet."}}
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+    </button>
+</div> -->
+
+
+<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+  <input hidden type="file" #fileInput (change)="uploadFile($event)">
+</div>
+<div  class="files-list" *ngFor="let file of files;let i= index">
+    <p> {{ file }} </p>
+    <button class="delete-file" (click)="deleteAttachment(i)">
+      <img src="../../../../assets/img/bin.png">
+    </button>
+ </div>
+
 <div mat-dialog-content>
+
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Nom</mat-label>
       <input matInput [(ngModel)]="data.nom" />
     </mat-form-field>
-  </p>
-  <p>
     <mat-form-field appearance="fill">
       <mat-label>Prénom</mat-label>
       <input matInput [(ngModel)]="data.prenom" />
