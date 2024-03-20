@@ -1,9 +1,12 @@
+import { DialogUpdateTrombinoscopeComponent } from './dialogUpdateTrombinoscope/dialogUpdateTrombinoscope.component';
 import { Component } from '@angular/core';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import {MatSort} from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-trombinoscope',
@@ -24,7 +27,7 @@ export class TrombinoscopeComponent {
   sortedData;
   dataSortedByUser: Sort;
 
-  constructor(public bddCommunicationService: BddCommunicationService) {
+  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog) {
     const dbGeneral = getDatabase();
     const starCountRefGeneral = ref(dbGeneral, 'general/');
     onValue(starCountRefGeneral, (snapshot) => {
@@ -118,5 +121,18 @@ export class TrombinoscopeComponent {
       return 1;
     }
     return 0;
+  }
+
+  openUpdateDialog(id, imageUrl, nom, prenom, serment, casePalais, adresse, telephone, email): void {
+    const dialogRef = this.dialog.open(DialogUpdateTrombinoscopeComponent, {
+      height: "70vh",
+      width: "40vw",
+      data: {id: id, imageUrl: imageUrl, nom: nom, prenom: prenom, serment: serment, case: casePalais, adresse: adresse, telephone: telephone, email : email},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      //console.log(result);
+    });
   }
 }

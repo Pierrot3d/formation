@@ -1,0 +1,64 @@
+<div mat-dialog-actions style="justify-content: right">
+  <mat-icon style="cursor: pointer" (click)="onNoClick()">close</mat-icon>
+</div>
+<h1 mat-dialog-title>
+  Modification du profil de {{ data.prenom }} {{ data.nom }}
+</h1>
+<div mat-dialog-content>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="data.nom" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Prénom</mat-label>
+      <input matInput [(ngModel)]="data.prenom" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Serment</mat-label>
+      <input matInput [(ngModel)]="data.serment" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Case Palais</mat-label>
+      <input type="number" matInput [(ngModel)]="data.casePalais" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Adresse</mat-label>
+      <input matInput [(ngModel)]="data.adresse" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Téléphone</mat-label>
+      <input matInput [(ngModel)]="data.telephone" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>e-mail</mat-label>
+      <input matInput [(ngModel)]="data.email" />
+    </mat-form-field>
+  </p>
+
+  <div mat-dialog-actions style="width: 100%; justify-content: center;">
+  <button
+    mat-raised-button
+    color="primary"
+    class="button"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    (click)="updateUser()"
+  >
+    Valider
+  </button>
+</div>
+</div>
+

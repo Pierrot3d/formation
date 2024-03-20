@@ -38,6 +38,12 @@ export interface DialogData {
   nbrAdjustHour: number;
   motifAdjustHour: string;
   reportableHours: number;
+  serment: string,
+  casePalais : number,
+  adresse: string,
+  telephone: string,
+  imageUrl: string
+
 }
 
 @Component({

@@ -171,6 +171,30 @@ export class BddCommunicationService {
     });
   }
 
+  updateTrombinoscopeUser(
+    id,
+    imageUrl,
+    nom,
+    prenom,
+    serment,
+    casePalais,
+    adresse,
+    telephone,
+    email
+  ) {
+    const db = getDatabase();
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
+      imageUrl:imageUrl? imageUrl: './../../assets/img/defaut.jpg',
+      prenom: prenom,
+      nom: nom,
+      serment:serment,
+      casePalais: casePalais,
+      adresse: adresse,
+      telephone: telephone,
+      email: email,
+    });
+  }
+
   updateReportableHours(id, reportableHours: number) {
     const db = getDatabase();
     update(ref(db, this.selectedDate + '/avocats/' + id), {
