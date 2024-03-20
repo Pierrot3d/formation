@@ -1,3 +1,69 @@
-<p>
-  trombinoscope works!
-</p>
+<table mat-table [dataSource]="this.sortedData" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
+
+        <ng-container matColumnDef="imageUrl">
+          <th mat-header-cell *matHeaderCellDef> Photo </th>
+          <td mat-cell *matCellDef="let element"> <img [src]="element.imageUrl" /> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="nom" sortActionDescription="Sort by nom"> Nom </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.nom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prenom">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="prenom" sortActionDescription="Sort by prenom"> Prénom </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.prenom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="serment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="serment" sortActionDescription="Sort by serment"> Serment </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.serment}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="case">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="case" sortActionDescription="Sort by case"> case </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.case}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="adresse">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="adresse" sortActionDescription="Sort by adresse"> adresse </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.adresse}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="telephone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="telephone" sortActionDescription="Sort by telephone"> telephone </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.telephone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="email" sortActionDescription="Sort by email"> email </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.value.email}} </td>
+        </ng-container>
+
+           <!-- update Column -->
+    <ng-container matColumnDef="update" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element" >
+        <mat-icon mat-raised-button> create </mat-icon>
+      </td>
+    </ng-container>
+
+  <!-- delete Column -->
+    <ng-container matColumnDef="trash" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon class="trash"(click)="this.bddCommunicationService.removeUser(element.type)"> delete </mat-icon>
+      </td>
+    </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

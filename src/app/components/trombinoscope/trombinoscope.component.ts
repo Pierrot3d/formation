@@ -3,6 +3,7 @@ import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-trombinoscope',
@@ -10,6 +11,9 @@ import { Sort } from '@angular/material/sort';
   styleUrls: ['./trombinoscope.component.css'],
 })
 export class TrombinoscopeComponent {
+
+  displayedColumns: string[] = ['imageUrl', 'nom', 'prenom', 'serment', 'case', 'adresse', 'telephone', 'email', 'update', 'trash'];
+
   dataSource;
   db;
   generalData$;
@@ -18,7 +22,7 @@ export class TrombinoscopeComponent {
   lawyers$;
   numberOfLawyer;
   sortedData;
-  dataSortedByUser;
+  dataSortedByUser: Sort;
 
   constructor(public bddCommunicationService: BddCommunicationService) {
     const dbGeneral = getDatabase();
@@ -55,6 +59,8 @@ export class TrombinoscopeComponent {
           this.numberOfLawyer = this.lawyers$.length;
 
           this.sortedData = this.lawyers$.slice();
+          this.sortedData.sort(this.SortList)
+
           if (this.dataSortedByUser) {
             this.sortData(this.dataSortedByUser);
           }
@@ -102,5 +108,15 @@ export class TrombinoscopeComponent {
 
   compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a > b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  SortList(x, y) {
+    if (x.value.nom  < y.value.nom) {
+      return -1;
+    }
+    if (x.value.nom > y.value.nom) {
+      return 1;
+    }
+    return 0;
   }
 }
