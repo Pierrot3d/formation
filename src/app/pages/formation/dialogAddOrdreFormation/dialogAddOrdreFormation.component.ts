@@ -30,6 +30,7 @@ export class DialogAddOrdreFormationComponent {
   @ViewChild('chipList') chipList;
 
   dataSource: any;
+  isAParticipant = false;
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -124,6 +125,10 @@ export class DialogAddOrdreFormationComponent {
     if (index >= 0) {
       this.lawyer.splice(index, 1);
     }
+    if(this.lawyer.length <= 0)
+      {
+        this.isAParticipant = false
+      }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -138,6 +143,10 @@ export class DialogAddOrdreFormationComponent {
           this.$lawyerList.splice(i, 1);
         }
       }
+      if(this.lawyer.length > 0)
+        {
+          this.isAParticipant = true
+        }
     }
 
   private _filter(value: string): string[] {

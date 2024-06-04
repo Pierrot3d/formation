@@ -85,10 +85,10 @@
     </mat-chip-row>
 </p>
 <p style="margin-top: 1.4em;">
-  <ng-container *ngIf="!this.data.lieu || !this.data.formationName || !this.data.duration" mat-dialog-actions>
+  <ng-container *ngIf="!this.data.lieu || !this.data.formationName || !this.data.duration || !this.isAParticipant || !this.range.value.start || !this.range.value.end" mat-dialog-actions>
     <button mat-raised-button disabled>Ajouter la formation</button>
   </ng-container>
-  <ng-container *ngIf="this.data.lieu && this.data.formationName && this.data.duration" mat-dialog-actions>
+  <ng-container *ngIf="this.data.lieu && this.data.formationName && this.data.duration && this.isAParticipant && this.range.value.start &&this.range.value.end" mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="addGlobalFormation()" [mat-dialog-close]="data"
       cdkFocusInitial>Ajouter la formation</button>
   </ng-container>
