@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { Component, EventEmitter, HostBinding, HostListener, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
@@ -27,6 +28,7 @@ export class DialogUpdateTrombinoscopeComponent   {
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
+
 
 
   updateUser() {

@@ -539,7 +539,7 @@ export class BddCommunicationService {
   getLawyersFromServerWithId(): [] {
     this.httpClient
       .get<any[]>(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/avocats.json'
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/avocats.json'
       )
       .subscribe(
         (response) => {
