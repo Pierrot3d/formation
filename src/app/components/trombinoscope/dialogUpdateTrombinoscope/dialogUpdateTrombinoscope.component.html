@@ -19,21 +19,15 @@
     </button>
 </div> -->
 
+<p>
+  <img class="image" [src]="'../../../../assets/img/avocats/'+data.nom+'_'+data.prenom+'.png'" />
+</p>
 
-<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-  <input hidden type="file" #fileInput (change)="uploadFile($event)">
-</div>
-<div  class="files-list" *ngFor="let file of files;let i= index">
-    <p> {{ file }} </p>
-    <button class="delete-file" (click)="deleteAttachment(i)">
-      <img src="../../../../assets/img/bin.png">
-    </button>
- </div>
 
 <div mat-dialog-content>
 
   <p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="left-container">
       <mat-label>Nom</mat-label>
       <input matInput [(ngModel)]="data.nom" />
     </mat-form-field>
