@@ -6,6 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import {MatSort} from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+import { ContentService } from 'src/app/services/content.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -27,7 +31,7 @@ export class TrombinoscopeComponent {
   sortedData;
   dataSortedByUser: Sort;
 
-  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog) {
+  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private contentService: ContentService) {
     const dbGeneral = getDatabase();
     const starCountRefGeneral = ref(dbGeneral, 'general/');
     onValue(starCountRefGeneral, (snapshot) => {
@@ -135,4 +139,124 @@ export class TrombinoscopeComponent {
       //console.log(result);
     });
   }
+
+
+  //
+  //
+  //GESTION PDF
+  //
+  //
+
+  generatePdf(participant, date, formationName, lieu)
+{
+  let lawyersNameTableTmp = [];
+  for(const part of participant)
+  {
+    const lawyerTableTmp = {
+      Nom: part.value.nom + ' ' + part.value.prenom,
+      Signature: ' '
+    }
+
+    lawyersNameTableTmp.push(lawyerTableTmp)
+  }
+
+  lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) => (a.Nom > b.Nom ? 1 : -1))
+
+  const document = this.getDocument(lawyersNameTableTmp, ['Nom', 'Signature'], date, formationName, lieu);
+  pdfMake.createPdf(document).open();
+}
+
+
+buildTableBody(data, columns) {
+  const body = [];
+
+  body.push(columns);
+
+  data.forEach(function(row) {
+      const dataRow = [];
+
+      columns.forEach(function(column) {
+          dataRow.push(row[column].toString());
+      })
+
+      body.push(dataRow);
+  });
+
+  return body;
+}
+
+getDocument(participant, column, date, formationName, lieu)
+{
+
+  const logo = this.contentService.logoBase64
+
+  const docDefinition =
+
+  { content:
+    [
+    {
+      image: logo,
+      width: 60
+    },
+    {
+      text: 'ORDRE DES AVOCATS DE TOURS',
+      margin: [ 0, 20, 0, 10 ],
+      style: 'header'
+    },
+    {
+      text: formationName,
+      margin: [ 0, 10, 0, 10 ],
+      style: 'formation'
+    },
+    {
+      text: lieu,
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
+    },
+    {
+      text: date,
+      margin: [ 0, 10, 0, 10 ],
+      style: 't1'
+    },
+    {
+			table: {
+        widths: ['auto', '*'],
+        heights: 40,
+				body: this.buildTableBody(participant, column)
+			},
+			layout: {
+				fillColor: function (rowIndex, node, columnIndex) {
+					return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+				}
+			}
+		},
+
+  ],
+styles:
+{
+  header:
+  {
+    fontSize: 18,
+    alignment: 'center',
+    bold: true
+  },
+  t1:
+  {
+    fontSize: 14,
+    alignment: 'center',
+    bold: true
+  },
+  formation:
+  {
+    fontSize: 14,
+    alignment: 'center',
+  }
+}
+
+}
+
+  return docDefinition
+
+}
+
 }
