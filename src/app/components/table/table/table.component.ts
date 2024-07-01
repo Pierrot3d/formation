@@ -42,8 +42,18 @@ export interface DialogData {
   casePalais : number,
   adresse: string,
   telephone: string,
-  imageUrl: string
-
+  imageUrl: string,
+case: string,
+tel: string,
+ville: string,
+site: string,
+domaine: any,
+cabinetSecondaire: string,
+specialite: string,
+mediateur: string,
+titre: string,
+cabinet: any,
+cp: number,
 }
 
 @Component({

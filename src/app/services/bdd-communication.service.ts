@@ -83,6 +83,8 @@ export class BddCommunicationService {
       );
   }
 
+
+
   saveOrdreFormationToServer(element) {
     this.httpClient
       .post(
@@ -107,6 +109,7 @@ export class BddCommunicationService {
       .subscribe(
         (response) => {
           this.liste = [];
+          this.lawyersInformationTMP = []
           let listTmp = response;
           this.listeWithId = Object.keys(response).map((key) => ({
             type: key,
@@ -115,6 +118,7 @@ export class BddCommunicationService {
           //console.log("ceci est la listTmp", listTmp)
           for (let elemnt of Object.getOwnPropertyNames(listTmp)) {
             this.liste.push(listTmp[elemnt]);
+            this.lawyersInformationTMP.push(listTmp[elemnt]);
           }
           // console.log("ceci est la vraie liste",this.liste)
           return this.liste;
@@ -125,6 +129,26 @@ export class BddCommunicationService {
       );
     return [];
   }
+
+  lawyersInformationTMP
+  saveLawyersInformations(element)
+  {
+    console.log(element)
+    console.log(this.listeWithId)
+    for (let lawyer = 0; lawyer < this.listeWithId.length; lawyer++) {
+      for(let information of element)
+        {
+          if(information.NOM === this.listeWithId[lawyer].value.nom && information.PRENOM === this.listeWithId[lawyer].value.prenom)
+            {
+              console.log(this.listeWithId[lawyer].value.nom, this.listeWithId[lawyer].value.nom, this.listeWithId[lawyer].type)
+
+              this.updateUserTMP(this.listeWithId[lawyer].type, this.listeWithId[lawyer].value.prenom, this.listeWithId[lawyer].value.nom, information.MAIL, information.CASE, information.SERMENT, information.TELEPHONE, information.VILLE, information.ADRESSE, information.SITE, information.DOMAINE, information.CABINETSECONDAIRE, information.SPECIALITE, information.MEDIATEURS, information.TITRE, information.CABINET, information.CP)
+            }
+        }
+
+    }
+  }
+
 
   getGeneralFromServer(): [] {
     this.httpClient
@@ -168,6 +192,46 @@ export class BddCommunicationService {
       email: DataEmail,
       group: DataGroup,
       mandatoryHoursGroup: mandatoryHoursGroup,
+    });
+  }
+
+  updateUserTMP(
+    id,
+    DataPrenom,
+    DataNom,
+    DataEmail,
+    Case,
+    Serment,
+    Tel,
+    Ville,
+    Adresse,
+    Site?,
+    Domaine?,
+    CabinetSecondaire?,
+    Specialite?,
+    Mediateur?,
+    Titre?,
+    Cabinet?,
+    CP?
+  ) {
+    const db = getDatabase();
+    update(ref(db, this.selectedDate + '/avocats/' + id), {
+      prenom: DataPrenom,
+      nom: DataNom,
+      email: DataEmail? DataEmail:"",
+      case: Case? Case:"",
+      serment: Serment? Serment:"",
+      tel: Tel? Tel:"",
+      ville: Ville? Ville:"",
+      adresse: Adresse? Adresse:"",
+      site: Site? Site:"",
+      domaine: Domaine? Domaine:"",
+      cabinetSecondaire: CabinetSecondaire? CabinetSecondaire:"",
+      specialite: Specialite? Specialite:"",
+      mediateur: Mediateur? Mediateur:"",
+      titre: Titre? Titre:"",
+      cabinet: Cabinet? Cabinet: "",
+      cp: CP? CP: ""
     });
   }
 

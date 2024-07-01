@@ -7,6 +7,7 @@ import { Sort } from '@angular/material/sort';
 import {MatSort} from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ContentService } from 'src/app/services/content.service';
+import { DialogExcelComponent } from "../excel/dialogExcel/dialogExcel.component";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -127,11 +128,38 @@ export class TrombinoscopeComponent {
     return 0;
   }
 
-  openUpdateDialog(id, imageUrl, nom, prenom, serment, casePalais, adresse, telephone, email): void {
+  openUpdateDialog(id, imageUrl, prenom, nom,email, casePalais, serment, tel,
+    ville,
+    adresse,
+    site,
+    domaine,
+    cabinetSecondaire,
+    specialite,
+    mediateur,
+    titre,
+    cabinet,
+    cp): void {
     const dialogRef = this.dialog.open(DialogUpdateTrombinoscopeComponent, {
       height: "100vh",
       width: "40vw",
-      data: {id: id, imageUrl: imageUrl, nom: nom, prenom: prenom, serment: serment, case: casePalais, adresse: adresse, telephone: telephone, email : email},
+      data: {id: id,
+        imageUrl: imageUrl,
+        prenom:prenom,
+        nom:nom,
+        email:email,
+        case:casePalais,
+        serment:serment,
+        tel:tel,
+        ville:ville,
+        adresse:adresse,
+        site:site,
+        domaine:domaine,
+        cabinetSecondaire:cabinetSecondaire,
+        specialite:specialite,
+        mediateur:mediateur,
+        titre:titre,
+        cabinet:cabinet,
+        cp:cp},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -140,6 +168,17 @@ export class TrombinoscopeComponent {
     });
   }
 
+  openExcelDialog(): void {
+    const dialogRef = this.dialog.open(DialogExcelComponent, {
+      height: "80vh",
+      width: "60vw",
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      //console.log(result);
+    });
+  }
 
   //
   //

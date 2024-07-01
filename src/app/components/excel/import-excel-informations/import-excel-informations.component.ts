@@ -4,11 +4,13 @@ import { Subject } from 'rxjs';
 import { BddCommunicationService } from 'src/app/services/bdd-communication.service';
 
 @Component({
-  selector: 'app-import-excel',
-  templateUrl: './import-excel.component.html',
-  styleUrls: ['./import-excel.component.css']
+  selector: 'app-import-excel-informations',
+  templateUrl: './import-excel-informations.component.html',
+  styleUrls: ['./import-excel-informations.component.css']
 })
-export class ImportExcelComponent   {
+export class ImportExcelInformationsComponent   {
+
+
   spinnerEnabled = false;
   keys: string[];
   dataSheet: any = new Subject();
@@ -58,37 +60,15 @@ export class ImportExcelComponent   {
 
   importData()
   {
-
-    // eslint-disable-next-line prefer-const
-    for(let elmt of this.dataImported)
-    {
-      const str = elmt.nom
-      const words = str.split(' ');
-      if(words.length === 2)
-      {
-        this.addUser(words[1], words[0], elmt?.email)
-      }
-      else
-      {
-        this.addUser(words[2], words[0] + ' ' + words[1], elmt?.email)
-      }
-
-    }
-    console.log(this.dataImported)
+    this.bddCommunicationService.getLawyersFromServer()
+    this.bddCommunicationService.saveLawyersInformations(this.dataImported)
   }
 
 
 
   addUser(prenom, nom, email?)
   {
-    const value = {
-      prenom: prenom,
-      nom: nom,
-      email: email? email: 'non renseigné',
-      mandatoryHours: 20,
-    }
-    this.bddCommunicationService.saveLawyersToServer(value);
-    this.bddCommunicationService.getLawyersFromServer();
+    console.log("addUser Work")
   }
 
   removeData() {
@@ -96,7 +76,6 @@ export class ImportExcelComponent   {
     this.dataSheet.next(null);
     this.keys = null;
   }
-
 
 
 }

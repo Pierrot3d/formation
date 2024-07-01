@@ -42,10 +42,22 @@
       <input matInput [(ngModel)]="data.serment" />
     </mat-form-field>
   </p>
+   <p>
+    <mat-form-field appearance="fill">
+      <mat-label>titre</mat-label>
+      <input matInput [(ngModel)]="data.titre" />
+    </mat-form-field>
+  </p>
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Case Palais</mat-label>
-      <input type="number" matInput [(ngModel)]="data.casePalais" />
+      <input type="number" matInput [(ngModel)]="data.case" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>cabinet</mat-label>
+      <input matInput [(ngModel)]="data.cabinet" />
     </mat-form-field>
   </p>
   <p>
@@ -55,9 +67,19 @@
     </mat-form-field>
   </p>
   <p>
+    <mat-form-field appearance="fill" class="left-container">
+      <mat-label>Ville</mat-label>
+      <input matInput [(ngModel)]="data.ville" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>CP</mat-label>
+      <input matInput [(ngModel)]="data.cp" />
+    </mat-form-field>
+  </p>
+  <p>
     <mat-form-field appearance="fill">
       <mat-label>Téléphone</mat-label>
-      <input matInput [(ngModel)]="data.telephone" />
+      <input matInput [(ngModel)]="data.tel" />
     </mat-form-field>
   </p>
   <p>
@@ -66,6 +88,44 @@
       <input matInput [(ngModel)]="data.email" />
     </mat-form-field>
   </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Site Web</mat-label>
+      <input matInput [(ngModel)]="data.site" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Spécialité</mat-label>
+      <input matInput [(ngModel)]="data.specialite" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Domaine de compétence</mat-label>
+      <input matInput [(ngModel)]="data.domaine" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>cabinet secondaire</mat-label>
+      <input matInput [(ngModel)]="data.cabinetSecondaire" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>mediateur</mat-label>
+      <input matInput [(ngModel)]="data.mediateur" />
+    </mat-form-field>
+  </p>
+
+
+
+
+
+
+
+
 
   <div mat-dialog-actions style="width: 100%; justify-content: center;">
   <button

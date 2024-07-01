@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { ExportExcelComponent } from './export-excel/export-excel.component';
+import { ImportExcelInformationsComponent } from './import-excel-informations/import-excel-informations.component';
 
 
 
@@ -28,7 +29,8 @@ import { ExportExcelComponent } from './export-excel/export-excel.component';
     ExcelComponent,
     ImportExcelComponent,
     ExportExcelComponent,
-    DialogExcelComponent
+    DialogExcelComponent,
+    ImportExcelInformationsComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { ExportExcelComponent } from './export-excel/export-excel.component';
     [
       ExcelComponent,
       ImportExcelComponent,
+      ImportExcelInformationsComponent,
       DialogExcelComponent
     ]
 })
