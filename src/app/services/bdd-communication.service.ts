@@ -144,30 +144,16 @@ export class BddCommunicationService {
           information.NOM === this.listeWithId[lawyer].value.nom &&
           information.PRENOM === this.listeWithId[lawyer].value.prenom
         ) {
-          console.log(
-            this.listeWithId[lawyer].value.nom,
-            this.listeWithId[lawyer].value.nom,
-            this.listeWithId[lawyer].type
-          );
+
+          console.log(information.NOM, information.PRENOM)
 
           this.updateUserTMP(
             this.listeWithId[lawyer].type,
             this.listeWithId[lawyer].value.prenom,
             this.listeWithId[lawyer].value.nom,
-            information.MAIL,
-            information.CASE,
-            information.SERMENT,
-            information.TELEPHONE,
-            information.VILLE,
-            information.ADRESSE,
-            information.SITE,
-            information.DOMAINE,
-            information.CABINETSECONDAIRE,
-            information.SPECIALITE,
-            information.MEDIATEURS,
-            information.TITRE,
-            information.CABINET,
-            information.CP
+             information.DOMAINE1,
+             information.DOMAINE2,
+             information.DOMAINE3,
           );
         }
       }
@@ -221,41 +207,17 @@ export class BddCommunicationService {
 
   updateUserTMP(
     id,
-    DataPrenom,
-    DataNom,
-    DataEmail,
-    Case,
-    Serment,
-    Tel,
-    Ville,
-    Adresse,
-    Site?,
-    Domaine?,
-    CabinetSecondaire?,
-    Specialite?,
-    Mediateur?,
-    Titre?,
-    Cabinet?,
-    CP?
+    prenom,
+    nom,
+    domaine1,
+    domaine2,
+    domaine3,
   ) {
     const db = getDatabase();
     update(ref(db, this.selectedDate + '/avocats/' + id), {
-      prenom: DataPrenom,
-      nom: DataNom,
-      email: DataEmail ? DataEmail : '',
-      case: Case ? Case : '',
-      serment: Serment ? Serment : '',
-      tel: Tel ? Tel : '',
-      ville: Ville ? Ville : '',
-      adresse: Adresse ? Adresse : '',
-      site: Site ? Site : '',
-      domaine: Domaine ? Domaine : '',
-      cabinetSecondaire: CabinetSecondaire ? CabinetSecondaire : '',
-      specialite: Specialite ? Specialite : '',
-      mediateur: Mediateur ? Mediateur : '',
-      titre: Titre ? Titre : '',
-      cabinet: Cabinet ? Cabinet : '',
-      cp: CP ? CP : '',
+      domaine1: domaine1 ? domaine1 : '',
+      domaine2: domaine2 ? domaine2 : '',
+      domaine3: domaine3 ? domaine3 : '',
     });
   }
 
