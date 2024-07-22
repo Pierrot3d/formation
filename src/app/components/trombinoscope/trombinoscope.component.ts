@@ -141,7 +141,7 @@ export class TrombinoscopeComponent {
     cp): void {
     const dialogRef = this.dialog.open(DialogUpdateTrombinoscopeComponent, {
       height: "100vh",
-      width: "40vw",
+      width: "60vw",
       data: {id: id,
         imageUrl: imageUrl,
         prenom:prenom,

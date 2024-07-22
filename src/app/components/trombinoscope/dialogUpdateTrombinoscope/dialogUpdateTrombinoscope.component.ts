@@ -33,8 +33,19 @@ export class DialogUpdateTrombinoscopeComponent   {
       this.data.serment,
       this.data.casePalais,
       this.data.adresse,
-      this.data.telephone,
+      this.data.tel,
       this.data.email,
+      this.data.ville,
+      this.data.site,
+      this.data.domaine1,
+      this.data.domaine2,
+      this.data.domaine3,
+      this.data.cabinetSecondaire,
+      this.data.specialite,
+      this.data.mediateur,
+      this.data.titre,
+      this.data.cabinet,
+      this.data.cp
     );
   }
 

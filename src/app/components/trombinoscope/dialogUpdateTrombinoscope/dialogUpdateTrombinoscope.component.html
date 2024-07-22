@@ -37,21 +37,17 @@
     </mat-form-field>
   </p>
   <p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="left-container">
       <mat-label>Serment</mat-label>
       <input matInput [(ngModel)]="data.serment" />
     </mat-form-field>
-  </p>
-   <p>
+    <mat-form-field appearance="fill" class="left-container">
+      <mat-label>Case Palais</mat-label>
+      <input type="number" matInput [(ngModel)]="data.case" />
+    </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>titre</mat-label>
       <input matInput [(ngModel)]="data.titre" />
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Case Palais</mat-label>
-      <input type="number" matInput [(ngModel)]="data.case" />
     </mat-form-field>
   </p>
   <p>
@@ -61,9 +57,13 @@
     </mat-form-field>
   </p>
   <p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="left-container">
       <mat-label>Adresse</mat-label>
       <input matInput [(ngModel)]="data.adresse" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>cabinet secondaire</mat-label>
+      <input matInput [(ngModel)]="data.cabinetSecondaire" />
     </mat-form-field>
   </p>
   <p>
@@ -77,18 +77,14 @@
     </mat-form-field>
   </p>
   <p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="left-container">
       <mat-label>Téléphone</mat-label>
       <input matInput [(ngModel)]="data.tel" />
     </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="left-container">
       <mat-label>e-mail</mat-label>
       <input matInput [(ngModel)]="data.email" />
     </mat-form-field>
-  </p>
-  <p>
     <mat-form-field appearance="fill">
       <mat-label>Site Web</mat-label>
       <input matInput [(ngModel)]="data.site" />
@@ -101,17 +97,20 @@
     </mat-form-field>
   </p>
   <p>
+    <mat-form-field appearance="fill" class="left-container">
+      <mat-label>Compétence 1</mat-label>
+      <input matInput [(ngModel)]="data.domaine1" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="left-container">
+      <mat-label>Compétence 2</mat-label>
+      <input matInput [(ngModel)]="data.domaine2" />
+    </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Domaine de compétence</mat-label>
-      <input matInput [(ngModel)]="data.domaine" />
+      <mat-label>Compétence 3</mat-label>
+      <input matInput [(ngModel)]="data.domaine3" />
     </mat-form-field>
   </p>
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>cabinet secondaire</mat-label>
-      <input matInput [(ngModel)]="data.cabinetSecondaire" />
-    </mat-form-field>
-  </p>
+
   <p>
     <mat-form-field appearance="fill">
       <mat-label>mediateur</mat-label>

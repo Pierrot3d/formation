@@ -43,7 +43,7 @@ export class BddCommunicationService {
   listeWithId = [];
 
   listTMP = [];
-  listWithIdTMP= [];
+  listWithIdTMP = [];
 
   formationList = [];
   formationListWithId = [];
@@ -70,7 +70,9 @@ export class BddCommunicationService {
   saveLawyersToServer(element: FormExcel) {
     this.httpClient
       .post(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/avocats.json',
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' +
+          this.selectedDate +
+          '/avocats.json',
         element
       )
       .subscribe(
@@ -83,12 +85,12 @@ export class BddCommunicationService {
       );
   }
 
-
-
   saveOrdreFormationToServer(element) {
     this.httpClient
       .post(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/formationOrdre.json',
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' +
+          this.selectedDate +
+          '/formationOrdre.json',
         element
       )
       .subscribe(
@@ -104,12 +106,14 @@ export class BddCommunicationService {
   getLawyersFromServer(): [] {
     this.httpClient
       .get<any[]>(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/avocats.json'
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' +
+          this.selectedDate +
+          '/avocats.json'
       )
       .subscribe(
         (response) => {
           this.liste = [];
-          this.lawyersInformationTMP = []
+          this.lawyersInformationTMP = [];
           let listTmp = response;
           this.listeWithId = Object.keys(response).map((key) => ({
             type: key,
@@ -130,25 +134,45 @@ export class BddCommunicationService {
     return [];
   }
 
-  lawyersInformationTMP
-  saveLawyersInformations(element)
-  {
-    console.log(element)
-    console.log(this.listeWithId)
+  lawyersInformationTMP;
+  saveLawyersInformations(element) {
+    console.log(element);
+    console.log(this.listeWithId);
     for (let lawyer = 0; lawyer < this.listeWithId.length; lawyer++) {
-      for(let information of element)
-        {
-          if(information.NOM === this.listeWithId[lawyer].value.nom && information.PRENOM === this.listeWithId[lawyer].value.prenom)
-            {
-              console.log(this.listeWithId[lawyer].value.nom, this.listeWithId[lawyer].value.nom, this.listeWithId[lawyer].type)
+      for (let information of element) {
+        if (
+          information.NOM === this.listeWithId[lawyer].value.nom &&
+          information.PRENOM === this.listeWithId[lawyer].value.prenom
+        ) {
+          console.log(
+            this.listeWithId[lawyer].value.nom,
+            this.listeWithId[lawyer].value.nom,
+            this.listeWithId[lawyer].type
+          );
 
-              this.updateUserTMP(this.listeWithId[lawyer].type, this.listeWithId[lawyer].value.prenom, this.listeWithId[lawyer].value.nom, information.MAIL, information.CASE, information.SERMENT, information.TELEPHONE, information.VILLE, information.ADRESSE, information.SITE, information.DOMAINE, information.CABINETSECONDAIRE, information.SPECIALITE, information.MEDIATEURS, information.TITRE, information.CABINET, information.CP)
-            }
+          this.updateUserTMP(
+            this.listeWithId[lawyer].type,
+            this.listeWithId[lawyer].value.prenom,
+            this.listeWithId[lawyer].value.nom,
+            information.MAIL,
+            information.CASE,
+            information.SERMENT,
+            information.TELEPHONE,
+            information.VILLE,
+            information.ADRESSE,
+            information.SITE,
+            information.DOMAINE,
+            information.CABINETSECONDAIRE,
+            information.SPECIALITE,
+            information.MEDIATEURS,
+            information.TITRE,
+            information.CABINET,
+            information.CP
+          );
         }
-
+      }
     }
   }
-
 
   getGeneralFromServer(): [] {
     this.httpClient
@@ -218,20 +242,20 @@ export class BddCommunicationService {
     update(ref(db, this.selectedDate + '/avocats/' + id), {
       prenom: DataPrenom,
       nom: DataNom,
-      email: DataEmail? DataEmail:"",
-      case: Case? Case:"",
-      serment: Serment? Serment:"",
-      tel: Tel? Tel:"",
-      ville: Ville? Ville:"",
-      adresse: Adresse? Adresse:"",
-      site: Site? Site:"",
-      domaine: Domaine? Domaine:"",
-      cabinetSecondaire: CabinetSecondaire? CabinetSecondaire:"",
-      specialite: Specialite? Specialite:"",
-      mediateur: Mediateur? Mediateur:"",
-      titre: Titre? Titre:"",
-      cabinet: Cabinet? Cabinet: "",
-      cp: CP? CP: ""
+      email: DataEmail ? DataEmail : '',
+      case: Case ? Case : '',
+      serment: Serment ? Serment : '',
+      tel: Tel ? Tel : '',
+      ville: Ville ? Ville : '',
+      adresse: Adresse ? Adresse : '',
+      site: Site ? Site : '',
+      domaine: Domaine ? Domaine : '',
+      cabinetSecondaire: CabinetSecondaire ? CabinetSecondaire : '',
+      specialite: Specialite ? Specialite : '',
+      mediateur: Mediateur ? Mediateur : '',
+      titre: Titre ? Titre : '',
+      cabinet: Cabinet ? Cabinet : '',
+      cp: CP ? CP : '',
     });
   }
 
@@ -243,19 +267,41 @@ export class BddCommunicationService {
     serment,
     casePalais,
     adresse,
-    telephone,
-    email
+    tel,
+    email,
+    ville,
+    site,
+    domaine1,
+    domaine2,
+    domaine3,
+    cabinetSecondaire,
+    specialite,
+    mediateur,
+    titre,
+    cabinet,
+    cp
   ) {
     const db = getDatabase();
     update(ref(db, this.selectedDate + '/avocats/' + id), {
-      imageUrl:imageUrl? imageUrl: './../../assets/img/defaut.jpg',
-      prenom: prenom,
+      imageUrl: imageUrl ? imageUrl : './../../assets/img/defaut.jpg',
       nom: nom,
-      serment:serment,
-      casePalais: casePalais,
-      adresse: adresse,
-      telephone: telephone,
-      email: email,
+      email: email ? email : '',
+      prenom: prenom ? prenom : '',
+      casePalais: casePalais ? casePalais : '',
+      serment: serment ? serment : '',
+      tel: tel ? tel : '',
+      ville: ville ? ville : '',
+      adresse: adresse ? adresse : '',
+      site: site ? site : '',
+      domaine1: domaine1 ? domaine1 : '',
+      domaine2: domaine2 ? domaine2 : '',
+      domaine3: domaine3 ? domaine3 : '',
+      cabinetSecondaire: cabinetSecondaire ? cabinetSecondaire : '',
+      specialite: specialite ? specialite : '',
+      mediateur: mediateur ? mediateur : '',
+      titre: titre ? titre : '',
+      cabinet: cabinet ? cabinet : '',
+      cp: cp ? cp : '',
     });
   }
 
@@ -274,8 +320,7 @@ export class BddCommunicationService {
     });
   }
 
-
- /*  getLawyersFromServerTMP() {
+  /*  getLawyersFromServerTMP() {
 
     const dbFormation = getDatabase();
     const starCountRefFormation = ref(dbFormation, 'formation/');
@@ -396,7 +441,10 @@ export class BddCommunicationService {
       let formationList$: { type; value }[] = [];
 
       const db = getDatabase();
-      const starCountRef = ref(db, this.selectedDate + '/formation/' + participant.type);
+      const starCountRef = ref(
+        db,
+        this.selectedDate + '/formation/' + participant.type
+      );
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
@@ -438,7 +486,10 @@ export class BddCommunicationService {
     );
 
     console.log('jenvoie à bdd :', lawyer);
-    const formation = ref(db, this.selectedDate + '/formationOrdre/' + idFormationOrdre);
+    const formation = ref(
+      db,
+      this.selectedDate + '/formationOrdre/' + idFormationOrdre
+    );
     update(formation, {
       formationName: data.formationName,
       duration: data.duration,
@@ -463,7 +514,10 @@ export class BddCommunicationService {
   ) {
     const db = getDatabase();
 
-    const formation = ref(db, this.selectedDate + '/formationOrdre/' + idFormationOrdre);
+    const formation = ref(
+      db,
+      this.selectedDate + '/formationOrdre/' + idFormationOrdre
+    );
 
     update(formation, {
       formationName: data.formationName,
@@ -485,11 +539,11 @@ export class BddCommunicationService {
     numOfGroupHours: number,
     isHeFormator?: boolean,
     isitAPublication?: boolean,
-    formationId?: number,
+    formationId?: number
   ) {
     // Create a new post reference with an auto-generated id
     const db = getDatabase();
-    const lawyerListRef = ref(db, + this.selectedDate + '/formation/' + id);
+    const lawyerListRef = ref(db, +this.selectedDate + '/formation/' + id);
     const formation = push(lawyerListRef);
     //console.log(formation.key)
     set(formation, {
@@ -501,7 +555,7 @@ export class BddCommunicationService {
       numOfHours: numOfHours,
       numOfGroupHours: numOfGroupHours,
       isHeFormator: isHeFormator ? isHeFormator : false,
-      isitAPublication: isitAPublication? isitAPublication: false
+      isitAPublication: isitAPublication ? isitAPublication : false,
     });
 
     return formation.key;
@@ -523,7 +577,10 @@ export class BddCommunicationService {
     // Create a new post reference with an auto-generated id
     const db = getDatabase();
 
-    const formation = ref(db, this.selectedDate + '/formation/' + id + '/' + formationId);
+    const formation = ref(
+      db,
+      this.selectedDate + '/formation/' + id + '/' + formationId
+    );
 
     update(formation, {
       formationLabel: formationLabel,
@@ -534,7 +591,7 @@ export class BddCommunicationService {
       numOfHours: numOfHours,
       numOfGroupHours: numOfGroupHours,
       isHeFormator: isHeFormator,
-      isitAPublication: isitAPublication
+      isitAPublication: isitAPublication,
     });
 
     return;
@@ -579,12 +636,14 @@ export class BddCommunicationService {
   removeUser(userKey) {
     const db = getDatabase();
     remove(ref(db, this.selectedDate + '/avocats/' + userKey));
-    remove(ref(db, this.selectedDate +'/formation/' + userKey));
+    remove(ref(db, this.selectedDate + '/formation/' + userKey));
   }
 
   removeFormation(id, formationKey) {
     const db = getDatabase();
-    remove(ref(db, this.selectedDate + '/formation/' + id + '/' + formationKey));
+    remove(
+      ref(db, this.selectedDate + '/formation/' + id + '/' + formationKey)
+    );
   }
 
   removeOrdreFormation(userKey) {
@@ -603,7 +662,9 @@ export class BddCommunicationService {
   getLawyersFromServerWithId(): [] {
     this.httpClient
       .get<any[]>(
-        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' + this.selectedDate + '/avocats.json'
+        'https://barreaudetours-f3e06-default-rtdb.europe-west1.firebasedatabase.app/' +
+          this.selectedDate +
+          '/avocats.json'
       )
       .subscribe(
         (response) => {
@@ -633,36 +694,34 @@ export class BddCommunicationService {
       nbrGroupHours = this.getFormationGroupHours(formationList);
       this.updateNbrGroupHours(id, nbrGroupHours);
     } else {
-    //nothing
+      //nothing
     }
   }
 
   getSatisfyList(allLawyerInformation, satisfyList, unsatifyList) {
-
     for (let lawyerInformation of allLawyerInformation) {
       if (lawyerInformation.value.nbrAdjustHour) {
         lawyerInformation.value.mandatoryhoursAdjust =
-        lawyerInformation.value.mandatoryHours -
-        lawyerInformation.value.nbrAdjustHour;
-        if(lawyerInformation.value.nbr >= lawyerInformation.value.mandatoryhoursAdjust)
-      {
-        satisfyList.push(lawyerInformation)
-      }
-      else{
-        unsatifyList.push(lawyerInformation)
-      }
-      }
-      else
-      {
-        if(lawyerInformation.value.nbr >= lawyerInformation.value.mandatoryHours)
-        {
-          satisfyList.push(lawyerInformation)
+          lawyerInformation.value.mandatoryHours -
+          lawyerInformation.value.nbrAdjustHour;
+        if (
+          lawyerInformation.value.nbr >=
+          lawyerInformation.value.mandatoryhoursAdjust
+        ) {
+          satisfyList.push(lawyerInformation);
+        } else {
+          unsatifyList.push(lawyerInformation);
         }
-        else{
-          unsatifyList.push(lawyerInformation)
+      } else {
+        if (
+          lawyerInformation.value.nbr >= lawyerInformation.value.mandatoryHours
+        ) {
+          satisfyList.push(lawyerInformation);
+        } else {
+          unsatifyList.push(lawyerInformation);
         }
       }
-      }
+    }
   }
 
   getFormationHours(formationList) {
