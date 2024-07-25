@@ -1,7 +1,12 @@
 <div class="button-container">
 
-<button mat-raised-button (click)="openExcelDialog()" class="button">
+<!-- <button mat-raised-button (click)="openExcelDialog()" class="button">
   Importer / exporter
+  <mat-icon>file_copy</mat-icon>
+</button> -->
+
+<button mat-raised-button class="button" (click)="genereatePdfTmp(this.sortedData)">
+  Générer le trombinoscope
   <mat-icon>file_copy</mat-icon>
 </button>
 </div>

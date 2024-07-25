@@ -135,6 +135,7 @@ export class BddCommunicationService {
   }
 
   lawyersInformationTMP;
+
   saveLawyersInformations(element) {
     console.log(element);
     console.log(this.listeWithId);

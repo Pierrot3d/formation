@@ -68,10 +68,6 @@ export class TrombinoscopeComponent {
 
           this.sortedData = this.lawyers$.slice();
           this.sortedData.sort(this.SortList)
-
-          if (this.dataSortedByUser) {
-            this.sortData(this.dataSortedByUser);
-          }
         });
       }
     });
@@ -190,7 +186,14 @@ export class TrombinoscopeComponent {
   //
   //
 
-  generatePdf(participant, date, formationName, lieu)
+  genereatePdfTmp(participant)
+  {
+    let tabTmp
+    console.log(participant)
+
+  }
+
+  generatePdf(participant)
 {
   let lawyersNameTableTmp = [];
   for(const part of participant)
@@ -205,7 +208,7 @@ export class TrombinoscopeComponent {
 
   lawyersNameTableTmp = lawyersNameTableTmp.sort((a, b) => (a.Nom > b.Nom ? 1 : -1))
 
-  const document = this.getDocument(lawyersNameTableTmp, ['Nom', 'Signature'], date, formationName, lieu);
+  const document = this.getDocument(lawyersNameTableTmp, ['', '', '']);
   pdfMake.createPdf(document).open();
 }
 
@@ -228,7 +231,7 @@ buildTableBody(data, columns) {
   return body;
 }
 
-getDocument(participant, column, date, formationName, lieu)
+getDocument(participant, column)
 {
 
   const logo = this.contentService.logoBase64
@@ -247,23 +250,8 @@ getDocument(participant, column, date, formationName, lieu)
       style: 'header'
     },
     {
-      text: formationName,
-      margin: [ 0, 10, 0, 10 ],
-      style: 'formation'
-    },
-    {
-      text: lieu,
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
-      text: date,
-      margin: [ 0, 10, 0, 10 ],
-      style: 't1'
-    },
-    {
 			table: {
-        widths: ['auto', '*'],
+        widths: ['auto', 'auto', 'auto'],
         heights: 40,
 				body: this.buildTableBody(participant, column)
 			},
