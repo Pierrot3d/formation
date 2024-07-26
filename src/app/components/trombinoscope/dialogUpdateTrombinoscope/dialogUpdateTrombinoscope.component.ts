@@ -31,7 +31,7 @@ export class DialogUpdateTrombinoscopeComponent   {
       this.data.nom,
       this.data.prenom,
       this.data.serment,
-      this.data.casePalais,
+      this.data.case,
       this.data.adresse,
       this.data.tel,
       this.data.email,

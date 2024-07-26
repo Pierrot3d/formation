@@ -250,7 +250,7 @@ export class BddCommunicationService {
       nom: nom,
       email: email ? email : '',
       prenom: prenom ? prenom : '',
-      casePalais: casePalais ? casePalais : '',
+      case: casePalais ? casePalais : '',
       serment: serment ? serment : '',
       tel: tel ? tel : '',
       ville: ville ? ville : '',
