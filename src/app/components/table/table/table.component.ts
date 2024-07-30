@@ -39,7 +39,7 @@ export interface DialogData {
   motifAdjustHour: string;
   reportableHours: number;
   serment: string,
-  casePalais : number,
+  casePalais : string,
   adresse: string,
   telephone: string,
   imageUrl: string,
