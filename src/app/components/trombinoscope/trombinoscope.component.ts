@@ -20,7 +20,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class TrombinoscopeComponent {
 
-  displayedColumns: string[] = ['imageUrl', 'nom', 'prenom', 'serment', 'case', 'adresse', 'telephone', 'email', 'update', 'trash'];
+  displayedColumns: string[] = ['imageUrl', 'nom', 'prenom', 'serment', 'case', 'adresse', 'ville', 'cp', 'telephone', 'email', 'update', 'trash'];
 
   dataSource;
   db;
