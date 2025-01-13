@@ -32,6 +32,9 @@ export class TrombinoscopeComponent {
   sortedData;
   dataSortedByUser: Sort;
 
+  currentTimestamp: number = Date.now(); // Timestamp initial généré au chargement de la page
+
+
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private contentService: ContentService) {
     const dbGeneral = getDatabase();
     const starCountRefGeneral = ref(dbGeneral, 'general/');
