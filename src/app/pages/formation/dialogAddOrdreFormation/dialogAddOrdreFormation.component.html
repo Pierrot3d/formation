@@ -54,15 +54,7 @@
   <mat-form-field class="fill">
     <mat-label>Ajouter des participants</mat-label>
     <mat-chip-grid #chipGrid aria-label="Ajout de participant">
-     <!--  <mat-chip-row *ngFor="let participant of this.lawyer" (removed)="remove(participant)">
-        {{participant.value.nom}}
-        <button matChipRemove [attr.aria-label]="'remove ' + participant">
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip-row> -->
     </mat-chip-grid>
-    <!-- ajouter : (matChipInputTokenEnd)="add($event)" dans le input ci-dessous pour remettre en fonction add
-  -->
     <input placeholder="Ajouter un participant ..." #lawyerInput [formControl]="lawyerCtrl"
       [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
