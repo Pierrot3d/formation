@@ -85,11 +85,15 @@ export class DialogInformationLawyerComponent {
 
     if(this.data.reportableHours)
     {
+
       if (!(this.data.reportableHours == this.data.nbr - this.data.mandatoryHours)) {
         this.bddCommunicationService.updateReportableHours(
           this.data.id,
           this.data.nbr - this.data.mandatoryHours
         );
+        this.data.reportableHours = this.data.nbr - this.data.mandatoryHours;
+
+
       }
     }
     else {
@@ -98,6 +102,7 @@ export class DialogInformationLawyerComponent {
         this.data.nbr - this.data.mandatoryHours
       );
       this.data.reportableHours = this.data.nbr - this.data.mandatoryHours
+
   }
 
       }
@@ -108,25 +113,55 @@ export class DialogInformationLawyerComponent {
 
   }
 
+
   modifyModeFn(element) {
     element.value.modifyMode = true;
   }
 
   modified(element) {
     element.value.modifyMode = false;
+  
     this.bddCommunicationService.updateFormationBdd(
       this.data.id,
       element.value.formationLabel,
-      element.value.formationType ? element.value.formationType : '',
+      element.value.formationType || '',
       element.value.start,
       element.value.end,
       0,
-      element.value.numOfHours ? element.value.numOfHours : 0,
-      element.value.numOfGroupHours ? element.value.numOfGroupHours : 0,
+      element.value.numOfHours || 0,
+      element.value.numOfGroupHours || 0,
       element.type,
-      element.value.isHeFormator ? element.value.isHeFormator : false,
-      element.value.isitAPublication ? element.value.isitAPublication : false
-    );
+      element.value.isHeFormator || false,
+      element.value.isitAPublication || false
+    ).then(() => {
+      // Recalcule les heures reportables et mets à jour Firebase
+      const newReportableHours = this.data.nbr - this.data.mandatoryHours;
+      return this.bddCommunicationService.updateReportableHours(this.data.id, newReportableHours);
+    }).then(() => {
+      // Mets à jour les données locales et recharge l'interface
+      this.data.reportableHours = this.data.nbr - this.data.mandatoryHours;
+      this.reloadData();
+    }).catch(error => {
+      console.error('Erreur lors de la mise à jour :', error);
+    });
+  }
+
+  reloadData() {
+    const db = getDatabase();
+    const starCountRef = ref(db, `${this.bddCommunicationService.selectedDate}/formation/${this.data.id}`);
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        this.formationList$ = Object.keys(data).map((key) => ({
+          type: key,
+          value: data[key],
+        }));
+        this.dataSource = new MatTableDataSource(this.formationList$);
+        this.sortedData = this.formationList$.slice();
+      } else {
+        this.formationList$ = [];
+      }
+    });
   }
 
   removeFormation(id, elemnt) {
@@ -203,14 +238,23 @@ export class DialogInformationLawyerComponent {
   }
 
   sendNewHours() {
-    this.bddCommunicationService.sendNewHours(
-      this.data.id,
-      this.formationList$
-    );
-    this.bddCommunicationService.sendNewGroupHours(
-      this.data.id,
-      this.formationList$
-    );
+    // Envoie les heures et les heures de groupe à Firebase
+    this.bddCommunicationService.sendNewHours(this.data.id, this.formationList$);
+    this.bddCommunicationService.sendNewGroupHours(this.data.id, this.formationList$);
+  
+    // Recalcule les heures reportables
+    const newReportableHours = this.data.nbr - this.data.mandatoryHours;
+  
+    // Mets à jour `reportableHours` dans Firebase
+    this.bddCommunicationService.updateReportableHours(this.data.id, newReportableHours).then(() => {
+      // Mets à jour la valeur locale pour qu'elle soit visible immédiatement dans l'interface
+      this.data.reportableHours = newReportableHours;
+  
+      // Recharge l'interface avec les nouvelles données
+      this.reloadData();
+    }).catch(error => {
+      console.error("Erreur lors de la mise à jour des heures reportables :", error);
+    });
   }
 
   ajustFn() {
@@ -297,7 +341,6 @@ export class DialogInformationLawyerComponent {
       {
         const dataRow = [];
         row.Comptabilisées = row.Heures*4
-        console.log(row)
         columns.forEach(function (column) {
           dataRow.push(row[column].toString());
         });
@@ -331,6 +374,7 @@ export class DialogInformationLawyerComponent {
   getDocument(formationName, column, columnDispense, columnPublication) {
     const logo = this.contentService.logoBase64;
     let mandatoryhoursAdjust: number;
+
     if(this.data.nbrAdjustHour)
     {
       mandatoryhoursAdjust = this.data.mandatoryHours - this.data.nbrAdjustHour

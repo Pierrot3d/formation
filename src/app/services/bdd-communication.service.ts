@@ -274,9 +274,11 @@ export class BddCommunicationService {
     });
   }
 
-  updateReportableHours(id, reportableHours: number) {
+  updateReportableHours(id: string, reportableHours: number): Promise<void> {
     const db = getDatabase();
-    update(ref(db, this.selectedDate + '/avocats/' + id), {
+    
+    // Retourne la promesse Firebase
+    return update(ref(db, this.selectedDate + '/avocats/' + id), {
       reportableHours: reportableHours ? reportableHours : 0,
     });
   }
@@ -531,27 +533,27 @@ export class BddCommunicationService {
   }
 
   updateFormationBdd(
-    id,
-    formationLabel,
-    formationType,
-    startDay,
-    endDay,
-    numOfDay,
+    id: string,
+    formationLabel: string,
+    formationType: string,
+    startDay: string,
+    endDay: string,
+    numOfDay: number,
     numOfHours: number,
     numOfGroupHours: number,
     formationId: number,
     isHeFormator?: boolean,
     isitAPublication?: boolean
-  ) {
-    // Create a new post reference with an auto-generated id
+  ): Promise<void> {
     const db = getDatabase();
-
-    const formation = ref(
+  
+    const formationRef = ref(
       db,
       this.selectedDate + '/formation/' + id + '/' + formationId
     );
-
-    update(formation, {
+  
+    // Retourne la promesse retournée par Firebase
+    return update(formationRef, {
       formationLabel: formationLabel,
       formationType: formationType,
       start: startDay,
@@ -562,8 +564,6 @@ export class BddCommunicationService {
       isHeFormator: isHeFormator,
       isitAPublication: isitAPublication,
     });
-
-    return;
   }
 
   updateAdjustementHour(id, nbrAdjustHour, motifAdjustHour) {
