@@ -671,8 +671,8 @@ export class BddCommunicationService {
     for (let lawyerInformation of allLawyerInformation) {
       if (lawyerInformation.value.nbrAdjustHour) {
         lawyerInformation.value.mandatoryhoursAdjust =
-          lawyerInformation.value.mandatoryHours -
-          lawyerInformation.value.nbrAdjustHour;
+          lawyerInformation.value.mandatoryHours || 20 -
+          lawyerInformation.value.nbrAdjustHour || 0;
         if (
           lawyerInformation.value.nbr >=
           lawyerInformation.value.mandatoryhoursAdjust
@@ -683,7 +683,7 @@ export class BddCommunicationService {
         }
       } else {
         if (
-          lawyerInformation.value.nbr >= lawyerInformation.value.mandatoryHours
+          lawyerInformation.value.nbr || 0 >= lawyerInformation.value.mandatoryHours
         ) {
           satisfyList.push(lawyerInformation);
         } else {

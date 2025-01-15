@@ -340,6 +340,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
     {
       const satisfyList = []
       const unsatisfyList = []
+      
       this.bddCommunicationService.getSatisfyList(this.lawyers$, satisfyList, unsatisfyList)
       unsatisfyList.sort(this.SortSatisfyArray)
       this.UnsatisfyNumber = unsatisfyList.length
@@ -460,6 +461,8 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
     generateUnsatisfyPdf(datas) {
+
+      console.log('les datas de generateUnsatisfyPdf :', datas)
       const document = this.getGlobalUnsatisfyDocument(
         datas
       );
@@ -470,12 +473,15 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
       const tables = [];
       const logo = this.contentService.logoBase64;
 
+      console.log('les datas de getGlobalUnsatisfyDocument :', datas)
+
+
       tables.push({
         image: logo,
         width: 60,
       },
       {
-        text: 'Avocats n\'ayant pas satisfaits à leurs obligations de formation : ' + this.UnsatisfyNumber,
+        text: 'Avocats n\'ayant pas satisfaits à leurs obligations de formation : ' + this.UnsatisfyNumber || 0,
         bold: true,
         fontSize: 20,
         alignment: 'center',
@@ -507,7 +513,7 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
 
         for (const data of datas) {
           tables[3].table.body.push(
-            [data.value.nom, data.value.prenom],
+            [data.value.nom || '', data.value.prenom || ''],
           )
         }
 
