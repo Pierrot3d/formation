@@ -1,0 +1,226 @@
+diff --git a/src/app/components/trombinoscope/trombinoscope.component.css b/src/app/components/trombinoscope/trombinoscope.component.css
+index 22d4270..7c478f7 100644
+--- a/src/app/components/trombinoscope/trombinoscope.component.css
++++ b/src/app/components/trombinoscope/trombinoscope.component.css
+@@ -1,7 +1,11 @@
+ .image{
+   width: 40%;
+   max-width: 200px;
++  height: auto;
++  aspect-ratio: 204 / 274;
++  object-fit: cover;
+   margin: 0 auto 0 auto;
++  background-color: #eef1f5;
+ }
+ 
+ .export-progress{
+diff --git a/src/app/components/trombinoscope/trombinoscope.component.html b/src/app/components/trombinoscope/trombinoscope.component.html
+index 06dd7a0..b467c59 100644
+--- a/src/app/components/trombinoscope/trombinoscope.component.html
++++ b/src/app/components/trombinoscope/trombinoscope.component.html
+@@ -23,7 +23,7 @@
+ 
+         <ng-container matColumnDef="imageUrl">
+           <th mat-header-cell *matHeaderCellDef> Photo </th>
+-          <td mat-cell *matCellDef="let element"> <img class="image" [src]="'../../../assets/img/avocats/'+element.value.nom+'_'+element.value.prenom+'.png' + '?t=' + currentTimestamp"  (click)="openUpdateDialog(
++          <td mat-cell *matCellDef="let element"> <img class="image" [src]="photoUrl(element)" (error)="onPhotoError($event, element)" loading="lazy" decoding="async" width="204" height="274" [alt]="element.value.prenom + ' ' + element.value.nom"  (click)="openUpdateDialog(
+             element.type,
+             element.value.imageUrl,
+             element.value.prenom,
+diff --git a/src/app/components/trombinoscope/trombinoscope.component.ts b/src/app/components/trombinoscope/trombinoscope.component.ts
+index 5bdf7e3..7195d43 100644
+--- a/src/app/components/trombinoscope/trombinoscope.component.ts
++++ b/src/app/components/trombinoscope/trombinoscope.component.ts
+@@ -34,6 +34,44 @@ export class TrombinoscopeComponent {
+   dataSortedByUser: Sort;
+ 
+   currentTimestamp: number = Date.now(); // Timestamp initial généré au chargement de la page
++
++  /* Jetons anti-cache ciblés : une entrée n'existe que pour un avocat dont la
++     photo vient d'être modifiée. Les autres photos sont servies depuis le cache
++     du navigateur au lieu d'être retéléchargées à chaque affichage. */
++  private photoTokens: { [id: string]: number } = {};
++
++  /** Nom de fichier de la photo, sans extension. */
++  private photoBaseName(element: any): string {
++    return element.value.nom + '_' + element.value.prenom;
++  }
++
++  /**
++   * URL de la photo d'un avocat.
++   * On sert en priorité la version WebP (générée par tools/optimize-photos.js,
++   * ~95% plus légère). Si elle n'existe pas, onPhotoError() bascule sur le PNG.
++   */
++  photoUrl(element: any): string {
++    const base =
++      '../../../assets/img/avocats/webp/' + this.photoBaseName(element) + '.webp';
++    const token = this.photoTokens[element.type];
++    return token ? base + '?t=' + token : base;
++  }
++
++  /** Repli sur le PNG d'origine si la version WebP n'est pas disponible. */
++  onPhotoError(event: Event, element: any): void {
++    const img = event.target as HTMLImageElement;
++    const png =
++      '../../../assets/img/avocats/' + this.photoBaseName(element) + '.png';
++    if (img.src.indexOf('/webp/') !== -1) {
++      const token = this.photoTokens[element.type];
++      img.src = token ? png + '?t=' + token : png;
++    }
++  }
++
++  /** Force le rechargement de la photo d'un seul avocat (après modification). */
++  refreshPhoto(id: string): void {
++    this.photoTokens[id] = Date.now();
++  }
+   isExportingTrombinoscope = false;
+   exportProgress = 0;
+   exportProgressLabel = '';
+@@ -176,8 +214,9 @@ export class TrombinoscopeComponent {
+     });
+ 
+     dialogRef.afterClosed().subscribe(result => {
+-      // console.log('The dialog was closed');
+-      //console.log(result);
++      /* La photo de cet avocat a pu changer : on ne rafraîchit que la sienne,
++         les autres restent en cache. */
++      this.refreshPhoto(id);
+     });
+   }
+ 
+diff --git a/src/app/services/trombinoscope-pdf.service.ts b/src/app/services/trombinoscope-pdf.service.ts
+index 8678744..ed2f054 100644
+--- a/src/app/services/trombinoscope-pdf.service.ts
++++ b/src/app/services/trombinoscope-pdf.service.ts
+@@ -348,6 +348,7 @@ export class TrombinoscopePdfService {
+     if (this.imageCache.has(key)) return this.imageCache.get(key)!;
+ 
+     const candidates = [
++      `assets/img/avocats/webp/${v?.nom}_${v?.prenom}.webp`,
+       `assets/img/avocats/${v?.nom}_${v?.prenom}.png`,
+       v?.imageUrl,
+     ].filter(Boolean);
+diff --git a/tools/optimize-photos.js b/tools/optimize-photos.js
+new file mode 100644
+index 0000000..882c7ca
+--- /dev/null
++++ b/tools/optimize-photos.js
+@@ -0,0 +1,118 @@
++#!/usr/bin/env node
++/**
++ * Optimisation des photos du trombinoscope.
++ *
++ * Les photos sont affichées dans une vignette d'environ 200 px de large mais
++ * sont stockées en PNG (~93 Mo au total), ce qui rend le chargement de la page
++ * très lent. Ce script génère une version WebP redimensionnée de chaque photo,
++ * typiquement 95 à 98 % plus légère, à qualité visuelle équivalente.
++ *
++ * Les PNG d'origine ne sont PAS supprimés : ils servent de repli et restent
++ * utilisés par la génération du PDF.
++ *
++ * Usage :
++ *   npm install sharp --save-dev
++ *   node tools/optimize-photos.js
++ *
++ * Options :
++ *   --quality=82   qualité WebP (défaut 82)
++ *   --width=408    largeur max en px (défaut 408 = 200px d'affichage en écran retina)
++ *   --force        régénère même si le WebP est déjà à jour
++ */
++
++const fs = require('fs');
++const path = require('path');
++
++let sharp;
++try {
++  sharp = require('sharp');
++} catch (e) {
++  console.error(
++    "Le module « sharp » est requis.\n" +
++      'Installez-le avec :  npm install sharp --save-dev'
++  );
++  process.exit(1);
++}
++
++const SRC_DIR = path.join(__dirname, '..', 'src', 'assets', 'img', 'avocats');
++const OUT_DIR = path.join(SRC_DIR, 'webp');
++
++const args = process.argv.slice(2);
++const getArg = (name, def) => {
++  const found = args.find((a) => a.startsWith(`--${name}=`));
++  return found ? found.split('=')[1] : def;
++};
++const QUALITY = parseInt(getArg('quality', '82'), 10);
++const MAX_WIDTH = parseInt(getArg('width', '408'), 10);
++const FORCE = args.includes('--force');
++
++async function main() {
++  if (!fs.existsSync(SRC_DIR)) {
++    console.error(`Dossier introuvable : ${SRC_DIR}`);
++    process.exit(1);
++  }
++  fs.mkdirSync(OUT_DIR, { recursive: true });
++
++  const files = fs
++    .readdirSync(SRC_DIR)
++    .filter((f) => /\.(png|jpe?g)$/i.test(f));
++
++  if (!files.length) {
++    console.log('Aucune photo à traiter.');
++    return;
++  }
++
++  let originalBytes = 0;
++  let outputBytes = 0;
++  let processed = 0;
++  let skipped = 0;
++
++  for (const file of files) {
++    const srcPath = path.join(SRC_DIR, file);
++    const outName = file.replace(/\.(png|jpe?g)$/i, '.webp');
++    const outPath = path.join(OUT_DIR, outName);
++
++    const srcStat = fs.statSync(srcPath);
++    originalBytes += srcStat.size;
++
++    /* On saute les fichiers déjà convertis et plus récents que la source */
++    if (!FORCE && fs.existsSync(outPath)) {
++      const outStat = fs.statSync(outPath);
++      if (outStat.mtimeMs >= srcStat.mtimeMs) {
++        outputBytes += outStat.size;
++        skipped++;
++        continue;
++      }
++    }
++
++    try {
++      await sharp(srcPath)
++        .rotate()
++        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
++        .webp({ quality: QUALITY, effort: 6 })
++        .toFile(outPath);
++
++      outputBytes += fs.statSync(outPath).size;
++      processed++;
++    } catch (e) {
++      console.warn(`  Échec sur ${file} : ${e.message}`);
++    }
++  }
++
++  const mb = (b) => (b / 1e6).toFixed(2) + ' Mo';
++  const reduction = originalBytes
++    ? Math.round(100 - (outputBytes / originalBytes) * 100)
++    : 0;
++
++  console.log('');
++  console.log(`Photos traitées   : ${processed} (${skipped} déjà à jour)`);
++  console.log(`Poids d'origine   : ${mb(originalBytes)}`);
++  console.log(`Poids optimisé    : ${mb(outputBytes)}`);
++  console.log(`Réduction         : ${reduction} %`);
++  console.log(`Sortie            : ${OUT_DIR}`);
++}
++
++main().catch((e) => {
++  console.error(e);
++  process.exit(1);
++});

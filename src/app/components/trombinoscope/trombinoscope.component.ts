@@ -34,6 +34,44 @@ export class TrombinoscopeComponent {
   dataSortedByUser: Sort;
 
   currentTimestamp: number = Date.now(); // Timestamp initial généré au chargement de la page
+
+  /* Jetons anti-cache ciblés : une entrée n'existe que pour un avocat dont la
+     photo vient d'être modifiée. Les autres photos sont servies depuis le cache
+     du navigateur au lieu d'être retéléchargées à chaque affichage. */
+  private photoTokens: { [id: string]: number } = {};
+
+  /** Nom de fichier de la photo, sans extension. */
+  private photoBaseName(element: any): string {
+    return element.value.nom + '_' + element.value.prenom;
+  }
+
+  /**
+   * URL de la photo d'un avocat.
+   * On sert en priorité la version WebP (générée par tools/optimize-photos.js,
+   * ~95% plus légère). Si elle n'existe pas, onPhotoError() bascule sur le PNG.
+   */
+  photoUrl(element: any): string {
+    const base =
+      '../../../assets/img/avocats/webp/' + this.photoBaseName(element) + '.webp';
+    const token = this.photoTokens[element.type];
+    return token ? base + '?t=' + token : base;
+  }
+
+  /** Repli sur le PNG d'origine si la version WebP n'est pas disponible. */
+  onPhotoError(event: Event, element: any): void {
+    const img = event.target as HTMLImageElement;
+    const png =
+      '../../../assets/img/avocats/' + this.photoBaseName(element) + '.png';
+    if (img.src.indexOf('/webp/') !== -1) {
+      const token = this.photoTokens[element.type];
+      img.src = token ? png + '?t=' + token : png;
+    }
+  }
+
+  /** Force le rechargement de la photo d'un seul avocat (après modification). */
+  refreshPhoto(id: string): void {
+    this.photoTokens[id] = Date.now();
+  }
   isExportingTrombinoscope = false;
   exportProgress = 0;
   exportProgressLabel = '';
@@ -176,8 +214,9 @@ export class TrombinoscopeComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      //console.log(result);
+      /* La photo de cet avocat a pu changer : on ne rafraîchit que la sienne,
+         les autres restent en cache. */
+      this.refreshPhoto(id);
     });
   }
 

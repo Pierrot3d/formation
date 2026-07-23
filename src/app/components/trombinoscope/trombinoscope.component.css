@@ -1,7 +1,11 @@
 .image{
   width: 40%;
   max-width: 200px;
+  height: auto;
+  aspect-ratio: 204 / 274;
+  object-fit: cover;
   margin: 0 auto 0 auto;
+  background-color: #eef1f5;
 }
 
 .export-progress{

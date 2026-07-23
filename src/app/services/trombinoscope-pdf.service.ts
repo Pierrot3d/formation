@@ -348,6 +348,7 @@ export class TrombinoscopePdfService {
     if (this.imageCache.has(key)) return this.imageCache.get(key)!;
 
     const candidates = [
+      `assets/img/avocats/webp/${v?.nom}_${v?.prenom}.webp`,
       `assets/img/avocats/${v?.nom}_${v?.prenom}.png`,
       v?.imageUrl,
     ].filter(Boolean);
