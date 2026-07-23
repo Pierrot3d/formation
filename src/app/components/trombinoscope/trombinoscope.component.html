@@ -5,10 +5,17 @@
   <mat-icon>file_copy</mat-icon>
 </button> -->
 
-<button mat-raised-button class="button" (click)="genereatePdfTmp(this.sortedData)">
-  Générer le trombinoscope
-  <mat-icon>file_copy</mat-icon>
+<button mat-raised-button class="button"
+        [disabled]="isExportingTrombinoscope || !numberOfLawyer"
+        (click)="exportTrombinoscopePdf()">
+  {{ isExportingTrombinoscope ? 'Génération en cours…' : 'Générer le trombinoscope (PDF)' }}
+  <mat-icon>picture_as_pdf</mat-icon>
 </button>
+
+<div class="export-progress" *ngIf="isExportingTrombinoscope">
+  <mat-progress-bar mode="determinate" [value]="exportProgress"></mat-progress-bar>
+  <span class="export-progress-text">{{ exportProgressLabel }} — {{ exportProgress }}%</span>
+</div>
 </div>
 
 

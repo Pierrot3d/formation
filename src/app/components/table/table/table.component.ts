@@ -89,6 +89,8 @@ export class TableComponent {
   sortedDataTmp
   selectedDate = ((new Date()).getFullYear()).toString();
   numberOfLawyer: number;
+  availableYears: string[] = [];
+  isCreatingYear = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -96,7 +98,8 @@ export class TableComponent {
 
   constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, public formationService: FormationService, private contentService: ContentService) {
 
-
+    /* Liste dynamique des années présentes en base (clés racines à 4 chiffres) */
+    this.loadAvailableYears();
 
     const dbGeneral = getDatabase();
     const starCountRefGeneral = ref(dbGeneral, 'general/');
@@ -149,6 +152,49 @@ export class TableComponent {
   updateDisplayYear()
   {
     this.bddCommunicationService.updateDisplayYear(this.selectedDate);
+  }
+
+  /** Lit les clés racines de la base et n'en garde que les années (4 chiffres). */
+  loadAvailableYears() {
+    const db = getDatabase();
+    onValue(ref(db, '/'), (snapshot) => {
+      const data = snapshot.val();
+      if (!data) return;
+      this.availableYears = Object.keys(data)
+        .filter((key) => /^\d{4}$/.test(key))
+        .sort();
+    });
+  }
+
+  /**
+   * Crée l'année suivante en copiant intégralement l'année sélectionnée,
+   * puis bascule l'affichage sur cette nouvelle année.
+   */
+  async createNextYear() {
+    if (this.isCreatingYear) return;
+
+    const nextYear = String(Number(this.selectedDate) + 1);
+    const ok = window.confirm(
+      `Créer l'année ${nextYear} en copiant intégralement l'année ${this.selectedDate} ` +
+        `(avocats, formations, formations de l'Ordre) ?`
+    );
+    if (!ok) return;
+
+    this.isCreatingYear = true;
+    try {
+      const created = await this.bddCommunicationService.duplicateYearToNext(
+        this.selectedDate
+      );
+      this.selectedDate = created;
+      window.alert(`L'année ${created} a été créée et sélectionnée.`);
+    } catch (e: any) {
+      window.alert(
+        e?.message ?? "Une erreur est survenue lors de la création de l'année."
+      );
+      console.error('createNextYear', e);
+    } finally {
+      this.isCreatingYear = false;
+    }
   }
 
   refreshHours(){

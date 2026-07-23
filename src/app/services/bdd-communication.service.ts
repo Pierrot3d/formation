@@ -355,6 +355,49 @@ export class BddCommunicationService {
     });
   }
 
+  /**
+   * Duplique intégralement une année (avocats, formation, formationOrdre)
+   * vers l'année suivante (sourceYear + 1).
+   *
+   * - Ne fait rien et rejette si l'année cible existe déjà (protection anti-écrasement).
+   * - Copie l'arborescence à l'identique, puis bascule l'année active (displayYear)
+   *   sur la nouvelle année.
+   *
+   * @param sourceYear année à copier (ex. '2024'). Par défaut : année active.
+   * @returns la nouvelle année (string), ex. '2025'
+   */
+  async duplicateYearToNext(sourceYear?: string): Promise<string> {
+    const db = getDatabase();
+    const source = String(sourceYear ?? this.selectedDate).trim();
+
+    if (!/^\d{4}$/.test(source)) {
+      throw new Error(`Année source invalide : « ${source} »`);
+    }
+
+    const target = String(Number(source) + 1);
+
+    /* Protection : ne pas écraser une année déjà existante */
+    const targetSnap = await get(ref(db, `${target}`));
+    if (targetSnap.exists()) {
+      throw new Error(`L'année ${target} existe déjà.`);
+    }
+
+    /* Lecture de l'année source */
+    const sourceSnap = await get(ref(db, `${source}`));
+    if (!sourceSnap.exists()) {
+      throw new Error(`L'année source ${source} est introuvable.`);
+    }
+
+    /* Copie intégrale de l'arborescence */
+    await set(ref(db, `${target}`), sourceSnap.val());
+
+    /* Bascule l'année active sur la nouvelle année */
+    this.updateDisplayYear(target);
+    this.selectedDate = target;
+
+    return target;
+  }
+
   addOrdreFormation(
     range,
     data,

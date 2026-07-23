@@ -7,6 +7,7 @@ import { Sort } from '@angular/material/sort';
 import {MatSort} from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ContentService } from 'src/app/services/content.service';
+import { TrombinoscopePdfService } from 'src/app/services/trombinoscope-pdf.service';
 import { DialogExcelComponent } from "../excel/dialogExcel/dialogExcel.component";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -33,9 +34,12 @@ export class TrombinoscopeComponent {
   dataSortedByUser: Sort;
 
   currentTimestamp: number = Date.now(); // Timestamp initial généré au chargement de la page
+  isExportingTrombinoscope = false;
+  exportProgress = 0;
+  exportProgressLabel = '';
 
 
-  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private contentService: ContentService) {
+  constructor(public bddCommunicationService: BddCommunicationService, public dialog: MatDialog, private contentService: ContentService, private trombinoscopePdfService: TrombinoscopePdfService) {
     const dbGeneral = getDatabase();
     const starCountRefGeneral = ref(dbGeneral, 'general/');
     onValue(starCountRefGeneral, (snapshot) => {
@@ -195,11 +199,27 @@ export class TrombinoscopeComponent {
   //
   //
 
-  genereatePdfTmp(participant)
-  {
-    let tabTmp
-    console.log(participant)
-
+  async exportTrombinoscopePdf(): Promise<void> {
+    if (this.isExportingTrombinoscope || !this.lawyers$?.length) return;
+    this.isExportingTrombinoscope = true;
+    this.exportProgress = 0;
+    this.exportProgressLabel = 'Préparation…';
+    try {
+      const year =
+        this.bddCommunicationService.selectedDate ?? new Date().getFullYear();
+      await this.trombinoscopePdfService.generate(
+        this.lawyers$,
+        year,
+        (percent, label) => {
+          this.exportProgress = percent;
+          this.exportProgressLabel = label;
+        }
+      );
+    } catch (e) {
+      console.error('Erreur lors de la génération du trombinoscope PDF', e);
+    } finally {
+      this.isExportingTrombinoscope = false;
+    }
   }
 
   generatePdf(participant)
