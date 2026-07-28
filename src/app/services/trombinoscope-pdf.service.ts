@@ -15,6 +15,7 @@ const COLORS = {
   contact: '#2f6db3',
   text: '#3c4858',
   muted: '#8492a6',
+  sermentMuted: '#aab4c2', // serment : gris clair discret
 };
 
 const COLUMNS_PER_ROW = 3;
@@ -35,7 +36,7 @@ const CARD_WIDTH = Math.floor(
 /* Hauteur fixe d'une fiche (pt). Calée sur le pire cas — toutes les
    informations présentes — pour que toutes les cases aient la même taille,
    même quand un avocat a moins de renseignements. */
-const CARD_HEIGHT = 104;
+const CARD_HEIGHT = 112;
 
 /** Insère des césures invisibles dans les mots longs (emails, urls...)
  *  pour qu'ils reviennent à la ligne dans la fiche au lieu de déborder. */
@@ -265,7 +266,7 @@ export class TrombinoscopePdfService {
     if (v?.cabinet) {
       infos.push({
         text: breakable(v.cabinet),
-        fontSize: 6.5,
+        fontSize: 6.3,
         italics: true,
         color: COLORS.muted,
         margin: [0, 1, 0, 0],
@@ -274,7 +275,7 @@ export class TrombinoscopePdfService {
     if (v?.titre) {
       infos.push({
         text: v.titre,
-        fontSize: 6.5,
+        fontSize: 6.3,
         bold: true,
         color: COLORS.text,
       });
@@ -286,7 +287,7 @@ export class TrombinoscopePdfService {
         fontSize: 8,
         bold: true,
         color: COLORS.contact,
-        margin: [0, 4, 0, 0],
+        margin: [0, 3, 0, 0],
       });
     }
     if (v?.email) {
@@ -307,16 +308,16 @@ export class TrombinoscopePdfService {
         text: breakable(adresse.join('\n')),
         fontSize: 7,
         color: COLORS.text,
-        margin: [0, 4, 0, 0],
+        margin: [0, 3, 0, 0],
       });
     }
 
     if (v?.serment) {
       infos.push({
-        text: `Serment : ${v.serment}`,
-        fontSize: 6.5,
-        color: COLORS.muted,
-        margin: [0, 4, 0, 0],
+        text: `Prestation de serment : ${v.serment}`,
+        fontSize: 5.5,
+        color: COLORS.sermentMuted,
+        margin: [0, 3, 0, 0],
       });
     }
 
