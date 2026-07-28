@@ -32,6 +32,11 @@ const CARD_WIDTH = Math.floor(
     COLUMNS_PER_ROW
 );
 
+/* Hauteur fixe d'une fiche (pt). Calée sur le pire cas — toutes les
+   informations présentes — pour que toutes les cases aient la même taille,
+   même quand un avocat a moins de renseignements. */
+const CARD_HEIGHT = 104;
+
 /** Insère des césures invisibles dans les mots longs (emails, urls...)
  *  pour qu'ils reviennent à la ligne dans la fiche au lieu de déborder. */
 function breakable(text: any): string {
@@ -319,6 +324,7 @@ export class TrombinoscopePdfService {
     return {
       table: {
         widths: ['*'],
+        heights: [CARD_HEIGHT],
         body: [
           [
             {
