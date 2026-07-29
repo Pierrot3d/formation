@@ -1,0 +1,44 @@
+diff --git a/src/app/services/trombinoscope-pdf.service.ts b/src/app/services/trombinoscope-pdf.service.ts
+index 54a4591..526e292 100644
+--- a/src/app/services/trombinoscope-pdf.service.ts
++++ b/src/app/services/trombinoscope-pdf.service.ts
+@@ -256,17 +256,37 @@ export class TrombinoscopePdfService {
+ 
+   /* ─────────────────────── Fiche avocat ─────────────────────── */
+ 
++  /* Taille de police du nom, réduite pour les noms très longs afin qu'ils
++     tiennent dans la hauteur fixe de la fiche sans la faire déborder. */
++  private nameFontSize(nomComplet: string): number {
++    const l = nomComplet.length;
++    if (l > 40) return 6.6;
++    if (l > 32) return 7.4;
++    if (l > 24) return 8.4;
++    return 9.5;
++  }
++
++  /* Taille de police du cabinet, réduite si le libellé est long. */
++  private cabinetFontSize(cabinet: string): number {
++    return cabinet.length > 30 ? 5.6 : 6.3;
++  }
++
+   private buildCard(v: any, image: string): any {
+     const nomComplet = `${v?.prenom ?? ''} ${(v?.nom ?? '').toUpperCase()}`.trim();
+ 
+     const infos: any[] = [
+-      { text: nomComplet, bold: true, fontSize: 9.5, color: COLORS.name },
++      {
++        text: nomComplet,
++        bold: true,
++        fontSize: this.nameFontSize(nomComplet),
++        color: COLORS.name,
++      },
+     ];
+ 
+     if (v?.cabinet) {
+       infos.push({
+         text: breakable(v.cabinet),
+-        fontSize: 6.3,
++        fontSize: this.cabinetFontSize(v.cabinet),
+         italics: true,
+         color: COLORS.muted,
+         margin: [0, 1, 0, 0],
